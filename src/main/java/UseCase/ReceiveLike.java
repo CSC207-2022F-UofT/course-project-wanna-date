@@ -1,17 +1,21 @@
 package UseCase;
 import Entities.UserAccount;
 public class ReceiveLike implements ReceiveLikeInputBoundary{
-    UserAccount user_give_action;
-    UserAccount user_receive_action;
+    RetrieveLike like1;
 
-    public void ReceiveLike(UserAccount user1, UserAccount user2){
-        this.user_give_action = user1;
-        this.user_receive_action = user2;
+    //Constructor
+    public ReceiveLike(RetrieveLike like1){
+        this.like1 = like1;
     }
 
     @Override
-    public void Like(UserAccount user1, UserAccount user2){
-
+    //Main method to add update UserAccount liked_user and liked_by_user
+    public boolean like(UserAccount user1, UserAccount user2){
+        user1.set_liked_users(user2);
+        user2.set_liked_by_users(user1);
+        like1.connector();
+        return true;
     }
+
 
 }

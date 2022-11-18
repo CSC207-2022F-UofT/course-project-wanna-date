@@ -1,5 +1,7 @@
 package UseCase;
-import Entities.UserAccount;
 
 public interface RetrieveBlockOutputBoundary {
+    default String presenterBlock(){
+        return null;
+    }
 }

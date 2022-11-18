@@ -1,5 +1,7 @@
 package UseCase;
-import Entities.UserAccount;
 
 public interface RetrieveLikeOutputBoundary {
+    default String presenterLike(){
+        return null;
+    }
 }
