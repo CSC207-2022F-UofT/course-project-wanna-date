@@ -1,16 +1,13 @@
 package UseCase;
 import Entities.UserAccount;
+import InterfaceAdapters.PresenterLikeBlock;
 
 import java.util.ArrayList;
 
 public class RetrieveLike {
-    RetrieveLikeOutputBoundary param1;
-
-    public RetrieveLike(RetrieveLikeOutputBoundary OB_Like){
-        this.param1 = OB_Like;
-    }
 
     public void connector() {
+        RetrieveLikeOutputBoundary param1 = new PresenterLikeBlock();
         like_view(param1);
     }
 

@@ -1,17 +1,19 @@
 package UseCase;
+import InterfaceAdapters.PresenterLikeBlock;
+import UI.UserLikeBlock;
 
 public class RetrieveBlock {
-    RetrieveBlockOutputBoundary param1;
 
-    public RetrieveBlock(RetrieveBlockOutputBoundary OB_Block){
-        this.param1 = OB_Block;
-    }
+
 
     public void connector(){
+        RetrieveBlockOutputBoundary param1 = new PresenterLikeBlock();
         block_view(param1);
     }
     public void block_view(RetrieveBlockOutputBoundary view){
        view.presenterBlock();
     }
+
+
 
 }
