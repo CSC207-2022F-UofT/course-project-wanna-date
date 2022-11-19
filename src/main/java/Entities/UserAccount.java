@@ -128,15 +128,31 @@ public class UserAccount {
         return this.liked_users;
     }
 
+    public void set_liked_users(UserAccount user){
+        liked_users.add(user);
+    }
+
     public ArrayList<UserAccount> get_blocked_users() {
         return this.blocked_users;
     }
 
+    public void set_blocked_users(UserAccount user){
+        blocked_users.add(user);
+    }
+
     public ArrayList<UserAccount> get_liked_by_users() {
-        return this.liked_users;
+        return this.liked_by_users;
+    }
+
+    public void set_liked_by_users(UserAccount user){
+        liked_by_users.add(user);
     }
 
     public ArrayList<UserAccount> get_blocked_by_users() {
-        return this.liked_users;
+        return this.blocked_by_users;
+    }
+
+    public void set_blocked_by_users(UserAccount user) {
+        blocked_by_users.add(user);
     }
 }
