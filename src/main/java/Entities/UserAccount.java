@@ -32,17 +32,17 @@ public class UserAccount {
     // 'M': male
     // 'F': female
     // 'N': non-binary
-    private char gender;
+    private String gender;
 
     // The sexuality identified by user.
     // 'G': gay
     // 'L': lesbian
     // 'H': heterosexual
     // 'B': bisexual
-    private char sexuality;
+    private String sexuality;
 
     // The list of interests by user.
-    private ArrayList interests;
+    private String interest;
 
     // The password of user's account.
     private String password;
@@ -64,11 +64,10 @@ public class UserAccount {
                        int age,
                        String pronouns,
                        String country, String province, String city,
-                       char gender,
-                       char sexuality,
-                       ArrayList interests,
-                       String password,
-                       String password_hint) {
+                       String gender,
+                       String sexuality,
+                       String interest,
+                       String password) {
         this.username = username;
         this.full_name = full_name;
         this.age = age;
@@ -79,7 +78,7 @@ public class UserAccount {
         location.put("city", city);
         this.gender = gender;
         this.sexuality = sexuality;
-        this.interests = interests;
+        this.interest = interest;
         this.password = password;
         ArrayList<UserAccount> liked_users = new ArrayList<UserAccount>();
         ArrayList<UserAccount> liked_by_users = new ArrayList<UserAccount>();
@@ -108,16 +107,16 @@ public class UserAccount {
         return this.location;
     }
 
-    public char get_gender() {
+    public String get_gender() {
         return this.gender;
     }
 
-    public char get_sexuality() {
+    public String get_sexuality() {
         return this.sexuality;
     }
 
-    public ArrayList<String> get_interests() {
-        return this.interests;
+    public String get_interests() {
+        return this.interest;
     }
 
     public String get_password() {
