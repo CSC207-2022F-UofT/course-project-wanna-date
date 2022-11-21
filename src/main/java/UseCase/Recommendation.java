@@ -7,12 +7,17 @@ import java.util.HashMap;
 
 public class Recommendation implements RecInputBoundary {
 
+    public RecOutputBoundary outputManager;
     private HashMap<String, ComparingProfile> nameToComp;
 
     /**
-     * Construct a Recommendation use case object.
+     * Construct a Recommendation use case object with
+     * the given output boundary object.
+     *
+     * @param outputManager     An output boundary, usually a presenter
      */
-    public Recommendation(){
+    public Recommendation(RecOutputBoundary outputManager){
+        this.outputManager = outputManager;
         this.nameToComp = new HashMap<>();
     }
 
