@@ -45,13 +45,42 @@ public class Recommendation implements RecInputBoundary {
         // this might lead there to being less recommendations
         ArrayList<UserAccount> filteredUsers = this.takeOutBlocked(currentUsername, possibleUsers);
 
-        // Choose random users from the information and create ComparingProfiles tailored
+        // In this next part, choose random users from the information and create ComparingProfiles tailored
         // to the system's current user, if these profiles do not yet exist; otherwise,
         // update the profile's compatibility score; at the end, put them into a list
+
+        // Start by randomly excluding users from the filtered users
+        this.popRandomUsers(filteredUsers);
+
+        // Create a list to store the finalized ComparingProfiles
         ArrayList<ComparingProfile> compList = new ArrayList<>();
-        // TODO the process of going through each profile in filteredUsers,
-        //  updating the related ComparingProfile,
-        //  and adding the profile to compList
+
+        // Go through each profile
+        for (UserAccount chosenUser : filteredUsers) {
+
+            // Compute compatibility of this user and the new user
+            double likeScore = computeCompatibility(currentUser, chosenUser);
+
+            // Check if the user exists in the stored mapping
+            String chosenUsername = chosenUser.get_username();
+            ComparingProfile possibleProfile = this.nameToComp.get(chosenUsername);
+
+            // If it exists, then update its compatibility score
+            if (possibleProfile != null) {
+                possibleProfile.setCompatibility(likeScore);
+
+            // Else, create a new ComparingProfile for the user and add it to the mapping
+            } else {
+                String userCountry = (String) chosenUser.get_location().get("country");
+                String sexuality = ((Character) chosenUser.get_sexuality()).toString();
+                ComparingProfile newProfile = new ComparingProfile(chosenUser.get_full_name(),
+                        chosenUser.get_interests(), userCountry, sexuality, likeScore);
+                this.nameToComp.put(chosenUsername, newProfile);
+            }
+
+            // Lastly, update the list that stores ComparingProfiles
+            compList.add(this.nameToComp.get(chosenUsername));
+        }
 
         // Sort the list of profiles based on compatibility, in decreasing order (as defined by how
         // two profiles ought to be compared)
@@ -88,6 +117,27 @@ public class Recommendation implements RecInputBoundary {
      */
     private ArrayList<UserAccount> takeOutBlocked(String username, ArrayList<UserAccount> oldPossibleUsers) {
         return oldPossibleUsers; // TODO update
+    }
+
+    /**
+     * Randomly take out users from the inputted list, up until the limit is reached and we have
+     * 5 users or less to recommend.
+     * Note that this does not yet handle a case where the inputted list is empty.
+     *
+     * @param popList       An ArrayList of UserAccounts to mutate
+     */
+    private void popRandomUsers(ArrayList<UserAccount> popList) {
+        // TODO
+    }
+
+    /**
+     * Given 2 user accounts, return their compatibility score.
+     *
+     * @param user1         First UserAccount
+     * @param user2         Second UserAccount
+     */
+    private double computeCompatibility(UserAccount user1, UserAccount user2) {
+        return 0.0; // TODO
     }
 
     /**

@@ -13,7 +13,7 @@ import UseCase.Recommendation;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class HelloWorld {
+public class TestRecUC {
 
     // tutorial taken from https://www.javatpoint.com/java-swing
     // https://docs.oracle.com/javase/tutorial/uiswing/events/actionlistener.html
