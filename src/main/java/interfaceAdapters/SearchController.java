@@ -1,6 +1,6 @@
-package InterfaceAdapters;
+package interfaceAdapters;
 
-import UseCase.SearchInputBoundary;
+import useCase.SearchInputBoundary;
 
 public class SearchController {
     String toSearch;

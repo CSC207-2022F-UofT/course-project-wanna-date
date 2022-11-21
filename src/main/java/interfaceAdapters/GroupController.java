@@ -1,4 +1,4 @@
-package InterfaceAdapters;
+package interfaceAdapters;
 
 public class GroupController {
 }

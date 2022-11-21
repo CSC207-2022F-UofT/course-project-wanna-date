@@ -1,6 +1,6 @@
-package InterfaceAdapters;
+package interfaceAdapters;
 
-import UseCase.SearchFilterOutputBoundary;
+import useCase.SearchFilterOutputBoundary;
 
 public class SearchFilterPresenter implements SearchFilterOutputBoundary {
 

@@ -1,9 +1,7 @@
 package UI;
-import Entities.UserAccount;
-import InterfaceAdapters.ControllerLikeBlock;
-import UseCase.ReceiveBlockInputBoundary;
-import UseCase.ReceiveLike;
-import UseCase.ReceiveLikeInputBoundary;
+import entities.UserAccount;
+import interfaceAdapters.ControllerLikeBlock;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,58 +10,158 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class UserLikeBlock implements ActionListener {
+    //user giving the like or block
     UserAccount user1;
+    //user being view
     UserAccount user2;
     ControllerLikeBlock controller;
+    //Initiate buttons, frame and label
     JFrame profile = new JFrame();
-    JLabel fullName = new JLabel("Full Name: " );
+    JLabel fullName = new JLabel("Full Name: ");
+    JLabel age = new JLabel();
+    JLabel pronoun = new JLabel();
+    JLabel country = new JLabel();
+    JLabel province = new JLabel();
+    JLabel city = new JLabel();
+    JLabel gender = new JLabel();
+    JLabel sexuality = new JLabel();
+    JLabel interests = new JLabel();
 
     JButton like = new JButton("Like");
+    JButton block = new JButton("Block");
 
     JLabel likedString = new JLabel();
+    JLabel blockedString = new JLabel();
 
 
 
     public UserLikeBlock(UserAccount user1, UserAccount user2, ControllerLikeBlock controller){
+        /** Create new frame to view user after we click on user from recommendation or search. This class is
+         * the User Interface class. When like button is clicked a String "Liked" will appear on the frame to
+         * indicate the action. Similarly, for block button, String "Blocked" will appear on the frame.
+         */
         //Initiate the variables so that we can use it for the actionPerformed function
         this.user1 = user1;
         this.user2 = user2;
         this.controller = controller;
 
+        //Create frame
         profile.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //THE CLOSE BUTTON
-        profile.setSize(1000, 700); //size of the frame
+        profile.setSize(1000, 800); //size of the frame
         profile.setLayout(null); //customize where u want everything to go
-        profile.setVisible(true);
+        profile.setVisible(true); //make the frame visible
 
-        fullName.setBounds(10,10, 100, 100); //coordinate and size of the label
+        //create full name text and set text to include the user's full name
+        fullName.setBounds(10,10, 300, 100); //coordinate and size of the label
         fullName.setFont(new Font(null, Font.PLAIN, 14));
+        fullName.setText("Full Name: " + user2.get_full_name());
         fullName.setVisible(true);
 
-        like.setBounds(10,500, 60, 40); //coordinate and size of the label
+        //create age text and set text to include the user's age
+        age.setBounds(10,70, 300, 100); //coordinate and size of the label
+        age.setFont(new Font(null, Font.PLAIN, 14));
+        age.setText("Age: " + user2.get_age());
+        age.setVisible(true);
+
+        //create pronoun text
+        pronoun.setBounds(10,140, 300, 100); //coordinate and size of the label
+        pronoun.setFont(new Font(null, Font.PLAIN, 14));
+        pronoun.setText("Pronouns: " + user2.get_pronouns());
+        pronoun.setVisible(true);
+
+        //create country text
+        country.setBounds(10,210, 400, 100); //coordinate and size of the label
+        country.setFont(new Font(null, Font.PLAIN, 14));
+        country.setText("Country of Origin: " + user2.get_location().get("country"));
+        country.setVisible(true);
+
+        //create province text
+        province.setBounds(10,280, 300, 100); //coordinate and size of the label
+        province.setFont(new Font(null, Font.PLAIN, 14));
+        province.setText("Province: " + user2.get_location().get("province"));
+        province.setVisible(true);
+
+        //create city text
+        city.setBounds(10,350, 300, 100); //coordinate and size of the label
+        city.setFont(new Font(null, Font.PLAIN, 14));
+        city.setText("City: " + user2.get_location().get("city"));
+        city.setVisible(true);
+
+        //create gender text
+        gender.setBounds(10,420, 300, 100); //coordinate and size of the label
+        gender.setFont(new Font(null, Font.PLAIN, 14));
+        gender.setText("Gender: " + user2.get_gender());
+        gender.setVisible(true);
+
+        //create sexuality text
+        sexuality.setBounds(10,490, 300, 100); //coordinate and size of the label
+        sexuality.setFont(new Font(null, Font.PLAIN, 14));
+        sexuality.setText("Sexuality: " + user2.get_sexuality());
+        sexuality.setVisible(true);
+
+        //create interests text
+        interests.setBounds(10,560, 700, 100); //coordinate and size of the label
+        interests.setFont(new Font(null, Font.PLAIN, 14));
+        interests.setText("Interest: " + user2.get_interests());
+        interests.setVisible(true);
+
+        //create like button
+        like.setBounds(10,660, 60, 40); //coordinate and size of the label
         like.setFocusable(false);
         like.addActionListener(this);
         like.setBackground(Color.red);
         like.setOpaque(true);
 
-        likedString.setBounds(500,50, 100, 100); //coordinate and size of the label
+        //create block button
+        block.setBounds(700,660, 60, 40); //coordinate and size of the label
+        block.setFocusable(false);
+        block.addActionListener(this);
+        block.setBackground(Color.black);
+        block.setOpaque(true);
+
+        //create string that will appear after we finish with the like backend work
+        likedString.setBounds(700,20, 100, 100); //coordinate and size of the label
         likedString.setFont(new Font(null, Font.PLAIN, 14));
         likedString.setVisible(false);
 
-        profile.add(fullName);
-        profile.add(like);
-        profile.add(likedString);
+        //create string that will appear after we finish with the block backend work
+        blockedString.setBounds(700,50, 100, 100); //coordinate and size of the label
+        blockedString.setFont(new Font(null, Font.PLAIN, 14));
+        blockedString.setVisible(false);
 
+        //Add everything to the frame
+        profile.add(fullName);
+        profile.add(age);
+        profile.add(pronoun);
+        profile.add(country);
+        profile.add(province);
+        profile.add(city);
+        profile.add(gender);
+        profile.add(sexuality);
+        profile.add(interests);
+
+        profile.add(block);
+        profile.add(like);
+
+        profile.add(blockedString);
+        profile.add(likedString);
 
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // if like button get clicked
         if (e.getSource()== like) {
             String textShow= controller.likeController(user1, user2);
             likedString.setText(textShow);
             likedString.setVisible(true);
-
+        }
+        //if blocked button get clicked
+        else if (e.getSource()==block) {
+            String textShow2= controller.blockController(user1, user2);
+            blockedString.setText(textShow2);
+            blockedString.setVisible(true);
         }
     }
 
@@ -74,9 +172,9 @@ public class UserLikeBlock implements ActionListener {
         ArrayList<String>interest2 = new ArrayList<>();
         interest2.add("Eat");
         UserAccount user1 = new UserAccount("AL", "AML", 20, "her", "CAN",
-                "ON", "TOR", 'F', 'H',interests1, "123", "num");
-        UserAccount user2 = new UserAccount("EL", "EML", 20, "her", "CAN",
-                "ON", "TOR", 'F', 'H',interest2, "124", "num");
+                "ON", "TOR", "Female", "Hetero",interests1, "123");
+        UserAccount user2 = new UserAccount("JSmith", "Jessica Smith", 20, "her", "CAN",
+                "ON", "TOR", "Female", "Hetero",interest2, "124");
         ControllerLikeBlock control = new ControllerLikeBlock();
         new UserLikeBlock(user1, user2, control);
 

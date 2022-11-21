@@ -1,6 +1,4 @@
-package UseCase;
-
-import java.util.List;
+package useCase;
 
 public class Search implements SearchInputBoundary {
 
