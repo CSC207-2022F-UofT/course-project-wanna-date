@@ -18,4 +18,9 @@ public class ChatBoxPresenter implements ChatBoxOB{
             return false;
         }
     }
+
+    @Override
+    public String sendMessagePresenter(){
+        return "Message Sent.";
+    }
 }
