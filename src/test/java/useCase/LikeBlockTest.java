@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 
 import java.util.ArrayList;
 
-public class ReceiveLikeTest {
+public class LikeBlockTest {
     /** Create unit test for the use cases only expect for input and output boundary. We don't test input and output
      * boundary because it is an interface so there is no implementation of the function that can be tested. Besides
      * that, only use cases is tested because the other component mainly focuses on the program flow so error will be
