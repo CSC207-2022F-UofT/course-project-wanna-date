@@ -51,17 +51,6 @@ public class ChatBox implements ActionListener {
         frame.add(send);
         frame.add(mutuallyLiked);
         frame.add(text);
-
-        // making the rectangles to make it more organized
-        // NOT WORKING!!!
-        JPanel panel = new JPanel(){
-            @Override
-            public void paint(Graphics g){
-                // one rectangle for border, one for username, draw line for chat
-                g.drawRect(200, 200, 100, 100);
-            }
-        };
-        frame.add(panel);
     }
 
     @Override
