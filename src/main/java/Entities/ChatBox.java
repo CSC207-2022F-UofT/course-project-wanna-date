@@ -1,33 +1,26 @@
 package Entities;
 
-import Entities.UserAccount;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class ChatBox implements ActionListener {
 
     JFrame frame = new JFrame();
     JButton send = new JButton("Send Message");
-//    JLabel message = new JLabel("Hello!");
+    //    JLabel message = new JLabel("Hello!");
     JLabel message = new JLabel();
     JLabel hi = new JLabel("hi");
 
     // drop down menu, list of users they have liked (can't talk with all of them)
-    UserAccount user;
-    UserAccount[] likedUsers = new UserAccount[user.get_liked_users().size()];
-    ArrayList<String> usersa = new ArrayList<String>();
-    ArrayList<String> users;
-    JComboBox mutuallyLiked;
+    String[] users = {"Sam", "Mark", "Kevin"};
+    JComboBox mutuallyLiked = new JComboBox(users);
     public UserAccount receiver;
     JTextField text = new JTextField();
     public String textMessage;
 
     public ChatBox(){
-        likedUsers = user.get_liked_users().toArray(likedUsers);
-        mutuallyLiked = new JComboBox(likedUsers);
 
         // position of button and size of button
         send.setBounds(700, 460, 200, 40);
@@ -91,3 +84,4 @@ public class ChatBox implements ActionListener {
         new ChatBox();
     }
 }
+
