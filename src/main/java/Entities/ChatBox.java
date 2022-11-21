@@ -1,9 +1,11 @@
 package Entities;
 
+import Entities.UserAccount;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ChatBox implements ActionListener {
 
@@ -11,16 +13,21 @@ public class ChatBox implements ActionListener {
     JButton send = new JButton("Send Message");
 //    JLabel message = new JLabel("Hello!");
     JLabel message = new JLabel();
+    JLabel hi = new JLabel("hi");
 
-    // drop down menu
-    String[] users = {"Sam", "Mark", "Kevin"};
-    JComboBox mutuallyLiked = new JComboBox(users);
-    public String receiver;
-
+    // drop down menu, list of users they have liked (can't talk with all of them)
+    UserAccount user;
+    UserAccount[] likedUsers = new UserAccount[user.get_liked_users().size()];
+    ArrayList<String> usersa = new ArrayList<String>();
+    ArrayList<String> users;
+    JComboBox mutuallyLiked;
+    public UserAccount receiver;
     JTextField text = new JTextField();
     public String textMessage;
 
     public ChatBox(){
+        likedUsers = user.get_liked_users().toArray(likedUsers);
+        mutuallyLiked = new JComboBox(likedUsers);
 
         // position of button and size of button
         send.setBounds(700, 460, 200, 40);
@@ -31,6 +38,10 @@ public class ChatBox implements ActionListener {
         message.setBounds(100,100,300,50);
         message.setFont(new Font(null, Font.PLAIN, 12));
         message.setVisible(false);
+
+        hi.setBounds(100,100,300,50);
+        hi.setFont(new Font(null, Font.PLAIN, 12));
+        hi.setVisible(false);
 
         mutuallyLiked.setBounds(800, 100, 100, 50);
         mutuallyLiked.setFont(new Font(null, Font.PLAIN, 25));
@@ -72,7 +83,11 @@ public class ChatBox implements ActionListener {
         else if (e.getSource() == mutuallyLiked) {
             // show previous messages is they have
             // if message history is empty then show a label that say start a conversation with said user
-            receiver = (String) mutuallyLiked.getSelectedItem();
+            receiver = (UserAccount) mutuallyLiked.getSelectedItem();
         }
+    }
+
+    public static void main(String[] args) {
+        new ChatBox();
     }
 }
