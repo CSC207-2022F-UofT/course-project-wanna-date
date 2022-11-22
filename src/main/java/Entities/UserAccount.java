@@ -26,23 +26,35 @@ public class UserAccount {
     // The location where user lives.
     // Consists of three keys, each mapped to their own values:
     // country, province, and city.
-    private HashMap location;
+    private HashMap<String, String> location;
 
     // The gender identified by user.
     // 'M': male
     // 'F': female
     // 'N': non-binary
-    private char gender;
+    private String gender;
 
     // The sexuality identified by user.
     // 'G': gay
     // 'L': lesbian
     // 'H': heterosexual
     // 'B': bisexual
-    private char sexuality;
+    private String sexuality;
 
     // The list of interests by user.
-    private ArrayList interests;
+    // They can only name one interest most suitable to them from this list:
+    // - Culinary
+    // - Sports
+    // - Watching
+    // - Photography
+    // - Travelling
+    // - Fashion
+    // - Music
+    // - Exercise
+    // - Games
+    // - Socializing
+    // - Others
+    private String interest;
 
     // The password of user's account.
     private String password;
@@ -64,22 +76,22 @@ public class UserAccount {
                        int age,
                        String pronouns,
                        String country, String province, String city,
-                       char gender,
-                       char sexuality,
-                       ArrayList interests,
-                       String password,
-                       String password_hint) {
+                       String gender,
+                       String sexuality,
+                       String interest,
+                       String password) {
         this.username = username;
         this.full_name = full_name;
         this.age = age;
         this.pronouns = pronouns;
-        HashMap location = new HashMap(3);
+        HashMap<String, String> location = new HashMap<String, String>(3);
         location.put("country", country);
         location.put("province", province);
         location.put("city", city);
+        this.location = location;
         this.gender = gender;
         this.sexuality = sexuality;
-        this.interests = interests;
+        this.interest = interest;
         this.password = password;
         ArrayList<UserAccount> liked_users = new ArrayList<UserAccount>();
         ArrayList<UserAccount> liked_by_users = new ArrayList<UserAccount>();
@@ -108,16 +120,22 @@ public class UserAccount {
         return this.location;
     }
 
-    public char get_gender() {
+    public String get_country() { return this.location.get("country"); }
+
+    public String get_province() { return this.location.get("province"); }
+
+    public String get_city() { return this.location.get("city"); }
+
+    public String get_gender() {
         return this.gender;
     }
 
-    public char get_sexuality() {
+    public String get_sexuality() {
         return this.sexuality;
     }
 
-    public ArrayList<String> get_interests() {
-        return this.interests;
+    public String get_interests() {
+        return this.interest;
     }
 
     public String get_password() {
