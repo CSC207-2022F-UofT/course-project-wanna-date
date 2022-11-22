@@ -26,7 +26,7 @@ public class UserAccount {
     // The location where user lives.
     // Consists of three keys, each mapped to their own values:
     // country, province, and city.
-    private HashMap location;
+    private HashMap<String, String> location;
 
     // The gender identified by user.
     // 'M': male
@@ -42,6 +42,18 @@ public class UserAccount {
     private String sexuality;
 
     // The list of interests by user.
+    // They can only name one interest most suitable to them from this list:
+    // - Culinary
+    // - Sports
+    // - Watching
+    // - Photography
+    // - Travelling
+    // - Fashion
+    // - Music
+    // - Exercise
+    // - Games
+    // - Socializing
+    // - Others
     private String interest;
 
     // The password of user's account.
@@ -72,10 +84,11 @@ public class UserAccount {
         this.full_name = full_name;
         this.age = age;
         this.pronouns = pronouns;
-        HashMap location = new HashMap(3);
+        HashMap<String, String> location = new HashMap<String, String>(3);
         location.put("country", country);
         location.put("province", province);
         location.put("city", city);
+        this.location = location;
         this.gender = gender;
         this.sexuality = sexuality;
         this.interest = interest;
@@ -106,6 +119,12 @@ public class UserAccount {
     public HashMap get_location() {
         return this.location;
     }
+
+    public String get_country() { return this.location.get("country"); }
+
+    public String get_province() { return this.location.get("province"); }
+
+    public String get_city() { return this.location.get("city"); }
 
     public String get_gender() {
         return this.gender;
