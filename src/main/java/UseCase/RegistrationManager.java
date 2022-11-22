@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public class RegistrationManager implements RegistrationInputBoundary{
 
+    public RegistrationManager() {}
+
     public boolean isValidRegistration(UserDatabase database,
                                        String username,
                                        String full_name,
