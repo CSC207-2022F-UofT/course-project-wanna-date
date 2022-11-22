@@ -105,9 +105,7 @@ public class LoginPage extends JFrame implements ActionListener {
 
         if (ae.getSource() == login_button) {
             LoginController loginController = new LoginController();
-            // TODO: figure out where database goes!
-            // Temporary solution --> Create Main UI/Class and then create Database there,
-            // then call the UIs with database as input
+            loginController.helpSetCurrUsername(username_value);
             loginController.callCreateDatabase();
             UserDatabase database1 = loginController.getDatabase();
             ViewProfilePage viewProfilePage1 = new ViewProfilePage(database1, username_value);

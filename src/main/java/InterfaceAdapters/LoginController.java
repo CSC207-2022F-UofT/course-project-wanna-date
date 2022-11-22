@@ -9,6 +9,12 @@ public class LoginController {
 
     public LoginController() {}
 
+    public String helpSetCurrUsername(String username) {
+        CurrUser currUser = CurrUser.getCurrUser();
+        currUser.setCurrUsername(username);
+        return currUser.getCurrUsername();
+    }
+
     public UserDatabase callCreateDatabase() {
 
         DataAccess dataAccess = new DataAccess();
@@ -32,7 +38,6 @@ public class LoginController {
         return loginInputBoundary.is_valid_login(databaseManager.getDatabase(), username, password);     // method in LoginManager needs param, but I can't use a UserDatabase class
                                         // in the Controller class, right?
     }
-
 }
 
 //    public boolean call_valid_login(LoginInputBoundary loginInputBoundary) {
