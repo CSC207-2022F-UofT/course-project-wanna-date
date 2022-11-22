@@ -2,7 +2,7 @@ package Entities;
 
 import java.util.List;
 
-public class ComparingProfile implements Comparable {
+public class ComparingProfile implements Comparable<ComparingProfile> {
     public String name;
     public List<String> interests;
     public String location;
@@ -66,10 +66,20 @@ public class ComparingProfile implements Comparable {
     /**
      * Define how ComparingProfiles ought to be compared.
      *
-     * @param o     The object to compare to
+     * @param profile       The profile to compare to
      */
     @Override
-    public int compareTo(Object o) {
-        return 0; // TODO
+    public int compareTo(ComparingProfile profile) {
+
+        // If this profile has higher compatibility, then make this profile lesser
+        // If profiles have the same compatibility, then make them equal
+        // If this profile has less compatibility, then make this profile greater
+        if (this.getCompatibility() > profile.getCompatibility()) {
+            return -1;
+        } else if (this.getCompatibility() == profile.getCompatibility()) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 }

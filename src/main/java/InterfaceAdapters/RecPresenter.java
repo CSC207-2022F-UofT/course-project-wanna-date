@@ -14,7 +14,7 @@ public class RecPresenter implements RecOutputBoundary {
      * Show recommended profiles.
      */
     public void ShowRecommendations(RecommendedProfiles showedProfiles){
-        // TODO
+        // TODO: to be done with integration relative to the output buttons later on
     }
 
     /**

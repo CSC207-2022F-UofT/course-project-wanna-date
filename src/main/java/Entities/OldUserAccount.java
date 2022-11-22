@@ -3,7 +3,7 @@ package Entities;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public class UserAccount {
+public class OldUserAccount {
     /*
      * Represents a single user in the application
      * Contains this user's variables
@@ -48,27 +48,27 @@ public class UserAccount {
     private String password;
 
     // The list of usernames that this user liked.
-    private ArrayList<UserAccount> liked_users;
+    private ArrayList<OldUserAccount> liked_users;
 
     // The list of users who liked this user
-    private ArrayList<UserAccount> liked_by_users;
+    private ArrayList<OldUserAccount> liked_by_users;
 
     // The list of usernames that this user blocked.
-    private ArrayList<UserAccount> blocked_users;
+    private ArrayList<OldUserAccount> blocked_users;
 
     // The list of users who blocked this user
-    private ArrayList<UserAccount> blocked_by_users;
+    private ArrayList<OldUserAccount> blocked_by_users;
 
-    public UserAccount(String username,
-                       String full_name,
-                       int age,
-                       String pronouns,
-                       String country, String province, String city,
-                       char gender,
-                       char sexuality,
-                       ArrayList interests,
-                       String password,
-                       String password_hint) {
+    public OldUserAccount(String username,
+                          String full_name,
+                          int age,
+                          String pronouns,
+                          String country, String province, String city,
+                          char gender,
+                          char sexuality,
+                          ArrayList interests,
+                          String password,
+                          String password_hint) {
         this.username = username;
         this.full_name = full_name;
         this.age = age;
@@ -81,10 +81,10 @@ public class UserAccount {
         this.sexuality = sexuality;
         this.interests = interests;
         this.password = password;
-        ArrayList<UserAccount> liked_users = new ArrayList<UserAccount>();
-        ArrayList<UserAccount> liked_by_users = new ArrayList<UserAccount>();
-        ArrayList<UserAccount> blocked_users = new ArrayList<UserAccount>();
-        ArrayList<UserAccount> blocked_by_users = new ArrayList<UserAccount>();
+        ArrayList<OldUserAccount> liked_users = new ArrayList<OldUserAccount>();
+        ArrayList<OldUserAccount> liked_by_users = new ArrayList<OldUserAccount>();
+        ArrayList<OldUserAccount> blocked_users = new ArrayList<OldUserAccount>();
+        ArrayList<OldUserAccount> blocked_by_users = new ArrayList<OldUserAccount>();
     }
 
     // Get functions
@@ -124,19 +124,19 @@ public class UserAccount {
         return this.password;
     }
 
-    public ArrayList<UserAccount> get_liked_users() {
+    public ArrayList<OldUserAccount> get_liked_users() {
         return this.liked_users;
     }
 
-    public ArrayList<UserAccount> get_blocked_users() {
+    public ArrayList<OldUserAccount> get_blocked_users() {
         return this.blocked_users;
     }
 
-    public ArrayList<UserAccount> get_liked_by_users() {
+    public ArrayList<OldUserAccount> get_liked_by_users() {
         return this.liked_users;
     }
 
-    public ArrayList<UserAccount> get_blocked_by_users() {
+    public ArrayList<OldUserAccount> get_blocked_by_users() {
         return this.liked_users;
     }
 }

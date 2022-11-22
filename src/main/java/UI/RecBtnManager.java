@@ -1,9 +1,4 @@
-// by Arist Alfred Bravo
-// note that this code is interim code; it is meant to model how the CLEAN architecture ought to be created
-// outside of the CLEAN classes before other aspects are set up; this is a temporary set-up
-// one may run the main method in this file to try and start-up the GUI for this use case
-
-package tutorial;
+package UI;
 
 import FrameworksDrivers.RecDataAccessor;
 import InterfaceAdapters.RecController;
@@ -13,18 +8,17 @@ import UseCase.RecInputBoundary;
 import UseCase.RecOutputBoundary;
 import UseCase.Recommendation;
 
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.event.ActionListener;
 
-public class TestRecUC {
+public class RecBtnManager {
 
-    // tutorial taken from https://www.javatpoint.com/java-swing
-    // https://docs.oracle.com/javase/tutorial/uiswing/events/actionlistener.html
+    // TODO: this class will be referenced when the Recommendation button of the main screen is clicked, and from
+    //  here, the controller ought to be referenced as well; this class will do the startup of the TestRecUC
 
     public static void main(String[] args) {
 
-
-        // --- SET UP CLEAN ARCHITECTURE
+        // --- SET UP CLEAN ARCHITECTURE OF THIS USE CASE
         // Set up the recommendation use case
         RecOutputBoundary recPresenter = new RecPresenter();
         RecDataAccessInterface recDataAccess = new RecDataAccessor();
@@ -45,27 +39,5 @@ public class TestRecUC {
         // Make settings for button, including the addition of an action listener
         generateBtn.setBounds(0,0,200,30);
         generateBtn.addActionListener(recController);
-
     }
-
-    // Note: the code below was the former body of this class definition. It is kept here as a reference in
-    // case it is necessary.
-    //    public static void main(String[] args) {
-    //        for (int i = 1; i <= 100; i++) {
-    //            System.out.println(convert(i));
-    //        }
-    //    }
-    //
-    //    public static String convert(int decide) {
-    //        if (decide % 15 == 0) {
-    //            return "tutorial.HelloWorld";
-    //        }
-    //        if (decide % 3 == 0) {
-    //            return "Hello";
-    //        }
-    //        if (decide % 5 == 0) {
-    //            return "World";
-    //        }
-    //        return String.valueOf(decide);
-    //    }
 }

@@ -1,25 +1,31 @@
+// by Arist Alfred Bravo
+
 package UseCase;
 
 import Entities.ComparingProfile;
-import Entities.UserAccount;
+import Entities.OldUserAccount;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Recommendation implements RecInputBoundary {
 
     private RecOutputBoundary outputManager;
+    private RecDataAccessInterface dataManager;
     private HashMap<String, ComparingProfile> nameToComp;
 
     /**
      * Construct a Recommendation use case object with
-     * the given output boundary object.
+     * the given output boundary and data access interface objects.
      *
      * @param outputManager     An output boundary, usually a presenter
+     * @param dataManager       A data access interface object
      */
-    public Recommendation(RecOutputBoundary outputManager){
+    public Recommendation(RecOutputBoundary outputManager, RecDataAccessInterface dataManager){
         this.outputManager = outputManager;
+        this.dataManager = dataManager;
         this.nameToComp = new HashMap<>();
     }
 
@@ -29,34 +35,33 @@ public class Recommendation implements RecInputBoundary {
      * to do such processing.
      */
     public void MakeRecommendations(){
-        // TODO
 
         // Get the current user of the program
-        UserAccount currentUser = this.getCurrentUser();
+        OldUserAccount currentUser = this.getCurrentUser();
         String currentUsername = currentUser.get_username();
 
         // Get a list of user account information which satisfies mutual interests or locations
-        ArrayList<UserAccount> possibleUsers = this.getPossibleMatches();
+        ArrayList<OldUserAccount> possibleUsers = this.getPossibleMatches();
 
-        // Get information of blocked users
-        ArrayList<UserAccount> blockedUsers = new ArrayList<>(); // TODO update
+        // Get information of blocked users and users who liked the current user
+        ArrayList<OldUserAccount> blockedUsers = currentUser.get_blocked_users();
 
         // Using information of blocked users, take out any users who are blocked; note that
         // this might lead there to being less recommendations
-        ArrayList<UserAccount> filteredUsers = this.takeOutBlocked(currentUsername, possibleUsers);
+        ArrayList<OldUserAccount> filteredUsers = this.takeOutBlocked(possibleUsers, blockedUsers);
 
         // In this next part, choose random users from the information and create ComparingProfiles tailored
         // to the system's current user, if these profiles do not yet exist; otherwise,
         // update the profile's compatibility score; at the end, put them into a list
 
-        // Start by randomly excluding users from the filtered users
-        this.popRandomUsers(filteredUsers);
+        // Start by getting the final users
+        ArrayList<OldUserAccount> finalUsers = this.chooseRandomUsers(filteredUsers);
 
         // Create a list to store the finalized ComparingProfiles
         ArrayList<ComparingProfile> compList = new ArrayList<>();
 
         // Go through each profile
-        for (UserAccount chosenUser : filteredUsers) {
+        for (OldUserAccount chosenUser : filteredUsers) {
 
             // Compute compatibility of this user and the new user
             double likeScore = computeCompatibility(currentUser, chosenUser);
@@ -87,7 +92,7 @@ public class Recommendation implements RecInputBoundary {
         Collections.sort(compList);
 
         // Create recommended profiles in an object
-        RecommendedProfiles profilesToShow = createRecOutput(compList);
+        RecommendedProfiles profilesToShow = createRecOutput(currentUser, compList);
 
         // Send recommended profiles to the adapter layer through the output boundary
         this.outputManager.ShowRecommendations(profilesToShow);
@@ -97,37 +102,85 @@ public class Recommendation implements RecInputBoundary {
      * Get current user which is logged in.
      * This presumes that there is already a current user to get.
      */
-    private UserAccount getCurrentUser(){
-        return new UserAccount(); // TODO update
+    private OldUserAccount getCurrentUser(){
+        // TODO: update the method of getting the current user below, as it has changed from CRC
+        return (OldUserAccount) new Object();
     }
 
     /**
-     * Get a list of possible matches based on
+     * Get a list of possible (valid sexuality) matches based on
      * mutual interests and locations for the current user.
      */
-    private ArrayList<UserAccount> getPossibleMatches(){
-        ArrayList<UserAccount> potentialUsers = new ArrayList<>();
-        return potentialUsers; // TODO update
+    private ArrayList<OldUserAccount> getPossibleMatches(){
+        // TODO: update from the database instead of getting common code from Chris, as
+        //  Chris's implementation changed last-minute
+        ArrayList<OldUserAccount> potentialUsers = new ArrayList<>();
+        return potentialUsers;
     }
 
     /**
      * Return a list of UserAccounts without the users blocked by
-     * the current user, given the current user's username
-     * and a list of UserAccounts to filter through.
+     * the current user, given a list of UserAccounts to filter through
+     * and a list of blocked users.
+     *
+     * @param oldPossibleUsers      A list of UserAccounts to filter through
+     * @param blockedUsers          A list of blocked UserAccounts
      */
-    private ArrayList<UserAccount> takeOutBlocked(String username, ArrayList<UserAccount> oldPossibleUsers) {
-        return oldPossibleUsers; // TODO update
+    private ArrayList<OldUserAccount> takeOutBlocked(ArrayList<OldUserAccount> oldPossibleUsers,
+                                                     ArrayList<OldUserAccount> blockedUsers) {
+
+        // Define an array of filtered users
+        ArrayList<OldUserAccount> filteredList = new ArrayList<>();
+
+        // Go through each user to check
+        for (OldUserAccount checkedUser : oldPossibleUsers) {
+
+            // If the blocked user list does not contain the checked user, then add the
+            // checked user to the filtered list
+            if (!(blockedUsers.contains(checkedUser))) {
+                filteredList.add(checkedUser);
+            }
+        }
+
+        // Returned the filtered array
+        return filteredList;
     }
 
     /**
-     * Randomly take out users from the inputted list, up until the limit is reached and we have
-     * 5 users or less to recommend.
+     * Randomly pick users from the inputted list and return the list with the choices.
      * Note that this does not yet handle a case where the inputted list is empty.
      *
-     * @param popList       An ArrayList of UserAccounts to mutate
+     * @param pickerList       An ArrayList of UserAccounts to pick from
      */
-    private void popRandomUsers(ArrayList<UserAccount> popList) {
-        // TODO
+    private ArrayList<OldUserAccount> chooseRandomUsers(ArrayList<OldUserAccount> pickerList) {
+
+        // If there is at most 5 users, return them
+        if (pickerList.size() <= 5) {
+            return pickerList;
+
+        // Else, do random picking of 5 users
+        } else {
+
+            // Create a Random object
+            Random randomizer = new Random();
+
+            // Create a randomized list and a shallow copy of the pickerList
+            ArrayList<OldUserAccount> randomList = new ArrayList<>();
+            ArrayList<OldUserAccount> pickerCopy = (ArrayList<OldUserAccount>) pickerList.clone();
+
+            // Loop 5 times
+            for (int i = 1; i <= 5; i++) {
+
+                // Randomly pop from the copy and add the referred-to user to the final randomized list
+                int currentSize = pickerCopy.size();
+                int randomInt = randomizer.nextInt(currentSize);
+                randomList.add(pickerCopy.get(randomInt));
+                randomList.remove(randomInt);
+            }
+
+            // Return the random list
+            return randomList;
+        }
     }
 
     /**
@@ -136,18 +189,68 @@ public class Recommendation implements RecInputBoundary {
      * @param user1         First UserAccount
      * @param user2         Second UserAccount
      */
-    private double computeCompatibility(UserAccount user1, UserAccount user2) {
-        return 0.0; // TODO
+    private double computeCompatibility(OldUserAccount user1, OldUserAccount user2) {
+
+        // Define an accumulator to store the score sum
+        double scoreSum = 0.0;
+
+        // Add the proportion of interests in user1's interests which are shared
+        // This is an interim approach that might get optimized later on to account for the
+        // method of storage for UserAccounts
+        // TODO: update to account for Lovina's changes
+
+        // Start by declaring variables to count the number of shared interests and interests overall
+        double sharedInterests = 0;
+        ArrayList<String> user1Interests = user1.get_interests();
+        ArrayList<String> user2Interests = user2.get_interests();
+        int interestCount = user1Interests.size();
+
+        // Go through each interest to see if it is contained within user2's interests,
+        // and if so, record that
+        for (String interest : user1.get_interests()) {
+            if (user2Interests.contains(interest)) {
+                sharedInterests = sharedInterests + 1;
+            }
+        }
+
+        // Bump score sum by the proportion of matching interests using a weight of 2
+        scoreSum = scoreSum + (2.0 * sharedInterests / interestCount);
+
+        // Add a point for whether the country of both users is equivalent
+        if (user1.get_location().get("country") == user2.get_location().get("country")) {
+            scoreSum = scoreSum + 1;
+        }
+
+        // Add a point for whether there is a liking to the user
+        if (user1.get_liked_by_users().contains(user2)) {
+            scoreSum = scoreSum + 1;
+        }
+
+        // Return the compatibility as a weighted average out of the 4.0 maximum
+        return scoreSum / 4.0;
     }
 
     /**
      * Return a RecommendedProfiles object, given an ordered
      * ArrayList of user profiles to go recommend in that order.
      *
-     * @param newCompList   List of ComparingProfiles to recommend
+     * @param currentUserObj    The UserAccount for the current user
+     * @param newCompList       List of ComparingProfiles to recommend
      */
-    private RecommendedProfiles createRecOutput(ArrayList<ComparingProfile> newCompList) {
-        RecommendedProfiles recProfileObj = new RecommendedProfiles(); // TODO finish method
-        return recProfileObj;
+    private RecommendedProfiles createRecOutput(OldUserAccount currentUserObj, ArrayList<ComparingProfile> newCompList) {
+
+        // Create an ArrayList for all the recommended users
+        ArrayList<RecOutProfile> recommendationList = new ArrayList<>();
+
+        // Iterate through each profile
+        for (ComparingProfile sortedProfile : newCompList) {
+
+            // Create an output profile for the profile and add it to the ArrayList
+            RecOutProfile outProfile = new RecOutProfile(sortedProfile.name);
+            recommendationList.add(outProfile);
+        }
+
+        // Create the RecommendedProfiles object and return it
+        return new RecommendedProfiles(new RecOutProfile(currentUserObj.get_full_name()), recommendationList);
     }
 }
