@@ -2,10 +2,22 @@ package UseCase;
 
 import Entities.UserAccount;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
 public class SexFilterFemaleType implements FilterType {
     @Override
     public UserAccount[] filter() {
-
-        return new UserAccount[0];
+        DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
+        String[] username = databaseManager.list_username();
+        ArrayList<UserAccount> match= new ArrayList<>();
+        for (String user : username) {
+            UserAccount account = databaseManager.retrieve_user_account(user);
+            if (Objects.equals(account.get_gender(), "F")) {
+                match.add(account);
+            }
+        }
+        int size = match.size();
+        return match.toArray(new UserAccount[size]);
     }
 }

@@ -2,6 +2,9 @@ package UseCase;
 
 
 import Entities.UserAccount;
+import Entities.UserDatabase;
+
+import java.util.ArrayList;
 
 public class Search implements SearchInputBoundary {
 
@@ -22,12 +25,21 @@ public class Search implements SearchInputBoundary {
      */
 
     @Override
-    public void search(String name) {
-
+    public UserAccount[] search(String name) {
+        DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
         // do the search here and give a result
-        UserAccount[] results = {};
+        String[] username = databaseManager.list_username();
+        ArrayList<UserAccount> match= new ArrayList<>();
+        for (String user : username){
+            if (user.contains(name)){
+                match.add(databaseManager.retrieve_user_account(user));
+            }
+        }
+        int size = match.size();
+        UserAccount[] results = match.toArray(new UserAccount[size]);
         // show result
         this.presenter.showResult(results);
+        return results;
 
     }
 

@@ -19,10 +19,11 @@ public class FilterUseCase implements FilterInputBoundary{
      * @param type the filter type that the user clicked
      */
     @Override
-    public void apply(FilterType type) {
+    public UserAccount[] apply(FilterType type) {
         // the result after filter
         UserAccount[] results = type.filter();
         this.presenter.showResult(results);
+        return results;
 
     }
 }
