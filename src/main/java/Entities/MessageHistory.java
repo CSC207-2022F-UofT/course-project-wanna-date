@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 //Import the DateTimeFormatter class
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class MessageHistory {
 
@@ -30,11 +31,15 @@ public class MessageHistory {
     DateTimeFormatter dateTimeFormat  = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     private String formattedMessageDateTime = messageDateTime.format(dateTimeFormat);
 
+    //Array list of messages sent by this user
+    private ArrayList<MessageHistory> userMessages;
+
     public MessageHistory(String sendingUser, String receivingUser, String message, String formattedMessageDateTime) {
         this.sendingUser = sendingUser;
         this.receivingUser = receivingUser;
         this.message = message;
         this.formattedMessageDateTime = formattedMessageDateTime;
+        ArrayList<MessageHistory> userMessages = new ArrayList<MessageHistory>();
     }
 
     public String getSendingUser() {
@@ -51,5 +56,13 @@ public class MessageHistory {
 
     public String getFormattedMessageDateTime() {
         return this.formattedMessageDateTime;
+    }
+
+    public ArrayList<MessageHistory> getUserMessages() {
+        return this.userMessages;
+    }
+
+    public void setMessages(MessageHistory messageUser){
+        userMessages.add(messageUser);
     }
 }
