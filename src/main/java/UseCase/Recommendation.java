@@ -38,11 +38,11 @@ public class Recommendation implements RecInputBoundary {
     public void MakeRecommendations(){
 
         // Get the current user of the program
-        OldUserAccount currentUser = this.getCurrentUser();
-        String currentUsername = currentUser.get_username();
+        UserAccount currentUser = this.getCurrentUser();
 
         // Get possible users
-        ArrayList<ComparingProfile> possibleUsers = this.getPossibleMatches();
+        ArrayList<ComparingProfile> possibleUsers =
+                this.getPossibleMatches(currentUser.get_gender(), currentUser.get_sexuality());
 
         // TODO: update the general recommendation algo outlined below
 
@@ -105,24 +105,32 @@ public class Recommendation implements RecInputBoundary {
      * Get current user which is logged in.
      * This presumes that there is already a current user to get.
      */
-    private OldUserAccount getCurrentUser(){
+    private UserAccount getCurrentUser(){
         // TODO: update the method of getting the current user below, as it has changed from CRC
         //  that is, change OldUserAccount return type to UserAccount OR BETTER YET, change it
         //  into the ComparingProfile so that we can skip the affair of constructing from UserAccounts
-        return (OldUserAccount) new Object();
+        return (UserAccount) new Object();
     }
 
     /**
-     * Get a list of possible (valid sexuality) matches based on
-     * mutual interests and locations for the current user.
+     * Get a list of possible (valid sexuality) matches.
+     * Given are the gender and sexuality of the current user.
+     *
+     * @param userGender    User's gender
+     * @param userSex       User's sexuality
+     *
+     * @return              A list of matches as ComparingProfiles
      */
-    private ArrayList<ComparingProfile> getPossibleMatches(){
+    private ArrayList<ComparingProfile> getPossibleMatches(String userGender, String userSex){
 
-        // Define a random list of possible users
+        // Decide on what genders and sexualities to search for depending on the combination of user's
+        // gender and sexuality; put these into sets
+        // TODO
 
         // TODO: update from the database instead of getting common code from Chris, as
         //  Chris's implementation changed last-minute
-        ArrayList<ComparingProfile> potentialUsers = new ArrayList<>();
+        // Compute a list of possible users
+        ArrayList<ComparingProfile> potentialUsers = dataManager.getValidUsers();
 
         // Return the possible users
         return potentialUsers;
