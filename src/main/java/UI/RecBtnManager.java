@@ -16,7 +16,10 @@ public class RecBtnManager {
     // TODO: this class will be referenced when the Recommendation button of the main screen is clicked, and from
     //  here, the controller ought to be referenced as well; this class will do the startup of the TestRecUC
 
-    public static void main(String[] args) {
+    /**
+     * Construct a RecBtnManager and in doing so, create a new window.
+     */
+    public RecBtnManager(){
 
         // --- SET UP CLEAN ARCHITECTURE OF THIS USE CASE
         // Set up the recommendation use case
