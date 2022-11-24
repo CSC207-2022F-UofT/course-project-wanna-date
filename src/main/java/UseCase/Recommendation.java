@@ -40,6 +40,9 @@ public class Recommendation implements RecInputBoundary {
         OldUserAccount currentUser = this.getCurrentUser();
         String currentUsername = currentUser.get_username();
 
+        // todo remove the OLDUSERACC impleemntation, replace with the below
+        ArrayList<UserAccount> possibleUsers = this.getPossibleMatches();
+
         // Get a list of user account information which satisfies mutual interests or locations
         ArrayList<OldUserAccount> possibleUsers = this.getPossibleMatches();
 
@@ -104,6 +107,8 @@ public class Recommendation implements RecInputBoundary {
      */
     private OldUserAccount getCurrentUser(){
         // TODO: update the method of getting the current user below, as it has changed from CRC
+        //  that is, change OldUserAccount return type to UserAccount OR BETTER YET, change it
+        //  into the ComparingProfile so that we can skip the affair of constructing from UserAccounts
         return (OldUserAccount) new Object();
     }
 
@@ -112,9 +117,14 @@ public class Recommendation implements RecInputBoundary {
      * mutual interests and locations for the current user.
      */
     private ArrayList<OldUserAccount> getPossibleMatches(){
+
+        // Define a random list of possible users
+
         // TODO: update from the database instead of getting common code from Chris, as
         //  Chris's implementation changed last-minute
         ArrayList<OldUserAccount> potentialUsers = new ArrayList<>();
+
+        // Return the possible users
         return potentialUsers;
     }
 
