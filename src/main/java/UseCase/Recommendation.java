@@ -4,6 +4,7 @@ package UseCase;
 
 import Entities.ComparingProfile;
 import Entities.OldUserAccount;
+import Entities.UserAccount;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,11 +41,10 @@ public class Recommendation implements RecInputBoundary {
         OldUserAccount currentUser = this.getCurrentUser();
         String currentUsername = currentUser.get_username();
 
-        // todo remove the OLDUSERACC impleemntation, replace with the below
-        ArrayList<UserAccount> possibleUsers = this.getPossibleMatches();
+        // Get possible users
+        ArrayList<ComparingProfile> possibleUsers = this.getPossibleMatches();
 
-        // Get a list of user account information which satisfies mutual interests or locations
-        ArrayList<OldUserAccount> possibleUsers = this.getPossibleMatches();
+        // TODO: update the general recommendation algo outlined below
 
         // Get information of blocked users and users who liked the current user
         ArrayList<OldUserAccount> blockedUsers = currentUser.get_blocked_users();
@@ -116,13 +116,13 @@ public class Recommendation implements RecInputBoundary {
      * Get a list of possible (valid sexuality) matches based on
      * mutual interests and locations for the current user.
      */
-    private ArrayList<OldUserAccount> getPossibleMatches(){
+    private ArrayList<ComparingProfile> getPossibleMatches(){
 
         // Define a random list of possible users
 
         // TODO: update from the database instead of getting common code from Chris, as
         //  Chris's implementation changed last-minute
-        ArrayList<OldUserAccount> potentialUsers = new ArrayList<>();
+        ArrayList<ComparingProfile> potentialUsers = new ArrayList<>();
 
         // Return the possible users
         return potentialUsers;
