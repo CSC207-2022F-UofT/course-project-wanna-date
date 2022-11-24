@@ -1,7 +1,6 @@
 package InterfaceAdapters;
 
 import UseCase.Search;
-import UseCase.SearchFilterOutputBoundary;
 import UseCase.SearchInputBoundary;
 
 public class SearchController {
@@ -12,6 +11,10 @@ public class SearchController {
         this.toSearch = "";
         this.key = new Search();
 
+    }
+
+    public SearchInputBoundary getKey(){
+        return this.key;
     }
 
     /**
@@ -30,8 +33,6 @@ public class SearchController {
     public void performSearch(){
 
         this.key.search(toSearch);
-        SearchFilterOutputBoundary presenter = new SearchFilterPresenter();
-        this.key.setPresenter(presenter);
 
     }
 

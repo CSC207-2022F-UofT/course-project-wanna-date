@@ -1,8 +1,10 @@
 package UseCase;
 
+import Entities.UserAccount;
+
 public interface FilterInputBoundary {
 
-    void apply(FilterType type);
+    UserAccount[] apply(FilterType type);
 
     void setPresenter(SearchFilterOutputBoundary presenter);
 

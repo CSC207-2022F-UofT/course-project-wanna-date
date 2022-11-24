@@ -1,5 +1,7 @@
 package UI;
+import Entities.UserAccount;
 import InterfaceAdapters.FilterController;
+import InterfaceAdapters.SearchFilterPresenter;
 import UseCase.*;
 
 import javax.swing.*;
@@ -9,6 +11,8 @@ public class FilterMenu {
     public String getFilter;
     public String[] options = {"Sex Male", "Sex Female", "Location", "Sexuality"};
     public FilterType type;
+    public FilterController filterController = new FilterController();
+    public UserAccount[] results = {};
 
     public FilterMenu(){
 
@@ -27,7 +31,6 @@ public class FilterMenu {
     }
 
     public void applyFilter(){
-        FilterController filterController = new FilterController();
         if (Objects.equals(getFilter, options[0])){
             setType(new SexFilterMaleType());
         } if (Objects.equals(getFilter, options[1])){
@@ -41,10 +44,15 @@ public class FilterMenu {
         filterController.performFilter();
     }
 
+    public void setResult (UserAccount[] results){ this.results = results;}
+
 
     public static void main(String[] args) {
         FilterMenu choice = new FilterMenu();
         choice.applyFilter();
+        choice.filterController.getFilter().setPresenter(new SearchFilterPresenter(choice));
+
     }
+
 }
 

@@ -3,7 +3,6 @@ package InterfaceAdapters;
 import UseCase.FilterType;
 import UseCase.FilterUseCase;
 import UseCase.FilterInputBoundary;
-import UseCase.SearchFilterOutputBoundary;
 
 public class FilterController {
     public FilterType filterType;
@@ -17,15 +16,17 @@ public class FilterController {
     // for the different type in UI, set different types of filter
     public void setFilter(FilterType type){
         this.filterType = type;
+    }
 
+    public FilterInputBoundary getFilter(){
+        return this.filter;
     }
 
 
    // perform filter base on specific filter type with the help of input boundary.
     public void performFilter(){
         this.filter.apply(this.filterType);
-        SearchFilterOutputBoundary presenter = new SearchFilterPresenter();
-        this.filter.setPresenter(presenter);
+
 
 
     }
