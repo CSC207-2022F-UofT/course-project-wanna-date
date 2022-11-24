@@ -26,6 +26,7 @@
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
+gradlew.bat
 
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
@@ -115,10 +116,5 @@ gradle-app.setting
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
-/gradlew
-/gradlew.bat
-/.idea/.gitignore
 /.idea/misc.xml
-/gradle/wrapper/gradle-wrapper.jar
-/gradle/wrapper/gradle-wrapper.properties
 /.idea/vcs.xml
