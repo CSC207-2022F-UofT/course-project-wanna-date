@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class FilterMenu {
     public String getFilter;
-    public String[] options = {"Sex Male", "Sex Female", "Location", "Sexuality"};
+    public String[] options = {"Sex Male", "Sex Female", "Location"};
     public FilterType type;
     public FilterController filterController = new FilterController();
     public UserAccount[] results = {};
@@ -38,10 +38,8 @@ public class FilterMenu {
             setType(new SexFilterMaleType());
         } if (Objects.equals(getFilter, options[1])){
             setType(new SexFilterFemaleType());
-        }if (Objects.equals(getFilter, options[2])){
-            setType(new LocationFilterType());
         }else {
-            setType(new SexualityFilterType());
+            setType(new LocationFilterType());
         }
         filterController.setFilter(this.type);
         filterController.performFilter();
