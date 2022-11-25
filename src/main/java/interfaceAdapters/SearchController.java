@@ -1,13 +1,21 @@
 package interfaceAdapters;
 
+import useCase.Search;
+import useCase.SearchFilterOutputBoundary;
 import useCase.SearchInputBoundary;
 
 public class SearchController {
-    String toSearch;
+    public String toSearch;
+    public SearchInputBoundary key;
+
+    public SearchController(){
+        this.toSearch = "";
+        this.key = new Search();
+
+    }
 
     /**
      * Set class variable toSearch (input from user)
-     * @param toSearch
      */
 
     public void setToSearch(String toSearch) {
@@ -17,12 +25,13 @@ public class SearchController {
     /**
      * Call use case to perform search for the specific input
      * Use the input boundary to help
-     * @param key
      */
 
-    public void performSearch(SearchInputBoundary key){
+    public void performSearch(){
 
-        key.search(toSearch);
+        this.key.search(toSearch);
+        SearchFilterOutputBoundary presenter = new SearchFilterPresenter();
+        this.key.setPresenter(presenter);
 
     }
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UserAccount {
-    /**
+    /*
      * Represents a single user in the application
      * Contains this user's variables
      */
@@ -26,7 +26,7 @@ public class UserAccount {
     // The location where user lives.
     // Consists of three keys, each mapped to their own values:
     // country, province, and city.
-    private HashMap location;
+    private HashMap<String, String> location;
 
     // The gender identified by user.
     // 'M': male
@@ -42,7 +42,19 @@ public class UserAccount {
     private String sexuality;
 
     // The list of interests by user.
-    private ArrayList interests;
+    // They can only name one interest most suitable to them from this list:
+    // - Culinary
+    // - Sports
+    // - Watching
+    // - Photography
+    // - Travelling
+    // - Fashion
+    // - Music
+    // - Exercise
+    // - Games
+    // - Socializing
+    // - Others
+    private String interest;
 
     // The password of user's account.
     private String password;
@@ -66,24 +78,25 @@ public class UserAccount {
                        String country, String province, String city,
                        String gender,
                        String sexuality,
-                       ArrayList interests,
+                       String interest,
                        String password) {
         this.username = username;
         this.full_name = full_name;
         this.age = age;
         this.pronouns = pronouns;
-        location = new HashMap(3);
+        HashMap<String, String> location = new HashMap<String, String>(3);
         location.put("country", country);
         location.put("province", province);
         location.put("city", city);
+        this.location = location;
         this.gender = gender;
         this.sexuality = sexuality;
-        this.interests = interests;
+        this.interest = interest;
         this.password = password;
-        liked_users = new ArrayList<UserAccount>();
-        liked_by_users = new ArrayList<UserAccount>();
-        blocked_users = new ArrayList<UserAccount>();
-        blocked_by_users = new ArrayList<UserAccount>();
+        ArrayList<UserAccount> liked_users = new ArrayList<UserAccount>();
+        ArrayList<UserAccount> liked_by_users = new ArrayList<UserAccount>();
+        ArrayList<UserAccount> blocked_users = new ArrayList<UserAccount>();
+        ArrayList<UserAccount> blocked_by_users = new ArrayList<UserAccount>();
     }
 
     // Get functions
@@ -107,6 +120,12 @@ public class UserAccount {
         return this.location;
     }
 
+    public String get_country() { return this.location.get("country"); }
+
+    public String get_province() { return this.location.get("province"); }
+
+    public String get_city() { return this.location.get("city"); }
+
     public String get_gender() {
         return this.gender;
     }
@@ -115,8 +134,8 @@ public class UserAccount {
         return this.sexuality;
     }
 
-    public ArrayList<String> get_interests() {
-        return this.interests;
+    public String get_interests() {
+        return this.interest;
     }
 
     public String get_password() {
