@@ -12,20 +12,15 @@ public class LikeBlockTest {
      * that, only use cases is tested because the other component mainly focuses on the program flow so error will be
      * shown when program is run.
      */
-    ArrayList<String> interests1 = new ArrayList<>();
-
-    ArrayList<String>interest2 = new ArrayList<>();
 
     UserAccount user1 = new UserAccount("AL", "AML", 20, "her", "CAN",
-            "ON", "TOR", "Female", "Hetero",interests1, "123");
+            "ON", "TOR", "F", "H","Watching", "123");
     UserAccount user2 = new UserAccount("JSmith", "Jessica Smith", 20, "her", "CAN",
-            "ON", "TOR", "Female", "Hetero",interest2, "124");
+            "ON", "TOR", "F", "H","Music", "124");
 
 
     @Test
     public void ReceiveLikeAddLikeUser1(){
-        interests1.add("watch");
-        interest2.add("Eat");
         ReceiveLike likeTest1 = new ReceiveLike();
         likeTest1.like(user1, user2);
         ArrayList<Object> user1Like = new ArrayList<>();
@@ -36,8 +31,6 @@ public class LikeBlockTest {
 
     @Test
     public void ReceiveLikeAddLikedByUser2(){
-        interests1.add("Sleep");
-        interest2.add("Dance");
         ReceiveLike likeTest1 = new ReceiveLike();
         likeTest1.like(user1, user2);
         ArrayList<Object> user2Like = new ArrayList<>();
@@ -49,8 +42,7 @@ public class LikeBlockTest {
 
     @Test
     public void ReceiveBlockAddBlockUser1(){
-        interests1.add("Sleep");
-        interest2.add("Dance");
+
         ReceiveBlock blockTest1 = new ReceiveBlock();
         blockTest1.block(user1, user2);
         ArrayList<Object> user1Block = new ArrayList<>();
@@ -61,8 +53,7 @@ public class LikeBlockTest {
 
     @Test
     public void ReceiveBlockAddBlockByUser2(){
-        interests1.add("Sleep");
-        interest2.add("Dance");
+
         ReceiveBlock blockTest1 = new ReceiveBlock();
         blockTest1.block(user1, user2);
         ArrayList<Object> user2Block = new ArrayList<>();
@@ -73,8 +64,7 @@ public class LikeBlockTest {
 
     @Test
     public void RetrieveLikeMutualLikeTrue(){
-        interests1.add("Sleep");
-        interest2.add("Dance");
+
         ReceiveLike likeTest1 = new ReceiveLike();
         likeTest1.like(user1, user2);
         likeTest1.like(user2,user1);
@@ -85,8 +75,7 @@ public class LikeBlockTest {
 
     @Test
     public void RetrieveLikeMutualLikeFalse(){
-        interests1.add("Sleep");
-        interest2.add("Dance");
+
         ReceiveLike likeTest1 = new ReceiveLike();
         likeTest1.like(user1, user2);
 
