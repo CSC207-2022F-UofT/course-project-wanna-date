@@ -90,12 +90,28 @@ public class Recommendation implements RecInputBoundary {
             compList.add(this.nameToComp.get(chosenUsername));
         }
 
-        // Sort the list of profiles based on compatibility, in decreasing order (as defined by how
-        // two profiles ought to be compared)
+        // Sort the list of profiles based on compatibility
+        // A future alternative would be to introduce a custom sorting function that sorts
+        // the compList and finalUsers lists simultaneously
         Collections.sort(compList);
 
+        // Create a sorted final users' list
+        ArrayList<UserAccount> sortedFinalUsers = new ArrayList<>();
+
+        // Go through each Comparing Profile
+        for (ComparingProfile compProfile : compList) {
+
+            // For each user in finalUsers: if the usernames match, then we found the user, and add the
+            // UserAccount to the sortedFinalUsers
+            for (UserAccount maybeUser : finalUsers) {
+                if (Objects.equals(compProfile.name, maybeUser.get_username())) {
+                    sortedFinalUsers.add(maybeUser);
+                }
+            }
+        }
+
         // Create recommended profiles in an object
-        RecommendedProfiles profilesToShow = createRecOutput(currentUser, compList);
+        RecommendedProfiles profilesToShow = createRecOutput(currentUser, compList, sortedFinalUsers);
 
         // Send recommended profiles to the adapter layer through the output boundary
         this.outputManager.ShowRecommendations(profilesToShow);
@@ -318,8 +334,11 @@ public class Recommendation implements RecInputBoundary {
      *
      * @param currentUserObj    The UserAccount for the current user
      * @param newCompList       List of ComparingProfiles to recommend
+     * @param parallelList      A UserAccount version of newCompList
      */
-    private RecommendedProfiles createRecOutput(UserAccount currentUserObj, ArrayList<ComparingProfile> newCompList) {
+    private RecommendedProfiles createRecOutput(UserAccount currentUserObj,
+                                                ArrayList<ComparingProfile> newCompList,
+                                                ArrayList<UserAccount> parallelList) {
 
         // Create an ArrayList for all the recommended users
         ArrayList<RecOutProfile> recommendationList = new ArrayList<>();
@@ -333,6 +352,6 @@ public class Recommendation implements RecInputBoundary {
         }
 
         // Create the RecommendedProfiles object and return it
-        return new RecommendedProfiles(new RecOutProfile(currentUserObj.get_username()), recommendationList);
+        return new RecommendedProfiles(currentUserObj, recommendationList, parallelList);
     }
 }

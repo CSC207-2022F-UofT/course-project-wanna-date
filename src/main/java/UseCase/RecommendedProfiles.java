@@ -16,6 +16,7 @@ public class RecommendedProfiles {
      *
      * @param centralUser       User's account
      * @param recommendedUsers  User's recommended profiles
+     * @param recUserAcc        User's recommended user accounts; parallel list to recommendedUsers
      */
     public RecommendedProfiles(UserAccount centralUser, List<RecOutProfile> recommendedUsers,
                                List<UserAccount> recUserAcc){
