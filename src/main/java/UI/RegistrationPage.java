@@ -1,7 +1,7 @@
 package UI;
 
-import Entities.UserDatabase;
-import InterfaceAdapters.RegistrationController;
+import entities.UserDatabase;
+import interfaceAdapters.RegistrationController;
 
 import javax.swing.*;
 import java.awt.event.*;

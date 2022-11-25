@@ -1,7 +1,7 @@
 package UI;
 
-import Entities.UserDatabase;
-import InterfaceAdapters.LoginController;
+import entities.UserDatabase;
+import interfaceAdapters.LoginController;
 
 import javax.swing.*;
 import java.awt.event.*;

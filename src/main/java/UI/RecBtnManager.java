@@ -1,11 +1,10 @@
 package UI;
 
-import FrameworksDrivers.RecDataAccessor;
-import InterfaceAdapters.ControllerLikeBlock;
-import InterfaceAdapters.RecController;
-import InterfaceAdapters.RecPresenter;
-import InterfaceAdapters.RecShowRecBoundary;
-import UseCase.*;
+import frameworksDrivers.RecDataAccessor;
+import interfaceAdapters.RecController;
+import interfaceAdapters.RecPresenter;
+import interfaceAdapters.RecShowRecBoundary;
+import useCase.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -80,7 +79,6 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
             hideDisable(recBtn, false);
         }
 
-        // TODO VALIDATE AND REPAINT AT THE END, and do anything else here?
     }
 
     /**

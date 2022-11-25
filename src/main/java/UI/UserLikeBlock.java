@@ -1,13 +1,12 @@
 package UI;
-import Entities.UserAccount;
-import InterfaceAdapters.ControllerLikeBlock;
+import entities.UserAccount;
+import interfaceAdapters.ControllerLikeBlock;
 
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class UserLikeBlock implements ActionListener {
     //user giving the like or block

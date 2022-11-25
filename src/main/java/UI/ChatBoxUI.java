@@ -1,6 +1,6 @@
 package UI;
 
-import Entities.UserAccount;
+import entities.UserAccount;
 
 import javax.swing.*;
 import java.awt.*;

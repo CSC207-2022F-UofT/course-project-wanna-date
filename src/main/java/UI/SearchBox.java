@@ -1,8 +1,8 @@
 package UI;
 
-import Entities.UserAccount;
-import InterfaceAdapters.SearchController;
-import InterfaceAdapters.SearchFilterPresenter;
+import entities.UserAccount;
+import interfaceAdapters.SearchController;
+import interfaceAdapters.SearchFilterPresenter;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;

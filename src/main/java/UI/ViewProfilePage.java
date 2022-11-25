@@ -1,8 +1,8 @@
 package UI;
 
-import Entities.UserDatabase;
-import InterfaceAdapters.LogoutController;
-import InterfaceAdapters.ViewProfileController;
+import entities.UserDatabase;
+import interfaceAdapters.LogoutController;
+import interfaceAdapters.ViewProfileController;
 
 import javax.swing.*;
 import java.awt.event.*;
