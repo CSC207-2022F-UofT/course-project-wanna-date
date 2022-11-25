@@ -5,7 +5,7 @@ import UseCase.RecInputBoundary;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RecController implements ActionListener {
+public class RecController {
 
     RecInputBoundary useInteractor;
 
@@ -22,12 +22,16 @@ public class RecController implements ActionListener {
     /**
      * Handle input when the user wants to generate recommendations.
      */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // TODO: move this functionality into a UI class for integration later on
-        // Call on the use case interactor to make recommendations
+    public void handleInput(){
         useInteractor.MakeRecommendations();
     }
+
+//    @Override
+//    public void actionPerformed(ActionEvent e) {
+//        // Note: this functionality was moved into a UI class for integration
+//        // Call on the use case interactor to make recommendations
+//        useInteractor.MakeRecommendations();
+//    }
 
     /**
      * SYNTAX FOR THE GOING TO ANOTHER USER
