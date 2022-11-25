@@ -1,6 +1,7 @@
 package UI;
 
 import FrameworksDrivers.RecDataAccessor;
+import InterfaceAdapters.ControllerLikeBlock;
 import InterfaceAdapters.RecController;
 import InterfaceAdapters.RecPresenter;
 import InterfaceAdapters.RecShowRecBoundary;
@@ -82,6 +83,13 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
         // TODO VALIDATE AND REPAINT AT THE END, and do anything else here?
     }
 
+    /**
+     * Toggle enabled and visibility of the given
+     * button using the given status.
+     *
+     * @param recBtn    The button to change
+     * @param status    Boolean to switch statuses to
+     */
     private void hideDisable(JButton recBtn, boolean status) {
         recBtn.setEnabled(status);
         recBtn.setVisible(status);
@@ -108,16 +116,41 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
             recController.handleInput();
 
         // Otherwise, handle for the buttons and recommended profile viewing
-        } else if (actSrc == recBtn1) {
-            System.out.println("h");
-        } else if (actSrc == recBtn2) {
+        } else {
 
-        } else if (actSrc == recBtn3) {
+            /**
+             * SYNTAX FOR THE GOING TO ANOTHER USER
+             * Create this (In UI folder.ActionListener for a user's profile) object...
+             * x = UserLikeBlock(UserAccount user1=current user,
+             *               UserAccount user2=user on the list to click,
+             *               ControllerLikeBlock control=controller to import from Adeline's code)
+             *
+             * after that, call x.functionToCall() inside the ActionListener code
+             *
+             * the general idea is this:
+             * Lovina is going to create the code for startup and all, and what's going to happen from the home page is
+             * there is a Recommendation button
+             * this sends you to the getRecommendations webpage which I created in my TestRecUC, and then this
+             * is my area to handle from there
+             */
 
-        } else if (actSrc == recBtn4) {
+            // Create a controller for liking and blocking
+            ControllerLikeBlock likeBlockControl = new ControllerLikeBlock();
 
-        } else if (actSrc == recBtn5) {
+            // Create a UserLikeBlock object
+            UserLikeBlock profileDisplayer = new UserLikeBlock(x1, x2, likeBlockControl);
 
+            if (actSrc == recBtn1) {
+                profileDisplayer.functionToCall();
+            } else if (actSrc == recBtn2) {
+
+            } else if (actSrc == recBtn3) {
+
+            } else if (actSrc == recBtn4) {
+
+            } else if (actSrc == recBtn5) {
+
+            }
         }
 
     }

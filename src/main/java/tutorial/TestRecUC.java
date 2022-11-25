@@ -5,17 +5,6 @@
 
 package tutorial;
 
-import FrameworksDrivers.RecDataAccessor;
-import InterfaceAdapters.RecController;
-import InterfaceAdapters.RecPresenter;
-import UseCase.RecDataAccessInterface;
-import UseCase.RecInputBoundary;
-import UseCase.RecOutputBoundary;
-import UseCase.Recommendation;
-
-import java.awt.event.*;
-import javax.swing.*;
-
 public class TestRecUC {
 
     // tutorial taken from https://www.javatpoint.com/java-swing

@@ -5,11 +5,9 @@ import InterfaceAdapters.LogoutController;
 import InterfaceAdapters.ViewProfileController;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ViewProfilePage extends JFrame implements ActionListener {
 

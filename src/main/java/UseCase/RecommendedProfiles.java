@@ -1,19 +1,27 @@
 package UseCase;
 
+import Entities.UserAccount;
+
 import java.util.List;
 
 public class RecommendedProfiles {
 
-    public RecOutProfile recProfileUser;
+    public UserAccount recProfileUser;
     public List<RecOutProfile> recProfileList;
+    public List<UserAccount> recUserAcc;
 
     /**
      * Construct a RecommendedProfiles object, giving it the given
      * parameters of data to output.
+     *
+     * @param centralUser       User's account
+     * @param recommendedUsers  User's recommended profiles
      */
-    public RecommendedProfiles(RecOutProfile centralUser, List<RecOutProfile> recommendedUsers){
+    public RecommendedProfiles(UserAccount centralUser, List<RecOutProfile> recommendedUsers,
+                               List<UserAccount> recUserAcc){
         this.recProfileUser = centralUser;
         this.recProfileList = recommendedUsers;
+        this.recUserAcc = recUserAcc;
     }
 
     /**

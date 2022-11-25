@@ -216,13 +216,14 @@ public class Recommendation implements RecInputBoundary {
      * Return a list of UserAccounts without the users blocked by
      * the current user, given a list of UserAccounts to filter through
      * and a list of blocked users.
+     * As of now, this method can be deprecated but it is kept in
+     * the code in case it is of use in the future.
      *
      * @param oldPossibleUsers      A list of UserAccounts to filter through
      * @param blockedUsers          A list of blocked UserAccounts
      */
     private ArrayList<UserAccount> takeOutBlocked(ArrayList<UserAccount> oldPossibleUsers,
                                                      ArrayList<UserAccount> blockedUsers) {
-        // TODO deprecate
         // Define an array of filtered users
         ArrayList<UserAccount> filteredList = new ArrayList<>();
 
