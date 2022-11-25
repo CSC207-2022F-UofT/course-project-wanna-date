@@ -2,6 +2,7 @@ package tutorial;
 
 import Entities.UserAccount;
 import Entities.UserDatabase;
+import FrameworksDrivers.DataAccess;
 import UseCase.DatabaseManager;
 import UseCase.Search;
 import org.junit.Test;
@@ -21,10 +22,8 @@ public class SearchTest {
 
     @Test
     public void SearchNoOccurrence(){
-        DatabaseManager dm = DatabaseManager.getDatabaseManager();
-        String[] data = {};
-        dm.createDatabase(data);
-        UserDatabase database = dm.getDatabase();
+        DataAccess access = new DataAccess();
+        access.read_csv();
         Search search = new Search();
         UserAccount[] expected = {};
         Assertions.assertEquals(expected, search.search("name"));
