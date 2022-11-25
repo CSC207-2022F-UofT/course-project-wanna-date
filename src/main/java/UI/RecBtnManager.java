@@ -115,11 +115,12 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
             // Call on the controller to handle input
             recController.handleInput();
 
-        // Otherwise, handle for the buttons and recommended profile viewing
+        // Otherwise, handle for the buttons and recommended profile viewing; entry
+        // in this branch implies recommendations have already been shown; this is a precondition
         } else {
 
             /**
-             * SYNTAX FOR THE GOING TO ANOTHER USER
+             * GENERAL INSTRUCTIONS FOR GOING TO ANOTHER USER
              * Create this (In UI folder.ActionListener for a user's profile) object...
              * x = UserLikeBlock(UserAccount user1=current user,
              *               UserAccount user2=user on the list to click,
@@ -134,33 +135,31 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
              * is my area to handle from there
              */
 
-            // Create a controller for liking and blocking
-            ControllerLikeBlock likeBlockControl = new ControllerLikeBlock();
-
-            // Create a UserLikeBlock object
-            UserLikeBlock profileDisplayer = new UserLikeBlock(x1, x2, likeBlockControl);
-
             if (actSrc == recBtn1) {
-                profileDisplayer.functionToCall();
+                recController.formLBControl(0);
             } else if (actSrc == recBtn2) {
-
+                recController.formLBControl(1);
             } else if (actSrc == recBtn3) {
-
+                recController.formLBControl(2);
             } else if (actSrc == recBtn4) {
-
+                recController.formLBControl(3);
             } else if (actSrc == recBtn5) {
-
+                recController.formLBControl(4);
             }
         }
 
     }
 
     /**
-     * Show recommendations.
+     * Show recommendations and give some data to the controller.
      *
-     * @param profilesToShow    A list of profiles to output
+     * @param suggestedProfiles    A list of profiles to output
      */
-    public void showRec(List<RecOutProfile> profilesToShow){
+    public void showRec(RecommendedProfiles suggestedProfiles){
+
+        // Unpack profiles to show and update the controller
+        List<RecOutProfile> profilesToShow = suggestedProfiles.getRecProfileList();
+        recController.setRecProfiles(suggestedProfiles);
 
         // Go through each profile using an index
         for (int i = 0; i <= profilesToShow.size() - 1; i++) {

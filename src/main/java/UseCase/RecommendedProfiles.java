@@ -31,4 +31,11 @@ public class RecommendedProfiles {
     public List<RecOutProfile> getRecProfileList() {
         return recProfileList;
     }
+
+    /**
+     * Get the recommended profiles (user account version) for the user contained in this object.
+     */
+    public List<UserAccount> getRecUserAcc() {
+        return recUserAcc;
+    }
 }

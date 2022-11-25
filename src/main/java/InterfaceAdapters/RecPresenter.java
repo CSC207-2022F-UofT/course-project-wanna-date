@@ -15,18 +15,19 @@ public class RecPresenter implements RecOutputBoundary {
      */
     public RecPresenter(RecShowRecBoundary showRecBoundary){
         this.showRecBoundary = showRecBoundary;
-    } // TODO accept the UI to edit
+    }
 
     /**
      * Show recommended profiles.
      */
     public void ShowRecommendations(RecommendedProfiles showedProfiles){
-        // TODO: to be done with integration relative to the output buttons later on
 
         // Enable and show buttons which have recommendations in them
+        this.showRecBoundary.showRec(showedProfiles);
 
         // Change the button to "Re-Generate Recommendations"
-
+        // Optional: negligible/minor change for Milestone 4, all it means is changing the text of the
+        // recommendation button
     }
 
     /**
