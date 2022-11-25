@@ -173,10 +173,10 @@ public class RegistrationPage extends JFrame implements ActionListener{
                     sexuality_value,
                     interest_value,
                     pass_value)) {
-                NewPage page = new NewPage();
-                page.setVisible(true);
-                JLabel welcome_label = new JLabel("Welcome, " + username_value +"!");
-                page.getContentPane().add(welcome_label);
+//                NewPage page = new NewPage();
+//                page.setVisible(true);
+//                JLabel welcome_label = new JLabel("Welcome: " + username_value +"!");
+//                page.getContentPane().add(welcome_label);
 
                 ViewProfilePage viewProfilePage = new ViewProfilePage(database, username_value);
             } else {

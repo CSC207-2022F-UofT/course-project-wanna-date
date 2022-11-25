@@ -1,7 +1,9 @@
 package UI;
+
 import Entities.UserAccount;
 import InterfaceAdapters.FilterController;
 import InterfaceAdapters.SearchFilterPresenter;
+
 import UseCase.*;
 
 import javax.swing.*;
@@ -13,6 +15,7 @@ public class FilterMenu {
     public FilterType type;
     public FilterController filterController = new FilterController();
     public UserAccount[] results = {};
+
 
     public FilterMenu(){
 
@@ -44,6 +47,7 @@ public class FilterMenu {
         filterController.performFilter();
     }
 
+
     public void setResult (UserAccount[] results){ this.results = results;}
 
 
@@ -53,6 +57,7 @@ public class FilterMenu {
         choice.filterController.getFilter().setPresenter(new SearchFilterPresenter(choice));
 
     }
+
 
 }
 

@@ -1,11 +1,13 @@
 package UI;
 
 import Entities.UserDatabase;
+import InterfaceAdapters.LogoutController;
 import InterfaceAdapters.ViewProfileController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -154,6 +156,12 @@ public class ViewProfilePage extends JFrame implements ActionListener {
 
         } else if (ae.getSource() == logout_button) {
             // Create LogoutController
+            LogoutController logoutController = new LogoutController();
+            try {
+                logoutController.helpWriteDatabase();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             LoginPage loginPage = new LoginPage();
             frame.dispose();
         }

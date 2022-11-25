@@ -6,6 +6,7 @@ import InterfaceAdapters.SearchFilterPresenter;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -22,6 +23,9 @@ public class SearchBox extends JFrame {
         SearchBox searchBox = new SearchBox("Search For Username");
         searchBox.searchController.getKey().setPresenter(new SearchFilterPresenter(searchBox));
 
+
+    public static void main(String[] args) {
+        new SearchBox("Search For Username");
     }
 
     // create search box that take string as input
@@ -75,7 +79,6 @@ public class SearchBox extends JFrame {
         });
 
     }
-
 
 }
 
