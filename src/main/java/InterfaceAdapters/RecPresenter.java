@@ -23,9 +23,9 @@ public class RecPresenter implements RecOutputBoundary {
     public void ShowRecommendations(RecommendedProfiles showedProfiles){
         // TODO: to be done with integration relative to the output buttons later on
 
-        // Change the button to "Re-Generate Recommendations"
+        // Enable and show buttons which have recommendations in them
 
-        // Take the profiles and create buttons that link to profile pages
+        // Change the button to "Re-Generate Recommendations"
 
     }
 
