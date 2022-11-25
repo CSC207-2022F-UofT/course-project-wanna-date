@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 class RecommendationTest {
 
     // TODO: figure out a way to do testing by means of the DatabaseManager.
-    //  After conferencing in office hours, the problem was that because our implementations
-    //  require use of the DatabaseManager, it is harder to create a "dummy" version of the
-    //  data persistence layer for testing. I will have to talk to Lovina about this but will write tests
-    //  later on.
+    //  After consulting in office hours, I have figured out a way to test the Recommendation use case despite the
+    //  singleton DataManager. I will write unit tests by use of mocking via Mockito and JUnit.
+    //  However, I was unable to finish these tests since currently there are errors in the program which have
+    //  to be fixed.
 
     @Test
     public void RecommendationTest7ValidUsers() {
