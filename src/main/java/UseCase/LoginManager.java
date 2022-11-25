@@ -6,6 +6,7 @@ import Entities.UserDatabase;
 public class LoginManager implements LoginInputBoundary{
     public UserAccount currUser;
 
+    private String currentUser;
     public LoginManager() {}
 
     public void help_create_database(String[] data_from_csv) {
@@ -17,6 +18,7 @@ public class LoginManager implements LoginInputBoundary{
         DatabaseManager dm = DatabaseManager.getDatabaseManager();
         if (dm.is_pair_exist(database, username, password)) {
             this.currUser = dm.retrieve_user_account(username);
+
             return true;
         } else {
             return false;
@@ -24,4 +26,6 @@ public class LoginManager implements LoginInputBoundary{
     }
 
     public UserAccount getCurrUser(){return this.currUser;}
+
 }
+

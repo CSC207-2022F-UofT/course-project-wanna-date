@@ -14,7 +14,8 @@ public class DatabaseManager implements DataExportInterface {
     private UserDatabase database;
 //    private static String[] dataFromCSV;
 
-    private DatabaseManager() {
+    public DatabaseManager() {
+        // Note from Arist: I had to make this public so the code compiles
     }
 
     public static DatabaseManager getDatabaseManager() {

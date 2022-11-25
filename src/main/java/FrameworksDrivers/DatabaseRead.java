@@ -29,10 +29,12 @@ public class DatabaseRead {
                 System.out.println("User 1 [Name=" + user[0] + ", Age=" + user[1] + ", Pronouns=" + user[2] + ", Gender=" + user[3] + ", Sexuality= " + user[4] + ", Interest= " + user[5] + ", Password:" + user[6] + "]");
                 UserAccount curr = new UserAccount( user[0], user[1], Integer.valueOf(user[2]), user[3], user[4],
                                                     user[5], user[6], user[7], user[8], user[9], user[10]);
-                DatabaseManager dm = new DatabaseManager();
-                if (dm.save_user_account(database, user[0], curr)) {
+                // Note from Arist: I presumed the code below was problematic and
+                // left in error, so I had to comment it out. It looks like it was code for testing.
+//                DatabaseManager dm = new DatabaseManager();
+//                if (dm.save_user_account(database, user[0], curr)) {
 //                    System.out.println(dm.retrieve_user_account(user[0]).get_full_name() == "Jungkook");
-                }
+//                }
             }
         }
         catch (IOException e)

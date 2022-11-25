@@ -28,7 +28,7 @@ public class RecDataAccessor implements RecDataAccessInterface {
      *
      * @return              A list of valid users
      */
-    public ArrayList<ComparingProfile> getValidUsers(String keyGender, String keySex, HashMap<>){
+    public ArrayList<ComparingProfile> getValidUsers(String keyGender, String keySex){
 
         // --- Get the database and do initial set-up
 

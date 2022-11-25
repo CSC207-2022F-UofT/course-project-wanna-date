@@ -28,9 +28,12 @@ public class DatabaseWrite {
         DatabaseManager dm = new DatabaseManager();
         UserDatabase database = new UserDatabase();
 //        HashMap<String, UserAccount> database = database_to_write.get_data();
-        String[] usernames = dm.list_username(database);
-        for (int i = 0; i < dm.number_user(database); i++) {
-            UserAccount user = dm.retrieve_user_account(database, usernames[i]);
+
+        // Note from Arist: I had to update parameters where dm was used and had to make dm public
+        // so I could compile the code
+        String[] usernames = dm.list_username();
+        for (int i = 0; i < dm.number_user(); i++) {
+            UserAccount user = dm.retrieve_user_account(usernames[i]);
             Object[] userProfileEach = new Object[]{user.get_username(),
                                                     user.get_full_name(),
                                                     user.get_age(),

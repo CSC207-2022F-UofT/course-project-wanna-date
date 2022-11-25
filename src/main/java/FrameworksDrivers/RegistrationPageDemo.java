@@ -1,5 +1,8 @@
 package FrameworksDrivers;
 
+// Note from Arist: had to import for this to work
+import UI.RegistrationPage;
+
 import javax.swing.*;
 
 public class RegistrationPageDemo {

@@ -19,7 +19,7 @@ public class ChatBoxPresenter implements ChatBoxOB{
         }
     }
 
-    @Override
+    // Note from Arist: removed the override notation since it seemed unneeded
     public String sendMessagePresenter(){
         return "Message Sent.";
     }

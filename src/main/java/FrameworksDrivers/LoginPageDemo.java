@@ -1,5 +1,8 @@
 package FrameworksDrivers;
 
+// Note from Arist: had to import this for this to work
+import UI.LoginPage;
+
 import javax.swing.*;
 
 public class LoginPageDemo {

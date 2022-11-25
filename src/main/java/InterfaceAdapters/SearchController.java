@@ -1,6 +1,7 @@
 package InterfaceAdapters;
 
 import UseCase.Search;
+
 import UseCase.SearchInputBoundary;
 
 public class SearchController {
@@ -16,6 +17,7 @@ public class SearchController {
     public SearchInputBoundary getKey(){
         return this.key;
     }
+
 
     /**
      * Set class variable toSearch (input from user)
