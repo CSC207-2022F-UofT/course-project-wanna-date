@@ -1,5 +1,7 @@
 package useCase;
 
+import entities.UserDatabase;
+
 import java.io.IOException;
 
 public interface DataAccessInterface {

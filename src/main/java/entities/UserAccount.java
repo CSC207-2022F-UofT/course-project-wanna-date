@@ -93,10 +93,10 @@ public class UserAccount {
         this.sexuality = sexuality;
         this.interest = interest;
         this.password = password;
-        ArrayList<UserAccount> liked_users = new ArrayList<UserAccount>();
-        ArrayList<UserAccount> liked_by_users = new ArrayList<UserAccount>();
-        ArrayList<UserAccount> blocked_users = new ArrayList<UserAccount>();
-        ArrayList<UserAccount> blocked_by_users = new ArrayList<UserAccount>();
+        this.liked_users = new ArrayList<UserAccount>();
+        this.liked_by_users = new ArrayList<UserAccount>();
+        this.blocked_users = new ArrayList<UserAccount>();
+        this.blocked_by_users = new ArrayList<UserAccount>();
     }
 
     // Get functions

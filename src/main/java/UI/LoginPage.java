@@ -2,6 +2,7 @@ package UI;
 
 import entities.UserDatabase;
 import interfaceAdapters.LoginController;
+import interfaceAdapters.RegistrationController;
 
 import javax.swing.*;
 import java.awt.event.*;

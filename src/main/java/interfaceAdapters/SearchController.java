@@ -1,7 +1,7 @@
 package interfaceAdapters;
 
 import useCase.Search;
-
+import useCase.SearchFilterOutputBoundary;
 import useCase.SearchInputBoundary;
 
 public class SearchController {

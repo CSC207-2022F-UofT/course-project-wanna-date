@@ -2,6 +2,7 @@ package useCase;
 
 import entities.UserAccount;
 import entities.UserDatabase;
+import frameworksDrivers.DataAccess;
 import frameworksDrivers.DataExportInterface;
 
 import java.util.Arrays;
@@ -13,8 +14,7 @@ public class DatabaseManager implements DataExportInterface {
     private UserDatabase database;
 //    private static String[] dataFromCSV;
 
-    public DatabaseManager() {
-        // Note from Arist: I had to make this public so the code compiles
+    private DatabaseManager() {
     }
 
     public static DatabaseManager getDatabaseManager() {

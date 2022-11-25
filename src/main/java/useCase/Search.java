@@ -1,10 +1,8 @@
 package useCase;
 
-
 import entities.UserAccount;
 
 import java.util.ArrayList;
-
 
 public class Search implements SearchInputBoundary {
     public SearchFilterOutputBoundary presenter = null;

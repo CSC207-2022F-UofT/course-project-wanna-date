@@ -1,5 +1,7 @@
 package UI;
 
+
+import entities.ChatBox;
 import entities.UserAccount;
 
 import javax.swing.*;

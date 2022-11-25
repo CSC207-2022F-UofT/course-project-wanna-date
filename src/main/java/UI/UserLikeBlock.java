@@ -185,17 +185,12 @@ public class UserLikeBlock implements ActionListener {
 
     public static void main (String[] args) {
 
-        // Note from Arist: had to comment this out so that things could run
-//        ArrayList<String> interests1 = new ArrayList<>();
-//        interests1.add("watch");
-//        ArrayList<String>interest2 = new ArrayList<>();
-//        interest2.add("Eat");
-//        UserAccount user1 = new UserAccount("AL", "AML", 20, "her", "CAN",
-//                "ON", "TOR", "Female", "Hetero",interests1, "123");
-//        UserAccount user2 = new UserAccount("JSmith", "Jessica Smith", 20, "her", "CAN",
-//                "ON", "TOR", "Female", "Hetero",interest2, "124");
-//        ControllerLikeBlock control = new ControllerLikeBlock();
-//        new UserLikeBlock(user1, user2, control);
+        UserAccount user1 = new UserAccount("AL", "AML", 20, "her", "CAN",
+                "ON", "TOR", "F", "H","Watching", "123");
+        UserAccount user2 = new UserAccount("JSmith", "Jessica Smith", 20, "her", "CAN",
+                "ON", "TOR", "F", "H","Music", "124");
+        ControllerLikeBlock control = new ControllerLikeBlock();
+        new UserLikeBlock(user1, user2, control);
 
     }
 }
