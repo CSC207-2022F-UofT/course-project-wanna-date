@@ -8,7 +8,7 @@ public class RecPresenter implements RecOutputBoundary {
     /**
      * Construct a RecPresenter object.
      */
-    public RecPresenter(){};
+    public RecPresenter(){}; // TODO accept the UI to edit
 
     /**
      * Show recommended profiles.

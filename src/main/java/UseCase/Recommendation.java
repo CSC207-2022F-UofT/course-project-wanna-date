@@ -5,17 +5,17 @@ package UseCase;
 import Entities.ComparingProfile;
 import Entities.OldUserAccount;
 import Entities.UserAccount;
+import Entities.UserDatabase;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 public class Recommendation implements RecInputBoundary {
 
     private RecOutputBoundary outputManager;
     private RecDataAccessInterface dataManager;
     private HashMap<String, ComparingProfile> nameToComp;
+    private DatabaseManager databaseRef;
+
 
     /**
      * Construct a Recommendation use case object with
@@ -28,6 +28,7 @@ public class Recommendation implements RecInputBoundary {
         this.outputManager = outputManager;
         this.dataManager = dataManager;
         this.nameToComp = new HashMap<>();
+        this.databaseRef = DatabaseManager.getDatabaseManager();
     }
 
     /**
@@ -41,30 +42,30 @@ public class Recommendation implements RecInputBoundary {
         UserAccount currentUser = this.getCurrentUser();
 
         // Get possible users
-        ArrayList<ComparingProfile> possibleUsers =
-                this.getPossibleMatches(currentUser.get_gender(), currentUser.get_sexuality());
+        ArrayList<UserAccount> possibleUsers =
+                this.getPossibleMatches(currentUser.get_gender(), currentUser.get_sexuality(), currentUser);
 
-        // TODO: update the general recommendation algo outlined below
-
-        // Get information of blocked users and users who liked the current user
-        ArrayList<OldUserAccount> blockedUsers = currentUser.get_blocked_users();
+        // TODO DEPRECATE ---
+        // Get information of blocked users
+        ArrayList<UserAccount> blockedUsers = currentUser.get_blocked_users();
 
         // Using information of blocked users, take out any users who are blocked; note that
         // this might lead there to being less recommendations
-        ArrayList<OldUserAccount> filteredUsers = this.takeOutBlocked(possibleUsers, blockedUsers);
+        ArrayList<UserAccount> filteredUsers = this.takeOutBlocked(possibleUsers, blockedUsers);
+        // TODO DEPRECATE ---
 
         // In this next part, choose random users from the information and create ComparingProfiles tailored
         // to the system's current user, if these profiles do not yet exist; otherwise,
         // update the profile's compatibility score; at the end, put them into a list
 
         // Start by getting the final users
-        ArrayList<OldUserAccount> finalUsers = this.chooseRandomUsers(filteredUsers);
+        ArrayList<UserAccount> finalUsers = this.chooseRandomUsers(filteredUsers);
 
         // Create a list to store the finalized ComparingProfiles
         ArrayList<ComparingProfile> compList = new ArrayList<>();
 
         // Go through each profile
-        for (OldUserAccount chosenUser : filteredUsers) {
+        for (UserAccount chosenUser : finalUsers) {
 
             // Compute compatibility of this user and the new user
             double likeScore = computeCompatibility(currentUser, chosenUser);
@@ -106,31 +107,107 @@ public class Recommendation implements RecInputBoundary {
      * This presumes that there is already a current user to get.
      */
     private UserAccount getCurrentUser(){
-        // TODO: update the method of getting the current user below, as it has changed from CRC
-        //  that is, change OldUserAccount return type to UserAccount OR BETTER YET, change it
-        //  into the ComparingProfile so that we can skip the affair of constructing from UserAccounts
-        return (UserAccount) new Object();
+
+        // Get the database and its data, presuming login is already done
+        HashMap<String, UserAccount> userDataMap = this.databaseRef.getDatabase().get_data();
+
+        // Get and return the current user based on their username, presuming login is already done
+        String currentUsername = CurrUser.getCurrUser().getCurrUsername();
+        return userDataMap.get(currentUsername);
     }
 
     /**
-     * Get a list of possible (valid sexuality) matches.
+     * Return whether there is a match of gender and sexuality
+     * between information for two users.
+     *
+     * @param u1Gender      User 1's gender as given in UserAccount
+     * @param u1Sex         User 1's sexuality as given in UserAccount
+     * @param u2Gender      User 2's gender as given in UserAccount
+     * @param u2Sex         User 2's sexuality as given in UserAccount
+     *
+     * @return              Whether the users match
+     */
+    private boolean genderSexMatches(String u1Gender, String u1Sex, String u2Gender, String u2Sex){
+
+        // Create a mapping of sexuality and/or gender codes to the corresponding desired gender codes
+        HashMap<String, String> desiredGender = new HashMap<>();
+
+        // For bisexual, lesbian, gay: map to the corresponding genders accepted
+        desiredGender.put("B", "MFN");
+        desiredGender.put("L", "F");
+        desiredGender.put("G", "M");
+
+        // For heterosexual (coded as Hetero+Gender): map to the "opposite" gender
+        desiredGender.put("HM", "F");
+        desiredGender.put("HF", "M");
+        desiredGender.put("HN", "N");
+
+        // See what gender each user desires, depending on their sexuality; different logic is for straight people
+
+        // For user 1: if they are hetero, then who they want depends on user 1's gender too; else,
+        // it does not, so merely consider sexuality
+        String u1Wants = "";
+        if (Objects.equals(u1Sex, "H")) {
+            u1Wants = desiredGender.get("H" + u1Gender);
+        } else {
+            u1Wants = desiredGender.get(u1Sex);
+        }
+
+        // For user 2: if they are hetero, then who they want depends on user 1's gender too; else,
+        // it does not, so merely consider sexuality
+        String u2Wants = "";
+        if (Objects.equals(u2Sex, "H")) {
+            u2Wants = desiredGender.get("H" + u2Gender);
+        } else {
+            u2Wants = desiredGender.get(u2Sex);
+        }
+
+        // Return whether the users would want each other
+        return (u2Wants.contains(u1Gender) && u1Wants.contains(u2Gender));
+    }
+
+    /**
+     * Get a list of possible (valid gender-sexuality) matches.
      * Given are the gender and sexuality of the current user.
+     * Blocked people are not included.
      *
      * @param userGender    User's gender
      * @param userSex       User's sexuality
+     * @param currentUser   Current user
      *
      * @return              A list of matches as ComparingProfiles
      */
-    private ArrayList<ComparingProfile> getPossibleMatches(String userGender, String userSex){
+    private ArrayList<UserAccount> getPossibleMatches(String userGender, String userSex, UserAccount currentUser){
 
-        // Decide on what genders and sexualities to search for depending on the combination of user's
-        // gender and sexuality; put these into sets
-        // TODO
+        // Define a list of possible users
+        ArrayList<UserAccount> potentialUsers = new ArrayList<>();
 
-        // TODO: update from the database instead of getting common code from Chris, as
-        //  Chris's implementation changed last-minute
-        // Compute a list of possible users
-        ArrayList<ComparingProfile> potentialUsers = dataManager.getValidUsers();
+        // Go through the current user's blocked users and fetch a list of usernames for blocked people
+        ArrayList<String> blockedUsernames = new ArrayList<>();
+        for (UserAccount blockedUser : currentUser.get_blocked_users()) {
+            blockedUsernames.add(blockedUser.get_username());
+        }
+
+        // Using the database, go through each contained member to determine if they ought to be brought
+        // into the use case as a valid user
+
+        // To start, get the database and its data, presuming login is already done
+        HashMap<String, UserAccount> userDataMap = this.databaseRef.getDatabase().get_data();
+
+        // Iterate through each account
+        for (UserAccount maybeValidUser : userDataMap.values()) {
+
+            // If the possible user does not have the same username as the current user,
+            // and the users have compatible gender-sexuality,
+            // and the possible user is not being blocked,
+            // then add the possible user to the array
+            if ( (!Objects.equals(maybeValidUser.get_username(), currentUser.get_username()))
+                    && genderSexMatches(currentUser.get_gender(), currentUser.get_sexuality(),
+                    maybeValidUser.get_gender(), maybeValidUser.get_sexuality())
+                    && (!blockedUsernames.contains(maybeValidUser.get_username())) ) {
+                potentialUsers.add(maybeValidUser);
+            }
+        }
 
         // Return the possible users
         return potentialUsers;
@@ -144,17 +221,19 @@ public class Recommendation implements RecInputBoundary {
      * @param oldPossibleUsers      A list of UserAccounts to filter through
      * @param blockedUsers          A list of blocked UserAccounts
      */
-    private ArrayList<OldUserAccount> takeOutBlocked(ArrayList<OldUserAccount> oldPossibleUsers,
-                                                     ArrayList<OldUserAccount> blockedUsers) {
-
+    private ArrayList<UserAccount> takeOutBlocked(ArrayList<UserAccount> oldPossibleUsers,
+                                                     ArrayList<UserAccount> blockedUsers) {
+        // TODO deprecate
         // Define an array of filtered users
-        ArrayList<OldUserAccount> filteredList = new ArrayList<>();
+        ArrayList<UserAccount> filteredList = new ArrayList<>();
 
         // Go through each user to check
-        for (OldUserAccount checkedUser : oldPossibleUsers) {
+        for (UserAccount checkedUser : oldPossibleUsers) {
 
             // If the blocked user list does not contain the checked user, then add the
             // checked user to the filtered list
+            // Note that this might have a chance of failing if UserAccount objects
+            // have different memory addresses
             if (!(blockedUsers.contains(checkedUser))) {
                 filteredList.add(checkedUser);
             }
@@ -167,10 +246,11 @@ public class Recommendation implements RecInputBoundary {
     /**
      * Randomly pick users from the inputted list and return the list with the choices.
      * Note that this does not yet handle a case where the inputted list is empty.
+     * In this case, we pick at most 5 users randomly.
      *
      * @param pickerList       An ArrayList of UserAccounts to pick from
      */
-    private ArrayList<OldUserAccount> chooseRandomUsers(ArrayList<OldUserAccount> pickerList) {
+    private ArrayList<UserAccount> chooseRandomUsers(ArrayList<UserAccount> pickerList) {
 
         // If there is at most 5 users, return them
         if (pickerList.size() <= 5) {
@@ -183,8 +263,8 @@ public class Recommendation implements RecInputBoundary {
             Random randomizer = new Random();
 
             // Create a randomized list and a shallow copy of the pickerList
-            ArrayList<OldUserAccount> randomList = new ArrayList<>();
-            ArrayList<OldUserAccount> pickerCopy = (ArrayList<OldUserAccount>) pickerList.clone();
+            ArrayList<UserAccount> randomList = new ArrayList<>();
+            ArrayList<UserAccount> pickerCopy = (ArrayList<UserAccount>) pickerList.clone();
 
             // Loop 5 times
             for (int i = 1; i <= 5; i++) {
@@ -207,7 +287,7 @@ public class Recommendation implements RecInputBoundary {
      * @param user1         First UserAccount
      * @param user2         Second UserAccount
      */
-    private double computeCompatibility(OldUserAccount user1, OldUserAccount user2) {
+    private double computeCompatibility(UserAccount user1, UserAccount user2) {
 
         // Define an accumulator to store the score sum
         double scoreSum = 0.0;
