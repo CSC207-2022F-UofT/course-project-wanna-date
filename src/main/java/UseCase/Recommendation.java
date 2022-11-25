@@ -42,17 +42,16 @@ public class Recommendation implements RecInputBoundary {
         UserAccount currentUser = this.getCurrentUser();
 
         // Get possible users
-        ArrayList<UserAccount> possibleUsers =
+        ArrayList<UserAccount> filteredUsers =
                 this.getPossibleMatches(currentUser.get_gender(), currentUser.get_sexuality(), currentUser);
 
-        // TODO DEPRECATE ---
+        // Below is some old code, kept here for documentation as to an alternative implementation if needed
         // Get information of blocked users
-        ArrayList<UserAccount> blockedUsers = currentUser.get_blocked_users();
+        // ArrayList<UserAccount> blockedUsers = currentUser.get_blocked_users();
 
         // Using information of blocked users, take out any users who are blocked; note that
         // this might lead there to being less recommendations
-        ArrayList<UserAccount> filteredUsers = this.takeOutBlocked(possibleUsers, blockedUsers);
-        // TODO DEPRECATE ---
+        // ArrayList<UserAccount> filteredUsers = this.takeOutBlocked(possibleUsers, blockedUsers);
 
         // In this next part, choose random users from the information and create ComparingProfiles tailored
         // to the system's current user, if these profiles do not yet exist; otherwise,
@@ -80,10 +79,10 @@ public class Recommendation implements RecInputBoundary {
 
             // Else, create a new ComparingProfile for the user and add it to the mapping
             } else {
-                String userCountry = (String) chosenUser.get_location().get("country");
-                String sexuality = ((Character) chosenUser.get_sexuality()).toString();
-                ComparingProfile newProfile = new ComparingProfile(chosenUser.get_full_name(),
-                        chosenUser.get_interests(), userCountry, sexuality, likeScore);
+                String userCountry = chosenUser.get_country();
+                String userSexuality = chosenUser.get_sexuality();
+                ComparingProfile newProfile = new ComparingProfile(chosenUser.get_username(),
+                        chosenUser.get_interests(), userCountry, userSexuality, likeScore);
                 this.nameToComp.put(chosenUsername, newProfile);
             }
 
@@ -273,7 +272,7 @@ public class Recommendation implements RecInputBoundary {
                 int currentSize = pickerCopy.size();
                 int randomInt = randomizer.nextInt(currentSize);
                 randomList.add(pickerCopy.get(randomInt));
-                randomList.remove(randomInt);
+                pickerCopy.remove(randomInt);
             }
 
             // Return the random list
@@ -282,7 +281,8 @@ public class Recommendation implements RecInputBoundary {
     }
 
     /**
-     * Given 2 user accounts, return their compatibility score.
+     * Given 2 user accounts, return their compatibility score
+     * relative to user1 recommendations.
      *
      * @param user1         First UserAccount
      * @param user2         Second UserAccount
@@ -292,40 +292,23 @@ public class Recommendation implements RecInputBoundary {
         // Define an accumulator to store the score sum
         double scoreSum = 0.0;
 
-        // Add the proportion of interests in user1's interests which are shared
-        // This is an interim approach that might get optimized later on to account for the
-        // method of storage for UserAccounts
-        // TODO: update to account for Lovina's changes
-
-        // Start by declaring variables to count the number of shared interests and interests overall
-        double sharedInterests = 0;
-        ArrayList<String> user1Interests = user1.get_interests();
-        ArrayList<String> user2Interests = user2.get_interests();
-        int interestCount = user1Interests.size();
-
-        // Go through each interest to see if it is contained within user2's interests,
-        // and if so, record that
-        for (String interest : user1.get_interests()) {
-            if (user2Interests.contains(interest)) {
-                sharedInterests = sharedInterests + 1;
-            }
-        }
-
-        // Bump score sum by the proportion of matching interests using a weight of 2
-        scoreSum = scoreSum + (2.0 * sharedInterests / interestCount);
-
-        // Add a point for whether the country of both users is equivalent
-        if (user1.get_location().get("country") == user2.get_location().get("country")) {
+        // If the top interests are shared, then bump score sum
+        if (Objects.equals(user1.get_interests(), user2.get_interests())) {
             scoreSum = scoreSum + 1;
         }
 
-        // Add a point for whether there is a liking to the user
+        // Add a point for whether the country of both users is equivalent
+        if (Objects.equals(user1.get_country(), user2.get_country())) {
+            scoreSum = scoreSum + 1;
+        }
+
+        // Add a point for whether user2 likes user1
         if (user1.get_liked_by_users().contains(user2)) {
             scoreSum = scoreSum + 1;
         }
 
-        // Return the compatibility as a weighted average out of the 4.0 maximum
-        return scoreSum / 4.0;
+        // Return the compatibility as a weighted average out of the maximum points
+        return scoreSum / 3.0;
     }
 
     /**
@@ -335,7 +318,7 @@ public class Recommendation implements RecInputBoundary {
      * @param currentUserObj    The UserAccount for the current user
      * @param newCompList       List of ComparingProfiles to recommend
      */
-    private RecommendedProfiles createRecOutput(OldUserAccount currentUserObj, ArrayList<ComparingProfile> newCompList) {
+    private RecommendedProfiles createRecOutput(UserAccount currentUserObj, ArrayList<ComparingProfile> newCompList) {
 
         // Create an ArrayList for all the recommended users
         ArrayList<RecOutProfile> recommendationList = new ArrayList<>();
@@ -349,6 +332,6 @@ public class Recommendation implements RecInputBoundary {
         }
 
         // Create the RecommendedProfiles object and return it
-        return new RecommendedProfiles(new RecOutProfile(currentUserObj.get_full_name()), recommendationList);
+        return new RecommendedProfiles(new RecOutProfile(currentUserObj.get_username()), recommendationList);
     }
 }

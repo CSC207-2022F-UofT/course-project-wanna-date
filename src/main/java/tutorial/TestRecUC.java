@@ -26,25 +26,25 @@ public class TestRecUC {
 
         // --- SET UP CLEAN ARCHITECTURE
         // Set up the recommendation use case
-        RecOutputBoundary recPresenter = new RecPresenter();
-        RecDataAccessInterface recDataAccess = new RecDataAccessor();
-        RecInputBoundary recUseCase = new Recommendation(recPresenter, recDataAccess);
-        ActionListener recController = new RecController(recUseCase);
-
-        // --- SET UP GUI
-        // Create a frame and a button for generation of recommendations
-        JFrame recommendFrame = new JFrame("User's Profile Page");
-        JButton generateBtn = new JButton("Generate Recommendations");
-
-        // Make settings for frame
-        recommendFrame.add(generateBtn);
-        recommendFrame.setSize(400,400);
-        recommendFrame.setLayout(null);
-        recommendFrame.setVisible(true);
-
-        // Make settings for button, including the addition of an action listener
-        generateBtn.setBounds(0,0,200,30);
-        generateBtn.addActionListener(recController);
+//        RecOutputBoundary recPresenter = new RecPresenter();
+//        RecDataAccessInterface recDataAccess = new RecDataAccessor();
+//        RecInputBoundary recUseCase = new Recommendation(recPresenter, recDataAccess);
+//        ActionListener recController = new RecController(recUseCase);
+//
+//        // --- SET UP GUI
+//        // Create a frame and a button for generation of recommendations
+//        JFrame recommendFrame = new JFrame("User's Profile Page");
+//        JButton generateBtn = new JButton("Generate Recommendations");
+//
+//        // Make settings for frame
+//        recommendFrame.add(generateBtn);
+//        recommendFrame.setSize(400,400);
+//        recommendFrame.setLayout(null);
+//        recommendFrame.setVisible(true);
+//
+//        // Make settings for button, including the addition of an action listener
+//        generateBtn.setBounds(0,0,200,30);
+//        generateBtn.addActionListener(recController);
 
     }
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ComparingProfile implements Comparable<ComparingProfile> {
     public String name;
-    public List<String> interests;
+    public String interests;
     public String location;
     public String sexuality;
     public double compatibility;
@@ -19,7 +19,7 @@ public class ComparingProfile implements Comparable<ComparingProfile> {
      * @param sexuality         Compared user's sexuality
      * @param compatibility     Compared user's compatibility to current user
      */
-    public ComparingProfile(String name, List<String> interests, String location,
+    public ComparingProfile(String name, String interests, String location,
                             String sexuality, double compatibility) {
         this.name = name;
         this.interests = interests;
@@ -37,7 +37,7 @@ public class ComparingProfile implements Comparable<ComparingProfile> {
      * @param location          Compared user's location
      * @param sexuality         Compared user's sexuality
      */
-    public ComparingProfile(String name, List<String> interests, String location, String sexuality) {
+    public ComparingProfile(String name, String interests, String location, String sexuality) {
         this.name = name;
         this.interests = interests;
         this.location = location;

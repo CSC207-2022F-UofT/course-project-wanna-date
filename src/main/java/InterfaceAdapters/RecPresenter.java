@@ -5,10 +5,17 @@ import UseCase.RecommendedProfiles;
 
 public class RecPresenter implements RecOutputBoundary {
 
+    private RecShowRecBoundary showRecBoundary;
+
     /**
-     * Construct a RecPresenter object.
+     * Construct a RecPresenter object using the given
+     * object which refers to the UI.
+     *
+     * @param showRecBoundary   The object which builds the UI for this use case
      */
-    public RecPresenter(){}; // TODO accept the UI to edit
+    public RecPresenter(RecShowRecBoundary showRecBoundary){
+        this.showRecBoundary = showRecBoundary;
+    } // TODO accept the UI to edit
 
     /**
      * Show recommended profiles.
