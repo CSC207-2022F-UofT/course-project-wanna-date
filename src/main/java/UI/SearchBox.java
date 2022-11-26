@@ -1,8 +1,8 @@
 package UI;
 
-import Entities.UserAccount;
-import InterfaceAdapters.SearchController;
-import InterfaceAdapters.SearchFilterPresenter;
+import entities.UserAccount;
+import interfaceAdapters.SearchController;
+import interfaceAdapters.SearchFilterPresenter;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
@@ -30,7 +30,6 @@ public class SearchBox extends JFrame {
         setSize(600, 600);
         setResizable(true);
         addComponents();
-        setTable();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
@@ -52,6 +51,8 @@ public class SearchBox extends JFrame {
                 }
             }
         });
+
+        setTable();
     }
 
     private void addComponents() {

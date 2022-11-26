@@ -1,11 +1,9 @@
 package UI;
 
-import Entities.UserDatabase;
-import InterfaceAdapters.LoginController;
-import InterfaceAdapters.RegistrationController;
+import entities.UserDatabase;
+import interfaceAdapters.LoginController;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public class LoginPage extends JFrame implements ActionListener {

@@ -1,8 +1,8 @@
 package UI;
-import Entities.UserAccount;
-import InterfaceAdapters.FilterController;
-import InterfaceAdapters.SearchFilterPresenter;
-import UseCase.*;
+import entities.UserAccount;
+import interfaceAdapters.FilterController;
+import interfaceAdapters.SearchFilterPresenter;
+import useCase.*;
 
 import javax.swing.*;
 import java.util.Objects;
