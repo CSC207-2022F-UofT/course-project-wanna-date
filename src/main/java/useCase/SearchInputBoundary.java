@@ -1,9 +1,12 @@
 package useCase;
 
+import entities.UserAccount;
+
 public interface SearchInputBoundary {
 
     // search method implemented by Search class
-    void search(String name);
+    UserAccount[] search(String name);
+
     void setPresenter(SearchFilterOutputBoundary presenter);
 
 }

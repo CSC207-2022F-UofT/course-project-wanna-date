@@ -5,11 +5,9 @@ import interfaceAdapters.LogoutController;
 import interfaceAdapters.ViewProfileController;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ViewProfilePage extends JFrame implements ActionListener {
 
@@ -146,7 +144,7 @@ public class ViewProfilePage extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == recommend_button) {
-
+            new RecBtnManager();
         } else if (ae.getSource() == search_button) {
 
         } else if (ae.getSource() == message_button) {

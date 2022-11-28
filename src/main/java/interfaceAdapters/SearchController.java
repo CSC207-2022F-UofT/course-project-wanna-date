@@ -14,6 +14,11 @@ public class SearchController {
 
     }
 
+    public SearchInputBoundary getKey(){
+        return this.key;
+    }
+
+
     /**
      * Set class variable toSearch (input from user)
      */
@@ -30,8 +35,6 @@ public class SearchController {
     public void performSearch(){
 
         this.key.search(toSearch);
-        SearchFilterOutputBoundary presenter = new SearchFilterPresenter();
-        this.key.setPresenter(presenter);
 
     }
 

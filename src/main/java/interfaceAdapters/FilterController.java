@@ -20,14 +20,14 @@ public class FilterController {
 
     }
 
+    public FilterInputBoundary getFilter(){
+        return this.filter;
+    }
+
 
    // perform filter base on specific filter type with the help of input boundary.
     public void performFilter(){
         this.filter.apply(this.filterType);
-        SearchFilterOutputBoundary presenter = new SearchFilterPresenter();
-        this.filter.setPresenter(presenter);
-
-
     }
 
 }

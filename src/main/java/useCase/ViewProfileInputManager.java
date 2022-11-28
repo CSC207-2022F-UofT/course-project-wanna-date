@@ -2,6 +2,7 @@ package useCase;
 
 import entities.UserAccount;
 import entities.UserDatabase;
+
 import interfaceAdapters.ViewProfilePresenter;
 
 import java.util.ArrayList;

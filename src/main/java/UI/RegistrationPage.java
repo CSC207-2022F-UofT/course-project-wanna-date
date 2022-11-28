@@ -4,7 +4,6 @@ import entities.UserDatabase;
 import interfaceAdapters.RegistrationController;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public class RegistrationPage extends JFrame implements ActionListener{

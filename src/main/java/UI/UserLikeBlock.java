@@ -185,7 +185,6 @@ public class UserLikeBlock implements ActionListener {
 
     public static void main (String[] args) {
 
-
         UserAccount user1 = new UserAccount("AL", "AML", 20, "her", "CAN",
                 "ON", "TOR", "F", "H","Watching", "123");
         UserAccount user2 = new UserAccount("JSmith", "Jessica Smith", 20, "her", "CAN",
