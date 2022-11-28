@@ -5,7 +5,17 @@ import entities.UserAccount;
 
 import java.util.ArrayList;
 
+
 public class Search implements SearchInputBoundary {
+    public SearchFilterOutputBoundary presenter = null;
+
+
+    /**
+     * used in controller to set the present to present the result.
+     */
+    public void setPresenter(SearchFilterOutputBoundary presenter){
+        this.presenter = presenter;
+    }
 
     public SearchFilterOutputBoundary presenter = null;
 
@@ -21,6 +31,7 @@ public class Search implements SearchInputBoundary {
     /**
      * Return a list of profiles whose username contains the given key word.
      * @param name Input from user to search.
+
      */
 
     @Override
@@ -40,6 +51,10 @@ public class Search implements SearchInputBoundary {
         this.presenter.showResult(results);
 
         return results;
+
+        // do the search here and give a result
+        // show result
+        this.presenter.showResult();
 
     }
 

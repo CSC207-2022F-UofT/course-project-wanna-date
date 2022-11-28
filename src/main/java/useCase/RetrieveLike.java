@@ -10,6 +10,10 @@ public class RetrieveLike {
         this.param1 = OB_Like;
     }
 
+    public RetrieveLike(){
+
+    }
+
     public void connector() {
         like_view(param1);
     }

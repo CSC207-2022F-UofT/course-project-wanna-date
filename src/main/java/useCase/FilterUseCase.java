@@ -9,6 +9,7 @@ public class FilterUseCase implements FilterInputBoundary{
     /**
      * used in controller to set the present to present the result.
      * @param  presenter Presenter to present the result.
+
      */
     public void setPresenter(SearchFilterOutputBoundary presenter){
         this.presenter = presenter;
@@ -16,6 +17,7 @@ public class FilterUseCase implements FilterInputBoundary{
 
     /**
      * apply the filter base on which type of filter it is.
+
      * @param type the filter type that the user clicked
      */
     @Override

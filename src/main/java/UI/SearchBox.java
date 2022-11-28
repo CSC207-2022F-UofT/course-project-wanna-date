@@ -21,7 +21,6 @@ public class SearchBox extends JFrame {
     public static void main(String[] args) {
         SearchBox searchBox = new SearchBox("Search For Username");
         searchBox.searchController.getKey().setPresenter(new SearchFilterPresenter(searchBox));
-
     }
 
     // create search box that take string as input
@@ -76,7 +75,6 @@ public class SearchBox extends JFrame {
         });
 
     }
-
 
 }
 
