@@ -2,12 +2,13 @@ package useCase;
 
 
 import entities.UserAccount;
+import interfaceAdapters.testPresenter;
 
 import java.util.ArrayList;
 
 
 public class Search implements SearchInputBoundary {
-    public SearchFilterOutputBoundary presenter = null;
+    public SearchFilterOutputBoundary presenter = new testPresenter();
 
 
     /**
