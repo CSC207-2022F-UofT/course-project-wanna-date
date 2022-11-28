@@ -1,6 +1,6 @@
-package UseCase;
+package useCase;
 
-import UseCase.SendMessageID;
+import useCase.SendMessageID;
 
 public interface SendMessageIB {
     public default boolean mutualUsers(SendMessageID user){

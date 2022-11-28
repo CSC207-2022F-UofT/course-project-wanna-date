@@ -1,6 +1,6 @@
-package UseCase;
-import Entities.UserHistory;
-import Entities.UserAccount;
+package useCase;
+import entities.UserHistory;
+import entities.UserAccount;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -98,10 +98,10 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
         String[] userCategories = new String[]{"Likes male users", "Likes female users",
                 "Likes non-binary users"};
 
-        char commonLikedType = ' ';
+        String commonLikedType = "";
         int commonLikedTypeInt = 0;
 
-        char[] likedType = new char[user.get_liked_users().size()];
+        String [] likedType = new String[user.get_liked_users().size()];
 
         for (int i = 0; i < user.get_liked_users().size(); i++) {
             likedType[i] = user.get_gender();
@@ -129,13 +129,13 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
             }
         }
 
-        if (commonLikedType == 'M') {
+        if (commonLikedType == "M") {
             commonLikedTypeInt = 0;
         }
-        else if (commonLikedType == 'F') {
+        else if (commonLikedType == "F") {
             commonLikedTypeInt = 1;
         }
-        else if (commonLikedType == 'N') {
+        else if (commonLikedType == "N") {
             commonLikedTypeInt = 2;
         }
 

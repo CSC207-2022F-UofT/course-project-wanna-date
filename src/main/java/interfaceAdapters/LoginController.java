@@ -1,5 +1,6 @@
 package interfaceAdapters;
 
+import entities.UserAccount;
 import entities.UserDatabase;
 import frameworksDrivers.DataAccess;
 import useCase.*;

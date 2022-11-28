@@ -1,6 +1,6 @@
-package UseCase;
+package useCase;
 
-import Entities.UserHistory;
+import entities.UserHistory;
 
 public interface GenerateUserHistoryInputBoundary {
 

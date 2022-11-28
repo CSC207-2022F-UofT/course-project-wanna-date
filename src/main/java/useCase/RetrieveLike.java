@@ -10,10 +10,7 @@ public class RetrieveLike {
         this.param1 = OB_Like;
     }
 
-    public RetrieveLike(){
-
-    }
-
+    // Function to connect his class with ReceiveLike class
     public void connector() {
         like_view(param1);
     }

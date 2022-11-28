@@ -1,4 +1,4 @@
-package UseCase;
+package useCase;
 
 public class SexualityFilterType implements FilterType {
     @Override

@@ -1,7 +1,7 @@
-package UseCase;
+package useCase;
 
-import Entities.ChatBox;
-import Entities.UserAccount;
+import entities.ChatBox;
+import entities.UserAccount;
 
 public class SendMessageID {
     ChatBox message;

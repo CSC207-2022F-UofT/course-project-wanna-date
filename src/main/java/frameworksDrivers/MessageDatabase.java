@@ -1,9 +1,9 @@
-package FrameworksDrivers;
+package frameworksDrivers;
 
 
 import javax.swing.*;
 import java.io.*;
-import Entities.MessageHistory;
+import entities.MessageHistory;
 
 public class MessageDatabase {
 

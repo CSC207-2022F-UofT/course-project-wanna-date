@@ -1,8 +1,8 @@
-package InterfaceAdapters;
+package interfaceAdapters;
 
-import Entities.ChatBox;
-import Entities.UserAccount;
-import UseCase.*;
+import entities.ChatBox;
+import entities.UserAccount;
+import useCase.*;
 
 public class ChatBoxPresenter implements ChatBoxOB{
     @Override
@@ -19,7 +19,7 @@ public class ChatBoxPresenter implements ChatBoxOB{
         }
     }
 
-    @Override
+//    @Override
     public String sendMessagePresenter(){
         return "Message Sent.";
     }

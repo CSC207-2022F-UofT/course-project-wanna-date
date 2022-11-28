@@ -1,8 +1,8 @@
-package InterfaceAdapters;
+package interfaceAdapters;
 
-import UseCase.ChatBoxIB;
-import UseCase.SendMessageIB;
-import UseCase.SendMessageID;
+import useCase.ChatBoxIB;
+import useCase.SendMessageIB;
+import useCase.SendMessageID;
 
 public class SendMessageController {
 

@@ -1,7 +1,8 @@
-package UseCase;
-import Entities.MessageHistory;
-import FrameworksDrivers.MessageDatabase;
-import UseCase.SendMessageID;
+package useCase;
+import entities.MessageHistory;
+import frameworksDrivers.MessageDatabase;
+
+import useCase.SendMessageID;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 

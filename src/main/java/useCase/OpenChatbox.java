@@ -1,8 +1,8 @@
-package UseCase;
+package useCase;
 
-import Entities.ChatBox;
-import UseCase.SendMessageID;
-import UseCase.RetrieveLike;
+import entities.ChatBox;
+import useCase.SendMessageID;
+import useCase.RetrieveLike;
 
 public class OpenChatbox implements ChatBoxIB{
     RetrieveLike likes;

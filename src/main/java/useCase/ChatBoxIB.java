@@ -1,6 +1,6 @@
-package UseCase;
+package useCase;
 
-import UseCase.SendMessageID;
+import useCase.SendMessageID;
 
 public interface ChatBoxIB {
     public default boolean mutualUsers(SendMessageID user){

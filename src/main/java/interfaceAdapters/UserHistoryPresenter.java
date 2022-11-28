@@ -1,6 +1,6 @@
-package InterfaceAdapters;
+package interfaceAdapters;
 
-import UseCase.GenerateUserHistoryOutputBoundary;
+import useCase.GenerateUserHistoryOutputBoundary;
 
 public class UserHistoryPresenter implements GenerateUserHistoryOutputBoundary{
     //Present results from GenerateUserHistory use case

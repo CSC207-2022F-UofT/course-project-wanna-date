@@ -1,7 +1,8 @@
-import Entities.UserAccount;
-import UseCase.OpenChatbox;
-import UseCase.SendMessageID;
-import UseCase.ReceiveLike;
+import entities.UserAccount;
+import useCase.OpenChatbox;
+import useCase.SendMessageID;
+
+import useCase.ReceiveLike;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

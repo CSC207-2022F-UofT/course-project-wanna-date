@@ -23,6 +23,11 @@ public class SearchBox extends JFrame {
         searchBox.searchController.getKey().setPresenter(new SearchFilterPresenter(searchBox));
     }
 
+    // Note from Arist: I had to clean up some syntax here
+//    public static void main(String[] args) {
+//        new SearchBox("Search For Username");
+//    }
+
     // create search box that take string as input
     public SearchBox(String title) throws HeadlessException {
         super(title);

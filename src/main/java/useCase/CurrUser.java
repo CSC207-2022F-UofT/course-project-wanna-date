@@ -1,5 +1,7 @@
 package useCase;
 
+import entities.UserDatabase;
+
 public class CurrUser {
 
     private static CurrUser currUser;

@@ -1,7 +1,7 @@
-package InterfaceAdapters;
+package interfaceAdapters;
 
-import Entities.UserHistory;
-import UseCase.GenerateUserHistoryInputBoundary;
+import entities.UserHistory;
+import useCase.GenerateUserHistoryInputBoundary;
 
 public class UserHistoryController implements GenerateUserHistoryInputBoundary{
 
