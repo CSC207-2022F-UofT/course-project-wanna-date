@@ -1,7 +1,6 @@
 package useCase;
 import entities.UserAccount;
 import interfaceAdapters.PresenterLikeBlock;
-
 import java.util.ArrayList;
 
 public class RetrieveLike {
