@@ -11,16 +11,6 @@ public class Search implements SearchInputBoundary {
 
 
     /**
-     * used in controller to set the present to present the result.
-     */
-    public void setPresenter(SearchFilterOutputBoundary presenter){
-        this.presenter = presenter;
-    }
-
-    public SearchFilterOutputBoundary presenter = null;
-
-
-    /**
      * used in controller to set the presenter to present the result.
      * @param  presenter Presenter to present the result.
      */
@@ -51,10 +41,6 @@ public class Search implements SearchInputBoundary {
         this.presenter.showResult(results);
 
         return results;
-
-        // do the search here and give a result
-        // show result
-        this.presenter.showResult();
 
     }
 
