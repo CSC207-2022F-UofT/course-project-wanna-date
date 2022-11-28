@@ -6,7 +6,6 @@ import interfaceAdapters.SearchFilterPresenter;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
-
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -35,7 +34,6 @@ public class SearchBox extends JFrame {
         setSize(600, 600);
         setResizable(true);
         addComponents();
-        setTable();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
@@ -57,6 +55,8 @@ public class SearchBox extends JFrame {
                 }
             }
         });
+
+        setTable();
     }
 
     private void addComponents() {

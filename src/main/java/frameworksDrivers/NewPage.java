@@ -1,7 +1,6 @@
 package frameworksDrivers;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class NewPage extends JFrame {
     public NewPage() {
