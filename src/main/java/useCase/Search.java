@@ -1,21 +1,13 @@
 package useCase;
 
+
 import entities.UserAccount;
 
 import java.util.ArrayList;
 
+
 public class Search implements SearchInputBoundary {
     public SearchFilterOutputBoundary presenter = null;
-
-    // Note from Arist: had to comment this out for the code to compile
-//    /**
-//     * used in controller to set the present to present the result.
-//     */
-//    public void setPresenter(SearchFilterOutputBoundary presenter){
-//        this.presenter = presenter;
-//    }
-
-//    public SearchFilterOutputBoundary presenter = null;
 
 
     /**
@@ -47,11 +39,8 @@ public class Search implements SearchInputBoundary {
         UserAccount[] results = match.toArray(new UserAccount[size]);
         // show result
         this.presenter.showResult(results);
-        return results;
 
-        // do the search here and give a result
-        // show result
-        this.presenter.showResult();
+        return results;
 
     }
 
