@@ -6,17 +6,17 @@ import entities.UserAccount;
 public class SendMessageID {
     ChatBox message;
     UserAccount user;
-    public UserAccount messageReceiver;
-    String receivingUser;
-    public UserAccount messageSender;
-    String sendingUser;
-    String text;
+    UserAccount messageReceiver, messageSender;
+    String receivingUser, sendingUser, text;
 
-    SendMessageID() {
-        messageReceiver = message.receiver;
-        receivingUser = message.receiver.get_full_name();
-        messageSender = user;
-        sendingUser = user.get_full_name();
-        text = message.textMessage;
+    SendMessageID(String receivingUser, String sendingUser,String text) {
+//        messageReceiver = message.receiver;
+//        messageSender = user;
+//        receivingUser = message.receiver.get_full_name();
+//        sendingUser = user.get_full_name();
+//        text = message.textMessage;
+        this.receivingUser = receivingUser;
+        this.sendingUser = sendingUser;
+        this.text = text;
     }
 }
