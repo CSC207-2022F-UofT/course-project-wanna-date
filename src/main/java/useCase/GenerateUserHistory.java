@@ -1,5 +1,5 @@
 package useCase;
-import entities.UserHistory;
+
 import entities.UserAccount;
 
 import java.util.ArrayList;
@@ -11,23 +11,23 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
         viewUserHistory.presenterUserHistory();
     }
 
-    // Return liked users
-    public ArrayList likedUsers(UserHistory user){
+    // Return list of liked users
+    public ArrayList likedUsers(UserAccount user){
         return user.getLikedUsers();
     }
 
-    // Return blocked users
-    public ArrayList blockedUsers(UserHistory user){
+    // Return list of blocked users
+    public ArrayList blockedUsers(UserAccount user){
         return user.getBlockedUsers();
     }
 
     // Use the age data of the people the user liked to find the most common age
     // that the user would like
     public int getLikedAgeRange(UserAccount user){
-        int[] ages = new int[user.get_liked_users().size()];
+        int[] ages = new int[user.getLikedUsers().size()];
 
-        for (int i = 0; i < user.get_liked_users().size(); i++) {
-            ages[i] = user.get_age();
+        for (int i = 0; i < user.getLikedUsers().size(); i++) {
+            ages[i] = user.getAge();
         }
 
         int commonAge = Integer.MIN_VALUE, maxCount = 1, count = 1;
@@ -58,10 +58,10 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
     // the liked users are from. The location is mapped as country, province, and city.
     public String getLikedLocation(UserAccount user){
         String commonLocation = "";
-        String[] cities = new String[user.get_liked_users().size()];
+        String[] cities = new String[user.getLikedUsers().size()];
 
-        for (int i = 0; i < user.get_liked_users().size(); i++) {
-            cities[i] = user.get_location().get("city").toString();
+        for (int i = 0; i < user.getLikedUsers().size(); i++) {
+            cities[i] = user.getLocation().get("city").toString();
         }
 
         boolean[] alreadySeen = new boolean[cities.length];
@@ -88,7 +88,7 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
         return commonLocation;
     }
 
-    // Use user history data to provide statistics on what kind of people the user likes by looking
+    // Use user account data to provide statistics on what kind of people the user likes by looking
     // at the gender of the users that the user liked.
     // The gender identified by user.
     // 'M': male
@@ -101,10 +101,10 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
         String commonLikedType = "";
         int commonLikedTypeInt = 0;
 
-        String [] likedType = new String[user.get_liked_users().size()];
+        String [] likedType = new String[user.getLikedUsers().size()];
 
-        for (int i = 0; i < user.get_liked_users().size(); i++) {
-            likedType[i] = user.get_gender();
+        for (int i = 0; i < user.getLikedUsers().size(); i++) {
+            likedType[i] = user.getGender();
         }
 
         boolean[] alreadySeen = new boolean[likedType.length];
@@ -143,17 +143,12 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
     }
 
     // Get total number of likes the user has made
-    public int getTotalLiked(UserHistory user){
+    public int getTotalLiked(UserAccount user){
         return user.getLikedUsers().size();
     }
 
     // Get total number of blocks the user has ade
-    public int getTotalBlocks(UserHistory user){
+    public int getTotalBlocks(UserAccount user){
         return user.getBlockedUsers().size();
-    }
-
-    //Get total number of users that the user has sent a message to
-    public int getTotalUsersMessaged(UserHistory user){
-        return user.getMessagedUsers().size();
     }
 }

@@ -64,9 +64,10 @@ public class UserHistoryUI implements ActionListener {
         //Set size of window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 800);
-
         frame.setLayout(null);
         frame.setVisible(true);
+
+        //Add frames
         frame.add(likedButton);
         frame.add(blockedButton);
         frame.add(title);
