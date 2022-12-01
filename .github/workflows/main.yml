@@ -1,0 +1,36 @@
+# Note from Arist: I put this up as a way to check style for Java files in pull requests.
+# It was taken from GitHub marketplace at https://github.com/marketplace/actions/run-java-checkstyle
+# This is to address the feedback from the rubric that we ought to add a new workflow, so I hope
+# this addresses that issue.
+on: pull_request
+
+jobs:
+  checkstyle_job:
+    runs-on: ubuntu-latest
+    name: General checking of style
+    steps:
+    - name: Run java checkstyle
+      # You may pin to the exact commit or the version.
+      # uses: nikitasavinov/checkstyle-action@79490c0fdcc3ab5dd2b50a0e82a5bfc4fe63f0a9
+      uses: nikitasavinov/checkstyle-action@0.6.0
+      with:
+        # GITHUB_TOKEN.
+        github_token: ${{ github.token }}
+        # Report level for reviewdog [info,warning,error]
+        level: info
+        # Reporter of reviewdog command [github-pr-check,github-pr-review]
+        reporter: github-pr-check
+        # Filtering for the reviewdog command [added,diff_context,file,nofilter]. Default is `added`.
+        filter_mode: added
+        # Exit code for reviewdog when errors are found [true,false] Default is `false`.
+        fail_on_error: false
+        # Checkstyle config file
+        checkstyle_config: google_checks.xml
+        # Checkstyle version
+        checkstyle_version: 10.3
+        # Working directory relative to the root directory.
+        workdir: .
+        # Tool name to use for reviewdog reporter
+        tool_name: reviewdog
+        # Properties file relative to the root directory.
+        # properties_file: # optional, default is 
