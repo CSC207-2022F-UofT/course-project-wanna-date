@@ -1,18 +1,15 @@
 package InterfaceAdapters;
 
-import UseCase.ChatBoxIB;
-import UseCase.SendMessageIB;
-import UseCase.SendMessageID;
+import useCase.SendMessageIB;
+import useCase.SendMessageID;
+import useCase.ReceiveMessageOD;
 
 public class SendMessageController {
+    private final SendMessageIB messageInput;
 
-    SendMessageID user;
-
-    public void messageController(ChatBoxIB input){
-        input.mutualUsers(user);
+    public SendMessageController(SendMessageIB messageInput) {
+        this.messageInput = messageInput;
     }
 
-    public void sendController(SendMessageIB messageInfo){
-        messageInfo.sendMessage();
-    }
+    ReceiveMessageOD saveMessage(SendMessageID sendMessageID) {return messageInput.sendMessage(sendMessageID);}
 }
