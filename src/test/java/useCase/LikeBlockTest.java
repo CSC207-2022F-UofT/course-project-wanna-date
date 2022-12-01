@@ -26,7 +26,7 @@ public class LikeBlockTest {
         ArrayList<Object> user1Like = new ArrayList<>();
         user1Like.add(user2);
 
-        Assertions.assertEquals(user1Like,user1.get_liked_users());
+        Assertions.assertEquals(user1Like,user1.getLikedUsers());
     }
 
     @Test
@@ -36,7 +36,7 @@ public class LikeBlockTest {
         ArrayList<Object> user2Like = new ArrayList<>();
         user2Like.add(user1);
 
-        Assertions.assertEquals(user2Like,user2.get_liked_by_users());
+        Assertions.assertEquals(user2Like,user2.getLikedByUsers());
 
     }
 
@@ -48,7 +48,7 @@ public class LikeBlockTest {
         ArrayList<Object> user1Block = new ArrayList<>();
         user1Block.add(user2);
 
-        Assertions.assertEquals(user1Block,user1.get_blocked_users());
+        Assertions.assertEquals(user1Block,user1.getBlockedUsers());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class LikeBlockTest {
         ArrayList<Object> user2Block = new ArrayList<>();
         user2Block.add(user1);
 
-        Assertions.assertEquals(user2Block,user2.get_blocked_by_users());
+        Assertions.assertEquals(user2Block,user2.getBlockedByUsers());
     }
 
     @Test

@@ -6,7 +6,7 @@ import useCase.ReceiveBlockInputBoundary;
 import useCase.ReceiveLike;
 import useCase.ReceiveLikeInputBoundary;
 
-public class ControllerLikeBlock implements ReceiveLikeInputBoundary, ReceiveBlockInputBoundary {
+public class ControllerLikeBlock {
     /** Controller for both like and block. There are 2 functions one for each action. Both function return String
      * that will be shown in the UI after button was clicked. Controller call the function in input boundary as
      * part of the Clean Architecture
@@ -18,6 +18,7 @@ public class ControllerLikeBlock implements ReceiveLikeInputBoundary, ReceiveBlo
     public String blockController(UserAccount userBlocking, UserAccount userBlocked) {
         // Create new ReceiveBlockInputBoundary with specific class of ReceiveBlock so that function with implementation
         // is called.
+        // This might be facade design pattern
         ReceiveBlockInputBoundary BlockIB = new ReceiveBlock();
         boolean result = BlockIB.block(userBlocking, userBlocked); // calling the main method
         PresenterLikeBlock presenter = new PresenterLikeBlock(); // create new presenter item to call its function later
