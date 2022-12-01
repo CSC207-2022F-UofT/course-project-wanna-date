@@ -9,8 +9,8 @@ public class FilterController {
     public FilterInputBoundary filter;
 
 
-    public FilterController(){
-        this.filter = new FilterUseCase();
+    public FilterController(SearchFilterPresenter presenter){
+        this.filter = new FilterUseCase(presenter);
     }
 
     // for the different type in UI, set different types of filter

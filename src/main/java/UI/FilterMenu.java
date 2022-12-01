@@ -11,7 +11,8 @@ public class FilterMenu {
     public String getFilter;
     public String[] options = {"Sex Male", "Sex Female", "Location"};
     public FilterType type;
-    public FilterController filterController = new FilterController();
+    public SearchFilterPresenter presenter = new SearchFilterPresenter(this);
+    public FilterController filterController = new FilterController(presenter);
     public UserAccount[] results = {};
 
     public FilterMenu(){
@@ -48,7 +49,6 @@ public class FilterMenu {
     public static void main(String[] args) {
         FilterMenu choice = new FilterMenu();
         choice.applyFilter();
-        choice.filterController.getFilter().setPresenter(new SearchFilterPresenter(choice));
 
     }
 

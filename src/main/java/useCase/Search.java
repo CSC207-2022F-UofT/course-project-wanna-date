@@ -8,16 +8,11 @@ import java.util.ArrayList;
 
 
 public class Search implements SearchInputBoundary {
-    public SearchFilterOutputBoundary presenter = new testPresenter();
+    public SearchFilterOutputBoundary presenter;
 
+    public Search(SearchFilterOutputBoundary presenter){this.presenter = presenter;}
 
-    /**
-     * used in controller to set the presenter to present the result.
-     * @param  presenter Presenter to present the result.
-     */
-    public void setPresenter(SearchFilterOutputBoundary presenter){
-        this.presenter = presenter;
-    }
+    public Search(){this.presenter = new testPresenter();}
 
     /**
      * Return a list of profiles whose username contains the given key word.

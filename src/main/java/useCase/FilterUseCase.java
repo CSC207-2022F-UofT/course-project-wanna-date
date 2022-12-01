@@ -1,19 +1,14 @@
 package useCase;
 
 import entities.UserAccount;
+import interfaceAdapters.testPresenter;
 
 public class FilterUseCase implements FilterInputBoundary{
-    public SearchFilterOutputBoundary presenter = null;
+    public SearchFilterOutputBoundary presenter;
 
+    public FilterUseCase(SearchFilterOutputBoundary presenter){this.presenter = presenter;};
 
-    /**
-     * used in controller to set the present to present the result.
-     * @param  presenter Presenter to present the result.
-
-     */
-    public void setPresenter(SearchFilterOutputBoundary presenter){
-        this.presenter = presenter;
-    }
+    public FilterUseCase(){this.presenter = new testPresenter();}
 
     /**
      * apply the filter base on which type of filter it is.

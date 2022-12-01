@@ -5,7 +5,6 @@ import interfaceAdapters.SearchController;
 import interfaceAdapters.SearchFilterPresenter;
 
 import javax.swing.*;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -15,12 +14,12 @@ public class SearchBox extends JFrame {
     private final JButton searchB = new JButton("Search");
     private final JPanel panel = new JPanel();
     private final JLabel label = new JLabel();
-    public SearchController searchController = new SearchController();
     public UserAccount[] results = {};
+    public SearchFilterPresenter presenter = new SearchFilterPresenter(this);
+    public SearchController searchController = new SearchController(presenter);
 
     public static void main(String[] args) {
-        SearchBox searchBox = new SearchBox("Search For Username");
-        searchBox.searchController.getKey().setPresenter(new SearchFilterPresenter(searchBox));
+        new SearchBox("Search For Username");
     }
 
 
@@ -51,8 +50,6 @@ public class SearchBox extends JFrame {
                 }
             }
         });
-
-        setTable();
     }
 
     private void addComponents() {
@@ -64,18 +61,7 @@ public class SearchBox extends JFrame {
 
     public void setResult (UserAccount[] results){ this.results = results;}
 
-    private void setTable(){
-        searchB.addActionListener(e -> {
-            JTableButtonModel jTableButtonModel = new JTableButtonModel();
-            jTableButtonModel.setRows(results);
-            JTable table = new JTable(jTableButtonModel);
-            TableCellRenderer tableRenderer = table.getDefaultRenderer(JButton.class);
-            table.setDefaultRenderer(JButton.class, new JTableButtonRenderer(tableRenderer));
-            JScrollPane scrollPane = new JScrollPane(table);
-            add(scrollPane, BorderLayout.CENTER);
-        });
 
-    }
 
 }
 

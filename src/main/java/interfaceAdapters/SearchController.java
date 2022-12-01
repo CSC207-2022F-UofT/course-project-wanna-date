@@ -1,15 +1,16 @@
 package interfaceAdapters;
 
 import useCase.Search;
+import useCase.SearchFilterOutputBoundary;
 import useCase.SearchInputBoundary;
 
 public class SearchController {
     public String toSearch;
     public SearchInputBoundary key;
 
-    public SearchController(){
+    public SearchController(SearchFilterOutputBoundary presenter){
         this.toSearch = "";
-        this.key = new Search();
+        this.key = new Search(presenter);
 
     }
 
