@@ -27,33 +27,49 @@ public class UserManager {
      */
     public ArrayList<String> getLikedUsernames() {
         ArrayList<String> liked_usernames = new ArrayList<>();
-        for (UserAccount liked_account: this.account.getLikedUsers()) {
-            liked_usernames.add(liked_account.getUsername());
+        if (!(this.account.getLikedUsers().isEmpty())){
+            for (UserAccount liked_account : this.account.getLikedUsers()) {
+                liked_usernames.add(liked_account.getUsername());
+            }
+            return liked_usernames;
+        } else {
+            return new ArrayList<>();
         }
-        return liked_usernames;
     }
 
     public ArrayList<String> getLikedByUsernames() {
         ArrayList<String> liked_by_usernames = new ArrayList<>();
-        for (UserAccount liked_by_account: this.account.getLikedByUsers()) {
-            liked_by_usernames.add(liked_by_account.getUsername());
+        if (!(this.account.getLikedByUsers().isEmpty())) {
+            for (UserAccount liked_by_account : this.account.getLikedByUsers()) {
+                liked_by_usernames.add(liked_by_account.getUsername());
+            }
+            return liked_by_usernames;
+        } else {
+            return new ArrayList<>();
         }
-        return liked_by_usernames;
     }
 
     public ArrayList<String> getBlockedUsernames() {
         ArrayList<String> blocked_usernames = new ArrayList<>();
-        for (UserAccount blocked_account: this.account.getBlockedUsers()) {
-            blocked_usernames.add(blocked_account.getUsername());
+        if (!(this.account.getBlockedUsers().isEmpty())) {
+            for (UserAccount blocked_account : this.account.getBlockedUsers()) {
+                blocked_usernames.add(blocked_account.getUsername());
+            }
+            return blocked_usernames;
+        } else {
+            return new ArrayList<>();
         }
-        return blocked_usernames;
     }
 
     public ArrayList<String> getBlockedByUsernames() {
         ArrayList<String> blocked_by_usernames = new ArrayList<>();
-        for (UserAccount blocked_by_account: this.account.getBlockedByUsers()) {
-            blocked_by_usernames.add(blocked_by_account.getUsername());
+        if (!(this.account.getBlockedByUsers().isEmpty())) {
+            for (UserAccount blocked_by_account : this.account.getBlockedByUsers()) {
+                blocked_by_usernames.add(blocked_by_account.getUsername());
+            }
+            return blocked_by_usernames;
+        } else {
+            return new ArrayList<>();
         }
-        return blocked_by_usernames;
     }
 }
