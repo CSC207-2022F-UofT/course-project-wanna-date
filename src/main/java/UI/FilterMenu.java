@@ -16,18 +16,18 @@ import java.util.Objects;
 
 public class FilterMenu extends JFrame{
     public UserAccount[] results = {};
-    public FilterType type;
     public String[] options = {"Sex Male", "Sex Female", "Location"};
     public SearchFilterPresenter presenter = new SearchFilterPresenter(this);
     public FilterController filterController = new FilterController(presenter);
     public FilterMenu(String title){
+        // set up the frame
         super(title);
         setSize(600, 600);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
-
+        // creating drop down menu.
         JComboBox<String> jComboBox = new JComboBox<>(options);
         jComboBox.setBounds(80, 50, 140, 20);
 
@@ -49,6 +49,13 @@ public class FilterMenu extends JFrame{
         JButton user4 = new JButton("");
         JButton user5 = new JButton("");
 
+        userList.add(user1);
+        userList.add(user2);
+        userList.add(user3);
+        userList.add(user4);
+        userList.add(user5);
+
+        // add the buttons to the frame, and set their location.
         add(user1);
         add(user2);
         add(user3);
@@ -62,12 +69,6 @@ public class FilterMenu extends JFrame{
         user5.setBounds(150,400,350,30);
 
 
-        userList.add(user1);
-        userList.add(user2);
-        userList.add(user3);
-        userList.add(user4);
-        userList.add(user5);
-
         //set the buttons to invisible and disabled
         for (JButton users : userList){
             users.setVisible(false);
@@ -79,17 +80,20 @@ public class FilterMenu extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String selectedFilter = "You selected " + jComboBox.getItemAt(jComboBox.getSelectedIndex());
                 jLabel.setText(selectedFilter);
+                // apply user's selection here
                 applyFilter(jComboBox.getItemAt(jComboBox.getSelectedIndex()));
+                //presenter the result and call the view profile UI when button is clicked
                 for (int i = 0; i <= results.length - 1; i++){
                     if (i <= 4){
                         JButton currButton = userList.get(i);
-                        currButton.setText(results[i].getUsername());
+                        UserAccount targetUser = results[i];
+                        currButton.setText(targetUser.getUsername());
                         currButton.setVisible(true);
                         currButton.setEnabled(true);
                         currButton.addActionListener(e1 -> {
                             CurrUserManager currUserManager = CurrUserManager.getCurrUserManager();
                             UserAccount account = currUserManager.getCurrUser();
-                            UserLikeBlock profile = new UserLikeBlock(account, results[i]);
+                            UserLikeBlock profile = new UserLikeBlock(account, targetUser);
                             profile.functionToCall();
                         });
                     }
@@ -102,78 +106,20 @@ public class FilterMenu extends JFrame{
     public static void main(String[] args) {
         new FilterMenu("Choose the filter");
     }
+
+    // allows the presenter to set results to presenter
     public void setResult (UserAccount[] results){ this.results = results;}
 
+    // distinguish user's choice and perform the filter
     public void applyFilter(String choice){
         if (Objects.equals(choice, options[0])){
-            setType(new SexFilterMaleType());
+            filterController.setFilter(new SexFilterMaleType());
         } if (Objects.equals(choice, options[1])){
-            setType(new SexFilterFemaleType());
+            filterController.setFilter(new SexFilterFemaleType());
         }else {
-            setType(new LocationFilterType());
+            filterController.setFilter(new LocationFilterType());
         }
-        filterController.setFilter(this.type);
         filterController.performFilter();
-    }
-
-    public void setType(FilterType type) {
-        this.type = type;
-    }
-}
-
-
-/**
-import entities.UserAccount;
-import interfaceAdapters.FilterController;
-import interfaceAdapters.SearchFilterPresenter;
-import useCase.*;
-
-import javax.swing.*;
-import java.util.Objects;
-
-public class FilterMenu {
-    public String getFilter;
-    public String[] options = {"Sex Male", "Sex Female", "Location"};
-    public FilterType type;
-    public SearchFilterPresenter presenter = new SearchFilterPresenter(this);
-    public FilterController filterController = new FilterController(presenter);
-    public UserAccount[] results = {};
-
-    public FilterMenu(){
-
-        this.getFilter = (String) JOptionPane.showInputDialog(
-                null,
-                "Which area are you interested in?",
-                "Choose Filter",
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                options,
-                options[0]);
-    }
-
-    public void setType(FilterType type) {
-        this.type = type;
-    }
-
-    public void applyFilter(){
-        if (Objects.equals(getFilter, options[0])){
-            setType(new SexFilterMaleType());
-        } if (Objects.equals(getFilter, options[1])){
-            setType(new SexFilterFemaleType());
-        }else {
-            setType(new LocationFilterType());
-        }
-        filterController.setFilter(this.type);
-        filterController.performFilter();
-    }
-
-    public void setResult (UserAccount[] results){ this.results = results;}
-
-
-    public static void main(String[] args) {
-        FilterMenu choice = new FilterMenu();
-        choice.applyFilter();
-
     }
 
 }

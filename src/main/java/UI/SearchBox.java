@@ -44,6 +44,13 @@ public class SearchBox extends JFrame {
         JButton user4 = new JButton("");
         JButton user5 = new JButton("");
 
+        userList.add(user1);
+        userList.add(user2);
+        userList.add(user3);
+        userList.add(user4);
+        userList.add(user5);
+
+        // add the buttons to the frame, and set their location.
         add(user1);
         add(user2);
         add(user3);
@@ -57,11 +64,6 @@ public class SearchBox extends JFrame {
         user5.setBounds(150,400,350,30);
 
 
-        userList.add(user1);
-        userList.add(user2);
-        userList.add(user3);
-        userList.add(user4);
-        userList.add(user5);
 
         //set the buttons to invisible and disabled
         for (JButton users : userList){
@@ -73,18 +75,21 @@ public class SearchBox extends JFrame {
         //perform search when button is clicked
         searchB.addActionListener(e -> {
             label.setText("Searching for " + textField.getText());
+            //perform the search base on user input
             searchController.setToSearch(textField.getText());
             searchController.performSearch();
+            //presenter the result and call the view profile UI when button is clicked
             for (int i = 0; i <= results.length - 1; i++){
                 if (i <= 4){
                     JButton currButton = userList.get(i);
-                    currButton.setText(results[i].getUsername());
+                    UserAccount targetUser = results[i];
+                    currButton.setText(targetUser.getUsername());
                     currButton.setVisible(true);
                     currButton.setEnabled(true);
                     currButton.addActionListener(e1 -> {
                         CurrUserManager currUserManager = CurrUserManager.getCurrUserManager();
                         UserAccount account = currUserManager.getCurrUser();
-                        UserLikeBlock profile = new UserLikeBlock(account, results[i]);
+                        UserLikeBlock profile = new UserLikeBlock(account, targetUser);
                         profile.functionToCall();
                     });
                 }
@@ -97,18 +102,22 @@ public class SearchBox extends JFrame {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER){
                     label.setText("Searching for " + textField.getText());
+                    //perform the search base on user input
                     searchController.setToSearch(textField.getText());
                     searchController.performSearch();
+                    //presenter the result and call the view profile UI when button is clicked
                     for (int i = 0; i <= results.length - 1; i++){
                         if (i <= 4){
                             JButton currButton = userList.get(i);
-                            currButton.setText(results[i].getUsername());
+                            UserAccount targetUser = results[i];
+                            currButton.setText(targetUser.getUsername());
                             currButton.setVisible(true);
                             currButton.setEnabled(true);
                             currButton.addActionListener(e1 -> {
                                 CurrUserManager currUserManager = CurrUserManager.getCurrUserManager();
                                 UserAccount account = currUserManager.getCurrUser();
-                                UserLikeBlock profile = new UserLikeBlock(account, results[i]);
+                                UserLikeBlock profile = new UserLikeBlock(account, targetUser);
+                                profile.functionToCall();
                             });
                         }
                     }
@@ -124,9 +133,8 @@ public class SearchBox extends JFrame {
         add(panel);
     }
 
+    // allows the presenter to set results to presenter
     public void setResult (UserAccount[] results){ this.results = results;}
-
-
 
 }
 

@@ -10,8 +10,10 @@ import java.util.ArrayList;
 public class Search implements SearchInputBoundary {
     public SearchFilterOutputBoundary presenter;
 
+    // constructor method that allow UI to pass in presenter.
     public Search(SearchFilterOutputBoundary presenter){this.presenter = presenter;}
 
+    // override constructor method just for test uses.
     public Search(){this.presenter = new testPresenter();}
 
     /**

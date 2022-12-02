@@ -6,8 +6,10 @@ import interfaceAdapters.testPresenter;
 public class FilterUseCase implements FilterInputBoundary{
     public SearchFilterOutputBoundary presenter;
 
+    // constructor method that allow UI to pass in presenter.
     public FilterUseCase(SearchFilterOutputBoundary presenter){this.presenter = presenter;};
 
+    // override constructor method just for test uses.
     public FilterUseCase(){this.presenter = new testPresenter();}
 
     /**
