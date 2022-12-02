@@ -14,4 +14,7 @@ public class ViewProfileController {
         ViewProfileInputBoundary viewProfileInputBoundary = new ViewProfileInputManager();
         return viewProfileInputBoundary.searchInfo(database, username);
     }
+
+
+
 }
