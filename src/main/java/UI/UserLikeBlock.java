@@ -1,6 +1,7 @@
 package UI;
 import entities.UserAccount;
 import interfaceAdapters.ControllerLikeBlock;
+import interfaceAdapters.ViewProfileController;
 
 
 import javax.swing.*;
@@ -10,9 +11,9 @@ import java.awt.event.ActionListener;
 
 public class UserLikeBlock implements ActionListener {
     //user giving the like or block
-    UserAccount user1;
+    String user1;
     //user being view
-    UserAccount user2;
+    String user2;
     ControllerLikeBlock controller;
     //Initiate buttons, frame and label
     JFrame profile = new JFrame();
@@ -37,13 +38,16 @@ public class UserLikeBlock implements ActionListener {
 
 
 
-    public UserLikeBlock(UserAccount user1, UserAccount user2){
+    public UserLikeBlock(String user1, String user2){
         /* Create new frame to view user after we click on user from recommendation or search. This class is
          * the User Interface class. When like button is clicked a String "Liked" will appear on the frame to
          * indicate the action. Similarly, for block button, String "Blocked" will appear on the frame.
          */
         //Initiate the variables so that we can use it for the actionPerformed function
-        this.user1 = user1;
+        ViewProfileController view1 = new ViewProfileController();
+//        UserAccount userAccount1 = view1.newFunction();
+        // create newFunction in ViewProfileController() and then this new function call searchUserAccount (new
+        // function in ViewProfileInputManager) that return UserAccount
         this.user2 = user2;
         this.controller = new ControllerLikeBlock();
 
