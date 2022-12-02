@@ -1,9 +1,9 @@
 package UI;
 
-import entities.UserDatabase;
 import interfaceAdapters.RegistrationController;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class RegistrationPage extends JFrame implements ActionListener{
@@ -12,8 +12,9 @@ public class RegistrationPage extends JFrame implements ActionListener{
     JFrame frame;
     JLabel username_label, name_label, age_label, pronouns_label, country_label, province_label, city_label,
             gender_label, sexuality_label, interest_label, pass_label;
-    final JTextField username_textField, name_textField, age_textField, pronouns_textField, country_textField,
-            province_textField, city_textField, gender_textField, sexuality_textField, interest_textField, pass_textField;
+    final JTextField username_textField, name_textField, age_textField, country_textField,
+            province_textField, city_textField, pass_textField;
+    JComboBox<String> pronouns_comboBox, gender_comboBox, sexuality_comboBox, interest_comboBox;
 
     public RegistrationPage() {
 
@@ -44,8 +45,10 @@ public class RegistrationPage extends JFrame implements ActionListener{
         pronouns_label.setText("Pronouns:");
         pronouns_label.setBounds(200,250,200,40);
         pronouns_label.setFocusable(false);
-        pronouns_textField = new JTextField(50);
-        pronouns_textField.setBounds(400,250,200,40);
+        String[] list_pronouns = {"He/Him", "She/Her", "They/Them"};
+        pronouns_comboBox = new JComboBox<>(list_pronouns);
+        pronouns_comboBox.setBounds(400,250,200,40);
+        pronouns_comboBox.setBackground(Color.WHITE);
 
         country_label = new JLabel();
         country_label.setText("Country:");
@@ -72,22 +75,29 @@ public class RegistrationPage extends JFrame implements ActionListener{
         gender_label.setText("Gender:");
         gender_label.setBounds(200,450,200,40);
         gender_label.setFocusable(false);
-        gender_textField = new JTextField(50);
-        gender_textField.setBounds(400,450,200,40);
+        String[] list_gender = {"M: Male", "F: Female", "N: Non-binary"};
+        gender_comboBox = new JComboBox<>(list_gender);
+        gender_comboBox.setBounds(400,450,200,40);
+        gender_comboBox.setBackground(Color.WHITE);
 
         sexuality_label = new JLabel();
         sexuality_label.setText("Sexuality:");
         sexuality_label.setBounds(200,500,200,40);
         sexuality_label.setFocusable(false);
-        sexuality_textField = new JTextField(50);
-        sexuality_textField.setBounds(400,500,200,40);
+        String[] list_sexuality = {"G: Gay", "L: Lesbian", "H: Heterosexual", "B: Binary"};
+        sexuality_comboBox = new JComboBox<>(list_sexuality);
+        sexuality_comboBox.setBounds(400,500,200,40);
+        sexuality_comboBox.setBackground(Color.WHITE);
 
         interest_label = new JLabel();
         interest_label.setText("Interest:");
         interest_label.setBounds(200,550,200,40);
         interest_label.setFocusable(false);
-        interest_textField = new JTextField(50);
-        interest_textField.setBounds(400,550,200,40);
+        String[] list_interest = {"Culinary", "Sports", "Watching", "Photography", "Travelling",
+                "Fashion", "Music", "Exercise", "Games", "Socializing", "Others"};
+        interest_comboBox = new JComboBox<>(list_interest);
+        interest_comboBox.setBounds(400,550,200,40);
+        interest_comboBox.setBackground(Color.WHITE);
 
         pass_label = new JLabel();
         pass_label.setText("Password:");
@@ -115,7 +125,7 @@ public class RegistrationPage extends JFrame implements ActionListener{
         frame.add(age_label);
         frame.add(age_textField);
         frame.add(pronouns_label);
-        frame.add(pronouns_textField);
+        frame.add(pronouns_comboBox);
         frame.add(country_label);
         frame.add(country_textField);
         frame.add(province_label);
@@ -123,13 +133,14 @@ public class RegistrationPage extends JFrame implements ActionListener{
         frame.add(city_label);
         frame.add(city_textField);
         frame.add(gender_label);
-        frame.add(gender_textField);
+        frame.add(gender_comboBox);
         frame.add(sexuality_label);
-        frame.add(sexuality_textField);
+        frame.add(sexuality_comboBox);
         frame.add(interest_label);
-        frame.add(interest_textField);
+        frame.add(interest_comboBox);
         frame.add(pass_label);
         frame.add(pass_textField);
+
         frame.add(register_button2);
         frame.add(back_button);
 
@@ -138,52 +149,103 @@ public class RegistrationPage extends JFrame implements ActionListener{
         frame.setSize(1000,1000);
         frame.setLayout(null);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
 
         setTitle("REGISTRATION FORM");
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
+
         String username_value = username_textField.getText();
         String name_value = name_textField.getText();
         String age_value = age_textField.getText();
-        String pronouns_value = pronouns_textField.getText();
+        String pronouns_value = "";
+        if (pronouns_comboBox.getSelectedIndex() == 0) {
+            pronouns_value = "He/Him";
+        } else if (pronouns_comboBox.getSelectedIndex() == 1) {
+            pronouns_value = "She/Her";
+        } else if (pronouns_comboBox.getSelectedIndex() == 2) {
+            pronouns_value = "They/Them";
+        }
         String country_value = country_textField.getText();
         String province_value = province_textField.getText();
         String city_value = city_textField.getText();
-        String gender_value = gender_textField.getText();
-        String sexuality_value = sexuality_textField.getText();
-        String interest_value = interest_textField.getText();
+        String gender_value = "";
+        if (gender_comboBox.getSelectedIndex() == 0) {
+            gender_value = "M";
+        } else if (gender_comboBox.getSelectedIndex() == 1) {
+            gender_value = "F";
+        } else if (gender_comboBox.getSelectedIndex() == 2) {
+            gender_value = "N";
+        }
+        String sexuality_value = "";
+        if (sexuality_comboBox.getSelectedIndex() == 0) {
+            sexuality_value = "G";
+        } else if (sexuality_comboBox.getSelectedIndex() == 1) {
+            sexuality_value = "L";
+        } else if (sexuality_comboBox.getSelectedIndex() == 2) {
+            sexuality_value = "H";
+        } else if (sexuality_comboBox.getSelectedIndex() == 3) {
+            sexuality_value = "B";
+        }
+        String interest_value = "";
+        if (interest_comboBox.getSelectedIndex() == 0) {
+            interest_value = "Culinary";
+        } else if (interest_comboBox.getSelectedIndex() == 1) {
+            interest_value = "Sports";
+        } else if (interest_comboBox.getSelectedIndex() == 2) {
+            interest_value = "Watching";
+        } else if (interest_comboBox.getSelectedIndex() == 3) {
+            interest_value = "Photography";
+        } else if (interest_comboBox.getSelectedIndex() == 4) {
+            interest_value = "Travelling";
+        } else if (interest_comboBox.getSelectedIndex() == 5) {
+            interest_value = "Fashion";
+        } else if (interest_comboBox.getSelectedIndex() == 6) {
+            interest_value = "Music";
+        } else if (interest_comboBox.getSelectedIndex() == 7) {
+            interest_value = "Exercise";
+        } else if (interest_comboBox.getSelectedIndex() == 8) {
+            interest_value = "Games";
+        } else if (interest_comboBox.getSelectedIndex() == 9) {
+            interest_value = "Socializing";
+        } else if (interest_comboBox.getSelectedIndex() == 10) {
+            interest_value = "Others";
+        }
         String pass_value = pass_textField.getText();
 
         if (ae.getSource() == register_button2) {
             RegistrationController registrationController = new RegistrationController();
-            UserDatabase database = registrationController.callCreateDatabase();
-
-            if (registrationController.callIsValidRegistration(database,
-                    username_value,
-                    name_value,
-                    Integer.valueOf(age_value),
-                    pronouns_value,
-                    country_value,
-                    province_value,
-                    city_value,
-                    gender_value,
-                    sexuality_value,
-                    interest_value,
-                    pass_value)) {
-//                NewPage page = new NewPage();
-//                page.setVisible(true);
-//                JLabel welcome_label = new JLabel("Welcome: " + username_value +"!");
-//                page.getContentPane().add(welcome_label);
-
-                ViewProfilePage viewProfilePage = new ViewProfilePage(database, username_value);
-            } else {
-                System.out.println("Please enter the correct information");
+            registrationController.callCreateDatabase();
+            registrationController.helpSetCurrUsername(username_value);
+            try
+            {
+                Integer.parseInt(age_value);
+                if (registrationController.callIsValidRegistration(
+                        username_value,
+                        name_value,
+                        Integer.valueOf(age_value),
+                        pronouns_value,
+                        country_value,
+                        province_value,
+                        city_value,
+                        gender_value,
+                        sexuality_value,
+                        interest_value,
+                        pass_value)) {
+                    new ViewProfilePage(username_value);
+                } else {
+                    new RegistrationErrorPage();
+                }
+            }
+            catch (NumberFormatException ex)
+            {
+                new RegistrationErrorPage();
             }
         }
         else if (ae.getSource() == back_button) {
-            LoginPage loginPage = new LoginPage();
+            new LoginPage();
             frame.dispose();
         }
     }
