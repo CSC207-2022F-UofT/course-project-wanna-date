@@ -22,16 +22,16 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
     JLabel likedTitle = new JLabel("LIKED USERS");
 
     // Statistics Labels
-    JLabel totalLikedUsers = new JLabel("");
-    JLabel likedGender = new JLabel("LIKED USERS");
-    JLabel likedCountry = new JLabel("");
-    JLabel likedCity = new JLabel("");
-    JLabel likedAge = new JLabel("");
-    JLabel likedInterest = new JLabel("");
+    JLabel totalLikedUsersTitle = new JLabel("Total Number of Liked Users: ");
+    JLabel likedAgeTitle = new JLabel("Most Common Age of Liked Users: ");
+    JLabel likedCityTitle = new JLabel("Most Common City of Liked Users: ");
+    JLabel likedCountryTitle = new JLabel("Most Common Country of Liked Users: ");
+    JLabel likedGenderTitle = new JLabel("Most common Gender of Liked Users: ");
+    JLabel likedInterestTitle = new JLabel("Most common Interest of Liked Users: ");
 
     // List of users they have liked
     String[] likedUsers = {"Liked1", "Liked2"};
-    JComboBox likedBox = new JComboBox(likedUsers);
+    JComboBox<String> likedBox = new JComboBox<>(likedUsers);
 
 
     public ViewLikedUsers(){
@@ -42,12 +42,40 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
         frame.add(likedBox);
         frame.add(blockButton);
         frame.add(unlikeButton);
+        frame.add(totalLikedUsersTitle);
+        frame.add(likedAgeTitle);
+        frame.add(likedCityTitle);
+        frame.add(likedCountryTitle);
+        frame.add(likedGenderTitle);
+        frame.add(likedInterestTitle);
 
         // Set size of window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 550);
         frame.setLayout(null);
         frame.setVisible(true);
+
+        // Set the position and size of the labels
+        likedTitle.setBounds(30,15,500,50);
+        likedTitle.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
+
+        totalLikedUsersTitle.setBounds(20, 210, 500, 50);
+        totalLikedUsersTitle.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));
+
+        likedAgeTitle.setBounds(20, 250, 500, 50);
+        likedAgeTitle.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 15));
+
+        likedCityTitle.setBounds(20, 290, 500, 50);
+        likedCityTitle.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 15));
+
+        likedCountryTitle.setBounds(20, 330, 500, 50);
+        likedCountryTitle.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 15));
+
+        likedGenderTitle.setBounds(20, 370, 500, 50);
+        likedGenderTitle.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 15));
+
+        likedInterestTitle.setBounds(20, 410, 500, 50);
+        likedInterestTitle.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 15));
 
         // Set the position and size of the buttons
         backButton.setBounds(15,475,370,35);
@@ -65,11 +93,6 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
         unlikeButton.setFocusable(false);
         unlikeButton.addActionListener(this);
 
-        // Set the position and size of the labels
-        likedTitle.setBounds(30,15,500,50);
-        likedTitle.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
-        likedTitle.setVisible(true);
-
         // Set the position and size of box
         likedBox.setBounds(15, 80, 385, 30);
         likedBox.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
@@ -82,7 +105,7 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         // Get the user's selection from the dropdown box (combobox)
-        Object selection = (String)likedBox.getSelectedItem();
+        Object selection = likedBox.getSelectedItem();
 
         // User clicks Back button
         if(e.getSource() == backButton){

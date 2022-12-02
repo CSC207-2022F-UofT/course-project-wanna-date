@@ -1,11 +1,15 @@
 package useCase;
 
-import entities.UserHistory;
+import entities.UserAccount;
 
 public interface GenerateUserHistoryInputBoundary {
 
-    default String userStats(UserHistory user) {
-        return null;
+    default void getCurrentUserStats(UserAccount user) {
+        /**
+        CurrUserManager currUserManager = CurrUserManager.getCurrUserManager();
+        UserAccount account = currUserManager.getCurrUser();
+         */
     }
+
 
 }

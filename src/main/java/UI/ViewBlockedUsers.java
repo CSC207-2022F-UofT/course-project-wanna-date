@@ -22,11 +22,11 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
     JLabel blockedTitle = new JLabel("BLOCKED USERS");
 
     //Statistics Labels
-    JLabel totalBlockedUsers = new JLabel("");
+    JLabel totalBlockedUsersTitle = new JLabel("Total Number of Blocked Users: ");
 
     // List of users they have Blocked
     String[] blockedUsers = {"Blocked1", "Blocked2"};
-    JComboBox blockedBox = new JComboBox(blockedUsers);
+    JComboBox<String>  blockedBox = new JComboBox<>(blockedUsers);
 
 
     public ViewBlockedUsers(){
@@ -37,12 +37,20 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
         frame.add(unblockButton);
         frame.add(likeButton);
         frame.add(blockedBox);
+        frame.add(totalBlockedUsersTitle);
 
         //Set size of window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 550);
         frame.setLayout(null);
         frame.setVisible(true);
+
+        // Set the position and size of the labels
+        blockedTitle.setBounds(20,15,500,50);
+        blockedTitle.setFont(new Font(Font.MONOSPACED, Font.BOLD, 45));
+
+        totalBlockedUsersTitle.setBounds(20, 220, 500, 50);
+        totalBlockedUsersTitle.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));
 
         // Set the position and size of the buttons
         backButton.setBounds(15,475,370,35);
@@ -60,11 +68,6 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
         likeButton.setFocusable(false);
         likeButton.addActionListener(this);
 
-        // Set the position and size of the labels
-        blockedTitle.setBounds(20,15,500,50);
-        blockedTitle.setFont(new Font(Font.MONOSPACED, Font.BOLD, 45));
-        blockedTitle.setVisible(true);
-
         // Set the position and size of box
         blockedBox.setBounds(15, 80, 385, 30);
         blockedBox.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
@@ -77,7 +80,7 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         // Get the user's selection from the dropdown box (combobox)
-        Object selection = (String)blockedBox.getSelectedItem();
+        Object selection = blockedBox.getSelectedItem();
 
         // User clicks Back button
         if(e.getSource() == backButton){

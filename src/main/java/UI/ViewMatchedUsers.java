@@ -22,11 +22,11 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
     JLabel matchedTitle = new JLabel("MATCHED USERS");
 
     // Statistics labels
-    JLabel totalMatchedUsers = new JLabel("");
+    JLabel totalMatchedUsersTitle = new JLabel("Total Number of Matched Users: ");
 
     // List of users they have Blocked
     String[] matchedUsers = {"Matched1", "Matched2"};
-    JComboBox matchedBox = new JComboBox(matchedUsers);
+    JComboBox<String> matchedBox = new JComboBox<>(matchedUsers);
 
 
     public ViewMatchedUsers(){
@@ -37,12 +37,20 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
         frame.add(matchedBox);
         frame.add(blockButton);
         frame.add(unlikeButton);
+        frame.add(totalMatchedUsersTitle);
 
         //Set size of window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 550);
         frame.setLayout(null);
         frame.setVisible(true);
+
+        // Set the position and size of the labels
+        matchedTitle.setBounds(25,15,500,50);
+        matchedTitle.setFont(new Font(Font.MONOSPACED, Font.BOLD, 45));
+
+        totalMatchedUsersTitle.setBounds(20, 220, 500, 50);
+        totalMatchedUsersTitle.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));
 
         // Set the position and size of the buttons
         backButton.setBounds(15,475,370,35);
@@ -60,11 +68,6 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
         unlikeButton.setFocusable(false);
         unlikeButton.addActionListener(this);
 
-        // Set the position and size of the labels
-        matchedTitle.setBounds(25,15,500,50);
-        matchedTitle.setFont(new Font(Font.MONOSPACED, Font.BOLD, 45));
-        matchedTitle.setVisible(true);
-
         // Set the position and size of box
         matchedBox.setBounds(15, 80, 385, 30);
         matchedBox.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
@@ -77,7 +80,7 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         // Get the user's selection from the dropdown box (combobox)
-        Object selection = (String)matchedBox.getSelectedItem();
+        Object selection = matchedBox.getSelectedItem();
 
         // User clicks Back button
         if(e.getSource() == backButton){

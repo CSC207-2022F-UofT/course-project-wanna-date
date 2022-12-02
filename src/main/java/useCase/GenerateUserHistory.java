@@ -14,7 +14,11 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
         viewUserHistory.presenterUserHistory();
     }
 
-    // Return String list of liked usernames
+    /**
+     * Function that returns a String list of liked usernames
+     * @param user UserAccount of current user
+     * @return return a String array of the usernames of the accounts liked
+     */
     public String[] likedUsernames(UserAccount user) {
         String[] likedUsernames = new String[user.getLikedUsers().size()];
 
@@ -27,7 +31,11 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
         return likedUsernames;
     }
 
-    // Return String list of blocked usernames
+    /**
+     * Function that returns String list of blocked usernames
+     * @param user UserAccount of current user
+     * @return return a String array of the usernames of the accounts blocked
+     */
     public String[] blockedUsernames(UserAccount user) {
         String[] blockedUsernames = new String[user.getBlockedUsers().size()];
 
@@ -40,7 +48,11 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
         return blockedUsernames;
     }
 
-    // Return UserAccount ArrayList of matched users
+    /**
+     * Function that returns array of matches users
+     * @param user UserAccount of current user
+     * @return return an ArrayList of the matched UserAccount users
+     */
     public ArrayList<UserAccount> matchedUsers(UserAccount user) {
 
         UserAccount[] likedUsers = user.getLikedUsers().toArray(new UserAccount[0]);
@@ -48,20 +60,21 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
 
         ArrayList<UserAccount> matchedUsersList = new ArrayList<>();
 
-        for (int i = 0; i < likedUsers.length; i++)
-        {
-            for (int k = 0; k < likedByUsers.length; k++)
-            {
-                if(likedUsers[i] == (likedByUsers[k]))
-                {
-                    matchedUsersList.add(likedUsers[i]);
+        for (UserAccount likedUser : likedUsers) {
+            for (UserAccount likedByUser : likedByUsers) {
+                if (likedUser == likedByUser) {
+                    matchedUsersList.add(likedUser);
                 }
             }
         }
         return matchedUsersList;
     }
 
-    // Return String list of matched usernames
+    /**
+     * Function that returns String list of matched usernames
+     * @param user UserAccount of current user
+     * @return return a String array of the usernames of the accounts matched
+     */
     public String[] matchedUsernames(UserAccount user){
 
         String[] matchedUsernames = new String[matchedUsers(user).size()];
@@ -75,7 +88,11 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
         return matchedUsernames;
     }
 
-    // Most common age among the liked users
+    /**
+     * Function that returns the most common age among the liked users
+     * @param user UserAccount of current user
+     * @return return an int of the most common age
+     */
     public int getLikedAgeRange(UserAccount user){
         int[] ages = new int[user.getLikedUsers().size()];
 
@@ -107,7 +124,11 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
          return commonAge;
     }
 
-    // Most common city that the liked users are from
+    /**
+     * Function that returns the most common city among the liked users
+     * @param user UserAccount of current user
+     * @return return a String of the most common city
+     */
     public String getLikedCity(UserAccount user){
         String commonLocation = "";
         String[] cities = new String[user.getLikedUsers().size()];
@@ -140,13 +161,17 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
         return commonLocation;
     }
 
-    // Most common country that the liked users are from
+    /**
+     * Function that returns the most common country among the liked users
+     * @param user UserAccount of current user
+     * @return return a String of the most common country
+     */
     public String getLikedCountry(UserAccount user){
         String commonLocation = "";
         String[] countries = new String[user.getLikedUsers().size()];
 
         for (int i = 0; i < user.getLikedUsers().size(); i++) {
-            countries[i] = user.getLikedUsers().get(i).getLocation().get("country").toString();
+            countries[i] = user.getLikedUsers().get(i).getLocation().get("country");
         }
 
         boolean[] alreadySeen = new boolean[countries.length];
@@ -173,10 +198,11 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
         return commonLocation;
     }
 
-    // The gender that the user most often likes
-    // 'M': male
-    // 'F': female
-    // 'N': non-binary
+    /**
+     * Function that returns the most common gender among the liked users (M: male, F: female, N: non-binary)
+     * @param user UserAccount of current user
+     * @return return a String of the most common gender
+     */
     public String getLikedGender(UserAccount user) {
 
         String commonLikedType = "";
@@ -196,7 +222,7 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
                 int count = 1;
                 for (int k = i + 1; k < likedType.length; k++) {
                     if (!alreadySeen[k]) {
-                        if (likedType[i] == (likedType[k])) {
+                        if (likedType[i].equals(likedType[k])) {
                             alreadySeen[k] = true;
                             count++;
                         }
@@ -211,7 +237,11 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
         return commonLikedType;
     }
 
-    // The most common interest that the liked users share
+    /**
+     * Function that returns the most common shared interest among the liked users
+     * @param user UserAccount of current user
+     * @return return a String of the most common interest
+     */
     public String getLikedInterest(UserAccount user){
         String commonInterest = "";
         String[] interests = new String[user.getLikedUsers().size()];
@@ -244,18 +274,32 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
         return commonInterest;
     }
 
-    // Get total number of likes the user has made
+    /**
+     * Function that returns the number of liked accounts a user has
+     * @param user UserAccount of current user
+     * @return return an int of the total number of accounts that the user liked
+     */
     public int getTotalLiked(UserAccount user){
         return user.getLikedUsers().size();
     }
 
-    // Get total number of blocks the user has mde
+    /**
+     * Function that returns the number of blocked accounts a user has
+     * @param user UserAccount of current user
+     * @return return an int of the total number of accounts that the user blocked
+     */
     public int getTotalBlocks(UserAccount user){
         return user.getBlockedUsers().size();
     }
 
-    // Get total number of matches the user has
+    /**
+     * Function that returns the number of matched accounts a user has
+     * @param user UserAccount of current user
+     * @return return an int of the total number of accounts that the user matched with
+     */
     public int getTotalMatches(UserAccount user){
         return matchedUsers(user).size();
     }
+
+
 }
