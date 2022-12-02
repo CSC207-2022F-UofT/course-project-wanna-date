@@ -3,10 +3,7 @@ package UI;
 import entities.UserAccount;
 import interfaceAdapters.FilterController;
 import interfaceAdapters.SearchFilterPresenter;
-import useCase.FilterType;
-import useCase.LocationFilterType;
-import useCase.SexFilterFemaleType;
-import useCase.SexFilterMaleType;
+import useCase.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -55,8 +55,8 @@ public class FilterTest {
     @Test
     public void FilterTypeLocation(){
         manager.createDatabase(sample);
-        CurrUser curr = CurrUser.getCurrUser();
-        curr.setCurrUsername("lov12");
+        CurrUserManager currUserManager = CurrUserManager.getCurrUserManager();
+        currUserManager.setCurrUsername("lov12");
         FilterType type2 = new LocationFilterType();
         FilterUseCase filter = new FilterUseCase();
         Assertions.assertEquals(2, filter.apply(type2).length);

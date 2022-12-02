@@ -3,7 +3,7 @@ package UI;
 import entities.UserAccount;
 import interfaceAdapters.SearchController;
 import interfaceAdapters.SearchFilterPresenter;
-import useCase.CurrUser;
+import useCase.CurrUserManager;
 
 import javax.swing.*;
 import java.awt.*;

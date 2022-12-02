@@ -26,11 +26,11 @@ public class Search implements SearchInputBoundary {
     public UserAccount[] search(String name) {
         DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
         // do the search here and give a result
-        String[] username = databaseManager.list_username();
+        String[] username = databaseManager.listUsername();
         ArrayList<UserAccount> match= new ArrayList<>();
         for (String user : username){
             if (user.contains(name)){
-                match.add(databaseManager.retrieve_user_account(user));
+                match.add(databaseManager.retrieveUserAccount(user));
             }
         }
         int size = match.size();
