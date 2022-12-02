@@ -1,10 +1,8 @@
 package useCase;
 
-import entities.UserDatabase;
-
 public interface RegistrationInputBoundary {
-    boolean isValidRegistration(UserDatabase database,
-                                String username,
+
+    boolean isValidRegistration(String username,
                                 String full_name,
                                 int age,
                                 String pronouns,
