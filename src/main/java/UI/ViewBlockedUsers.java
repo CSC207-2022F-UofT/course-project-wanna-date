@@ -1,5 +1,8 @@
 package UI;
 
+import entities.UserAccount;
+import useCase.GenerateUserHistory;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,6 +12,16 @@ import java.awt.event.ActionListener;
  * UI for the blocked users page.
  */
 public class ViewBlockedUsers extends JFrame implements ActionListener {
+
+    // Get current user // Test user for now
+    UserAccount user1 = new UserAccount("johnd", "John Doe", 20, "her", "USA",
+            "ILL", "CHI", "M", "H","Watching", "123");
+    UserAccount currentUser;
+
+    GenerateUserHistory generateHistory = new GenerateUserHistory();
+
+    // Get the total number of blocks this user has
+    String totalBlocks = Integer.toString(generateHistory.getTotalBlocks(user1));
 
     // New instance of JFrame
     JFrame frame = new JFrame();
@@ -23,9 +36,10 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
 
     //Statistics Labels
     JLabel totalBlockedUsersTitle = new JLabel("Total Number of Blocked Users: ");
+    JLabel totalBlockedUsersNumber = new JLabel(totalBlocks);
 
     // List of users they have Blocked
-    String[] blockedUsers = {"Blocked1", "Blocked2"};
+    String[] blockedUsers = generateHistory.blockedUsernames(user1);
     JComboBox<String>  blockedBox = new JComboBox<>(blockedUsers);
 
 
@@ -38,6 +52,7 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
         frame.add(likeButton);
         frame.add(blockedBox);
         frame.add(totalBlockedUsersTitle);
+        frame.add(totalBlockedUsersNumber);
 
         //Set size of window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,6 +66,9 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
 
         totalBlockedUsersTitle.setBounds(20, 220, 500, 50);
         totalBlockedUsersTitle.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));
+
+        totalBlockedUsersNumber.setBounds(30, 270, 500, 50);
+        totalBlockedUsersNumber.setFont(new Font(Font.MONOSPACED, Font.BOLD, 55));
 
         // Set the position and size of the buttons
         backButton.setBounds(15,475,370,35);
@@ -69,7 +87,7 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
         likeButton.addActionListener(this);
 
         // Set the position and size of box
-        blockedBox.setBounds(15, 80, 385, 30);
+        blockedBox.setBounds(10, 80, 385, 30);
         blockedBox.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
         blockedBox.setVisible(true);
         blockedBox.addActionListener(this);

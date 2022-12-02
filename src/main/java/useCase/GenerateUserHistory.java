@@ -121,7 +121,13 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
             }
         }
         //Return most common Age
-         return commonAge;
+
+        if (commonAge < 0) {
+            return 0;
+        }
+        else {
+            return commonAge;
+        }
     }
 
     /**
