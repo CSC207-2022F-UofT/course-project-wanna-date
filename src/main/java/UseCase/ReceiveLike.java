@@ -13,8 +13,8 @@ public class ReceiveLike implements ReceiveLikeInputBoundary{
     //Main method to add update UserAccount liked_user and liked_by_user
     public boolean like(UserAccount user1, UserAccount user2){
         // Add user to each entity
-        user1.set_liked_users(user2);
-        user2.set_liked_by_users(user1);
+        user1.setLikedUsers(user2);
+        user2.setLikedByUsers(user1);
 
         //Create new RetrieveLike object so that this function will call method in retrieve like which call the
         //presenter

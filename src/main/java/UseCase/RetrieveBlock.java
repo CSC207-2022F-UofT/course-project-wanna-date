@@ -13,7 +13,7 @@ public class RetrieveBlock {
     }
     // Function that call functions in Output Boundary that is implemented in presenter
     public void block_view(RetrieveBlockOutputBoundary view){
-       view.presenterBlock();
+        view.presenterBlock();
     }
 
 
