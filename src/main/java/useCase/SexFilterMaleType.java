@@ -13,7 +13,7 @@ public class SexFilterMaleType implements FilterType {
         ArrayList<UserAccount> match= new ArrayList<>();
         for (String user : username) {
             UserAccount account = databaseManager.retrieve_user_account(user);
-            if (Objects.equals(account.get_gender(), "M")) {
+            if (Objects.equals(account.getGender(), "M")) {
                 match.add(account);
             }
         }
