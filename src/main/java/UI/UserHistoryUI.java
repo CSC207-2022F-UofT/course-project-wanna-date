@@ -5,116 +5,89 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * UI for the main user history page.
+ */
 public class UserHistoryUI implements ActionListener {
 
-    //New instance of JFrame
+    // New instance of JFrame
     JFrame frame = new JFrame();
-    JButton likedButton = new JButton("Liked Users");
-    JButton blockedButton = new JButton("Blocked Users");
+
+    // Buttons
+    JButton likedButton = new JButton("✦ Liked Users ✦");
+    JButton blockedButton = new JButton("✖ Blocked Users ✖");
+    JButton matchedButton = new JButton("♥ Matched Users ♥");
+    JButton backButton = new JButton("Back ⏎");
+
+    // Labels
     JLabel title = new JLabel("USER HISTORY");
-    JLabel likedTitle = new JLabel("LIKED USERS");
-    JLabel blockedTitle = new JLabel("BLOCKED USERS");
-    JButton backButton = new JButton("Back");
 
-    //List of users they have liked
-    String[] likedUsers = {"Liked1", "Liked2"};
-    JComboBox likedBox = new JComboBox(likedUsers);
-
-    //List of users they have Blocked
-    String[] blockedUsers = {"Blocked1", "Blocked2"};
-    JComboBox blockedBox = new JComboBox(blockedUsers);
 
     public UserHistoryUI(){
 
-        //Set the positions and sizes of the buttons
-        likedButton.setBounds(195,220,300,50);
-        likedButton.setFocusable(false);
-        likedButton.addActionListener(this);
-
-        blockedButton.setBounds(195,370,300,50);
-        blockedButton.setFocusable(false);
-        blockedButton.addActionListener(this);
-
-        backButton.setBounds(15,700,70,60);
-        backButton.setFocusable(false);
-        backButton.addActionListener(this);
-
-        //Set the position and size of the label
-        title.setBounds(210,80,300,50);
-        title.setFont(new Font(null, Font.PLAIN, 40));
-        title.setVisible(true);
-
-        likedTitle.setBounds(220,80,300,50);
-        likedTitle.setFont(new Font(null, Font.PLAIN, 40));
-        likedTitle.setVisible(false);
-
-        blockedTitle.setBounds(190,80,500,50);
-        blockedTitle.setFont(new Font(null, Font.PLAIN, 40));
-        blockedTitle.setVisible(false);
-
-        likedBox.setBounds(200, 250, 300, 50);
-        likedBox.setFont(new Font(null, Font.PLAIN, 25));
-        likedBox.setVisible(false);
-
-        blockedBox.setBounds(200, 250, 300, 50);
-        blockedBox.setFont(new Font(null, Font.PLAIN, 25));
-        blockedBox.setVisible(false);
-
-        //Set size of window
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(700, 800);
-        frame.setLayout(null);
-        frame.setVisible(true);
-
-        //Add frames
+        // Add frames
         frame.add(likedButton);
         frame.add(blockedButton);
         frame.add(title);
         frame.add(backButton);
-        frame.add(likedBox);
-        frame.add(blockedBox);
-        frame.add(likedTitle);
-        frame.add(blockedTitle);
+        frame.add(matchedButton);
+
+        //Set size of window
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 550);
+        frame.setLayout(null);
+        frame.setVisible(true);
+
+        // Set the positions and sizes of the buttons
+        likedButton.setBounds(25,80,350,120);
+        likedButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
+        likedButton.setFocusable(false);
+        likedButton.addActionListener(this);
+
+        blockedButton.setBounds(25,210,350,120);
+        blockedButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
+        blockedButton.setFocusable(false);
+        blockedButton.addActionListener(this);
+
+        matchedButton.setBounds(25,340,350,120);
+        matchedButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
+        matchedButton.setFocusable(false);
+        matchedButton.addActionListener(this);
+
+        backButton.setBounds(15,475,370,35);
+        backButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 20));
+        backButton.setFocusable(false);
+        backButton.addActionListener(this);
+
+        // Set the position and size of the labels
+        title.setBounds(20,15,500,50);
+        title.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
+        title.setVisible(true);
     }
 
 
-    //Actions when the buttons are pressed
+    // Actions when the buttons are pressed
     @Override
     public void actionPerformed(ActionEvent e){
-        //User clicks Liked button
+        // User clicks Liked button
         if(e.getSource() == likedButton){
-            likedButton.setVisible(false);
-            likedButton.addActionListener(this);
-            likedButton.setEnabled(false);
-            blockedButton.setVisible(false);
-            blockedButton.addActionListener(this);
-            blockedButton.setEnabled(false);
-            likedBox.setVisible(true);
-            title.setVisible(false);
-            likedTitle.setVisible(true);
+            new ViewLikedUsers();
+            frame.dispose();
         }
-        //User clicks Blocked button
+        // User clicks Blocked button
         else if(e.getSource() == blockedButton){
-            likedButton.setVisible(false);
-            likedButton.addActionListener(this);
-            likedButton.setEnabled(false);
-            blockedButton.setVisible(false);
-            blockedButton.addActionListener(this);
-            blockedButton.setEnabled(false);
-            blockedBox.setVisible(true);
-            title.setVisible(false);
-            blockedTitle.setVisible(true);
+            new ViewBlockedUsers();
+            frame.dispose();
         }
-        //User clicks Back button
+        // User clicks Matched button
+        else if(e.getSource() == matchedButton){
+            new ViewMatchedUsers();
+            frame.dispose();
+        }
+        // User clicks Back button
         else if(e.getSource() == backButton){
-            title.setVisible(false);
-            likedButton.setVisible(false);
-            likedButton.addActionListener(this);
-            likedButton.setEnabled(false);
-            blockedButton.setVisible(false);
-            blockedButton.addActionListener(this);
-            blockedButton.setEnabled(false);
+            // Return to main app
+            frame.dispose();
         }
     }
 
