@@ -1,5 +1,6 @@
 package frameworksDrivers;
 
+import useCase.DataExportInterface;
 import useCase.DatabaseManager;
 
 import java.io.File;
@@ -8,11 +9,11 @@ import java.io.IOException;
 
 public class DataExport {
 
-    public void write_csv() throws IOException {
+    public void writeCSV() throws IOException {
         DataExportInterface dataExportInterface = DatabaseManager.getDatabaseManager();
         Object[][] data_to_csv = dataExportInterface.writeDatabase();
 
-        File csvFile = new File("database.csv");
+        File csvFile = new File("src\\main\\java\\frameworksDrivers\\database.csv");
         FileWriter fileWriter = new FileWriter(csvFile);
 
         for (Object[] data: data_to_csv) {
@@ -20,7 +21,6 @@ public class DataExport {
             for (int i = 0; i < data.length; i++) {
                 line.append("\"");
                 line.append(data[i]);
-//                line.append(data[i].replaceAll("\"","\"\""));
                 line.append("\"");
                 if (i != data.length - 1) {
                     line.append(',');

@@ -8,7 +8,8 @@ public class ViewProfilePresenter implements ViewProfileOutputBoundary {
 
     public ViewProfilePresenter() {}
 
-    public ArrayList getInfo(ArrayList info) {
+    @Override
+    public ArrayList<String> getInfo(ArrayList<String> info) {
         return info;
     }
 }
