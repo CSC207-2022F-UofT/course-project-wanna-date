@@ -51,7 +51,8 @@ public class RegistrationManager implements RegistrationInputBoundary{
 
     public boolean isValidUsername(String username) {
         DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
-        return (!(databaseManager.isUsernameExist(username)) && !(username.isBlank()));
+        return (!(databaseManager.isUsernameExist(username)) && !(username.length() >= 1)
+        && !(username.trim().isEmpty()));
     }
 
     public boolean isValidPronouns(String pronouns) {
@@ -67,7 +68,7 @@ public class RegistrationManager implements RegistrationInputBoundary{
     }
 
     public boolean isValidPassword(String password) {
-        return (password.length() >= 8 && !(password.isBlank()));
+        return (password.length() >= 8 && !(password.contains(" ")) && !(password.trim().isEmpty()));
     }
 
     public boolean isValidInterest(String interest) {
