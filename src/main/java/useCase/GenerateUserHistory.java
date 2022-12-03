@@ -9,11 +9,6 @@ import java.util.Arrays;
  */
 public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
 
-    // Presenter
-    public void viewStats(GenerateUserHistoryOutputBoundary viewUserHistory){
-        viewUserHistory.presenterUserHistory();
-    }
-
     /**
      * Function that returns a String list of liked usernames
      * @param user UserAccount of current user
@@ -121,13 +116,7 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
             }
         }
         //Return most common Age
-
-        if (commonAge < 0) {
-            return 0;
-        }
-        else {
-            return commonAge;
-        }
+        return Math.max(commonAge, 0);
     }
 
     /**

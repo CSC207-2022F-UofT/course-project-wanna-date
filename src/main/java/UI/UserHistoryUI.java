@@ -1,5 +1,7 @@
 package UI;
 
+import entities.UserAccount;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,8 +24,11 @@ public class UserHistoryUI implements ActionListener {
     // Labels
     JLabel title = new JLabel("USER HISTORY");
 
+    UserAccount user1;
 
-    public UserHistoryUI(){
+    public UserHistoryUI(UserAccount currUser){
+
+        this.user1 = currUser;
 
         // Add frames
         frame.add(likedButton);
@@ -71,17 +76,17 @@ public class UserHistoryUI implements ActionListener {
     public void actionPerformed(ActionEvent e){
         // User clicks Liked button
         if(e.getSource() == likedButton){
-            new ViewLikedUsers();
+            new ViewLikedUsers(user1);
             frame.dispose();
         }
         // User clicks Blocked button
         else if(e.getSource() == blockedButton){
-            new ViewBlockedUsers();
+            new ViewBlockedUsers(user1);
             frame.dispose();
         }
         // User clicks Matched button
         else if(e.getSource() == matchedButton){
-            new ViewMatchedUsers();
+            new ViewMatchedUsers(user1);
             frame.dispose();
         }
         // User clicks Back button
@@ -91,8 +96,25 @@ public class UserHistoryUI implements ActionListener {
         }
     }
 
-
+    /** CurrUserManager userManager = CurrUserManager.getCurrUserManager();
+     UserAccount account = userManager.getCurrUser();*/
     public static void main(String[] args) {
-        new UserHistoryUI();
+
+        UserAccount user1 = new UserAccount("johnd", "John Doe", 20, "her", "USA",
+                "ILL", "CHI", "M", "H","Watching", "123");
+        UserAccount user2 = new UserAccount("JSmith", "Jessica Smith", 18, "her", "CAN",
+                "ON", "TOR", "F", "G","Music", "124");
+        UserAccount user3 = new UserAccount("janed", "Jane Doe", 18, "her", "CAN",
+                "ON", "TOR", "F", "H","Music", "124");
+        UserAccount user4 = new UserAccount("jenndoe", "Jennifer Doe", 18, "her", "CAN",
+                "ON", "OTT", "F", "H","Watching", "124");
+
+        user1.setLikedUsers(user2);
+        user1.setLikedUsers(user4);
+        user1.setBlockedUsers(user3);
+        user1.setLikedByUsers(user2);
+        user1.setLikedByUsers(user4);
+
+        new UserHistoryUI(user1);
     }
 }

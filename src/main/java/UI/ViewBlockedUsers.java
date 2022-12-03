@@ -13,16 +13,6 @@ import java.awt.event.ActionListener;
  */
 public class ViewBlockedUsers extends JFrame implements ActionListener {
 
-    // Get current user // Test user for now
-    UserAccount user1 = new UserAccount("johnd", "John Doe", 20, "her", "USA",
-            "ILL", "CHI", "M", "H","Watching", "123");
-    UserAccount currentUser;
-
-    GenerateUserHistory generateHistory = new GenerateUserHistory();
-
-    // Get the total number of blocks this user has
-    String totalBlocks = Integer.toString(generateHistory.getTotalBlocks(user1));
-
     // New instance of JFrame
     JFrame frame = new JFrame();
 
@@ -36,14 +26,25 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
 
     //Statistics Labels
     JLabel totalBlockedUsersTitle = new JLabel("Total Number of Blocked Users: ");
-    JLabel totalBlockedUsersNumber = new JLabel(totalBlocks);
 
-    // List of users they have Blocked
-    String[] blockedUsers = generateHistory.blockedUsernames(user1);
-    JComboBox<String>  blockedBox = new JComboBox<>(blockedUsers);
+    UserAccount user1;
+
+    int selectedUserIndex;
 
 
-    public ViewBlockedUsers(){
+    public ViewBlockedUsers(UserAccount currUser){
+
+        this.user1 = currUser;
+
+        GenerateUserHistory generateHistory = new GenerateUserHistory();
+
+        // Get the total number of blocks this user has
+        String totalBlocks = Integer.toString(generateHistory.getTotalBlocks(user1));
+        JLabel totalBlockedUsersNumber = new JLabel(totalBlocks);
+
+        // List of users they have Blocked
+        String[] blockedUsers = generateHistory.blockedUsernames(user1);
+        JComboBox<String>  blockedBox = new JComboBox<>(blockedUsers);
 
         // Add frames
         frame.add(blockedTitle);
@@ -74,52 +75,65 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
         backButton.setBounds(15,475,370,35);
         backButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 20));
         backButton.setFocusable(false);
-        backButton.addActionListener(this);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // User clicks back button
+                new UserHistoryUI(user1);
+                frame.dispose();
+            }
+        });
 
         unblockButton.setBounds(205,130,190,75);
         unblockButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
         unblockButton.setFocusable(false);
-        unblockButton.addActionListener(this);
+        unblockButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // User clicks Unblock Button
+                user1.getBlockedUsers().remove(selectedUserIndex);
+                new ViewBlockedUsers(user1);
+                frame.dispose();
+            }
+        });
 
         likeButton.setBounds(15,130,190,75);
         likeButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
         likeButton.setFocusable(false);
-        likeButton.addActionListener(this);
+        likeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Use clicks like button
+                user1.getLikedUsers().add(user1.getBlockedUsers().get(selectedUserIndex));
+                user1.getBlockedUsers().remove(selectedUserIndex);
+                new ViewBlockedUsers(user1);
+                frame.dispose();
+            }
+        });
 
         // Set the position and size of box
         blockedBox.setBounds(10, 80, 385, 30);
         blockedBox.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
         blockedBox.setVisible(true);
-        blockedBox.addActionListener(this);
+        blockedBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // User clicks Blocked users drop down box
+                JComboBox cb = (JComboBox)e.getSource();
+                cb.getSelectedIndex();
+                selectedUserIndex = cb.getSelectedIndex();
+            }
+        });
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        // Get the user's selection from the dropdown box (combobox)
-        Object selection = blockedBox.getSelectedItem();
-
-        // User clicks Back button
-        if(e.getSource() == backButton){
-            new UserHistoryUI();
-            frame.dispose();
-        }
-        // User clicks Like Button
-        else if(e.getSource() == likeButton){
-            new ViewBlockedUsers();
-            frame.dispose();
-        }
-        // User clicks Unblock Button
-        else if(e.getSource() == unblockButton){
-            new ViewBlockedUsers();
-            frame.dispose();
-        }
     }
 
 
     public static void main(String[] args) {
-        new ViewBlockedUsers();
-    }
 
+    }
 }

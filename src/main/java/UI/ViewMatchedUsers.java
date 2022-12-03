@@ -13,16 +13,6 @@ import java.awt.event.ActionListener;
  */
 public class ViewMatchedUsers extends JFrame implements ActionListener {
 
-    // Get current user // Test user for now
-    UserAccount user1 = new UserAccount("johnd", "John Doe", 20, "her", "USA",
-            "ILL", "CHI", "M", "H","Watching", "123");
-    UserAccount currentUser;
-
-    GenerateUserHistory generateHistory = new GenerateUserHistory();
-
-    // Get the total number of matches this user has
-    String totalMatched = Integer.toString(generateHistory.getTotalMatches(user1));
-
     // New instance of JFrame
     JFrame frame = new JFrame();
 
@@ -36,14 +26,25 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
 
     // Statistics labels
     JLabel totalMatchedUsersTitle = new JLabel("Total Number of Matched Users: ");
-    JLabel totalMatchedUsersNumber = new JLabel(totalMatched);
 
-    // List of users they have Blocked
-    String[] matchedUsers = generateHistory.matchedUsernames(user1);
-    JComboBox<String> matchedBox = new JComboBox<>(matchedUsers);
+    UserAccount user1;
+
+    int selectedUserIndex;
 
 
-    public ViewMatchedUsers(){
+    public ViewMatchedUsers(UserAccount currUser){
+
+        this.user1 = currUser;
+
+        GenerateUserHistory generateHistory = new GenerateUserHistory();
+
+        // Get the total number of matches this user has
+        String totalMatched = Integer.toString(generateHistory.getTotalMatches(user1));
+        JLabel totalMatchedUsersNumber = new JLabel(totalMatched);
+
+        // List of users they have matched with
+        String[] matchedUsers = generateHistory.matchedUsernames(user1);
+        JComboBox<String> matchedBox = new JComboBox<>(matchedUsers);
 
         // Add frames
         frame.add(matchedTitle);
@@ -74,52 +75,66 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
         backButton.setBounds(15,475,370,35);
         backButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 20));
         backButton.setFocusable(false);
-        backButton.addActionListener(this);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // User clicks back button
+                new UserHistoryUI(user1);
+                frame.dispose();
+            }
+        });
 
         blockButton.setBounds(205,130,190,75);
         blockButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
         blockButton.setFocusable(false);
-        blockButton.addActionListener(this);
+        blockButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Use clicks block button
+                user1.getBlockedUsers().add(user1.getLikedUsers().get(selectedUserIndex));
+                user1.getLikedUsers().remove(selectedUserIndex);
+                new ViewMatchedUsers(user1);
+                frame.dispose();
+            }
+        });
 
         unlikeButton.setBounds(15,130,190,75);
         unlikeButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
         unlikeButton.setFocusable(false);
-        unlikeButton.addActionListener(this);
+        unlikeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Use clicks unlike button
+                user1.getLikedUsers().remove(selectedUserIndex);
+                new ViewMatchedUsers(user1);
+                frame.dispose();
+            }
+        });
 
         // Set the position and size of box
         matchedBox.setBounds(10, 80, 385, 30);
         matchedBox.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
         matchedBox.setVisible(true);
-        matchedBox.addActionListener(this);
+        matchedBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // User clicks Matched users drop down box
+                JComboBox cb = (JComboBox)e.getSource();
+                cb.getSelectedIndex();
+                selectedUserIndex = cb.getSelectedIndex();
+            }
+        });
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        // Get the user's selection from the dropdown box (combobox)
-        Object selection = matchedBox.getSelectedItem();
-
-        // User clicks Back button
-        if(e.getSource() == backButton){
-            new UserHistoryUI();
-            frame.dispose();
-        }
-        // User clicks Unlike Button
-        else if(e.getSource() == unlikeButton){
-            new ViewMatchedUsers();
-            frame.dispose();
-        }
-        // User clicks Block Button
-        else if(e.getSource() == blockButton){
-            new ViewMatchedUsers();
-            frame.dispose();
-        }
     }
 
 
     public static void main(String[] args) {
-        new ViewMatchedUsers();
+
     }
 }
 
