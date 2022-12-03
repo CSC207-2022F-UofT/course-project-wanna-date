@@ -9,11 +9,6 @@ import java.util.Arrays;
  */
 public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
 
-    // Presenter
-    public void viewStats(GenerateUserHistoryOutputBoundary viewUserHistory){
-        viewUserHistory.presenterUserHistory();
-    }
-
     /**
      * Function that returns a String list of liked usernames
      * @param user UserAccount of current user

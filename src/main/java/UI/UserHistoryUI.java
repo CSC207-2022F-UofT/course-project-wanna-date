@@ -4,11 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import entities.UserAccount;
 
 /**
  * UI for the main user history page.
  */
 public class UserHistoryUI implements ActionListener {
+
+    UserAccount currentUser;
 
     // New instance of JFrame
     JFrame frame = new JFrame();
@@ -71,7 +74,7 @@ public class UserHistoryUI implements ActionListener {
     public void actionPerformed(ActionEvent e){
         // User clicks Liked button
         if(e.getSource() == likedButton){
-            new ViewLikedUsers();
+            new ViewLikedUsers(currentUser);
             frame.dispose();
         }
         // User clicks Blocked button

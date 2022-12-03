@@ -1,7 +1,7 @@
 package UI;
 
 import entities.UserAccount;
-import interfaceAdapters.UserHistoryPresenter;
+import interfaceAdapters.UserHistoryController;
 import useCase.GenerateUserHistory;
 
 import javax.swing.*;
@@ -14,20 +14,7 @@ import java.awt.event.ActionListener;
  */
 public class ViewLikedUsers extends JFrame implements ActionListener {
 
-    // Get current user // Test user for now
-    public UserAccount user1 = new UserAccount("johnd", "John Doe", 20, "her", "USA",
-            "ILL", "CHI", "M", "H","Watching", "123");
-    //UserAccount currentUser;
-
     GenerateUserHistory generateHistory = new GenerateUserHistory();
-
-    // Get the total number of likes this user has
-    String totalLikes = Integer.toString(generateHistory.getTotalLiked(user1));
-    String likedAge = Integer.toString(generateHistory.getLikedAgeRange(user1));
-    String likedCity = generateHistory.getLikedCity(user1);
-    String likedCountry = generateHistory.getLikedCountry(user1);
-    String likedGender = generateHistory.getLikedGender(user1);
-    String likedInterest = generateHistory.getLikedInterest(user1);
 
     // New instance of JFrame
     JFrame frame = new JFrame();
@@ -58,8 +45,15 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
     String[] likedUsers = generateHistory.likedUsernames(user1);
     JComboBox<String> likedBox = new JComboBox<>(likedUsers);
 
+    UserAccount user1;
+    UserHistoryController controller;
 
-    public ViewLikedUsers(){
+
+    public ViewLikedUsers(UserAccount currUser, UserHistoryController controller){
+
+        //Initiate the variables so that we can use it for the actionPerformed function
+        this.user1 = currUser;
+        this.controller = controller;
 
         // Add frames
         frame.add(likedTitle);
@@ -163,17 +157,21 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
         }
         // User clicks Unlike Button
         else if(e.getSource() == unlikeButton){
-            new ViewLikedUsers();
+            new ViewLikedUsers(user1, controller);
             frame.dispose();
         }
         // User clicks Block Button
         else if(e.getSource() == blockButton){
-            new ViewLikedUsers();
+            new ViewLikedUsers(user1, controller);
             frame.dispose();
         }
     }
 
     public static void main(String[] args) {
-        new ViewLikedUsers();
+        UserAccount user1 = new UserAccount("johnd", "John Doe", 20, "her", "USA",
+                "ILL", "CHI", "M", "H","Watching", "123");
+
+        UserHistoryController control = new UserHistoryController();
+        new ViewLikedUsers(user1, control);
     }
 }
