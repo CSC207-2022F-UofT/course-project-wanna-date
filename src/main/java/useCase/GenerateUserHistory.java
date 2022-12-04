@@ -1,33 +1,103 @@
 package useCase;
-import entities.UserHistory;
-import entities.UserAccount;
 
+import entities.UserAccount;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * GenerateUserHistory retrieves different statistics regarding the user's liked and blocked users.
+ */
 public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
 
+    // Presenter
     public void viewStats(GenerateUserHistoryOutputBoundary viewUserHistory){
         viewUserHistory.presenterUserHistory();
     }
 
-    // Return liked users
-    public ArrayList likedUsers(UserHistory user){
-        return user.getLikedUsers();
+    /**
+     * Function that returns a String list of liked usernames
+     * @param user UserAccount of current user
+     * @return return a String array of the usernames of the accounts liked
+     */
+    public String[] likedUsernames(UserAccount user) {
+        String[] likedUsernames = new String[user.getLikedUsers().size()];
+
+        ArrayList<UserAccount> liked = user.getLikedUsers();
+
+        for (int i = 0; i < user.getLikedUsers().size(); i++) {
+            likedUsernames[i] = liked.get(i).getUsername();
+        }
+
+        return likedUsernames;
     }
 
-    // Return blocked users
-    public ArrayList blockedUsers(UserHistory user){
-        return user.getBlockedUsers();
+    /**
+     * Function that returns String list of blocked usernames
+     * @param user UserAccount of current user
+     * @return return a String array of the usernames of the accounts blocked
+     */
+    public String[] blockedUsernames(UserAccount user) {
+        String[] blockedUsernames = new String[user.getBlockedUsers().size()];
+
+        ArrayList<UserAccount> blocked = user.getBlockedUsers();
+
+        for (int i = 0; i < user.getBlockedUsers().size(); i++) {
+            blockedUsernames[i] = blocked.get(i).getUsername();
+        }
+
+        return blockedUsernames;
     }
 
-    // Use the age data of the people the user liked to find the most common age
-    // that the user would like
+    /**
+     * Function that returns array of matches users
+     * @param user UserAccount of current user
+     * @return return an ArrayList of the matched UserAccount users
+     */
+    public ArrayList<UserAccount> matchedUsers(UserAccount user) {
+
+        UserAccount[] likedUsers = user.getLikedUsers().toArray(new UserAccount[0]);
+        UserAccount[] likedByUsers = user.getLikedByUsers().toArray(new UserAccount[0]);
+
+        ArrayList<UserAccount> matchedUsersList = new ArrayList<>();
+
+        for (UserAccount likedUser : likedUsers) {
+            for (UserAccount likedByUser : likedByUsers) {
+                if (likedUser == likedByUser) {
+                    matchedUsersList.add(likedUser);
+                }
+            }
+        }
+        return matchedUsersList;
+    }
+
+    /**
+     * Function that returns String list of matched usernames
+     * @param user UserAccount of current user
+     * @return return a String array of the usernames of the accounts matched
+     */
+    public String[] matchedUsernames(UserAccount user){
+
+        String[] matchedUsernames = new String[matchedUsers(user).size()];
+
+        ArrayList<UserAccount> matched = matchedUsers(user);
+
+        for (int i = 0; i < matchedUsers(user).size(); i++) {
+            matchedUsernames[i] = matched.get(i).getUsername();
+        }
+
+        return matchedUsernames;
+    }
+
+    /**
+     * Function that returns the most common age among the liked users
+     * @param user UserAccount of current user
+     * @return return an int of the most common age
+     */
     public int getLikedAgeRange(UserAccount user){
-        int[] ages = new int[user.get_liked_users().size()];
+        int[] ages = new int[user.getLikedUsers().size()];
 
-        for (int i = 0; i < user.get_liked_users().size(); i++) {
-            ages[i] = user.get_age();
+        for (int i = 0; i < user.getLikedUsers().size(); i++) {
+            ages[i] = user.getLikedUsers().get(i).getAge();
         }
 
         int commonAge = Integer.MIN_VALUE, maxCount = 1, count = 1;
@@ -51,17 +121,26 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
             }
         }
         //Return most common Age
-         return commonAge;
+
+        if (commonAge < 0) {
+            return 0;
+        }
+        else {
+            return commonAge;
+        }
     }
 
-    // Use the location data of the people the user liked to find the most common city that
-    // the liked users are from. The location is mapped as country, province, and city.
-    public String getLikedLocation(UserAccount user){
+    /**
+     * Function that returns the most common city among the liked users
+     * @param user UserAccount of current user
+     * @return return a String of the most common city
+     */
+    public String getLikedCity(UserAccount user){
         String commonLocation = "";
-        String[] cities = new String[user.get_liked_users().size()];
+        String[] cities = new String[user.getLikedUsers().size()];
 
-        for (int i = 0; i < user.get_liked_users().size(); i++) {
-            cities[i] = user.get_location().get("city").toString();
+        for (int i = 0; i < user.getLikedUsers().size(); i++) {
+            cities[i] = user.getLikedUsers().get(i).getLocation().get("city");
         }
 
         boolean[] alreadySeen = new boolean[cities.length];
@@ -88,23 +167,56 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
         return commonLocation;
     }
 
-    // Use user history data to provide statistics on what kind of people the user likes by looking
-    // at the gender of the users that the user liked.
-    // The gender identified by user.
-    // 'M': male
-    // 'F': female
-    // 'N': non-binary
-    public String getLikedType(UserAccount user) {
-        String[] userCategories = new String[]{"Likes male users", "Likes female users",
-                "Likes non-binary users"};
+    /**
+     * Function that returns the most common country among the liked users
+     * @param user UserAccount of current user
+     * @return return a String of the most common country
+     */
+    public String getLikedCountry(UserAccount user){
+        String commonLocation = "";
+        String[] countries = new String[user.getLikedUsers().size()];
+
+        for (int i = 0; i < user.getLikedUsers().size(); i++) {
+            countries[i] = user.getLikedUsers().get(i).getLocation().get("country");
+        }
+
+        boolean[] alreadySeen = new boolean[countries.length];
+
+        int resultCount = 0;
+        for (int i = 0; i < countries.length; i++) {
+            if (!alreadySeen[i]) {
+                alreadySeen[i] = true;
+                int count = 1;
+                for (int k = i + 1; k < countries.length; k++) {
+                    if (!alreadySeen[k]) {
+                        if (countries[i].equals(countries[k])) {
+                            alreadySeen[k] = true;
+                            count++;
+                        }
+                    }
+                }
+                if (count > resultCount) {
+                    resultCount = count;
+                    commonLocation = countries[i];
+                }
+            }
+        }
+        return commonLocation;
+    }
+
+    /**
+     * Function that returns the most common gender among the liked users (M: male, F: female, N: non-binary)
+     * @param user UserAccount of current user
+     * @return return a String of the most common gender
+     */
+    public String getLikedGender(UserAccount user) {
 
         String commonLikedType = "";
-        int commonLikedTypeInt = 0;
 
-        String [] likedType = new String[user.get_liked_users().size()];
+        String [] likedType = new String[user.getLikedUsers().size()];
 
-        for (int i = 0; i < user.get_liked_users().size(); i++) {
-            likedType[i] = user.get_gender();
+        for (int i = 0; i < user.getLikedUsers().size(); i++) {
+            likedType[i] = user.getLikedUsers().get(i).getGender();
         }
 
         boolean[] alreadySeen = new boolean[likedType.length];
@@ -116,7 +228,7 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
                 int count = 1;
                 for (int k = i + 1; k < likedType.length; k++) {
                     if (!alreadySeen[k]) {
-                        if (likedType[i] == (likedType[k])) {
+                        if (likedType[i].equals(likedType[k])) {
                             alreadySeen[k] = true;
                             count++;
                         }
@@ -128,32 +240,72 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
                 }
             }
         }
-
-        if (commonLikedType == "M") {
-            commonLikedTypeInt = 0;
-        }
-        else if (commonLikedType == "F") {
-            commonLikedTypeInt = 1;
-        }
-        else if (commonLikedType == "N") {
-            commonLikedTypeInt = 2;
-        }
-
-        return userCategories[commonLikedTypeInt];
+        return commonLikedType;
     }
 
-    // Get total number of likes the user has made
-    public int getTotalLiked(UserHistory user){
+    /**
+     * Function that returns the most common shared interest among the liked users
+     * @param user UserAccount of current user
+     * @return return a String of the most common interest
+     */
+    public String getLikedInterest(UserAccount user){
+        String commonInterest = "";
+        String[] interests = new String[user.getLikedUsers().size()];
+
+        for (int i = 0; i < user.getLikedUsers().size(); i++) {
+            interests[i] = user.getLikedUsers().get(i).getInterest();
+        }
+
+        boolean[] alreadySeen = new boolean[interests.length];
+
+        int resultCount = 0;
+        for (int i = 0; i < interests.length; i++) {
+            if (!alreadySeen[i]) {
+                alreadySeen[i] = true;
+                int count = 1;
+                for (int k = i + 1; k < interests.length; k++) {
+                    if (!alreadySeen[k]) {
+                        if (interests[i].equals(interests[k])) {
+                            alreadySeen[k] = true;
+                            count++;
+                        }
+                    }
+                }
+                if (count > resultCount) {
+                    resultCount = count;
+                    commonInterest = interests[i];
+                }
+            }
+        }
+        return commonInterest;
+    }
+
+    /**
+     * Function that returns the number of liked accounts a user has
+     * @param user UserAccount of current user
+     * @return return an int of the total number of accounts that the user liked
+     */
+    public int getTotalLiked(UserAccount user){
         return user.getLikedUsers().size();
     }
 
-    // Get total number of blocks the user has ade
-    public int getTotalBlocks(UserHistory user){
+    /**
+     * Function that returns the number of blocked accounts a user has
+     * @param user UserAccount of current user
+     * @return return an int of the total number of accounts that the user blocked
+     */
+    public int getTotalBlocks(UserAccount user){
         return user.getBlockedUsers().size();
     }
 
-    //Get total number of users that the user has sent a message to
-    public int getTotalUsersMessaged(UserHistory user){
-        return user.getMessagedUsers().size();
+    /**
+     * Function that returns the number of matched accounts a user has
+     * @param user UserAccount of current user
+     * @return return an int of the total number of accounts that the user matched with
+     */
+    public int getTotalMatches(UserAccount user){
+        return matchedUsers(user).size();
     }
+
+
 }

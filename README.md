@@ -1,3 +1,8 @@
+# Instructions to Run the Program
+To run the program go to AphroditeApp in UI section and run the main function. This will bring you to register/login 
+page. Then after you register or log in you will be taken to the main page where you can choose to search/filter 
+show recommendation or open the messaging feature.
+
 # Project Template
 
 This is a template repository for CSC 207 projects. 
