@@ -15,12 +15,15 @@ public class ControllerLikeBlock {
      * @return return String received from the presenter after function in presenter is called
      */
 
-    public String blockController(UserAccount userBlocking, UserAccount userBlocked) {
+    public String blockController(String userBlocking, String userBlocked) {
         // Create new ReceiveBlockInputBoundary with specific class of ReceiveBlock so that function with implementation
         // is called.
         // This might be facade design pattern
         ReceiveBlockInputBoundary BlockIB = new ReceiveBlock();
-        boolean result = BlockIB.block(userBlocking, userBlocked); // calling the main method
+        ViewProfileController view1 = new ViewProfileController();
+        UserAccount user1 = view1.callSearchUser(userBlocking);
+        UserAccount user2 = view1.callSearchUser(userBlocked);
+        boolean result = BlockIB.block(user1, user2); // calling the main method
         PresenterLikeBlock presenter = new PresenterLikeBlock(); // create new presenter item to call its function later
         if (result){
             return presenter.presenterBlock(); //presenterBlock function return String which will be used in the UI
@@ -28,12 +31,16 @@ public class ControllerLikeBlock {
         return " "; // if presenter doesn't run properly empty string is return
     }
 
-    public String likeController(UserAccount userLiking, UserAccount userLiked){
+    public String likeController(String userLiking, String userLiked){
         // Create new ReceiveLikeInputBoundary with specific class of ReceiveLike so that function with implementation
         // is called.
         ReceiveLikeInputBoundary LikeIB = new ReceiveLike();
+
+        ViewProfileController view1 = new ViewProfileController();
+        UserAccount user1 = view1.callSearchUser(userLiking);
+        UserAccount user2 = view1.callSearchUser(userLiked);
         PresenterLikeBlock presenter = new PresenterLikeBlock(); // calling main method in the use case
-        boolean result = LikeIB.like(userLiking, userLiked);
+        boolean result = LikeIB.like(user1, user2);
         if(result){
             return presenter.presenterLike(); //presenterLike function return String which will be used in the UI
         }
