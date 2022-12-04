@@ -1,5 +1,6 @@
 package UI;
 import entities.UserAccount;
+import frameworksDrivers.DataAccess;
 import interfaceAdapters.ControllerLikeBlock;
 import interfaceAdapters.LoginController;
 import interfaceAdapters.ViewProfileController;
@@ -196,10 +197,12 @@ public class UserLikeBlock implements ActionListener {
 //        loginController.callCreateDatabase();
         UserAccount user1 = new UserAccount("AL", "AML", 20, "her", "CAN",
                 "ON", "TOR", "F", "H","Watching", "12356435");
-        String[] userArray = {"AL,AML, 20, She/Her, CAN,ON, TOR, F, H,Watching, 12356435, [], [], [], []",
-        "JSmith,Jessica Smith, 20, She/Her, CAN,ON, TOR, F, H,Music, 124564565, [], [], [], []"};
+//        String[] userArray = {"AL,AML, 20, She/Her, CAN,ON, TOR, F, H,Watching, 12356435, [], [], [], []",
+//        "JSmith,Jessica Smith, 20, She/Her, CAN,ON, TOR, F, H,Music, 124564565, [], [], [], []"};
+//        data.createDatabase(userArray);
+        DataAccess dataAccess = new DataAccess();
+        dataAccess.readCSV();
         DatabaseManager data = DatabaseManager.getDatabaseManager();
-        data.createDatabase(userArray);
         data.saveNewUser(user1.getUsername(), user1);
         UserAccount user2 = new UserAccount("JSmith", "Jessica Smith", 20, "her", "CAN",
                 "ON", "TOR", "F", "H","Music", "124564565");
