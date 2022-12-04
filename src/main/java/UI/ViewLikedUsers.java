@@ -21,6 +21,8 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
     JButton blockButton = new JButton("Block ✖");
     JButton unlikeButton = new JButton("Unlike ☹");
 
+    JButton statsButton = new JButton("View Stats");
+
     // Labels
     JLabel likedTitle = new JLabel("LIKED USERS");
 
@@ -80,6 +82,7 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
         frame.add(likedCountryString);
         frame.add(likedGenderString);
         frame.add(likedInterestString);
+        frame.add(statsButton);
 
         // Set size of window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -127,6 +130,17 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
         likedInterestString.setBounds(230, 410, 500, 50);
         likedInterestString.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 
+        likedAgeTitle.setVisible(false);
+        likedCityTitle.setVisible(false);
+        likedCountryTitle.setVisible(false);
+        likedGenderTitle.setVisible(false);
+        likedInterestTitle.setVisible(false);
+        likedAgeNumber.setVisible(false);
+        likedCityString.setVisible(false);
+        likedCountryString.setVisible(false);
+        likedGenderString.setVisible(false);
+        likedInterestString.setVisible(false);
+
         // Set the position and size of the buttons
         backButton.setBounds(15,475,370,35);
         backButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 20));
@@ -164,6 +178,27 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
                 user1.getLikedUsers().remove(selectedUserIndex);
                 new ViewLikedUsers(user1);
                 frame.dispose();
+            }
+        });
+
+        statsButton.setBounds(15,250,380,35);
+        statsButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 20));
+        statsButton.setFocusable(false);
+        statsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // User clicks Unlike Button
+                statsButton.setVisible(false);
+                likedAgeTitle.setVisible(true);
+                likedCityTitle.setVisible(true);
+                likedCountryTitle.setVisible(true);
+                likedGenderTitle.setVisible(true);
+                likedInterestTitle.setVisible(true);
+                likedAgeNumber.setVisible(true);
+                likedCityString.setVisible(true);
+                likedCountryString.setVisible(true);
+                likedGenderString.setVisible(true);
+                likedInterestString.setVisible(true);
             }
         });
 
