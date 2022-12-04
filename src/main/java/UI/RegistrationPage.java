@@ -6,16 +6,31 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/** A UI class for Registration feature.
+ * */
 public class RegistrationPage extends JFrame implements ActionListener{
 
-    JButton register_button2, back_button;
+    // === Class Variables ===
+
+    // Frame
     JFrame frame;
+
+    // Labels
     JLabel username_label, name_label, age_label, pronouns_label, country_label, province_label, city_label,
             gender_label, sexuality_label, interest_label, pass_label;
+
+    // Text fields
     final JTextField username_textField, name_textField, age_textField, country_textField,
             province_textField, city_textField, pass_textField;
+
+    // Drop-down options
     JComboBox<String> pronouns_comboBox, gender_comboBox, sexuality_comboBox, interest_comboBox;
 
+    // Buttons
+    JButton register_button2, back_button;
+
+    /** Constructor function that builds the Registration page.
+     * */
     public RegistrationPage() {
 
         frame = new JFrame();
@@ -154,6 +169,9 @@ public class RegistrationPage extends JFrame implements ActionListener{
         setTitle("REGISTRATION FORM");
     }
 
+    /** Function that implements actionPerformed function from ActionListener interface.
+     * Contains the code for actions to the Register and Back buttons.
+     * */
     @Override
     public void actionPerformed(ActionEvent ae) {
 

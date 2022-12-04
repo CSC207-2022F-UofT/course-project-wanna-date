@@ -4,12 +4,23 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/** A UI class for Login feature when the login input is invalid.
+ * */
 public class LoginErrorPage extends JFrame implements ActionListener {
 
+    // === Class Variables ===
+
+    // Frame
     JFrame frame;
-    JButton ok_button;
+
+    // Label
     JLabel error_label;
 
+    // Button
+    JButton ok_button;
+
+    /** Constructor function that builds the LoginError page.
+     * */
     public LoginErrorPage() {
         frame = new JFrame();
 
@@ -36,6 +47,9 @@ public class LoginErrorPage extends JFrame implements ActionListener {
         frame.add(ok_button);
     }
 
+    /** Function that implements actionPerformed function from ActionListener interface.
+     * Contains the code for actions to the Ok button.
+     * */
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == ok_button) {

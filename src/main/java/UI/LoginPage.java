@@ -5,13 +5,26 @@ import interfaceAdapters.LoginController;
 import javax.swing.*;
 import java.awt.event.*;
 
+/** A UI class for Login feature.
+ * */
 public class LoginPage extends JFrame implements ActionListener {
 
-    JButton login_button, register_button1;
+    // === Class variables ===
+
+    // Frame
     JFrame frame;
+
+    // Labels
     JLabel username_label, pass_label;
+
+    // Text fields
     final JTextField textField1, textField2;
 
+    // Buttons
+    JButton login_button, register_button1;
+
+    /** Constructor function that builds the Login page.
+     * */
     public LoginPage() {
 
         frame = new JFrame();
@@ -60,6 +73,10 @@ public class LoginPage extends JFrame implements ActionListener {
 
         setTitle("LOGIN FORM");
     }
+
+    /** Function that implements actionPerformed function from ActionListener interface.
+     * Contains the code for actions to the Login and Register buttons.
+     * */
     @Override
     public void actionPerformed(ActionEvent ae) {
         String username_value = textField1.getText();

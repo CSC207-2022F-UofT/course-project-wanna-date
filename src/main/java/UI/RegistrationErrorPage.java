@@ -4,12 +4,23 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/** A UI class for Registration feature when the registration input is invalid.
+ * */
 public class RegistrationErrorPage extends JFrame implements ActionListener {
 
+    // === Class Variables ===
+
+    // Frame
     JFrame frame;
-    JButton ok_button;
+
+    // Labels
     JLabel error_label, username_rule, password_rule;
 
+    // Button
+    JButton ok_button;
+
+    /** Constructor function that builds the RegistrationError page.
+     * */
     public RegistrationErrorPage() {
         frame = new JFrame();
 
@@ -50,6 +61,9 @@ public class RegistrationErrorPage extends JFrame implements ActionListener {
         frame.add(ok_button);
     }
 
+    /** Function that implements actionPerformed function from ActionListener interface.
+     * Contains the code for actions to the Ok button.
+     * */
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == ok_button) {
