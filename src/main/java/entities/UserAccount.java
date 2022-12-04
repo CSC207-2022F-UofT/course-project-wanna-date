@@ -3,43 +3,43 @@ package entities;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * An Entity class representing a single user in the application
+ * Contains this user's variables
+ */
 public class UserAccount {
-    /*
-     * Represents a single user in the application
-     * Contains this user's variables
-     */
 
     // === Class Variables ===
 
     // The username of user that is unique in the application.
-    private String username;
+    private final String username;
 
     // The real name of user.
-    private String full_name;
+    private final String fullName;
 
     // The age of user.
-    private int age;
+    private final int age;
 
     // The pronouns identified by user.
-    private String pronouns;
+    private final String pronouns;
 
     // The location where user lives.
     // Consists of three keys, each mapped to their own values:
     // country, province, and city.
-    private HashMap<String, String> location;
+    private final HashMap<String, String> location;
 
     // The gender identified by user.
     // 'M': male
     // 'F': female
     // 'N': non-binary
-    private String gender;
+    private final String gender;
 
     // The sexuality identified by user.
     // 'G': gay
     // 'L': lesbian
     // 'H': heterosexual
     // 'B': bisexual
-    private String sexuality;
+    private final String sexuality;
 
     // The list of interests by user.
     // They can only name one interest most suitable to them from this list:
@@ -54,22 +54,22 @@ public class UserAccount {
     // - Games
     // - Socializing
     // - Others
-    private String interest;
+    private final String interest;
 
     // The password of user's account.
-    private String password;
+    private final String password;
 
     // The list of usernames that this user liked.
-    private ArrayList<UserAccount> liked_users;
+    private ArrayList<UserAccount> likedUsers;
 
     // The list of users who liked this user
-    private ArrayList<UserAccount> liked_by_users;
+    private ArrayList<UserAccount> likedByUsers;
 
     // The list of usernames that this user blocked.
-    private ArrayList<UserAccount> blocked_users;
+    private ArrayList<UserAccount> blockedUsers;
 
     // The list of users who blocked this user
-    private ArrayList<UserAccount> blocked_by_users;
+    private ArrayList<UserAccount> blockedByUsers;
 
     public UserAccount(String username,
                        String full_name,
@@ -81,10 +81,10 @@ public class UserAccount {
                        String interest,
                        String password) {
         this.username = username;
-        this.full_name = full_name;
+        this.fullName = full_name;
         this.age = age;
         this.pronouns = pronouns;
-        HashMap<String, String> location = new HashMap<String, String>(3);
+        HashMap<String, String> location = new HashMap<>(3);
         location.put("country", country);
         location.put("province", province);
         location.put("city", city);
@@ -93,84 +93,86 @@ public class UserAccount {
         this.sexuality = sexuality;
         this.interest = interest;
         this.password = password;
-        this.liked_users = new ArrayList<UserAccount>();
-        this.liked_by_users = new ArrayList<UserAccount>();
-        this.blocked_users = new ArrayList<UserAccount>();
-        this.blocked_by_users = new ArrayList<UserAccount>();
+        this.likedUsers = new ArrayList<>();
+        this.likedByUsers = new ArrayList<>();
+        this.blockedUsers = new ArrayList<>();
+        this.blockedByUsers = new ArrayList<>();
     }
 
-    // Get functions
-    public String get_username() {
+    /** Get functions for UserAccount variables
+     * */
+    public String getUsername() {
         return this.username;
     }
 
-    public String get_full_name() {
-        return this.full_name;
+    public String getFullName() {
+        return this.fullName;
     }
 
-    public int get_age() {
+    public int getAge() {
         return this.age;
     }
 
-    public String get_pronouns() {
+    public String getPronouns() {
         return this.pronouns;
     }
 
-    public HashMap get_location() {
-        return this.location;
-    }
+    public HashMap<String, String> getLocation() { return this.location; }
 
-    public String get_country() { return this.location.get("country"); }
+    public String getCountry() { return this.location.get("country"); }
 
-    public String get_province() { return this.location.get("province"); }
+    public String getProvince() { return this.location.get("province"); }
 
-    public String get_city() { return this.location.get("city"); }
+    public String getCity() { return this.location.get("city"); }
 
-    public String get_gender() {
+    public String getGender() {
         return this.gender;
     }
 
-    public String get_sexuality() {
+    public String getSexuality() {
         return this.sexuality;
     }
 
-    public String get_interests() {
+    public String getInterest() {
         return this.interest;
     }
 
-    public String get_password() {
+    public String getPassword() {
         return this.password;
     }
 
-    public ArrayList<UserAccount> get_liked_users() {
-        return this.liked_users;
+    public ArrayList<UserAccount> getLikedUsers() {
+        return this.likedUsers;
     }
 
-    public void set_liked_users(UserAccount user){
-        liked_users.add(user);
+    public ArrayList<UserAccount> getLikedByUsers() {
+        return this.likedByUsers;
     }
 
-    public ArrayList<UserAccount> get_blocked_users() {
-        return this.blocked_users;
+    public ArrayList<UserAccount> getBlockedUsers() {
+        return this.blockedUsers;
     }
 
-    public void set_blocked_users(UserAccount user){
-        blocked_users.add(user);
+    public ArrayList<UserAccount> getBlockedByUsers() {
+        return this.blockedByUsers;
     }
 
-    public ArrayList<UserAccount> get_liked_by_users() {
-        return this.liked_by_users;
+    /** Set functions for UserAccount variables that consist of UserAccount objects
+     *  as these are the variables that can be changed or modify once the user registers
+     * */
+    public void setLikedUsers(UserAccount user){
+        likedUsers.add(user);
     }
 
-    public void set_liked_by_users(UserAccount user){
-        liked_by_users.add(user);
+    public void setLikedByUsers(UserAccount user) {
+        likedByUsers.add(user);
     }
 
-    public ArrayList<UserAccount> get_blocked_by_users() {
-        return this.blocked_by_users;
+    public void setBlockedUsers(UserAccount user){
+        blockedUsers.add(user);
     }
 
-    public void set_blocked_by_users(UserAccount user) {
-        blocked_by_users.add(user);
+    public void setBlockedByUsers(UserAccount user) {
+        blockedByUsers.add(user);
     }
 }

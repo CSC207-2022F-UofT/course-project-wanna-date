@@ -1,6 +1,5 @@
 package UI;
 
-import entities.UserDatabase;
 import interfaceAdapters.LogoutController;
 import interfaceAdapters.ViewProfileController;
 
@@ -14,17 +13,22 @@ public class ViewProfilePage extends JFrame implements ActionListener {
     JFrame frame;
 
     JLabel username_label, name_label, age_label, pronouns_label, country_label, province_label, city_label,
-            gender_label, sexuality_label, interest_label, pass_label;
+            gender_label, sexuality_label, interest_label, pass_label, title;
 
-    JButton recommend_button, search_button, message_button, edit_button, logout_button;
+    JButton recommend_button, search_button, message_button, logout_button;
 
-    public ViewProfilePage(UserDatabase database, String username) {
+    public ViewProfilePage(String username) {
         ViewProfileController viewProfileController = new ViewProfileController();
-        ArrayList info = viewProfileController.callSearchInfo(database, username);
+        ArrayList<String> info = viewProfileController.callSearchInfo(username);
 
         frame = new JFrame();
 
         // Set labels of user information to display
+        title = new JLabel();
+        title.setText("YOUR APHRODITE PROFILE");
+        title.setBounds(200, 50, 200, 40);
+
+
         username_label = new JLabel();
         username_label.setText("Username: " + info.get(0));
         username_label.setBounds(200,100,200,40);
@@ -91,27 +95,22 @@ public class ViewProfilePage extends JFrame implements ActionListener {
 
         // Set buttons for different functionality
         recommend_button = new JButton("Recommendation");
-        recommend_button.setBounds(100,700,150,40);
+        recommend_button.setBounds(200,700,150,40);
         recommend_button.setFocusable(false);
         recommend_button.addActionListener(this);
 
         search_button = new JButton("Search Users");
-        search_button.setBounds(250,700,150,40);
+        search_button.setBounds(350,700,150,40);
         search_button.setFocusable(false);
         search_button.addActionListener(this);
 
         message_button = new JButton("Message");
-        message_button.setBounds(400,700,150,40);
+        message_button.setBounds(500,700,150,40);
         message_button.setFocusable(false);
         message_button.addActionListener(this);
 
-        edit_button = new JButton("Edit Profile");
-        edit_button.setBounds(550,700,150,40);
-        edit_button.setFocusable(false);
-        edit_button.addActionListener(this);
-
         logout_button = new JButton("Log out");
-        logout_button.setBounds(700,700,150,40);
+        logout_button.setBounds(650,700,150,40);
         logout_button.setFocusable(false);
         logout_button.addActionListener(this);
 
@@ -120,8 +119,11 @@ public class ViewProfilePage extends JFrame implements ActionListener {
         frame.setSize(1000,1000);
         frame.setLayout(null);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
 
         // Add elements to the frame
+        frame.add(title);
+
         frame.add(username_label);
         frame.add(name_label);
         frame.add(age_label);
@@ -137,20 +139,16 @@ public class ViewProfilePage extends JFrame implements ActionListener {
         frame.add(recommend_button);
         frame.add(search_button);
         frame.add(message_button);
-        frame.add(edit_button);
         frame.add(logout_button);
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == recommend_button) {
-            new RecBtnManager();
+
         } else if (ae.getSource() == search_button) {
 
         } else if (ae.getSource() == message_button) {
-
-        } else if (ae.getSource() == edit_button) {
-            frame.dispose();
 
         } else if (ae.getSource() == logout_button) {
             // Create LogoutController
@@ -160,7 +158,7 @@ public class ViewProfilePage extends JFrame implements ActionListener {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            LoginPage loginPage = new LoginPage();
+            new LoginPage();
             frame.dispose();
         }
     }

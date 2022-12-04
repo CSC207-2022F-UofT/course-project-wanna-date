@@ -1,6 +1,6 @@
 package interfaceAdapters;
 
-import entities.UserDatabase;
+import entities.UserAccount;
 import useCase.ViewProfileInputBoundary;
 import useCase.ViewProfileInputManager;
 
@@ -10,8 +10,14 @@ public class ViewProfileController {
 
     public ViewProfileController() {}
 
-    public ArrayList callSearchInfo(UserDatabase database, String username) {
+    public ArrayList<String> callSearchInfo(String username) {
         ViewProfileInputBoundary viewProfileInputBoundary = new ViewProfileInputManager();
-        return viewProfileInputBoundary.searchInfo(database, username);
+        return viewProfileInputBoundary.searchInfo(username);
     }
+
+    public UserAccount callSearchUser(String username){
+        ViewProfileInputBoundary viewProfileInputBoundary = new ViewProfileInputManager();
+        return viewProfileInputBoundary.searchUserAccount(username);
+    }
+
 }

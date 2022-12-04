@@ -1,10 +1,13 @@
 package useCase;
 
-import entities.UserDatabase;
+import entities.UserAccount;
 
 import java.util.ArrayList;
 
 public interface ViewProfileInputBoundary {
 
-    ArrayList searchInfo(UserDatabase database, String username);
+    ArrayList<String> searchInfo(String username);
+
+    UserAccount searchUserAccount(String username);
+
 }
