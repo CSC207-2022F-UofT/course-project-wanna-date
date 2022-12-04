@@ -57,32 +57,12 @@ public class Recommendation implements RecInputBoundary {
 
         // Start by getting the final users
         ArrayList<UserAccount> finalUsers = this.chooseRandomUsers(filteredUsers);
-
-        // Create a list to store the finalized ComparingProfiles
         ArrayList<ComparingProfile> compList = new ArrayList<>();
 
-        // Go through each profile
+        // Go through each profile to TODO explain what the below does -- don't have irritating comments
         for (UserAccount chosenUser : finalUsers) {
 
-            // Compute compatibility of this user and the new user
-            double likeScore = computeCompatibility(currentUser, chosenUser);
-
-            // Check if the user exists in the stored mapping
-            String chosenUsername = chosenUser.get_username();
-            ComparingProfile possibleProfile = this.nameToComp.get(chosenUsername);
-
-            // If it exists, then update its compatibility score
-            if (possibleProfile != null) {
-                possibleProfile.setCompatibility(likeScore);
-
-            // Else, create a new ComparingProfile for the user and add it to the mapping
-            } else {
-                String userCountry = chosenUser.get_country();
-                String userSexuality = chosenUser.get_sexuality();
-                ComparingProfile newProfile = new ComparingProfile(chosenUser.get_username(),
-                        chosenUser.get_interests(), userCountry, userSexuality, likeScore);
-                this.nameToComp.put(chosenUsername, newProfile);
-            }
+            String chosenUsername = calculateCompatibility(currentUser, chosenUser);
 
             // Lastly, update the list that stores ComparingProfiles
             compList.add(this.nameToComp.get(chosenUsername));
@@ -93,6 +73,7 @@ public class Recommendation implements RecInputBoundary {
         // the compList and finalUsers lists simultaneously
         Collections.sort(compList);
 
+        // TODO put stuff into a separate Builder class that the RecUC does
         // Create a sorted final users' list
         ArrayList<UserAccount> sortedFinalUsers = new ArrayList<>();
 
@@ -113,6 +94,29 @@ public class Recommendation implements RecInputBoundary {
 
         // Send recommended profiles to the adapter layer through the output boundary
         this.outputManager.ShowRecommendations(profilesToShow);
+    }
+
+    private String calculateCompatibility(UserAccount currentUser, UserAccount chosenUser) {
+        // Compute compatibility of this user and the new user
+        double likeScore = computeCompatibility(currentUser, chosenUser);
+
+        // Check if the user exists in the stored mapping
+        String chosenUsername = chosenUser.get_username();
+        ComparingProfile possibleProfile = this.nameToComp.get(chosenUsername);
+
+        // If it exists, then update its compatibility score
+        if (possibleProfile != null) {
+            possibleProfile.setCompatibility(likeScore);
+
+        // Else, create a new ComparingProfile for the user and add it to the mapping
+        } else {
+            String userCountry = chosenUser.get_country();
+            String userSexuality = chosenUser.get_sexuality();
+            ComparingProfile newProfile = new ComparingProfile(chosenUser.get_username(),
+                    chosenUser.get_interests(), userCountry, userSexuality, likeScore);
+            this.nameToComp.put(chosenUsername, newProfile);
+        }
+        return chosenUsername;
     }
 
     /**

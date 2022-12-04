@@ -38,9 +38,7 @@ public class RecController {
      */
     public void formLBControl(int index) {
 
-        // Create a controller for liking and blocking
-        ControllerLikeBlock likeBlockControl = new ControllerLikeBlock();
-
+        // TODO delete likeBlockControl b/c UserLikeBlock was updated
         // Create a UserLikeBlock object at the current user and picked user by index
         UserLikeBlock profileDisplayer = new UserLikeBlock(this.recProfiles.recProfileUser,
                 this.recProfiles.getRecUserAcc().get(index), likeBlockControl);
