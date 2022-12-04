@@ -3,7 +3,6 @@ package entities;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 /**
  * An Entity class representing a single user in the application
  * Contains this user's variables
@@ -27,7 +26,6 @@ public class UserAccount {
     // The location where user lives.
     // Consists of three keys, each mapped to their own values:
     // country, province, and city.
-
     private final HashMap<String, String> location;
 
     // The gender identified by user.
@@ -36,14 +34,12 @@ public class UserAccount {
     // 'N': non-binary
     private final String gender;
 
-
     // The sexuality identified by user.
     // 'G': gay
     // 'L': lesbian
     // 'H': heterosexual
     // 'B': bisexual
     private final String sexuality;
-
 
     // The list of interests by user.
     // They can only name one interest most suitable to them from this list:
@@ -89,7 +85,6 @@ public class UserAccount {
         this.age = age;
         this.pronouns = pronouns;
         HashMap<String, String> location = new HashMap<>(3);
-
         location.put("country", country);
         location.put("province", province);
         location.put("city", city);
