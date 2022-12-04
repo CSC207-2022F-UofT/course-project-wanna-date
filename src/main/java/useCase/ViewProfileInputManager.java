@@ -4,10 +4,17 @@ import entities.UserAccount;
 
 import java.util.ArrayList;
 
+/** This is a use case class for ViewProfile feature which receives input from user.
+ */
 public class ViewProfileInputManager implements ViewProfileInputBoundary {
 
     public ViewProfileInputManager() {}
 
+    /** Function that returns an ArrayList<String> consisting of variables of the user corresponding
+     * to the username in the parameter.
+     *
+     * @param username  represents the username of the user.
+     * */
     @Override
     public ArrayList<String> searchInfo(String username) {
         DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
@@ -30,6 +37,7 @@ public class ViewProfileInputManager implements ViewProfileInputBoundary {
         ViewProfileOutputManager viewProfileOutputManager = new ViewProfileOutputManager();
         return viewProfileOutputManager.connector(info);
     }
+
 
     @Override
     public UserAccount searchUserAccount(String username) {

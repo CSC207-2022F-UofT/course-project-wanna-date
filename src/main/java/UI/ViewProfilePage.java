@@ -8,15 +8,24 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/** A UI class for ViewProfile feature.
+ * */
 public class ViewProfilePage extends JFrame implements ActionListener {
 
+    // === Class Variables ===
+
+    // Frame
     JFrame frame;
 
+    // Labels
     JLabel username_label, name_label, age_label, pronouns_label, country_label, province_label, city_label,
             gender_label, sexuality_label, interest_label, pass_label, title;
 
+    // Buttons
     JButton recommend_button, search_button, message_button, logout_button;
 
+    /** Constructor function that builds the ViewProfile page.
+     * */
     public ViewProfilePage(String username) {
         ViewProfileController viewProfileController = new ViewProfileController();
         ArrayList<String> info = viewProfileController.callSearchInfo(username);
@@ -142,6 +151,9 @@ public class ViewProfilePage extends JFrame implements ActionListener {
         frame.add(logout_button);
     }
 
+    /** Function that implements actionPerformed function from ActionListener interface.
+     * Contains the code for actions to the Recommendation, Search, Message, and Logout buttons.
+     * */
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == recommend_button) {

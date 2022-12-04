@@ -4,6 +4,8 @@ import interfaceAdapters.ViewProfilePresenter;
 
 import java.util.ArrayList;
 
+/** This is a use case class for ViewProfile feature which returns output to user.
+ */
 public class ViewProfileOutputManager {
 
     public ViewProfileOutputManager() {}
