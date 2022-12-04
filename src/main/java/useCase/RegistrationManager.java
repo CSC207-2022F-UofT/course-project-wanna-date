@@ -74,7 +74,7 @@ public class RegistrationManager implements RegistrationInputBoundary{
      * */
     public boolean isValidUsername(String username) {
         DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
-        return (!(databaseManager.isUsernameExist(username)) && !(username.length() >= 1)
+        return (!(databaseManager.isUsernameExist(username)) && (username.length() >= 1)
         && !(username.trim().isEmpty()));
     }
 
