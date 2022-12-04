@@ -1,20 +1,13 @@
 package useCase;
 
-import Entities.ChatBox;
-import Entities.UserAccount;
+/**
+ * A class that provides the variables inputted from the user.
+ */
 
 public class SendMessageID {
-    ChatBox message;
-    UserAccount user;
-    UserAccount messageReceiver, messageSender;
     private String receivingUser, sendingUser, text;
 
-    SendMessageID(String receivingUser, String sendingUser, String text) {
-//        messageReceiver = message.receiver;
-//        receivingUser = message.receiver.get_full_name();
-//        messageSender = user;
-//        sendingUser = user.get_full_name();
-//        text = message.textMessage;
+    public SendMessageID(String receivingUser, String sendingUser, String text) {
         this.receivingUser = receivingUser;
         this.sendingUser = sendingUser;
         this.text = text;

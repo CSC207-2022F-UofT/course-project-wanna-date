@@ -2,6 +2,10 @@ package useCase;
 
 import java.time.LocalDateTime;
 
+/**
+ * A class that stores the information required from the message data set.
+ */
+
 public class SendMessageDS {
     private final String sender;
     private final String receiver;

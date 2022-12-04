@@ -1,9 +1,9 @@
-package UseCase;
+package useCase;
 
-import Entities.UserAccount;
+/**
+ * An interface that is implemented by ChatBoxPresenter.
+ */
 
 public interface ChatBoxOB {
-    default boolean chatBoxPresenter(UserAccount user1, UserAccount user2){
-        return false;
-    }
+    ChatBoxOD prepareChatBox(ChatBoxOD output);
 }

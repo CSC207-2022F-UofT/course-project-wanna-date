@@ -1,9 +1,9 @@
-package UseCase;
+package useCase;
 
-import UseCase.SendMessageID;
+/**
+ * An interface that is implemented by OpenChatbox.
+ */
 
 public interface ChatBoxIB {
-    public default boolean mutualUsers(SendMessageID user){
-        return false;
-    }
+    ChatBoxOD mutualUsers(SendMessageID user);
 }

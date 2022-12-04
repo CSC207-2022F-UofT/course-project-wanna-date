@@ -1,10 +1,10 @@
-package UseCase;
-import Entities.UserAccount;
+package useCase;
+import entities.UserAccount;
+import useCase.RetrieveLikeOutputBoundary;
 
 import java.util.ArrayList;
 
 public class RetrieveLike {
-<<<<<<< HEAD:src/main/java/UseCase/RetrieveLike.java
     RetrieveLikeOutputBoundary param1;
 
     public RetrieveLike(RetrieveLikeOutputBoundary OB_Like){
@@ -14,12 +14,10 @@ public class RetrieveLike {
     public RetrieveLike(){
 
     }
-=======
+
     /** RetrieveLike class that will be connected to the presenter which is responsible to update view when
      * action is given from the user.
      */
->>>>>>> 705418cb8463c0ebde7aa1e2ca88cf168bae0e37:src/main/java/useCase/RetrieveLike.java
-
     public void connector() {
         like_view(param1);
     }
