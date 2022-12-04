@@ -7,8 +7,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/** A frameworksDrivers class that writes CSV File from the Database in application.
+ * */
 public class DataExport {
 
+    /** Function that writes information from Database in the form of Object[][] to an outer CSV File
+     * */
     public void writeCSV() throws IOException {
         DataExportInterface dataExportInterface = DatabaseManager.getDatabaseManager();
         Object[][] data_to_csv = dataExportInterface.writeDatabase();

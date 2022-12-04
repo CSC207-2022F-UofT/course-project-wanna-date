@@ -8,10 +8,15 @@ import java.io.IOException;
 
 import java.util.Arrays;
 
+/** A frameworksDrivers class that reads an outer CSV File and create the Database in the application.
+ * */
 public class DataAccess {
 
     public DataAccess() {}
 
+    /** Function that reads an outer CSV File and convert the information to the form of String[]
+     * which will be transferred to a function in DatabaseManager class to create the Database in the application.
+     * */
     public void readCSV() {
 
         String line;
