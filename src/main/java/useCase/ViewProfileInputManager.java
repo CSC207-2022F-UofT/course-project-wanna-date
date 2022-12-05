@@ -30,4 +30,10 @@ public class ViewProfileInputManager implements ViewProfileInputBoundary {
         ViewProfileOutputManager viewProfileOutputManager = new ViewProfileOutputManager();
         return viewProfileOutputManager.connector(info);
     }
+
+    @Override
+    public UserAccount searchUserAccount(String username) {
+        DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
+        return databaseManager.retrieveUserAccount(username);
+    }
 }
