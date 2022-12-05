@@ -4,6 +4,7 @@ import interfaceAdapters.LogoutController;
 import interfaceAdapters.ViewProfileController;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,71 +35,74 @@ public class ViewProfilePage extends JFrame implements ActionListener {
 
         // Set labels of user information to display
         title = new JLabel();
-        title.setText("YOUR APHRODITE PROFILE");
-        title.setBounds(200, 50, 200, 40);
+        title.setText("Your APHRODITE Profile");
+        title.setHorizontalAlignment(JLabel.CENTER);
+        title.setBounds(0, 50, 1000, 40);
+        title.setFont(new Font("Lucida Calligraphy", Font.BOLD, 30));
+        title.setFocusable(false);
 
 
         username_label = new JLabel();
         username_label.setText("Username: " + info.get(0));
-        username_label.setBounds(200,100,200,40);
+        username_label.setBounds(200,125,200,40);
         username_label.setFocusable(false);
 
 
         name_label = new JLabel();
         name_label.setText("Full name: " + info.get(1));
-        name_label.setBounds(200,150,200,40);
+        name_label.setBounds(200,175,200,40);
         name_label.setFocusable(false);
 
 
         age_label = new JLabel();
         age_label.setText("Age: " + info.get(2));
-        age_label.setBounds(200,200,200,40);
+        age_label.setBounds(200,225,200,40);
         age_label.setFocusable(false);
 
 
         pronouns_label = new JLabel();
         pronouns_label.setText("Pronouns: " + info.get(3));
-        pronouns_label.setBounds(200,250,200,40);
+        pronouns_label.setBounds(200,275,200,40);
         pronouns_label.setFocusable(false);
 
         country_label = new JLabel();
         country_label.setText("Country: " + info.get(4));
-        country_label.setBounds(200,300,200,40);
+        country_label.setBounds(200,325,200,40);
         country_label.setFocusable(false);
 
         province_label = new JLabel();
         province_label.setText("Province: " + info.get(5));
-        province_label.setBounds(200,350,200,40);
+        province_label.setBounds(200,375,200,40);
         province_label.setFocusable(false);
 
 
         city_label = new JLabel();
         city_label.setText("City: " + info.get(6));
-        city_label.setBounds(200,400,200,40);
+        city_label.setBounds(200,425,200,40);
         city_label.setFocusable(false);
 
 
         gender_label = new JLabel();
         gender_label.setText("Gender: " + info.get(7));
-        gender_label.setBounds(200,450,200,40);
+        gender_label.setBounds(200,475,200,40);
         gender_label.setFocusable(false);
 
 
         sexuality_label = new JLabel();
         sexuality_label.setText("Sexuality: " + info.get(8));
-        sexuality_label.setBounds(200,500,200,40);
+        sexuality_label.setBounds(200,525,200,40);
         sexuality_label.setFocusable(false);
 
 
         interest_label = new JLabel();
         interest_label.setText("Interest: " + info.get(9));
-        interest_label.setBounds(200,550,200,40);
+        interest_label.setBounds(200,575,200,40);
         interest_label.setFocusable(false);
 
 
         pass_label = new JLabel();
         pass_label.setText("Password: " + info.get(10));
-        pass_label.setBounds(200,600,200,40);
+        pass_label.setBounds(200,625,200,40);
         pass_label.setFocusable(false);
 
 
@@ -123,13 +127,6 @@ public class ViewProfilePage extends JFrame implements ActionListener {
         logout_button.setFocusable(false);
         logout_button.addActionListener(this);
 
-        // Set layout for the frame
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000,1000);
-        frame.setLayout(null);
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
-
         // Add elements to the frame
         frame.add(title);
 
@@ -149,6 +146,15 @@ public class ViewProfilePage extends JFrame implements ActionListener {
         frame.add(search_button);
         frame.add(message_button);
         frame.add(logout_button);
+
+        // Set layout for the frame
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1000,1000);
+        frame.setLayout(null);
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+        Color LIGHT_PINK = new Color(255, 175, 175, 150);
+        frame.getContentPane().setBackground(LIGHT_PINK);
     }
 
     /** Function that implements actionPerformed function from ActionListener interface.

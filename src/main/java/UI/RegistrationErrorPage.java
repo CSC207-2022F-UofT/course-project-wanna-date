@@ -1,6 +1,7 @@
 package UI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -31,13 +32,13 @@ public class RegistrationErrorPage extends JFrame implements ActionListener {
         error_label.setFocusable(false);
 
         username_rule = new JLabel();
-        username_rule.setText("- Enter a non-empty username");
+        username_rule.setText("1. Enter a non-empty username");
         username_rule.setHorizontalAlignment(JLabel.CENTER);
         username_rule.setBounds(0,85,400,15);
         username_rule.setFocusable(false);
 
         password_rule = new JLabel();
-        password_rule.setText("- Enter at least 8 characters password");
+        password_rule.setText("2. Enter at least 8 characters password, no white space");
         password_rule.setHorizontalAlignment(JLabel.CENTER);
         password_rule.setBounds(0,120,400,15);
         password_rule.setFocusable(false);
@@ -53,6 +54,8 @@ public class RegistrationErrorPage extends JFrame implements ActionListener {
         frame.setLayout(null);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
+        Color LIGHT_YELLOW = new Color(255, 200, 100, 200);
+        frame.getContentPane().setBackground(LIGHT_YELLOW);
 
         // Add elements to the frame
         frame.add(error_label);

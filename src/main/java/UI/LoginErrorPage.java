@@ -1,6 +1,7 @@
 package UI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,13 +26,13 @@ public class LoginErrorPage extends JFrame implements ActionListener {
         frame = new JFrame();
 
         error_label = new JLabel();
-        error_label.setText("Enter valid username and password");
+        error_label.setText("Enter valid username and password!");
         error_label.setHorizontalAlignment(SwingConstants.CENTER);
-        error_label.setBounds(70,30,250,40);
+        error_label.setBounds(70,75,250,40);
         error_label.setFocusable(false);
 
         ok_button = new JButton("Ok");
-        ok_button.setBounds(70,100,250,40);
+        ok_button.setBounds(70,150,250,40);
         ok_button.setFocusable(false);
         ok_button.addActionListener(this);
 
@@ -41,6 +42,8 @@ public class LoginErrorPage extends JFrame implements ActionListener {
         frame.setLayout(null);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
+        Color LIGHT_YELLOW = new Color(255, 200, 100, 200);
+        frame.getContentPane().setBackground(LIGHT_YELLOW);
 
         // Add elements to the frame
         frame.add(error_label);
