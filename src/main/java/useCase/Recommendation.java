@@ -34,37 +34,22 @@ public class Recommendation implements RecInputBoundary {
      * in the program, calling an OutputBoundary object
      * to do such processing.
      */
-    public void MakeRecommendations(){
+    public void makeRecommendations(){
 
         // Get the current user of the program
         UserAccount currentUser = this.getCurrentUser();
 
         // Get possible users
         ArrayList<UserAccount> filteredUsers =
-                this.getPossibleMatches(currentUser.get_gender(), currentUser.get_sexuality(), currentUser);
-
-        // Below is some old code, kept here for documentation as to an alternative implementation if needed
-        // Get information of blocked users
-        // ArrayList<UserAccount> blockedUsers = currentUser.get_blocked_users();
-
-        // Using information of blocked users, take out any users who are blocked; note that
-        // this might lead there to being less recommendations
-        // ArrayList<UserAccount> filteredUsers = this.takeOutBlocked(possibleUsers, blockedUsers);
-
-        // In this next part, choose random users from the information and create ComparingProfiles tailored
-        // to the system's current user, if these profiles do not yet exist; otherwise,
-        // update the profile's compatibility score; at the end, put them into a list
+                this.getPossibleMatches(currentUser.getGender(), currentUser.getSexuality(), currentUser);
 
         // Start by getting the final users
         ArrayList<UserAccount> finalUsers = this.chooseRandomUsers(filteredUsers);
         ArrayList<ComparingProfile> compList = new ArrayList<>();
 
-        // Go through each profile to TODO explain what the below does -- don't have irritating comments
+        // Go through each profile to compute compatibility and update the list of ComparingProfiles if needed
         for (UserAccount chosenUser : finalUsers) {
-
             String chosenUsername = calculateCompatibility(currentUser, chosenUser);
-
-            // Lastly, update the list that stores ComparingProfiles
             compList.add(this.nameToComp.get(chosenUsername));
         }
 
@@ -75,16 +60,16 @@ public class Recommendation implements RecInputBoundary {
 
         // TODO put stuff into a separate Builder class that the RecUC does
         // Create a sorted final users' list
-        ArrayList<UserAccount> sortedFinalUsers = new ArrayList<>();
+        ArrayList<String> sortedFinalUsers = new ArrayList<>();
 
-        // Go through each Comparing Profile
+        // Go through each ComparingProfile
         for (ComparingProfile compProfile : compList) {
 
             // For each user in finalUsers: if the usernames match, then we found the user, and add the
             // UserAccount to the sortedFinalUsers
             for (UserAccount maybeUser : finalUsers) {
-                if (Objects.equals(compProfile.name, maybeUser.get_username())) {
-                    sortedFinalUsers.add(maybeUser);
+                if (Objects.equals(compProfile.name, maybeUser.getUsername())) {
+                    sortedFinalUsers.add(maybeUser.getUsername());
                 }
             }
         }
@@ -93,15 +78,16 @@ public class Recommendation implements RecInputBoundary {
         RecommendedProfiles profilesToShow = createRecOutput(currentUser, compList, sortedFinalUsers);
 
         // Send recommended profiles to the adapter layer through the output boundary
-        this.outputManager.ShowRecommendations(profilesToShow);
+        this.outputManager.showRecommendations(profilesToShow);
     }
 
     private String calculateCompatibility(UserAccount currentUser, UserAccount chosenUser) {
+
         // Compute compatibility of this user and the new user
         double likeScore = computeCompatibility(currentUser, chosenUser);
 
         // Check if the user exists in the stored mapping
-        String chosenUsername = chosenUser.get_username();
+        String chosenUsername = chosenUser.getUsername();
         ComparingProfile possibleProfile = this.nameToComp.get(chosenUsername);
 
         // If it exists, then update its compatibility score
@@ -110,10 +96,10 @@ public class Recommendation implements RecInputBoundary {
 
         // Else, create a new ComparingProfile for the user and add it to the mapping
         } else {
-            String userCountry = chosenUser.get_country();
-            String userSexuality = chosenUser.get_sexuality();
-            ComparingProfile newProfile = new ComparingProfile(chosenUser.get_username(),
-                    chosenUser.get_interests(), userCountry, userSexuality, likeScore);
+            String userCountry = chosenUser.getCountry();
+            String userSexuality = chosenUser.getSexuality();
+            ComparingProfile newProfile = new ComparingProfile(chosenUser.getUsername(),
+                    chosenUser.getInterest(), userCountry, userSexuality, likeScore);
             this.nameToComp.put(chosenUsername, newProfile);
         }
         return chosenUsername;
@@ -125,12 +111,9 @@ public class Recommendation implements RecInputBoundary {
      */
     private UserAccount getCurrentUser(){
 
-        // Get the database and its data, presuming login is already done
-        HashMap<String, UserAccount> userDataMap = this.databaseRef.getDatabase().get_data();
-
-        // Get and return the current user based on their username, presuming login is already done
-        String currentUsername = CurrUser.getCurrUser().getCurrUsername();
-        return userDataMap.get(currentUsername);
+        // Get and return the current user, presuming login is already done
+        CurrUserManager singletonUserManager = CurrUserManager.getCurrUserManager();
+        return singletonUserManager.getCurrUser();
     }
 
     /**
@@ -201,15 +184,15 @@ public class Recommendation implements RecInputBoundary {
 
         // Go through the current user's blocked users and fetch a list of usernames for blocked people
         ArrayList<String> blockedUsernames = new ArrayList<>();
-        for (UserAccount blockedUser : currentUser.get_blocked_users()) {
-            blockedUsernames.add(blockedUser.get_username());
+        for (UserAccount blockedUser : currentUser.getBlockedUsers()) {
+            blockedUsernames.add(blockedUser.getUsername());
         }
 
         // Using the database, go through each contained member to determine if they ought to be brought
         // into the use case as a valid user
 
         // To start, get the database and its data, presuming login is already done
-        HashMap<String, UserAccount> userDataMap = this.databaseRef.getDatabase().get_data();
+        HashMap<String, UserAccount> userDataMap = this.databaseRef.getDatabase().getData();
 
         // Iterate through each account
         for (UserAccount maybeValidUser : userDataMap.values()) {
@@ -218,10 +201,10 @@ public class Recommendation implements RecInputBoundary {
             // and the users have compatible gender-sexuality,
             // and the possible user is not being blocked,
             // then add the possible user to the array
-            if ( (!Objects.equals(maybeValidUser.get_username(), currentUser.get_username()))
-                    && genderSexMatches(currentUser.get_gender(), currentUser.get_sexuality(),
-                    maybeValidUser.get_gender(), maybeValidUser.get_sexuality())
-                    && (!blockedUsernames.contains(maybeValidUser.get_username())) ) {
+            if ( (!Objects.equals(maybeValidUser.getUsername(), currentUser.getUsername()))
+                    && genderSexMatches(currentUser.getGender(), currentUser.getSexuality(),
+                    maybeValidUser.getGender(), maybeValidUser.getSexuality())
+                    && (!blockedUsernames.contains(maybeValidUser.getUsername())) ) {
                 potentialUsers.add(maybeValidUser);
             }
         }
@@ -234,7 +217,7 @@ public class Recommendation implements RecInputBoundary {
      * Return a list of UserAccounts without the users blocked by
      * the current user, given a list of UserAccounts to filter through
      * and a list of blocked users.
-     * As of now, this method can be deprecated but it is kept in
+     * As of now, this method can be deprecated, but it is kept in
      * the code in case it is of use in the future.
      *
      * @param oldPossibleUsers      A list of UserAccounts to filter through
@@ -312,17 +295,17 @@ public class Recommendation implements RecInputBoundary {
         double scoreSum = 0.0;
 
         // If the top interests are shared, then bump score sum
-        if (Objects.equals(user1.get_interests(), user2.get_interests())) {
+        if (Objects.equals(user1.getInterest(), user2.getInterest())) {
             scoreSum = scoreSum + 1;
         }
 
         // Add a point for whether the country of both users is equivalent
-        if (Objects.equals(user1.get_country(), user2.get_country())) {
+        if (Objects.equals(user1.getCountry(), user2.getCountry())) {
             scoreSum = scoreSum + 1;
         }
 
         // Add a point for whether user2 likes user1
-        if (user1.get_liked_by_users().contains(user2)) {
+        if (user1.getLikedByUsers().contains(user2)) {
             scoreSum = scoreSum + 1;
         }
 
@@ -337,10 +320,12 @@ public class Recommendation implements RecInputBoundary {
      * @param currentUserObj    The UserAccount for the current user
      * @param newCompList       List of ComparingProfiles to recommend
      * @param parallelList      A UserAccount version of newCompList
+     *
+     * @return                  A RecommendedProfiles object as output data
      */
     private RecommendedProfiles createRecOutput(UserAccount currentUserObj,
                                                 ArrayList<ComparingProfile> newCompList,
-                                                ArrayList<UserAccount> parallelList) {
+                                                ArrayList<String> parallelList) {
 
         // Create an ArrayList for all the recommended users
         ArrayList<RecOutProfile> recommendationList = new ArrayList<>();

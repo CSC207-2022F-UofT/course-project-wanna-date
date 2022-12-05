@@ -26,7 +26,7 @@ public class RecController {
      * stored data.
      */
     public void handleInput(){
-        useInteractor.MakeRecommendations();
+        useInteractor.makeRecommendations();
     }
 
     /**
@@ -38,13 +38,11 @@ public class RecController {
      */
     public void formLBControl(int index) {
 
-        // TODO delete likeBlockControl b/c UserLikeBlock was updated
-        // Create a UserLikeBlock object at the current user and picked user by index
-        UserLikeBlock profileDisplayer = new UserLikeBlock(this.recProfiles.recProfileUser,
-                this.recProfiles.getRecUserAcc().get(index), likeBlockControl);
-
-        // Call the profile displayer so that the new controller's operations can run altogether
-        profileDisplayer.functionToCall();
+        // Create the UI for the display of profiles by fetching the current user and
+        // user to view, and then start the UI
+        String userToView = this.recProfiles.getRecUserAcc().get(index);
+        UserLikeBlock likeBlockUI = new UserLikeBlock(this.recProfiles.getRecProfileUser(), userToView);
+        likeBlockUI.functionToCall();
     }
 
     /**

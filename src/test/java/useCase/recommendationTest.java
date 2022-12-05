@@ -6,9 +6,9 @@ import interfaceAdapters.RecController;
 import interfaceAdapters.RecPresenter;
 import interfaceAdapters.RecShowRecBoundary;
 import org.junit.jupiter.api.Test;
-// import static org.mockito.Mockito.*; // TODO resolve
+import static org.mockito.Mockito.*;
 
-class RecommendationTest {
+class recommendationTest {
 
     // TODO: figure out a way to do testing by means of the DatabaseManager.
     //  After consulting in office hours, I have figured out a way to test the Recommendation use case despite the
