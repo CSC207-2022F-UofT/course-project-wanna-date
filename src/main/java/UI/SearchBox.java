@@ -88,8 +88,8 @@ public class SearchBox extends JFrame {
                     currButton.setEnabled(true);
                     currButton.addActionListener(e1 -> {
                         CurrUserManager currUserManager = CurrUserManager.getCurrUserManager();
-                        UserAccount account = currUserManager.getCurrUser();
-                        UserLikeBlock profile = new UserLikeBlock(account, targetUser);
+                        String account = currUserManager.getCurrUser().getUsername();
+                        UserLikeBlock profile = new UserLikeBlock(account, targetUser.getUsername());
                         profile.functionToCall();
                     });
                 }
@@ -115,8 +115,8 @@ public class SearchBox extends JFrame {
                             currButton.setEnabled(true);
                             currButton.addActionListener(e1 -> {
                                 CurrUserManager currUserManager = CurrUserManager.getCurrUserManager();
-                                UserAccount account = currUserManager.getCurrUser();
-                                UserLikeBlock profile = new UserLikeBlock(account, targetUser);
+                                String account = currUserManager.getCurrUser().getUsername();
+                                UserLikeBlock profile = new UserLikeBlock(account, targetUser.getUsername());
                                 profile.functionToCall();
                             });
                         }
