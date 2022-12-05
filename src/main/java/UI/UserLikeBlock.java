@@ -2,7 +2,6 @@ package UI;
 import entities.UserAccount;
 import frameworksDrivers.DataAccess;
 import interfaceAdapters.ControllerLikeBlock;
-import interfaceAdapters.LoginController;
 import interfaceAdapters.ViewProfileController;
 import useCase.DatabaseManager;
 
@@ -34,7 +33,7 @@ public class UserLikeBlock implements ActionListener {
     JLabel sexuality = new JLabel();
     JLabel interests = new JLabel();
 
-    JButton like = new JButton("Like");
+    JButton like = new JButton("Like♥");
     JButton block = new JButton("Block");
 
     JLabel likedString = new JLabel();
@@ -61,41 +60,41 @@ public class UserLikeBlock implements ActionListener {
         profile.setLayout(null); //customize where u want everything to go
         profile.setVisible(true); //make the frame visible
 
-        title.setBounds(10, 10, 100, 100);
-        title.setFont(new Font(null, Font.BOLD, 16));
+        title.setBounds(30, 40, 100, 100);
+        title.setFont(new Font(null, Font.BOLD, 18));
         title.setVisible(true);
 
-        pageTitle.setBounds(300, 20, 100, 100);
-        pageTitle.setFont(new Font(null, Font.BOLD, 14));
+        pageTitle.setBounds(310, 80, 100, 100);
+        pageTitle.setFont(new Font("Arial", Font.BOLD, 16));
         title.setVisible(true);
 
         //create full name text and set text to include the user's full name
-        fullName.setBounds(20,50, 300, 100); //coordinate and size of the label
+        fullName.setBounds(20,150, 300, 100); //coordinate and size of the label
         fullName.setFont(new Font(null, Font.PLAIN, 14));
         fullName.setText("Full Name: " + user2.getFullName());
         fullName.setFocusable(false);
         fullName.setVisible(true);
 
         //create age text and set text to include the user's age
-        age.setBounds(20,120, 300, 100); //coordinate and size of the label
+        age.setBounds(20,200, 300, 100); //coordinate and size of the label
         age.setFont(new Font(null, Font.PLAIN, 14));
         age.setText("Age: " + user2.getAge());
         age.setVisible(true);
 
         //create pronoun text
-        pronoun.setBounds(20,190, 300, 100); //coordinate and size of the label
+        pronoun.setBounds(20,250, 300, 100); //coordinate and size of the label
         pronoun.setFont(new Font(null, Font.PLAIN, 14));
         pronoun.setText("Pronouns: " + user2.getPronouns());
         pronoun.setVisible(true);
 
         //create country text
-        country.setBounds(20,260, 400, 100); //coordinate and size of the label
+        country.setBounds(20,300, 400, 100); //coordinate and size of the label
         country.setFont(new Font(null, Font.PLAIN, 14));
         country.setText("Country of Origin: " + user2.getLocation().get("country"));
         country.setVisible(true);
 
         //create province text
-        province.setBounds(20,330, 300, 100); //coordinate and size of the label
+        province.setBounds(20,350, 300, 100); //coordinate and size of the label
         province.setFont(new Font(null, Font.PLAIN, 14));
         province.setText("Province: " + user2.getLocation().get("province"));
         province.setVisible(true);
@@ -107,19 +106,19 @@ public class UserLikeBlock implements ActionListener {
         city.setVisible(true);
 
         //create gender text
-        gender.setBounds(20,470, 300, 100); //coordinate and size of the label
+        gender.setBounds(20,450, 300, 100); //coordinate and size of the label
         gender.setFont(new Font(null, Font.PLAIN, 14));
         gender.setText("Gender: " + user2.getGender());
         gender.setVisible(true);
 
         //create sexuality text
-        sexuality.setBounds(20,540, 300, 100); //coordinate and size of the label
+        sexuality.setBounds(20,500, 300, 100); //coordinate and size of the label
         sexuality.setFont(new Font(null, Font.PLAIN, 14));
         sexuality.setText("Sexuality: " + user2.getSexuality());
         sexuality.setVisible(true);
 
         //create interests text
-        interests.setBounds(20,610, 700, 100); //coordinate and size of the label
+        interests.setBounds(20,550, 700, 100); //coordinate and size of the label
         interests.setFont(new Font(null, Font.PLAIN, 14));
         interests.setText("Interest: " + user2.getInterest());
         interests.setVisible(true);
@@ -139,13 +138,15 @@ public class UserLikeBlock implements ActionListener {
         block.setOpaque(true);
 
         //create string that will appear after we finish with the like backend work
-        likedString.setBounds(600,20, 100, 100); //coordinate and size of the label
-        likedString.setFont(new Font(null, Font.ITALIC, 14));
+        likedString.setBounds(600,130, 100, 100); //coordinate and size of the label
+        likedString.setFont(new Font("Arial", Font.ITALIC, 14));
+        likedString.setForeground(Color.pink);
         likedString.setVisible(false);
 
         //create string that will appear after we finish with the block backend work
-        blockedString.setBounds(600,50, 100, 100); //coordinate and size of the label
-        blockedString.setFont(new Font(null, Font.ITALIC, 14));
+        blockedString.setBounds(600,150, 100, 100); //coordinate and size of the label
+        blockedString.setFont(new Font("Arial", Font.ITALIC, 14));
+        blockedString.setForeground(Color.red);
         blockedString.setVisible(false);
 
         //Add everything to the frame
@@ -176,13 +177,13 @@ public class UserLikeBlock implements ActionListener {
         // if like button get clicked
         if (e.getSource()== like) {
             String textShow= controller.likeController(username1, username2);
-            likedString.setText(textShow);
+            likedString.setText(textShow + "!");
             likedString.setVisible(true);
         }
         //if blocked button get clicked
         else if (e.getSource()==block) {
             String textShow2= controller.blockController(username1, username2);
-            blockedString.setText(textShow2);
+            blockedString.setText(textShow2+ "!");
             blockedString.setVisible(true);
         }
     }
@@ -193,13 +194,8 @@ public class UserLikeBlock implements ActionListener {
 
     public static void main (String[] args) {
 
-//        LoginController loginController= new LoginController();
-//        loginController.callCreateDatabase();
         UserAccount user1 = new UserAccount("AL", "AML", 20, "her", "CAN",
                 "ON", "TOR", "F", "H","Watching", "12356435");
-//        String[] userArray = {"AL,AML, 20, She/Her, CAN,ON, TOR, F, H,Watching, 12356435, [], [], [], []",
-//        "JSmith,Jessica Smith, 20, She/Her, CAN,ON, TOR, F, H,Music, 124564565, [], [], [], []"};
-//        data.createDatabase(userArray);
         DataAccess dataAccess = new DataAccess();
         dataAccess.readCSV();
         DatabaseManager data = DatabaseManager.getDatabaseManager();
