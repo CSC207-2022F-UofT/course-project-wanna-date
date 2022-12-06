@@ -36,39 +36,22 @@ public class RegistrationManager implements RegistrationInputBoundary{
                                        String sexuality,
                                        String interest,
                                        String password) {
-        if (isValidUsername(username)) {
-            if (isValidPronouns(pronouns)) {
-                if (isValidGender(gender)) {
-                    if (isValidSexuality(sexuality)) {
-                        if (isValidPassword(password)) {
-                            if(isValidInterest(interest)) {
-                                UserAccount new_user = new UserAccount(username, full_name, age, pronouns,
-                                        country, province, city, gender, sexuality, interest, password);
-                                DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
-                                databaseManager.saveNewUser(username, new_user);
-                                return true;
-                            } else {
-                                return false;
-                            }
-                        } else {
-                            return false;
-                        }
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
+        if (isValidUsername(username) && isValidFullName(full_name) && isValidPronouns(pronouns)
+                && isValidLocation(country, province, city) && isValidGender(gender) && isValidSexuality(sexuality)
+                && isValidInterest(interest) && isValidPassword(password)) {
+            UserAccount new_user = new UserAccount(username, full_name, age, pronouns, country, province, city,
+                    gender, sexuality, interest, password);
+            DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
+            databaseManager.saveNewUser(username, new_user);
+            return true;
         } else {
             return false;
         }
+
     }
 
     /** Function that returns a boolean value of whether the username given is valid.
-     * Valid username is one that has not existed before, not empty, and not consists of only white space.
+     * Valid username is one that has not existed in the database, not empty, and not consists of only white space.
      *
      * @param username  represents the username of the user.
      * */
@@ -78,6 +61,15 @@ public class RegistrationManager implements RegistrationInputBoundary{
         && !(username.trim().isEmpty()));
     }
 
+    /** Function that returns a boolean value of whether the full name given is valid.
+     * Valid full name is not empty and not consists of only white space.
+     *
+     * @param fullName  represents the full name of the user.
+     * */
+    public boolean isValidFullName(String fullName) {
+        return (fullName.length() >= 1 && !(fullName.trim().isEmpty()));
+    }
+
     /** Function that returns a boolean value of whether the pronouns given is valid.
      * Valid pronouns is one of He/Him, She/Her, or They/Them.
      *
@@ -85,6 +77,20 @@ public class RegistrationManager implements RegistrationInputBoundary{
      * */
     public boolean isValidPronouns(String pronouns) {
         return (pronouns.equals("He/Him") || pronouns.equals("She/Her") || pronouns.equals("They/Them"));
+    }
+
+    /** Function that returns a boolean value of whether the location which consists three values: country,
+     * province, and city given are valid.
+     * Valid country, province, and city are not empty and not consist of only white space.
+     *
+     * @param country   represents the country of the user.
+     * @param province  represents the province of the user.
+     * @param city      represents the city of the user.
+     * */
+    public boolean isValidLocation(String country, String province, String city) {
+        return (country.length() >= 1 && !(country.trim().isEmpty())
+                && province.length() >= 1 && !(province.trim().isEmpty())
+                && city.length() >= 1 && !(city.trim().isEmpty()));
     }
 
     /** Function that returns a boolean value of whether the gender given by the user is within the
