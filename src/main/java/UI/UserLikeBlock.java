@@ -59,9 +59,13 @@ public class UserLikeBlock implements ActionListener {
         profile.setSize(800, 800); //size of the frame
         profile.setLayout(null); //customize where u want everything to go
         profile.setVisible(true); //make the frame visible
+        Color lightPink = new Color(255,228,225);
+        profile.getContentPane().setBackground(lightPink);
 
         title.setBounds(30, 40, 100, 100);
-        title.setFont(new Font(null, Font.BOLD, 18));
+        title.setFont(new Font("Brush Script MT", Font.BOLD, 24));
+        Color gold = new Color(210,180,140);
+        title.setForeground(gold);
         title.setVisible(true);
 
         pageTitle.setBounds(310, 80, 100, 100);
@@ -125,7 +129,7 @@ public class UserLikeBlock implements ActionListener {
 
         //create like button
         like.setBounds(100,700, 60, 40); //coordinate and size of the label
-        like.setFocusable(false);
+        like.setFocusable(true);
         like.addActionListener(this);
         like.setBackground(Color.red);
         like.setOpaque(true);
@@ -140,13 +144,15 @@ public class UserLikeBlock implements ActionListener {
         //create string that will appear after we finish with the like backend work
         likedString.setBounds(600,130, 100, 100); //coordinate and size of the label
         likedString.setFont(new Font("Arial", Font.ITALIC, 14));
-        likedString.setForeground(Color.pink);
+        Color purple = new Color(111, 49, 138);
+        likedString.setForeground(purple);
         likedString.setVisible(false);
 
         //create string that will appear after we finish with the block backend work
         blockedString.setBounds(600,150, 100, 100); //coordinate and size of the label
         blockedString.setFont(new Font("Arial", Font.ITALIC, 14));
-        blockedString.setForeground(Color.red);
+        Color darkGreen = new Color(52, 92, 40);
+        blockedString.setForeground(darkGreen);
         blockedString.setVisible(false);
 
         //Add everything to the frame
@@ -168,6 +174,7 @@ public class UserLikeBlock implements ActionListener {
 
         profile.add(blockedString);
         profile.add(likedString);
+        profile.repaint();
 
     }
 
@@ -193,6 +200,7 @@ public class UserLikeBlock implements ActionListener {
     }
 
     public static void main (String[] args) {
+        // for individual testing purposes
 
         UserAccount user1 = new UserAccount("AL", "AML", 20, "her", "CAN",
                 "ON", "TOR", "F", "H","Watching", "12356435");
