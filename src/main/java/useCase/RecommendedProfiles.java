@@ -6,9 +6,9 @@ import java.util.List;
 
 public class RecommendedProfiles {
 
-    public UserAccount recProfileUser;
+    public String recProfileUser;
     public List<RecOutProfile> recProfileList;
-    public List<UserAccount> recUserAcc;
+    public List<String> recUserAcc;
 
     /**
      * Construct a RecommendedProfiles object, giving it the given
@@ -19,10 +19,14 @@ public class RecommendedProfiles {
      * @param recUserAcc        User's recommended user accounts; parallel list to recommendedUsers
      */
     public RecommendedProfiles(UserAccount centralUser, List<RecOutProfile> recommendedUsers,
-                               List<UserAccount> recUserAcc){
-        this.recProfileUser = centralUser;
+                               List<String> recUserAcc){
+        this.recProfileUser = centralUser.getUsername();
         this.recProfileList = recommendedUsers;
         this.recUserAcc = recUserAcc;
+    }
+
+    public String getRecProfileUser() {
+        return recProfileUser;
     }
 
     /**
@@ -35,7 +39,7 @@ public class RecommendedProfiles {
     /**
      * Get the recommended profiles (user account version) for the user contained in this object.
      */
-    public List<UserAccount> getRecUserAcc() {
+    public List<String> getRecUserAcc() {
         return recUserAcc;
     }
 }
