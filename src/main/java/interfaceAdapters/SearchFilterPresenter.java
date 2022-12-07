@@ -9,10 +9,12 @@ public class SearchFilterPresenter implements SearchFilterOutputBoundary {
     public SearchBox box = null;
     public FilterMenu menu = null;
 
+    // constructor called by the SearchBox UI
     public SearchFilterPresenter(SearchBox view){
         this.box = view;
     }
 
+    // override constructor that it can be called by the filter menu.
     public SearchFilterPresenter(FilterMenu menu){
         this.menu = menu;
     }
