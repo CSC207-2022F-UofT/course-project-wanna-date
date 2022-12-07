@@ -8,7 +8,7 @@ public interface GenerateUserHistoryOutputBoundary {
      * @return
      */
 
-    /**
+
     default String presenterTotalLikes(UserAccount user){
         return null;
     }
@@ -39,6 +39,6 @@ public interface GenerateUserHistoryOutputBoundary {
 
     default String presenterLikedInterest(UserAccount user){
         return null;
-    }*/
+    }
 
 }

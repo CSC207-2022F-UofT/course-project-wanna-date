@@ -11,8 +11,7 @@ public class UserHistoryPresenter implements GenerateUserHistoryOutputBoundary {
      * Each function returns a string of the statistics for the UI.
      * @return String of the specific statistic
      */
-/**
- *
+
  @Override
     public String presenterTotalLikes(UserAccount user){
         GenerateUserHistory generateHistory = new GenerateUserHistory();
@@ -59,5 +58,5 @@ public class UserHistoryPresenter implements GenerateUserHistoryOutputBoundary {
     public String presenterLikedInterest(UserAccount user){
         GenerateUserHistory generateHistory = new GenerateUserHistory();
         return generateHistory.getLikedInterest(user);
-    }*/
+    }
 }
