@@ -8,18 +8,16 @@ public class SearchController {
     public String toSearch;
     public SearchInputBoundary key;
 
+    // Constructor that set the presenter for use case
     public SearchController(SearchFilterOutputBoundary presenter){
         this.toSearch = "";
         this.key = new Search(presenter);
 
     }
 
-    public SearchInputBoundary getKey(){
-        return this.key;
-    }
-
     /**
      * Set class variable toSearch (input from user)
+     * @param toSearch Input from the user
      */
 
     public void setToSearch(String toSearch) {
