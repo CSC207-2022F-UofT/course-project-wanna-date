@@ -9,6 +9,10 @@ repositories {
 dependencies {
     implementation 'junit:junit:4.13.1'
     testImplementation('org.junit.jupiter:junit-jupiter:5.6.0')
+//    testImplementation('org.mockito:mockito-inline:{mockitoversion}')
+//    testImplementation('org.mockito:mockito-junit-jupiter:{mockitoversion}')
+    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version:'4.9.0';
+    testImplementation('org.mockito:mockito-junit-jupiter:{4.9.0}')
 }
 
 test {
