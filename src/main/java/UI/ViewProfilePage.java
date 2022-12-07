@@ -149,6 +149,7 @@ public class ViewProfilePage extends JFrame implements ActionListener {
         } else if (ae.getSource() == search_button) {
 
         } else if (ae.getSource() == message_button) {
+//            MessageUI(...);
 
         } else if (ae.getSource() == logout_button) {
             // Create LogoutController

@@ -1,4 +1,4 @@
-package interfaceAdapters;
+package InterfaceAdapters;
 
 import useCase.SendMessageIB;
 import useCase.SendMessageID;
