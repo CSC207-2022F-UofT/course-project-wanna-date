@@ -42,6 +42,8 @@ public class UserHistoryUI implements ActionListener {
         frame.setSize(400, 550);
         frame.setLayout(null);
         frame.setVisible(true);
+        Color LIGHT_PINK = new Color(255, 175, 175, 150);
+        frame.getContentPane().setBackground(LIGHT_PINK);
 
         // Set the positions and sizes of the buttons
         likedButton.setBounds(25,80,350,120);
@@ -100,20 +102,31 @@ public class UserHistoryUI implements ActionListener {
      UserAccount account = userManager.getCurrUser();*/
     public static void main(String[] args) {
 
-        UserAccount user1 = new UserAccount("johnd", "John Doe", 20, "her", "USA",
+        UserAccount user1 = new UserAccount("johnd", "John Doe", 20, "him", "USA",
                 "ILL", "CHI", "M", "H","Watching", "123");
         UserAccount user2 = new UserAccount("JSmith", "Jessica Smith", 18, "her", "CAN",
                 "ON", "TOR", "F", "G","Music", "124");
         UserAccount user3 = new UserAccount("janed", "Jane Doe", 18, "her", "CAN",
                 "ON", "TOR", "F", "H","Music", "124");
         UserAccount user4 = new UserAccount("jenndoe", "Jennifer Doe", 18, "her", "CAN",
+                "ON", "OTT", "F", "H","Music", "124");
+        UserAccount user5 = new UserAccount("nicksm", "Nick Smith", 20, "him", "CAN",
+                "ON", "OTT", "F", "H","Watching", "124");
+        UserAccount user6 = new UserAccount("michel9", "Michelle", 18, "her", "CAN",
+                "ON", "OTT", "F", "H","Music", "124");
+        UserAccount user7 = new UserAccount("jane65", "Jane Doee", 20, "her", "CAN",
                 "ON", "OTT", "F", "H","Watching", "124");
 
         user1.setLikedUsers(user2);
         user1.setLikedUsers(user4);
         user1.setBlockedUsers(user3);
+        user1.setBlockedUsers(user5);
+        user1.setLikedUsers(user6);
+        user1.setLikedUsers(user7);
+
         user1.setLikedByUsers(user2);
         user1.setLikedByUsers(user4);
+        user1.setLikedByUsers(user5);
 
         new UserHistoryUI(user1);
     }

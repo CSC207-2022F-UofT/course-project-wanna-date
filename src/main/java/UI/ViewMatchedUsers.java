@@ -60,6 +60,8 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
         frame.setSize(400, 550);
         frame.setLayout(null);
         frame.setVisible(true);
+        Color LIGHT_PINK = new Color(255, 175, 175, 150);
+        frame.getContentPane().setBackground(LIGHT_PINK);
 
         // Set the position and size of the labels
         matchedTitle.setBounds(25,15,500,50);
