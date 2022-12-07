@@ -2,6 +2,7 @@ package UI;
 
 import interfaceAdapters.LogoutController;
 import interfaceAdapters.ViewProfileController;
+import interfaceAdapters.ViewProfileInterface;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,9 +22,15 @@ public class ViewProfilePage extends JFrame implements ActionListener {
     // Labels
     JLabel username_label, name_label, age_label, pronouns_label, country_label, province_label, city_label,
             gender_label, sexuality_label, interest_label, pass_label, title;
+//            username_value, name_value, age_value, pronouns_value, country_value, province_value, city_value,
+//            gender_value, sexuality_value, interest_value, pass_value;
 
     // Buttons
     JButton recommend_button, search_button, message_button, logout_button;
+
+//    public void retrieveInfo(ArrayList<String> info) {
+//        username_value = new JLabel(info.get(0));
+//    }
 
     /** Constructor function that builds the ViewProfile page.
      * */
@@ -43,7 +50,7 @@ public class ViewProfilePage extends JFrame implements ActionListener {
 
 
         username_label = new JLabel();
-        username_label.setText("Username: " + info.get(0));
+        username_label.setText("Username:" + "");
         username_label.setBounds(200,125,200,40);
         username_label.setFocusable(false);
 

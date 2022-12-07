@@ -59,6 +59,5 @@ public class LoginErrorPage extends JFrame implements ActionListener {
             frame.dispose();
         }
     }
-
 }
 

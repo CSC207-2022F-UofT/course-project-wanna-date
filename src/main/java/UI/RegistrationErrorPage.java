@@ -73,4 +73,5 @@ public class RegistrationErrorPage extends JFrame implements ActionListener {
             frame.dispose();
         }
     }
+
 }

@@ -1,6 +1,7 @@
 package useCase;
 
 import entities.UserAccount;
+import interfaceAdapters.ViewProfilePresenter;
 
 import java.util.ArrayList;
 

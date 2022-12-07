@@ -291,5 +291,6 @@ public class RegistrationPage extends JFrame implements ActionListener{
             frame.dispose();
         }
     }
+
 }
 
