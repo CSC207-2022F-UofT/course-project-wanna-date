@@ -9,11 +9,11 @@ public class SexFilterFemaleType implements FilterType {
     @Override
     public UserAccount[] filter() {
         DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
-        String[] username = databaseManager.list_username();
+        String[] username = databaseManager.listUsername();
         ArrayList<UserAccount> match= new ArrayList<>();
         for (String user : username) {
-            UserAccount account = databaseManager.retrieve_user_account(user);
-            if (Objects.equals(account.get_gender(), "F")) {
+            UserAccount account = databaseManager.retrieveUserAccount(user);
+            if (Objects.equals(account.getGender(), "F")) {
                 match.add(account);
             }
         }
