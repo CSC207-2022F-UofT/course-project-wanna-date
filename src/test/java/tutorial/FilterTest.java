@@ -1,6 +1,5 @@
 package tutorial;
 
-import entities.UserAccount;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import useCase.*;

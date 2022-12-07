@@ -19,7 +19,6 @@ public class Search implements SearchInputBoundary {
     /**
      * Return a list of profiles whose username contains the given key word.
      * @param name Input from user to search.
-
      */
 
     @Override
@@ -37,7 +36,6 @@ public class Search implements SearchInputBoundary {
         UserAccount[] results = match.toArray(new UserAccount[size]);
         // show result
         this.presenter.showResult(results);
-
         return results;
 
     }
