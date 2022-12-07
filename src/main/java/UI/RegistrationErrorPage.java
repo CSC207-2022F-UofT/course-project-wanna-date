@@ -32,13 +32,13 @@ public class RegistrationErrorPage extends JFrame implements ActionListener {
         error_label.setFocusable(false);
 
         username_rule = new JLabel();
-        username_rule.setText("1. Enter a non-empty username");
+        username_rule.setText("1. Do not leave any empty field!");
         username_rule.setHorizontalAlignment(JLabel.CENTER);
         username_rule.setBounds(0,85,400,15);
         username_rule.setFocusable(false);
 
         password_rule = new JLabel();
-        password_rule.setText("2. Enter at least 8 characters password, no white space");
+        password_rule.setText("2. Username might have existed!");
         password_rule.setHorizontalAlignment(JLabel.CENTER);
         password_rule.setBounds(0,120,400,15);
         password_rule.setFocusable(false);
