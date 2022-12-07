@@ -1,5 +1,6 @@
 package useCase;
 import entities.UserAccount;
+import useCase.RetrieveLike;
 
 public class ReceiveLike implements ReceiveLikeInputBoundary{
     /** Use case for like action. Add user2 to user1 liked_users entities and add user1 to user2 liked_by_users
