@@ -59,11 +59,11 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
         generateBtn.addActionListener(this);
 
         // Update settings for recommendation buttons
-        recBtn1.setBounds(50,0,350,30);
-        recBtn2.setBounds(100,0,350,30);
-        recBtn3.setBounds(150,0,350,30);
-        recBtn4.setBounds(200,0,350,30);
-        recBtn5.setBounds(250,0,350,30);
+        recBtn1.setBounds(0,50,350,30);
+        recBtn2.setBounds(0,100,350,30);
+        recBtn3.setBounds(0,150,350,30);
+        recBtn4.setBounds(0,200,350,30);
+        recBtn5.setBounds(0,250,350,30);
 
         // Pack the buttons into a list
         ArrayList<JButton> recBtnList = new ArrayList<>();
@@ -74,9 +74,10 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
         recBtnList.add(recBtn5);
         this.recBtnList = recBtnList;
 
-        // Hide and disable buttons
+        // Add buttons to frame, and hide and disable buttons
         for (JButton recBtn : recBtnList) {
-            hideDisable(recBtn, false);
+            hideDisable(recBtn, false); // TODO check that there are 5 buttons going
+            recommendFrame.add(recBtn);
         }
 
     }
@@ -157,7 +158,7 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
 
         // Unpack profiles to show and update the controller
         List<RecOutProfile> profilesToShow = suggestedProfiles.getRecProfileList();
-        recController.setRecProfiles(suggestedProfiles);
+        recController.setRecProfiles(suggestedProfiles); // todo justify why the flow is OK here to go back and forth
 
         // Go through each profile using an index
         for (int i = 0; i <= profilesToShow.size() - 1; i++) {

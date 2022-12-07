@@ -1,14 +1,11 @@
 package useCase;
 
-import UI.RecBtnManager;
-import frameworksDrivers.RecDataAccessor;
-import interfaceAdapters.RecController;
-import interfaceAdapters.RecPresenter;
 import interfaceAdapters.RecShowRecBoundary;
+import interface_adapters.FakeRecUI;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 
-class recommendationTest {
+class RecommendationTest {
 
     // TODO: figure out a way to do testing by means of the DatabaseManager.
     //  After consulting in office hours, I have figured out a way to test the Recommendation use case despite the
@@ -32,7 +29,9 @@ class recommendationTest {
 //        RecInputBoundary recUseCase = new Recommendation(recPresenter, recDataAccess);
 //
 //        when(recUseCase.MakeRecommendations()).thenReturn(true); // TODO update syntax
-//      // block of coverage
+        // TODO next steps: delete the files which cause errors + update DataExport file path so that
+        //  I can run tests of my code for the video
+      // block of coverage
         // verify?
 
     }
