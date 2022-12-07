@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /** A UI class for ViewProfile feature.
  * */
-public class ViewProfilePage extends JFrame implements ActionListener {
+public class ViewProfilePage extends JFrame implements ActionListener, ViewProfileInterface {
 
     // === Class Variables ===
 
@@ -20,23 +20,48 @@ public class ViewProfilePage extends JFrame implements ActionListener {
     JFrame frame;
 
     // Labels
-    JLabel username_label, name_label, age_label, pronouns_label, country_label, province_label, city_label,
+    JLabel usernameLabel, nameLabel, age_label, pronouns_label, country_label, province_label, city_label,
             gender_label, sexuality_label, interest_label, pass_label, title;
-//            username_value, name_value, age_value, pronouns_value, country_value, province_value, city_value,
-//            gender_value, sexuality_value, interest_value, pass_value;
 
     // Buttons
-    JButton recommend_button, search_button, message_button, logout_button;
+    JButton recommend_button, search_button, message_button, historyButton, logout_button;
 
-//    public void retrieveInfo(ArrayList<String> info) {
-//        username_value = new JLabel(info.get(0));
-//    }
+    // String
+    String username,
+            usernameValue, nameValue, ageValue, pronounsValue, countryValue, provinceValue, cityValue,
+            genderValue, sexualityValue, interestValue, passValue;
 
-    /** Constructor function that builds the ViewProfile page.
+    /** Constructor function that sets username instance variable
      * */
     public ViewProfilePage(String username) {
+        this.username = username;
+    }
+
+    /** Function that implements retrieveInfo function from ViewProfileInterface interface. This function sets the 
+     * instance variables declared in order for them to be used in buildPage function.
+     * 
+     * @param info  represents an ArrayList of String of user's variables to display
+     * */
+    @Override
+    public void retrieveInfo(ArrayList<String> info) {
+        usernameValue = info.get(0);
+        nameValue = info.get(1);
+        ageValue = info.get(2);
+        pronounsValue = info.get(3);
+        countryValue = info.get(4);
+        provinceValue = info.get(5);
+        cityValue = info.get(6);
+        genderValue = info.get(7);
+        sexualityValue = info.get(8);
+        interestValue = info.get(9);
+        passValue = info.get(10);
+    }
+
+    /** Function that builds the ViewProfile page.
+     * */
+    public void buildPage() {
         ViewProfileController viewProfileController = new ViewProfileController();
-        ArrayList<String> info = viewProfileController.callSearchInfo(username);
+        viewProfileController.callSearchInfo(this.username, this);
 
         frame = new JFrame();
 
@@ -49,96 +74,101 @@ public class ViewProfilePage extends JFrame implements ActionListener {
         title.setFocusable(false);
 
 
-        username_label = new JLabel();
-        username_label.setText("Username:" + "");
-        username_label.setBounds(200,125,200,40);
-        username_label.setFocusable(false);
+        usernameLabel = new JLabel();
+        usernameLabel.setText("Username:" + usernameValue);
+        usernameLabel.setBounds(200,125,200,40);
+        usernameLabel.setFocusable(false);
 
 
-        name_label = new JLabel();
-        name_label.setText("Full name: " + info.get(1));
-        name_label.setBounds(200,175,200,40);
-        name_label.setFocusable(false);
+        nameLabel = new JLabel();
+        nameLabel.setText("Full name: " + nameValue);
+        nameLabel.setBounds(200,175,200,40);
+        nameLabel.setFocusable(false);
 
 
         age_label = new JLabel();
-        age_label.setText("Age: " + info.get(2));
+        age_label.setText("Age: " + ageValue);
         age_label.setBounds(200,225,200,40);
         age_label.setFocusable(false);
 
 
         pronouns_label = new JLabel();
-        pronouns_label.setText("Pronouns: " + info.get(3));
+        pronouns_label.setText("Pronouns: " + pronounsValue);
         pronouns_label.setBounds(200,275,200,40);
         pronouns_label.setFocusable(false);
 
         country_label = new JLabel();
-        country_label.setText("Country: " + info.get(4));
+        country_label.setText("Country: " + countryValue);
         country_label.setBounds(200,325,200,40);
         country_label.setFocusable(false);
 
         province_label = new JLabel();
-        province_label.setText("Province: " + info.get(5));
+        province_label.setText("Province: " + provinceValue);
         province_label.setBounds(200,375,200,40);
         province_label.setFocusable(false);
 
 
         city_label = new JLabel();
-        city_label.setText("City: " + info.get(6));
+        city_label.setText("City: " + cityValue);
         city_label.setBounds(200,425,200,40);
         city_label.setFocusable(false);
 
 
         gender_label = new JLabel();
-        gender_label.setText("Gender: " + info.get(7));
+        gender_label.setText("Gender: " + genderValue);
         gender_label.setBounds(200,475,200,40);
         gender_label.setFocusable(false);
 
 
         sexuality_label = new JLabel();
-        sexuality_label.setText("Sexuality: " + info.get(8));
+        sexuality_label.setText("Sexuality: " + sexualityValue);
         sexuality_label.setBounds(200,525,200,40);
         sexuality_label.setFocusable(false);
 
 
         interest_label = new JLabel();
-        interest_label.setText("Interest: " + info.get(9));
+        interest_label.setText("Interest: " + interestValue);
         interest_label.setBounds(200,575,200,40);
         interest_label.setFocusable(false);
 
 
         pass_label = new JLabel();
-        pass_label.setText("Password: " + info.get(10));
+        pass_label.setText("Password: " + passValue);
         pass_label.setBounds(200,625,200,40);
         pass_label.setFocusable(false);
 
 
         // Set buttons for different functionality
         recommend_button = new JButton("Recommendation");
-        recommend_button.setBounds(200,700,150,40);
+        recommend_button.setBounds(125,700,150,40);
         recommend_button.setFocusable(false);
         recommend_button.addActionListener(this);
 
         search_button = new JButton("Search Users");
-        search_button.setBounds(350,700,150,40);
+        search_button.setBounds(275,700,150,40);
         search_button.setFocusable(false);
         search_button.addActionListener(this);
 
         message_button = new JButton("Message");
-        message_button.setBounds(500,700,150,40);
+        message_button.setBounds(425,700,150,40);
         message_button.setFocusable(false);
         message_button.addActionListener(this);
 
+        historyButton = new JButton("History");
+        historyButton.setBounds(575,700,150,40);
+        historyButton.setFocusable(false);
+        historyButton.addActionListener(this);
+
         logout_button = new JButton("Log out");
-        logout_button.setBounds(650,700,150,40);
+        logout_button.setBounds(725,700,150,40);
         logout_button.setFocusable(false);
         logout_button.addActionListener(this);
 
         // Add elements to the frame
         frame.add(title);
 
-        frame.add(username_label);
-        frame.add(name_label);
+        frame.add(usernameLabel);
+        frame.add(nameLabel);
         frame.add(age_label);
         frame.add(pronouns_label);
         frame.add(country_label);
@@ -152,6 +182,7 @@ public class ViewProfilePage extends JFrame implements ActionListener {
         frame.add(recommend_button);
         frame.add(search_button);
         frame.add(message_button);
+        frame.add(historyButton);
         frame.add(logout_button);
 
         // Set layout for the frame
@@ -172,8 +203,11 @@ public class ViewProfilePage extends JFrame implements ActionListener {
         if (ae.getSource() == recommend_button) {
 
         } else if (ae.getSource() == search_button) {
-
+//            new SearchBox("Initiate SearchBox");
+//            new FilterMenu("Initiate FilterMenu");
         } else if (ae.getSource() == message_button) {
+
+        } else if (ae.getSource() == historyButton) {
 
         } else if (ae.getSource() == logout_button) {
             // Create LogoutController

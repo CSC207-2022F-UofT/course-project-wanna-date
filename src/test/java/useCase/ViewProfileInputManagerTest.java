@@ -1,8 +1,10 @@
 package useCase;
 
+import UI.ViewProfilePage;
 import entities.UserAccount;
 import frameworksDrivers.DataAccess;
 
+import interfaceAdapters.ViewProfilePresenter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -27,39 +29,14 @@ public class ViewProfileInputManagerTest {
         DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
         System.out.println(databaseManager.isUsernameExist("lov123"));
 
+        ViewProfilePage viewProfilePage = new ViewProfilePage("lov123");
+        ViewProfileOutputBoundary viewProfileOutputBoundary = new ViewProfilePresenter(viewProfilePage);
+
         ViewProfileInputManager viewProfileInputManager = new ViewProfileInputManager();
-        ArrayList<String> info = viewProfileInputManager.searchInfo("lov123");
+        ArrayList<String> info = viewProfileInputManager.searchInfo("lov123", viewProfileOutputBoundary);
 
         Assertions.assertEquals(11, info.size());
     }
-
-//    /** Test cases searchInfo whether it returns String type of information contained in ArrayList.
-//     * It is important that all information in ArrayList are String type because this will affect the
-//     * code in the UI for ViewProfile.
-//     * */
-//    @Test
-//    public void searchInfoClassType() {
-//        // Create Database from database.csv
-//        DataAccess dataAccess = new DataAccess();
-//        dataAccess.readCSV();
-//
-//        // Show that username "lov123" exists in Database
-//        DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
-//        System.out.println(databaseManager.isUsernameExist("lov123"));
-//
-//        ViewProfileInputManager viewProfileInputManager = new ViewProfileInputManager();
-//        ArrayList<String> info = viewProfileInputManager.searchInfo("lov123");
-//
-//        boolean allString = true;
-//
-//        for (String variable: info) {
-//            if (!(variable instanceof String)) {
-//                allString = false;
-//            }
-//        }
-//
-//        Assertions.assertTrue(allString);
-//    }
 
     /** Test cases searchInfo whether it returns the correct information of the newly added user.
      * */
@@ -86,8 +63,11 @@ public class ViewProfileInputManagerTest {
         DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
         databaseManager.saveNewUser("lov456", newUser);
 
+        ViewProfilePage viewProfilePage = new ViewProfilePage("lov456");
+        ViewProfileOutputBoundary viewProfileOutputBoundary = new ViewProfilePresenter(viewProfilePage);
+
         ViewProfileInputManager viewProfileInputManager = new ViewProfileInputManager();
-        ArrayList<String> info = viewProfileInputManager.searchInfo("lov456");
+        ArrayList<String> info = viewProfileInputManager.searchInfo("lov456", viewProfileOutputBoundary);
 
         Assertions.assertEquals("lov456", info.get(0));
         Assertions.assertEquals("Lovina", info.get(1));

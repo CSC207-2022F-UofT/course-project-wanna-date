@@ -1,7 +1,6 @@
 package useCase;
 
 import entities.UserAccount;
-import interfaceAdapters.ViewProfilePresenter;
 
 import java.util.ArrayList;
 
@@ -11,13 +10,15 @@ public class ViewProfileInputManager implements ViewProfileInputBoundary {
 
     public ViewProfileInputManager() {}
 
-    /** Function that returns an ArrayList<String> consisting of variables of the user corresponding
-     * to the username in the parameter.
+    /** Function that searches the user's variables from database and passed down this information to the Presenter via
+     * the ViewProfileOutputBoundary interface.
+     * This function returns an ArrayList of the user's variables for the purpose of testing this class.
      *
-     * @param username  represents the username of the user.
+     * @param username                  represents the username of the user.
+     * @param viewProfileOutputBoundary represents the Presenter class that will update the ViewProfilePage UI.
      * */
     @Override
-    public ArrayList<String> searchInfo(String username) {
+    public ArrayList<String> searchInfo(String username, ViewProfileOutputBoundary viewProfileOutputBoundary) {
         DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
         UserAccount account = databaseManager.retrieveUserAccount(username);
 
@@ -35,10 +36,10 @@ public class ViewProfileInputManager implements ViewProfileInputBoundary {
         info.add(account.getInterest());
         info.add(account.getPassword());
 
-        ViewProfileOutputManager viewProfileOutputManager = new ViewProfileOutputManager();
-        return viewProfileOutputManager.connector(info);
-    }
+        viewProfileOutputBoundary.getInfo(info);
 
+        return info;
+    }
 
     @Override
     public UserAccount searchUserAccount(String username) {

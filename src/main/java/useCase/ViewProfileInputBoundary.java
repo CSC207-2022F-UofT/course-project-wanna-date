@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public interface ViewProfileInputBoundary {
 
-    ArrayList<String> searchInfo(String username);
+    ArrayList<String> searchInfo(String username, ViewProfileOutputBoundary viewProfileOutputBoundary);
 
     UserAccount searchUserAccount(String username);
 

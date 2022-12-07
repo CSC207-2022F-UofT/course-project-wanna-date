@@ -1,6 +1,5 @@
 package interfaceAdapters;
 
-import UI.ViewProfilePage;
 import useCase.ViewProfileOutputBoundary;
 
 import java.util.ArrayList;
@@ -10,14 +9,20 @@ import java.util.ArrayList;
  * */
 public class ViewProfilePresenter implements ViewProfileOutputBoundary {
 
-    public ViewProfilePresenter() {}
+    // === Class Variables ===
 
-    /** Function that returns the user's information in the form of an ArrayList<String>
+    // Represents the interface for the UI ViewProfilePage class
+    ViewProfileInterface viewProfileInterface;
+
+    public ViewProfilePresenter(ViewProfileInterface viewProfileInterface) {
+        this.viewProfileInterface = viewProfileInterface;
+    }
+
+    /** Function that returns the user's information in the form of an ArrayList<String> to the ViewProfilePage class
+     * via the ViewProfileInterface interface.
      * */
     @Override
-    public ArrayList<String> getInfo(ArrayList<String> info) {
-//        ViewProfileInterface viewProfileInterface = new ViewProfilePage(info.get(0));
-
-        return info;
+    public void getInfo(ArrayList<String> info) {
+        viewProfileInterface.retrieveInfo(info);
     }
 }
