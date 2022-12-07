@@ -14,7 +14,6 @@ public class FilterUseCase implements FilterInputBoundary{
 
     /**
      * apply the filter base on which type of filter it is.
-
      * @param type the filter type that the user clicked
      */
     @Override
