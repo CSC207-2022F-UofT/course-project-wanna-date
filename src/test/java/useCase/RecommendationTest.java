@@ -1,6 +1,7 @@
 package useCase;
 
 import interfaceAdapters.RecShowRecBoundary;
+import interface_adapters.FakeRecPresenter;
 import interface_adapters.FakeRecUI;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
@@ -23,12 +24,12 @@ class RecommendationTest {
         // TODO: simulate the controller being run with typical recommendations for a profile; assume that
         //  there are at least 7 users total
         //  FakeRecUI and FakeRecPresenter should implement showRecBoundary but should also do nothing
-//        RecShowRecBoundary recBtnManager = new FakeRecUI();
-//        RecOutputBoundary recPresenter = new FakeRecPresenter(recBtnManager);
-//        RecDataAccessInterface recDataAccess = new RecDataAccessor();
-//        RecInputBoundary recUseCase = new Recommendation(recPresenter, recDataAccess);
-//
-//        when(recUseCase.MakeRecommendations()).thenReturn(true); // TODO update syntax
+        RecShowRecBoundary recBtnManager = new FakeRecUI();
+        RecOutputBoundary recPresenter = new FakeRecPresenter(recBtnManager);
+        RecDataAccessInterface recDataAccess = new RecDataAccessor();
+        RecInputBoundary recUseCase = new Recommendation(recPresenter, recDataAccess);
+
+        when(recUseCase.MakeRecommendations()).thenReturn(true); // TODO update syntax
         // TODO next steps: delete the files which cause errors + update DataExport file path so that
         //  I can run tests of my code for the video
       // block of coverage

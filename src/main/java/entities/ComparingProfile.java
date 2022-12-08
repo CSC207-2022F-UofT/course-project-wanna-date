@@ -1,11 +1,11 @@
 package entities;
 
 public class ComparingProfile implements Comparable<ComparingProfile> {
-    public String name;
-    public String interests;
-    public String location;
-    public String sexuality;
-    public double compatibility;
+    private final String name;
+    private String interests;
+    private String location;
+    private String sexuality;
+    private double compatibility;
 
     /**
      * Construct a ComparingProfile, giving it the given
@@ -44,12 +44,70 @@ public class ComparingProfile implements Comparable<ComparingProfile> {
     }
 
     /**
+     * Get name of user.
+     *
+     * @return      User's name
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Get interests of user.
+     * Note this is usually used for documentation/testing and also leaves
+     * the program open for extension.
+     *
+     * @return      User's interest
+     */
+    public String getInterests() {
+        return this.interests;
+    }
+
+    /**
+     * Get location of user.
+     * Note this is usually used for documentation/testing and also leaves
+     * the program open for extension.
+     *
+     * @return      User's location
+     */
+    public String getLocation() {
+        return location;
+    }
+
+    /**
      * Get compatibility score.
      *
      * @return      Compared user's compatibility to current user
      */
     public double getCompatibility() {
-        return compatibility;
+        return this.compatibility;
+    }
+
+    /**
+     * Update interests of user with a valid interest.
+     * Note this is usually used for documentation/testing and also leaves
+     * the program open for extension.
+     */
+    public void setInterests(String interests) {
+        this.interests = interests;
+    }
+
+    /**
+     * Update location of user.
+     * Note this is usually used for documentation/testing and also leaves
+     * the program open for extension.
+     */
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    /**
+     * Update sexuality of user with a valid sexuality value.
+     * Note this is usually used for documentation/testing and also leaves
+     * the program open for extension.
+     */
+    public void setSexuality(String sexuality) {
+        this.sexuality = sexuality;
     }
 
     /**

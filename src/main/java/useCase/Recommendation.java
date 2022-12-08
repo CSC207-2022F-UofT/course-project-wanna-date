@@ -68,7 +68,7 @@ public class Recommendation implements RecInputBoundary {
             // For each user in finalUsers: if the usernames match, then we found the user, and add the
             // UserAccount to the sortedFinalUsers
             for (UserAccount maybeUser : finalUsers) {
-                if (Objects.equals(compProfile.name, maybeUser.getUsername())) {
+                if (Objects.equals(compProfile.getName(), maybeUser.getUsername())) {
                     sortedFinalUsers.add(maybeUser.getUsername());
                 }
             }
@@ -339,7 +339,7 @@ public class Recommendation implements RecInputBoundary {
         for (ComparingProfile sortedProfile : newCompList) {
 
             // Create an output profile for the profile and add it to the ArrayList
-            RecOutProfile outProfile = new RecOutProfile(sortedProfile.name);
+            RecOutProfile outProfile = new RecOutProfile(sortedProfile.getName());
             recommendationList.add(outProfile);
         }
 
