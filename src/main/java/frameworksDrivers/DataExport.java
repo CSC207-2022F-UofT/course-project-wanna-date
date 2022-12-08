@@ -13,8 +13,8 @@ public class DataExport {
         DataExportInterface dataExportInterface = DatabaseManager.getDatabaseManager();
         Object[][] data_to_csv = dataExportInterface.writeDatabase();
 
-        File csvFile = new File("/Users/adelinemonica.l/Documents/Uni stuff" +
-                "/3rd Year/CSC207/course-project-wanna-date/src/main/java/frameworksDrivers/database.csv");
+        File csvFile = new File("/C:/csc207/programming exercises/" +
+                "course-project-wanna-date/src/main/java/frameworksDrivers/database.csv");
         FileWriter fileWriter = new FileWriter(csvFile);
 
         for (Object[] data: data_to_csv) {

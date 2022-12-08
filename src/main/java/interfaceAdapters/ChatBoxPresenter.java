@@ -1,6 +1,5 @@
 package interfaceAdapters;
 
-import entities.UserAccount;
 import useCase.*;
 
 public class ChatBoxPresenter implements ChatBoxOB {

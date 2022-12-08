@@ -5,9 +5,6 @@ import entities.UserAccount;
 import interfaceAdapters.ChatBoxPresenter;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import useCase.*;
-
-import java.util.ArrayList;
 
 public class OpenChatBoxTest {
     UserAccount sender = new UserAccount("AL", "AML", 20, "her", "CAN",
