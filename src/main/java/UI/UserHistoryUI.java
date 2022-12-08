@@ -93,6 +93,8 @@ public class UserHistoryUI implements ActionListener {
         // User clicks Back button
         else if(e.getSource() == backButton){
             // Return to main app, haven't added yet.
+            ViewProfilePage viewProfilePage = new ViewProfilePage(user1);
+            viewProfilePage.buildPage();
             frame.dispose();
         }
     }
