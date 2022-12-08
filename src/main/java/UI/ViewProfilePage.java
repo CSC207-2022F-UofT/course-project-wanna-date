@@ -154,6 +154,7 @@ public class ViewProfilePage extends JFrame implements ActionListener {
         } else if (ae.getSource() == search_button) {
 
         } else if (ae.getSource() == message_button) {
+
             String name = name_label.getText().substring(11);
             String username = username_label.getText().substring(10);
             try {
@@ -161,6 +162,7 @@ public class ViewProfilePage extends JFrame implements ActionListener {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+
         } else if (ae.getSource() == logout_button) {
             // Create LogoutController
             LogoutController logoutController = new LogoutController();

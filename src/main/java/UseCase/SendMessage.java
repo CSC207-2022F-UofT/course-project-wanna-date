@@ -3,12 +3,14 @@ package useCase;
 import entities.Message;
 import entities.MessageFactory;
 import entities.MessageFormat;
+import entities.UserAccount;
 import frameworksDrivers.MessageFileUser;
 import interfaceAdapters.MessageDSGateway;
 import interfaceAdapters.SendMessagePresenter;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -43,5 +45,20 @@ public class SendMessage implements SendMessageIB {
 
         // past five messages
         return receiveMessage.saveMessage(messageResponse);
+    }
+
+    @Override
+    public String[] getLikedUsers(String username){
+        DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
+        UserAccount account = databaseManager.retrieveUserAccount(username);
+
+        ArrayList<String> receivers = new ArrayList<>();
+        for (UserAccount user : account.getLikedUsers()){
+            receivers.add(user.getFullName());
+        }
+        String[] likedUsers = new String[receivers.size()];
+        likedUsers = receivers.toArray(likedUsers);
+
+        return likedUsers;
     }
 }
