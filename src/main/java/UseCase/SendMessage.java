@@ -1,17 +1,10 @@
 package useCase;
 
-import entities.Message;
-import entities.MessageFactory;
-import entities.MessageFormat;
-import entities.UserAccount;
-import frameworksDrivers.MessageFileUser;
+import entities.*;
 import interfaceAdapters.MessageDSGateway;
-import interfaceAdapters.SendMessagePresenter;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * A class that "sends the message" to the other user by adding it to the

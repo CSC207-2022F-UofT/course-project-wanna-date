@@ -2,7 +2,6 @@ package frameworksDrivers;
 
 import interfaceAdapters.MessageDSGateway;
 import useCase.SendMessageDS;
-import useCase.SendMessageID;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -106,7 +105,7 @@ public class MessageFileUser implements MessageDSGateway{
         Map<LocalDateTime, SendMessageDS> lastFiveMessages = new HashMap<>();
 
         // get the oldest message in lastFiveMessages so far (first message)
-        List<LocalDateTime> keys = new ArrayList<LocalDateTime>(userMessages.keySet());
+        List<LocalDateTime> keys = new ArrayList<>(userMessages.keySet());
         LocalDateTime oldestMessage = keys.get(0);
 
         if (userMessages.size() <= 5){

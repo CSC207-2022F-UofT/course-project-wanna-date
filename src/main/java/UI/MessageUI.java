@@ -34,7 +34,6 @@ public class MessageUI implements ActionListener, ItemListener {
     public String textMessage = "";
 
     // past texts
-    public String[] messages;
     JLabel text1, text2, text3, text4, text5;
 
     JLabel[] textMessages = {text1, text2, text3, text4, text5};
@@ -113,7 +112,7 @@ public class MessageUI implements ActionListener, ItemListener {
 
         // if the state combobox is changed
         if (e.getSource() == mutuallyLiked) {
-            receiver = mutuallyLiked.getSelectedItem().toString();
+            receiver = Objects.requireNonNull(mutuallyLiked.getSelectedItem()).toString();
             for (String s : liked) {
                 if (receiver.equals(s)) {
                     areLiked = true;
@@ -143,7 +142,7 @@ public class MessageUI implements ActionListener, ItemListener {
         SendMessageID input = new SendMessageID(receiver, user, msg);
         ReceiveMessageOD pastMessages = sendMessageController.saveMessage(input);
         Map<LocalDateTime, SendMessageDS> texts = pastMessages.getSent();
-        Map<String, String> usersText = new HashMap<String, String>();
+        Map<String, String> usersText = new HashMap<>();
 
         for (SendMessageDS messageDS : texts.values()){
             usersText.put(messageDS.getMessage(), messageDS.getSender());

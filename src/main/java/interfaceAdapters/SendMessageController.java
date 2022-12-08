@@ -1,4 +1,4 @@
-package interfaceAdapters;
+package InterfaceAdapters;
 
 import useCase.SendMessageIB;
 import useCase.SendMessageID;
@@ -11,9 +11,5 @@ public class SendMessageController {
         this.messageInput = messageInput;
     }
 
-    public ReceiveMessageOD saveMessage(SendMessageID sendMessageID) {return messageInput.sendMessage(sendMessageID);}
-
-    public String[] getLikedUsers(String username) {
-        return messageInput.getLikedUsers(username);
-    }
+    ReceiveMessageOD saveMessage(SendMessageID sendMessageID) {return messageInput.sendMessage(sendMessageID);}
 }
