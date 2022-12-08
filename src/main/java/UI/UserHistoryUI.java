@@ -22,8 +22,12 @@ public class UserHistoryUI implements ActionListener {
     // Labels
     JLabel title = new JLabel("USER HISTORY");
 
+    // User's username
+    String user1;
 
-    public UserHistoryUI(){
+    public UserHistoryUI(String currUsername){
+
+        this.user1 = currUsername;
 
         // Add frames
         frame.add(likedButton);
@@ -37,6 +41,8 @@ public class UserHistoryUI implements ActionListener {
         frame.setSize(400, 550);
         frame.setLayout(null);
         frame.setVisible(true);
+        Color LIGHT_PINK = new Color(255, 175, 175, 150);
+        frame.getContentPane().setBackground(LIGHT_PINK);
 
         // Set the positions and sizes of the buttons
         likedButton.setBounds(25,80,350,120);
@@ -71,28 +77,27 @@ public class UserHistoryUI implements ActionListener {
     public void actionPerformed(ActionEvent e){
         // User clicks Liked button
         if(e.getSource() == likedButton){
-            new ViewLikedUsers();
+            new ViewLikedUsers(user1);
             frame.dispose();
         }
         // User clicks Blocked button
         else if(e.getSource() == blockedButton){
-            new ViewBlockedUsers();
+            new ViewBlockedUsers(user1);
             frame.dispose();
         }
         // User clicks Matched button
         else if(e.getSource() == matchedButton){
-            new ViewMatchedUsers();
+            new ViewMatchedUsers(user1);
             frame.dispose();
         }
         // User clicks Back button
         else if(e.getSource() == backButton){
-            // Return to main app
+            // Return to main app, haven't added yet.
             frame.dispose();
         }
     }
 
-
     public static void main(String[] args) {
-        new UserHistoryUI();
+
     }
 }

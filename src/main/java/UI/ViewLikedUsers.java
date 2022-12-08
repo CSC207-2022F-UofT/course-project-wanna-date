@@ -1,32 +1,19 @@
 package UI;
 
 import entities.UserAccount;
+import InterfaceAdapters.UserHistoryController;
 import useCase.GenerateUserHistory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * UI for the liked users page.
  */
 public class ViewLikedUsers extends JFrame implements ActionListener {
-
-    // Get current user // Test user for now
-    public UserAccount user1 = new UserAccount("johnd", "John Doe", 20, "her", "USA",
-            "ILL", "CHI", "M", "H","Watching", "123");
-    //UserAccount currentUser;
-
-    GenerateUserHistory generateHistory = new GenerateUserHistory();
-
-    // Get the total number of likes this user has
-    String totalLikes = Integer.toString(generateHistory.getTotalLiked(user1));
-    String likedAge = Integer.toString(generateHistory.getLikedAgeRange(user1));
-    String likedCity = generateHistory.getLikedCity(user1);
-    String likedCountry = generateHistory.getLikedCountry(user1);
-    String likedGender = generateHistory.getLikedGender(user1);
-    String likedInterest = generateHistory.getLikedInterest(user1);
 
     // New instance of JFrame
     JFrame frame = new JFrame();
@@ -35,6 +22,8 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
     JButton backButton = new JButton("Return ⏎");
     JButton blockButton = new JButton("Block ✖");
     JButton unlikeButton = new JButton("Unlike ☹");
+
+    JButton statsButton = new JButton("View Stats");
 
     // Labels
     JLabel likedTitle = new JLabel("LIKED USERS");
@@ -46,19 +35,42 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
     JLabel likedCountryTitle = new JLabel("Most Common Country: ");
     JLabel likedGenderTitle = new JLabel("Most common Gender of Liked Users: ");
     JLabel likedInterestTitle = new JLabel("Most common Interests: ");
-    JLabel totalLikesUsersNumber = new JLabel(totalLikes);
-    JLabel likedAgeNumber = new JLabel(likedAge);
-    JLabel likedCityString = new JLabel(likedCity);
-    JLabel likedCountryString = new JLabel(likedCountry);
-    JLabel likedGenderString = new JLabel(likedGender);
-    JLabel likedInterestString = new JLabel(likedInterest);
 
-    // List of users they have liked
-    String[] likedUsers = generateHistory.likedUsernames(user1);
-    JComboBox<String> likedBox = new JComboBox<>(likedUsers);
+    String user1;
+
+    int selectedUserIndex;
 
 
-    public ViewLikedUsers(){
+    public ViewLikedUsers(String currUsername){
+
+        UserHistoryController userHistoryController = new UserHistoryController();
+        ArrayList<String> stats = userHistoryController.callGetUserStats(currUsername);
+
+        this.user1 = currUsername;
+
+        GenerateUserHistory generateHistory = new GenerateUserHistory();
+
+        // Get the UserAccount entity info from the given username and store it
+        UserAccount user1Acc = generateHistory.getCurrUserAccount(user1);
+
+        // Get the total number of likes this user has
+        String likedAge = stats.get(0);
+        String likedCity = stats.get(1);
+        String likedCountry = stats.get(2);
+        String likedGender = stats.get(3);
+        String likedInterest = stats.get(4);
+        String totalLikes = stats.get(5);
+
+        JLabel totalLikesUsersNumber = new JLabel(totalLikes);
+        JLabel likedAgeNumber = new JLabel(likedAge);
+        JLabel likedCityString = new JLabel(likedCity);
+        JLabel likedCountryString = new JLabel(likedCountry);
+        JLabel likedGenderString = new JLabel(likedGender);
+        JLabel likedInterestString = new JLabel(likedInterest);
+
+        // List of users they have liked
+        String[] likedUsers = generateHistory.likedUsernames(user1Acc);
+        JComboBox<String> likedBox = new JComboBox<>(likedUsers);
 
         // Add frames
         frame.add(likedTitle);
@@ -78,12 +90,15 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
         frame.add(likedCountryString);
         frame.add(likedGenderString);
         frame.add(likedInterestString);
+        frame.add(statsButton);
 
         // Set size of window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 550);
         frame.setLayout(null);
         frame.setVisible(true);
+        Color LIGHT_PINK = new Color(255, 175, 175, 150);
+        frame.getContentPane().setBackground(LIGHT_PINK);
 
         // Set the position and size of the labels
         likedTitle.setBounds(30,15,500,50);
@@ -125,55 +140,101 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
         likedInterestString.setBounds(230, 410, 500, 50);
         likedInterestString.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 
+        likedAgeTitle.setVisible(false);
+        likedCityTitle.setVisible(false);
+        likedCountryTitle.setVisible(false);
+        likedGenderTitle.setVisible(false);
+        likedInterestTitle.setVisible(false);
+        likedAgeNumber.setVisible(false);
+        likedCityString.setVisible(false);
+        likedCountryString.setVisible(false);
+        likedGenderString.setVisible(false);
+        likedInterestString.setVisible(false);
+
         // Set the position and size of the buttons
         backButton.setBounds(15,475,370,35);
         backButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 20));
         backButton.setFocusable(false);
-        backButton.addActionListener(this);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // User clicks back button
+                new UserHistoryUI(user1);
+                frame.dispose();
+            }
+        });
 
         blockButton.setBounds(205,130,190,75);
         blockButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
         blockButton.setFocusable(false);
-        blockButton.addActionListener(this);
+        blockButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // User clicks Block Button
+                user1Acc.getBlockedUsers().add(user1Acc.getLikedUsers().get(selectedUserIndex));
+                user1Acc.getLikedUsers().remove(selectedUserIndex);
+                new ViewLikedUsers(user1);
+                frame.dispose();
+            }
+        });
 
         unlikeButton.setBounds(15,130,190,75);
         unlikeButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
         unlikeButton.setFocusable(false);
-        unlikeButton.addActionListener(this);
+        unlikeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // User clicks Unlike Button
+                user1Acc.getLikedUsers().remove(selectedUserIndex);
+                new ViewLikedUsers(user1);
+                frame.dispose();
+            }
+        });
+
+        statsButton.setBounds(15,250,380,35);
+        statsButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 20));
+        statsButton.setFocusable(false);
+        statsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // User clicks Unlike Button
+                statsButton.setVisible(false);
+                likedAgeTitle.setVisible(true);
+                likedCityTitle.setVisible(true);
+                likedCountryTitle.setVisible(true);
+                likedGenderTitle.setVisible(true);
+                likedInterestTitle.setVisible(true);
+                likedAgeNumber.setVisible(true);
+                likedCityString.setVisible(true);
+                likedCountryString.setVisible(true);
+                likedGenderString.setVisible(true);
+                likedInterestString.setVisible(true);
+            }
+        });
 
         // Set the position and size of box
         likedBox.setBounds(10, 80, 385, 30);
         likedBox.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
         likedBox.setVisible(true);
-        likedBox.addActionListener(this);
+        likedBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // User clicks Liked users drop down box
+                JComboBox cb = (JComboBox)e.getSource();
+                cb.getSelectedIndex();
+                selectedUserIndex = cb.getSelectedIndex();
+            }
+        });
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        // Get the user's selection from the dropdown box (combobox)
-        Object selection = likedBox.getSelectedItem();
-
-        // User clicks Back button
-        if(e.getSource() == backButton){
-            new UserHistoryUI();
-            frame.dispose();
-        }
-        // User clicks Unlike Button
-        else if(e.getSource() == unlikeButton){
-            new ViewLikedUsers();
-            frame.dispose();
-        }
-        // User clicks Block Button
-        else if(e.getSource() == blockButton){
-            new ViewLikedUsers();
-            frame.dispose();
-        }
     }
+
 
     public static void main(String[] args) {
-        new ViewLikedUsers();
+        new ViewLikedUsers("lov789");
     }
 }
-
