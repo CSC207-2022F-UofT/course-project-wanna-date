@@ -1,5 +1,6 @@
 package interfaceAdapters;
 
+import useCase.FilterType;
 import useCase.FilterUseCase;
 import useCase.FilterInputBoundary;
 
@@ -18,9 +19,8 @@ public class FilterController {
     }
 
 
-   // perform filter base on specific filter type with the help of input boundary.
+    // perform filter base on specific filter type with the help of input boundary.
     public void performFilter(){
         this.filter.apply(this.filterType);
     }
-
 }
