@@ -1,11 +1,34 @@
 package useCase;
 
+import entities.UserAccount;
 import interfaceAdapters.RecShowRecBoundary;
+import interface_adapters.FakeRecPresenter;
 import interface_adapters.FakeRecUI;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.Objects;
+
 import static org.mockito.Mockito.*;
 
+// To the developer:
+// When running these tests, you may get a message akin to:
+// This does not appear to be a bug at all despite the red text. Please refer to
+// https://youtrack.jetbrains.com/issue/IDEA-260211 for documentation on this oddity of Gradle.
+// The tests all pass, though!
+
 class RecommendationTest {
+
+    // Create generic classes
+    RecOutputBoundary recPresenter = new FakeRecPresenter();
+    DatabaseManager someDatabase = DatabaseManager.getDatabaseManager();
+    CurrUserManager someUserManager = CurrUserManager.getCurrUserManager();
+
+    // Create generic users
+    UserAccount user1 = new UserAccount("AL", "AML", 20, "her", "CAN",
+            "ON", "TOR", "F", "H","Watching", "12356435");
+    UserAccount user2 = new UserAccount("JSmith", "Jessica Smith", 20, "her",
+            "CAN", "ON", "TOR", "F", "H","Music", "124564565");
 
     // TODO: figure out a way to do testing by means of the DatabaseManager.
     //  After consulting in office hours, I have figured out a way to test the Recommendation use case despite the
@@ -20,15 +43,37 @@ class RecommendationTest {
     @Test
     public void RecommendationTest7ValidUsers() {
 
+        // TODO: redo this test
+        // Create generic classes with mocking
+        RecOutputBoundary recPresenter = new FakeRecPresenter();
+        DatabaseManager someDatabase = mock(DatabaseManager.class);
+        CurrUserManager someUserManager = mock(CurrUserManager.class);
+
+        // what UC calls
+        // DatabaseManager.getDatabaseManager()
+        // this.databaseRef.getDatabase().getData()
+        // CurrUserManager.getCurrUserManager()
+        // singletonUserManager.getCurrUser();
+
+        // Create generic users
+        UserAccount user1 = new UserAccount("AL", "AML", 20, "her", "CAN",
+                "ON", "TOR", "F", "H","Watching", "12356435");
+        UserAccount user2 = new UserAccount("JSmith", "Jessica Smith", 20, "her",
+                "CAN", "ON", "TOR", "F", "H","Music", "124564565");
+
         // TODO: simulate the controller being run with typical recommendations for a profile; assume that
         //  there are at least 7 users total
         //  FakeRecUI and FakeRecPresenter should implement showRecBoundary but should also do nothing
-//        RecShowRecBoundary recBtnManager = new FakeRecUI();
-//        RecOutputBoundary recPresenter = new FakeRecPresenter(recBtnManager);
-//        RecDataAccessInterface recDataAccess = new RecDataAccessor();
-//        RecInputBoundary recUseCase = new Recommendation(recPresenter, recDataAccess);
-//
-//        when(recUseCase.MakeRecommendations()).thenReturn(true); // TODO update syntax
+        // Create a use case object
+        RecInputBoundary recUseCase = new Recommendation(recPresenter);
+        HashMap<String, UserAccount> testData = new HashMap<>();
+        testData.put("AL", user1);
+        testData.put("JSmith", user2);
+
+        when(someUserManager.getCurrUser()).thenReturn(user1);
+        //when(someDatabase.getDatabase()).thenReturn(null);
+        RecommendedProfiles results = recUseCase.makeRecommendations();
+        System.out.println(results);
         // TODO next steps: delete the files which cause errors + update DataExport file path so that
         //  I can run tests of my code for the video
       // block of coverage

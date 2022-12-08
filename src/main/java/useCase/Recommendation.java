@@ -9,39 +9,80 @@ import java.util.*;
 
 public class Recommendation implements RecInputBoundary {
 
-    private RecOutputBoundary outputManager;
-    private RecDataAccessInterface dataManager;
-    private HashMap<String, ComparingProfile> nameToComp;
-    private DatabaseManager databaseRef;
-
+    private final RecOutputBoundary outputManager;
+    private final HashMap<String, ComparingProfile> nameToComp;
+    private final CompProfileFactory compProfileFactory;
+    private final RecOutputBuilder recOutputBuilder;
+    private final RecDataGetter dataGetter;
 
     /**
      * Construct a Recommendation use case object with
-     * the given output boundary and data access interface objects.
+     * the given output boundary.
+     * This is in the case where the developer does not
+     * want to pass their own data getter in.
      *
      * @param outputManager     An output boundary, usually a presenter
-     * @param dataManager       A data access interface object
      */
-    public Recommendation(RecOutputBoundary outputManager, RecDataAccessInterface dataManager){
+    public Recommendation(RecOutputBoundary outputManager){
         this.outputManager = outputManager;
-        this.dataManager = dataManager;
         this.nameToComp = new HashMap<>();
-        this.databaseRef = DatabaseManager.getDatabaseManager();
+        this.compProfileFactory = new CompProfileFactory();
+        this.recOutputBuilder = new RecOutputBuilder1();
+        this.dataGetter = new RecDataGetFacade();
+    }
+
+    /**
+     * Construct a Recommendation use case object with
+     * the given output boundary.
+     * This is in the case where the developer does
+     * want to pass their own data getter in.
+     *
+     * @param outputManager     An output boundary, usually a presenter
+     * @param dataGetObject     An object with which you can get data (current user, database data)
+     */
+    public Recommendation(RecOutputBoundary outputManager, RecDataGetter dataGetObject){
+        this.outputManager = outputManager;
+        this.nameToComp = new HashMap<>();
+        this.compProfileFactory = new CompProfileFactory();
+        this.recOutputBuilder = new RecOutputBuilder1();
+        this.dataGetter = dataGetObject;
+    }
+
+    /**
+     * Construct a Recommendation use case object with
+     * the given output boundary.
+     * This is in the case where the developer does not
+     * want to pass their own data getter and output builder in
+     * (preserving open-closed principle).
+     *
+     * @param outputManager     An output boundary, usually a presenter
+     * @param dataGetObject     An object with which you can get data (current user, database data)
+     * @param newRecOutBuilder  An output builder object
+     */
+    public Recommendation(RecOutputBoundary outputManager, RecDataGetter dataGetObject,
+                          RecOutputBuilder newRecOutBuilder){
+        this.outputManager = outputManager;
+        this.nameToComp = new HashMap<>();
+        this.compProfileFactory = new CompProfileFactory();
+        this.recOutputBuilder = newRecOutBuilder;
+        this.dataGetter = dataGetObject;
     }
 
     /**
      * Make recommendations with information already stored
      * in the program, calling an OutputBoundary object
      * to do such processing.
+     *
+     * @return  RecommendedProfiles as a sort of output to the UI layer
      */
     public RecommendedProfiles makeRecommendations(){
 
         // Get the current user of the program
-        UserAccount currentUser = this.getCurrentUser();
+        UserAccount currentUser = this.dataGetter.getCurrentUser();
 
         // Get possible users
         ArrayList<UserAccount> filteredUsers =
-                this.getPossibleMatches(currentUser.getGender(), currentUser.getSexuality(), currentUser);
+                this.getPossibleMatches(currentUser);
 
         // Start by getting the final users
         ArrayList<UserAccount> finalUsers = this.chooseRandomUsers(filteredUsers);
@@ -58,24 +99,15 @@ public class Recommendation implements RecInputBoundary {
         // the compList and finalUsers lists simultaneously
         Collections.sort(compList);
 
-        // TODO put stuff into a separate Builder class that the RecUC does
-        // Create a sorted final users' list
-        ArrayList<String> sortedFinalUsers = new ArrayList<>();
-
-        // Go through each ComparingProfile
-        for (ComparingProfile compProfile : compList) {
-
-            // For each user in finalUsers: if the usernames match, then we found the user, and add the
-            // UserAccount to the sortedFinalUsers
-            for (UserAccount maybeUser : finalUsers) {
-                if (Objects.equals(compProfile.name, maybeUser.getUsername())) {
-                    sortedFinalUsers.add(maybeUser.getUsername());
-                }
-            }
-        }
+        // Get a list of sorted final users where the users are strings
+        //ArrayList<String> sortedFinalUsers = getSortedFinalUsers(finalUsers, compList);
 
         // Create recommended profiles in an object
-        RecommendedProfiles profilesToShow = createRecOutput(currentUser, compList, sortedFinalUsers);
+        //RecommendedProfiles profilesToShow = createRecOutput(currentUser, compList, sortedFinalUsers);
+
+        // Create recommended profiles in an object
+        RecommendedProfiles profilesToShow = this.recOutputBuilder.constructRecOutput(currentUser,
+                finalUsers, compList);
 
         // Send recommended profiles to the adapter layer through the output boundary
         this.outputManager.showRecommendations(profilesToShow);
@@ -84,6 +116,14 @@ public class Recommendation implements RecInputBoundary {
         return profilesToShow;
     }
 
+    /**
+     * Calculate the current user's compatibility score, given the chosen user for matchmaking.
+     *
+     * @param currentUser       The current user to which the score applies
+     * @param chosenUser        The user chosen for matchmaking with the current user
+     *
+     * @return                  The current user's compatibility to the chosen user
+     */
     private String calculateCompatibility(UserAccount currentUser, UserAccount chosenUser) {
 
         // Compute compatibility of this user and the new user
@@ -97,28 +137,17 @@ public class Recommendation implements RecInputBoundary {
         if (possibleProfile != null) {
             possibleProfile.setCompatibility(likeScore);
 
-        // Else, create a new ComparingProfile for the user and add it to the mapping
+            // Else, create a new ComparingProfile for the user and add it to the mapping
         } else {
             String userCountry = chosenUser.getCountry();
             String userSexuality = chosenUser.getSexuality();
-            ComparingProfile newProfile = new ComparingProfile(chosenUser.getUsername(),
+            ComparingProfile newProfile = this.compProfileFactory.makeCompProfile(chosenUser.getUsername(),
                     chosenUser.getInterest(), userCountry, userSexuality, likeScore);
             this.nameToComp.put(chosenUsername, newProfile);
         }
 
         // Return the chosen username
         return chosenUsername;
-    }
-
-    /**
-     * Get current user which is logged in.
-     * This presumes that there is already a current user to get.
-     */
-    private UserAccount getCurrentUser(){
-
-        // Get and return the current user, presuming login is already done
-        CurrUserManager singletonUserManager = CurrUserManager.getCurrUserManager();
-        return singletonUserManager.getCurrUser();
     }
 
     /**
@@ -151,7 +180,7 @@ public class Recommendation implements RecInputBoundary {
 
         // For user 1: if they are hetero, then who they want depends on user 1's gender too; else,
         // it does not, so merely consider sexuality
-        String u1Wants = "";
+        String u1Wants;
         if (Objects.equals(u1Sex, "H")) {
             u1Wants = desiredGender.get("H" + u1Gender);
         } else {
@@ -160,7 +189,7 @@ public class Recommendation implements RecInputBoundary {
 
         // For user 2: if they are hetero, then who they want depends on user 1's gender too; else,
         // it does not, so merely consider sexuality
-        String u2Wants = "";
+        String u2Wants;
         if (Objects.equals(u2Sex, "H")) {
             u2Wants = desiredGender.get("H" + u2Gender);
         } else {
@@ -176,13 +205,11 @@ public class Recommendation implements RecInputBoundary {
      * Given are the gender and sexuality of the current user.
      * Blocked people are not included.
      *
-     * @param userGender    User's gender
-     * @param userSex       User's sexuality
      * @param currentUser   Current user
      *
      * @return              A list of matches as ComparingProfiles
      */
-    private ArrayList<UserAccount> getPossibleMatches(String userGender, String userSex, UserAccount currentUser){
+    private ArrayList<UserAccount> getPossibleMatches(UserAccount currentUser){
 
         // Define a list of possible users
         ArrayList<UserAccount> potentialUsers = new ArrayList<>();
@@ -197,7 +224,7 @@ public class Recommendation implements RecInputBoundary {
         // into the use case as a valid user
 
         // To start, get the database and its data, presuming login is already done
-        HashMap<String, UserAccount> userDataMap = this.databaseRef.getDatabase().getData();
+        HashMap<String, UserAccount> userDataMap = this.dataGetter.getDatabaseData();
 
         // Iterate through each account
         for (UserAccount maybeValidUser : userDataMap.values()) {
@@ -219,37 +246,6 @@ public class Recommendation implements RecInputBoundary {
     }
 
     /**
-     * Return a list of UserAccounts without the users blocked by
-     * the current user, given a list of UserAccounts to filter through
-     * and a list of blocked users.
-     * As of now, this method can be deprecated, but it is kept in
-     * the code in case it is of use in the future.
-     *
-     * @param oldPossibleUsers      A list of UserAccounts to filter through
-     * @param blockedUsers          A list of blocked UserAccounts
-     */
-    private ArrayList<UserAccount> takeOutBlocked(ArrayList<UserAccount> oldPossibleUsers,
-                                                     ArrayList<UserAccount> blockedUsers) {
-        // Define an array of filtered users
-        ArrayList<UserAccount> filteredList = new ArrayList<>();
-
-        // Go through each user to check
-        for (UserAccount checkedUser : oldPossibleUsers) {
-
-            // If the blocked user list does not contain the checked user, then add the
-            // checked user to the filtered list
-            // Note that this might have a chance of failing if UserAccount objects
-            // have different memory addresses
-            if (!(blockedUsers.contains(checkedUser))) {
-                filteredList.add(checkedUser);
-            }
-        }
-
-        // Returned the filtered array
-        return filteredList;
-    }
-
-    /**
      * Randomly pick users from the inputted list and return the list with the choices.
      * Note that this does not yet handle a case where the inputted list is empty.
      * In this case, we pick at most 5 users randomly.
@@ -262,20 +258,19 @@ public class Recommendation implements RecInputBoundary {
         if (pickerList.size() <= 5) {
             return pickerList;
 
-        // Else, do random picking of 5 users
+            // Else, do random picking of 5 users
         } else {
 
             // Create a Random object
             Random randomizer = new Random();
 
-            // Create a randomized list and a shallow copy of the pickerList
+            // Create a randomized list and a shallow copy of the pickerList, noting that
+            // the casting is needed for the shallow copy to be manipulate-able
             ArrayList<UserAccount> randomList = new ArrayList<>();
             ArrayList<UserAccount> pickerCopy = (ArrayList<UserAccount>) pickerList.clone();
 
-            // Loop 5 times
+            // Loop to randomly pop from the copy and add the referred-to user to the final randomized list
             for (int i = 1; i <= 5; i++) {
-
-                // Randomly pop from the copy and add the referred-to user to the final randomized list
                 int currentSize = pickerCopy.size();
                 int randomInt = randomizer.nextInt(currentSize);
                 randomList.add(pickerCopy.get(randomInt));
@@ -318,32 +313,4 @@ public class Recommendation implements RecInputBoundary {
         return scoreSum / 3.0;
     }
 
-    /**
-     * Return a RecommendedProfiles object, given an ordered
-     * ArrayList of user profiles to go recommend in that order.
-     *
-     * @param currentUserObj    The UserAccount for the current user
-     * @param newCompList       List of ComparingProfiles to recommend
-     * @param parallelList      A UserAccount version of newCompList
-     *
-     * @return                  A RecommendedProfiles object as output data
-     */
-    private RecommendedProfiles createRecOutput(UserAccount currentUserObj,
-                                                ArrayList<ComparingProfile> newCompList,
-                                                ArrayList<String> parallelList) {
-
-        // Create an ArrayList for all the recommended users
-        ArrayList<RecOutProfile> recommendationList = new ArrayList<>();
-
-        // Iterate through each profile
-        for (ComparingProfile sortedProfile : newCompList) {
-
-            // Create an output profile for the profile and add it to the ArrayList
-            RecOutProfile outProfile = new RecOutProfile(sortedProfile.name);
-            recommendationList.add(outProfile);
-        }
-
-        // Create the RecommendedProfiles object and return it
-        return new RecommendedProfiles(currentUserObj, recommendationList, parallelList);
-    }
 }

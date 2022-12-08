@@ -7,7 +7,7 @@ public interface RecInputBoundary {
      * in the program, calling an OutputBoundary object
      * to do such processing.
      */
-    public default RecommendedProfiles makeRecommendations(){
+    default RecommendedProfiles makeRecommendations(){
         return null;
     };
 }
