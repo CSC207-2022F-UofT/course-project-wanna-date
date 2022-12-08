@@ -1,7 +1,7 @@
 package UI;
 
 import entities.UserAccount;
-import InterfaceAdapters.UserHistoryController;
+import interfaceAdapters.UserHistoryController;
 import useCase.GenerateUserHistory;
 
 import javax.swing.*;
