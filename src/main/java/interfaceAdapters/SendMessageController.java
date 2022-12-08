@@ -1,4 +1,4 @@
-package interfaceAdapters;
+package InterfaceAdapters;
 
 import useCase.SendMessageIB;
 import useCase.SendMessageID;
@@ -11,5 +11,5 @@ public class SendMessageController {
         this.messageInput = messageInput;
     }
 
-    public ReceiveMessageOD saveMessage(SendMessageID sendMessageID) {return messageInput.sendMessage(sendMessageID);}
+    ReceiveMessageOD saveMessage(SendMessageID sendMessageID) {return messageInput.sendMessage(sendMessageID);}
 }
