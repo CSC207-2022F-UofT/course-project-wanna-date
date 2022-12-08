@@ -147,6 +147,8 @@ public class ViewProfilePage extends JFrame implements ActionListener {
         if (ae.getSource() == recommend_button) {
 
         } else if (ae.getSource() == search_button) {
+            new SearchBox("Initiate SearchBox");
+            new FilterMenu("Initiate FilterMenu");
 
         } else if (ae.getSource() == message_button) {
 
