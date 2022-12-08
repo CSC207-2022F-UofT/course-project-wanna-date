@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class MessageUI implements ActionListener, ItemListener {
-
     JFrame frame = new JFrame("Aphrodite");
 
     public String username;
