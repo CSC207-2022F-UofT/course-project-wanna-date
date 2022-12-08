@@ -1,6 +1,5 @@
 package UI;
 
-import frameworksDrivers.RecDataAccessor;
 import interfaceAdapters.RecController;
 import interfaceAdapters.RecPresenter;
 import interfaceAdapters.RecShowRecBoundary;
@@ -23,8 +22,7 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
     // Note: the data access may be deprecated if necessary; it is currently
     // kept inside here in case it's needed for future alterations
     RecOutputBoundary recPresenter = new RecPresenter(this);
-    RecDataAccessInterface recDataAccess = new RecDataAccessor();
-    RecInputBoundary recUseCase = new Recommendation(recPresenter, recDataAccess);
+    RecInputBoundary recUseCase = new Recommendation(recPresenter);
     RecController recController = new RecController(recUseCase);
 
     // --- SET UP GUI
@@ -74,9 +72,10 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
         recBtnList.add(recBtn5);
         this.recBtnList = recBtnList;
 
-        // Add buttons to frame, and hide and disable buttons
+        // Add buttons to frame, hide and disable buttons, and add action listeners
         for (JButton recBtn : recBtnList) {
-            hideDisable(recBtn, false); // TODO check that there are 5 buttons going
+            hideDisable(recBtn, false);
+            recBtn.addActionListener(this);
             recommendFrame.add(recBtn);
         }
 
@@ -114,26 +113,9 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
             // Call on the controller to handle input
             recController.handleInput();
 
-        // Otherwise, handle for the buttons and recommended profile viewing; entry
-        // in this branch implies recommendations have already been shown; this is a precondition
+            // Otherwise, handle for the buttons and recommended profile viewing; entry
+            // in this branch implies recommendations have already been shown; this is a precondition
         } else {
-
-            /**
-             * GENERAL INSTRUCTIONS FOR GOING TO ANOTHER USER
-             * Create this (In UI folder.ActionListener for a user's profile) object...
-             * x = UserLikeBlock(UserAccount user1=current user,
-             *               UserAccount user2=user on the list to click,
-             *               ControllerLikeBlock control=controller to import from Adeline's code)
-             *
-             * after that, call x.functionToCall() inside the ActionListener code
-             *
-             * the general idea is this:
-             * Lovina is going to create the code for startup and all, and what's going to happen from the home page is
-             * there is a Recommendation button
-             * this sends you to the getRecommendations webpage which I created in my TestRecUC, and then this
-             * is my area to handle from there
-             */
-
             if (actSrc == recBtn1) {
                 recController.formLBControl(0);
             } else if (actSrc == recBtn2) {
@@ -158,7 +140,7 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
 
         // Unpack profiles to show and update the controller
         List<RecOutProfile> profilesToShow = suggestedProfiles.getRecProfileList();
-        recController.setRecProfiles(suggestedProfiles); // todo justify why the flow is OK here to go back and forth
+        recController.setRecProfiles(suggestedProfiles);
 
         // Go through each profile using an index
         for (int i = 0; i <= profilesToShow.size() - 1; i++) {

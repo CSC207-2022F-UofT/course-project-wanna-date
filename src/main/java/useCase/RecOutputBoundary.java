@@ -4,5 +4,5 @@ public interface RecOutputBoundary {
     /**
      * Show recommended profiles.
      */
-    public default void showRecommendations(RecommendedProfiles showedProfiles){}
+    default void showRecommendations(RecommendedProfiles showedProfiles){}
 }
