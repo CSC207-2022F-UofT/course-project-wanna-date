@@ -1,6 +1,5 @@
 package UI;
 
-import frameworksDrivers.RecDataAccessor;
 import interfaceAdapters.RecController;
 import interfaceAdapters.RecPresenter;
 import interfaceAdapters.RecShowRecBoundary;
@@ -23,7 +22,6 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
     // Note: the data access may be deprecated if necessary; it is currently
     // kept inside here in case it's needed for future alterations
     RecOutputBoundary recPresenter = new RecPresenter(this);
-    RecDataAccessInterface recDataAccess = new RecDataAccessor();
     RecInputBoundary recUseCase = new Recommendation(recPresenter);
     RecController recController = new RecController(recUseCase);
 
@@ -115,8 +113,8 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
             // Call on the controller to handle input
             recController.handleInput();
 
-        // Otherwise, handle for the buttons and recommended profile viewing; entry
-        // in this branch implies recommendations have already been shown; this is a precondition
+            // Otherwise, handle for the buttons and recommended profile viewing; entry
+            // in this branch implies recommendations have already been shown; this is a precondition
         } else {
             if (actSrc == recBtn1) {
                 recController.formLBControl(0);

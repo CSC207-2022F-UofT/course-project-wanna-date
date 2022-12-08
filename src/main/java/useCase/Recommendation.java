@@ -137,7 +137,7 @@ public class Recommendation implements RecInputBoundary {
         if (possibleProfile != null) {
             possibleProfile.setCompatibility(likeScore);
 
-        // Else, create a new ComparingProfile for the user and add it to the mapping
+            // Else, create a new ComparingProfile for the user and add it to the mapping
         } else {
             String userCountry = chosenUser.getCountry();
             String userSexuality = chosenUser.getSexuality();
@@ -258,7 +258,7 @@ public class Recommendation implements RecInputBoundary {
         if (pickerList.size() <= 5) {
             return pickerList;
 
-        // Else, do random picking of 5 users
+            // Else, do random picking of 5 users
         } else {
 
             // Create a Random object
