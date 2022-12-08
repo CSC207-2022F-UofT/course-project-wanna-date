@@ -1,6 +1,5 @@
 package interfaceAdapters;
 
-import useCase.FilterType;
 import useCase.FilterUseCase;
 import useCase.FilterInputBoundary;
 
