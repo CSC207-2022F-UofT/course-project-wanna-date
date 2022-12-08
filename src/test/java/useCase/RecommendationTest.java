@@ -1,7 +1,6 @@
 package useCase;
 
 import entities.UserAccount;
-import frameworksDrivers.RecDataAccessor;
 import interfaceAdapters.RecShowRecBoundary;
 import interface_adapters.FakeRecPresenter;
 import interface_adapters.FakeRecUI;

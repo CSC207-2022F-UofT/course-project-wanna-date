@@ -42,7 +42,6 @@ public class RecController {
         // user to view, and then start the UI
         String userToView = this.recProfiles.getRecUserAcc().get(index);
         UserLikeBlock likeBlockUI = new UserLikeBlock(this.recProfiles.getRecProfileUser(), userToView);
-        likeBlockUI.functionToCall();
     }
 
     /**

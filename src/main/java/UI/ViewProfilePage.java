@@ -204,7 +204,7 @@ public class ViewProfilePage extends JFrame implements ActionListener, ViewProfi
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == recommendButton) {
-//            new RecBtnManager();
+            new RecBtnManager();
         } else if (ae.getSource() == searchButton) {
             new SearchBox("Initiate SearchBox");
             new FilterMenu("Initiate FilterMenu");
