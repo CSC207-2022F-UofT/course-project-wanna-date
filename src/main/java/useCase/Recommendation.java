@@ -34,7 +34,7 @@ public class Recommendation implements RecInputBoundary {
      * in the program, calling an OutputBoundary object
      * to do such processing.
      */
-    public void makeRecommendations(){
+    public RecommendedProfiles makeRecommendations(){
 
         // Get the current user of the program
         UserAccount currentUser = this.getCurrentUser();
@@ -79,6 +79,9 @@ public class Recommendation implements RecInputBoundary {
 
         // Send recommended profiles to the adapter layer through the output boundary
         this.outputManager.showRecommendations(profilesToShow);
+
+        // For testing, return the recommended profiles
+        return profilesToShow;
     }
 
     private String calculateCompatibility(UserAccount currentUser, UserAccount chosenUser) {
@@ -102,6 +105,8 @@ public class Recommendation implements RecInputBoundary {
                     chosenUser.getInterest(), userCountry, userSexuality, likeScore);
             this.nameToComp.put(chosenUsername, newProfile);
         }
+
+        // Return the chosen username
         return chosenUsername;
     }
 
