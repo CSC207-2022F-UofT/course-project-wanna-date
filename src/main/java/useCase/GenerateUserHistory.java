@@ -1,7 +1,7 @@
 package useCase;
 
 import entities.UserAccount;
-import interfaceAdapters.UserHistoryPresenter;
+import InterfaceAdapters.UserHistoryPresenter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
