@@ -4,6 +4,7 @@ import entities.UserAccount;
 import interfaceAdapters.SearchController;
 import interfaceAdapters.SearchFilterPresenter;
 import useCase.CurrUserManager;
+import useCase.DatabaseManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +23,14 @@ public class SearchBox extends JFrame {
     public SearchController searchController = new SearchController(presenter);
 
     public static void main(String[] args) {
+        DatabaseManager manager = DatabaseManager.getDatabaseManager();
+        //sample database for testing
+        String[] sample = {"Jiazi,Test 4,44,She/Her,trt,ON,CA,F,H,Others,44448888",
+                "Jiaziismycat,Lovina,20,She/Her,trt,ON,CA,F,H,Music,12345678",
+                "panda,Peter Panda,33,He/Him,trt,ON,CA,M,B,Exercise,12345678",
+                "test1,Test 2,22,He/Him,null,null,null,M,G,Culinary,22222222"
+        };
+        manager.createDatabase(sample);
         new SearchBox("Search For Username");
     }
 
@@ -30,7 +39,7 @@ public class SearchBox extends JFrame {
     public SearchBox(String title) throws HeadlessException {
         //set up the frame
         super(title);
-        setSize(600, 600);
+        setSize(250, 300);
         setResizable(true);
         addComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,11 +47,11 @@ public class SearchBox extends JFrame {
 
         // create 5 result buttons and store them in a list.
         ArrayList<JButton> userList = new ArrayList<>();
-        JButton user1 = new JButton("");
-        JButton user2 = new JButton("");
-        JButton user3 = new JButton("");
-        JButton user4 = new JButton("");
-        JButton user5 = new JButton("");
+        JButton user1 = new JButton("1");
+        JButton user2 = new JButton("2");
+        JButton user3 = new JButton("3");
+        JButton user4 = new JButton("4");
+        JButton user5 = new JButton("5");
 
         userList.add(user1);
         userList.add(user2);
@@ -51,18 +60,11 @@ public class SearchBox extends JFrame {
         userList.add(user5);
 
         // add the buttons to the frame, and set their location.
-        add(user1);
-        add(user2);
-        add(user3);
-        add(user4);
-        add(user5);
-
-        user1.setBounds(100,200,350,30);
-        user2.setBounds(200,200,350,30);
-        user3.setBounds(100,300,350,30);
-        user4.setBounds(200,300,350,30);
-        user5.setBounds(150,400,350,30);
-
+        panel.add(user1);
+        panel.add(user2);
+        panel.add(user3);
+        panel.add(user4);
+        panel.add(user5);
 
 
         //set the buttons to invisible and disabled

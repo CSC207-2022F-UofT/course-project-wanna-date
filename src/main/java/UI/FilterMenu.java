@@ -3,11 +3,13 @@ package UI;
 import entities.UserAccount;
 import interfaceAdapters.FilterController;
 import interfaceAdapters.SearchFilterPresenter;
-import useCase.*;
+import useCase.CurrUserManager;
+import useCase.DatabaseManager;
+import useCase.LocationFilterType;
+import useCase.SexFilterFemaleType;
+import useCase.SexFilterMaleType;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -19,20 +21,20 @@ public class FilterMenu extends JFrame{
     public FilterMenu(String title){
         // set up the frame
         super(title);
-        setSize(600, 600);
+        setSize(450, 500);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
         // creating drop down menu.
         JComboBox<String> jComboBox = new JComboBox<>(options);
-        jComboBox.setBounds(80, 50, 140, 20);
+        jComboBox.setBounds(150, 50, 140, 20);
 
         JButton jButton = new JButton("Done");
-        jButton.setBounds(100, 100, 90, 20);
+        jButton.setBounds(160, 100, 90, 20);
 
         JLabel jLabel = new JLabel();
-        jLabel.setBounds(90, 100, 400, 100);
+        jLabel.setBounds(130, 100, 400, 100);
 
         add(jButton);
         add(jComboBox);
@@ -40,11 +42,11 @@ public class FilterMenu extends JFrame{
 
         // create 5 result buttons and store them in a list.
         ArrayList<JButton> userList = new ArrayList<>();
-        JButton user1 = new JButton("");
-        JButton user2 = new JButton("");
-        JButton user3 = new JButton("");
-        JButton user4 = new JButton("");
-        JButton user5 = new JButton("");
+        JButton user1 = new JButton("1");
+        JButton user2 = new JButton("2");
+        JButton user3 = new JButton("3");
+        JButton user4 = new JButton("4");
+        JButton user5 = new JButton("5");
 
         userList.add(user1);
         userList.add(user2);
@@ -59,12 +61,11 @@ public class FilterMenu extends JFrame{
         add(user4);
         add(user5);
 
-        user1.setBounds(100,200,350,30);
-        user2.setBounds(200,200,350,30);
-        user3.setBounds(100,300,350,30);
-        user4.setBounds(200,300,350,30);
-        user5.setBounds(150,400,350,30);
-
+        user1.setBounds(100,175,200,40);
+        user2.setBounds(100,225,200,40);
+        user3.setBounds(100,275,200,40);
+        user4.setBounds(100,325,200,40);
+        user5.setBounds(100,375,200,40);
 
         //set the buttons to invisible and disabled
         for (JButton users : userList){
@@ -72,28 +73,25 @@ public class FilterMenu extends JFrame{
             users.setEnabled(false);
         }
 
-        jButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedFilter = "You selected " + jComboBox.getItemAt(jComboBox.getSelectedIndex());
-                jLabel.setText(selectedFilter);
-                // apply user's selection here
-                applyFilter(jComboBox.getItemAt(jComboBox.getSelectedIndex()));
-                //presenter the result and call the view profile UI when button is clicked
-                for (int i = 0; i <= results.length - 1; i++){
-                    if (i <= 4){
-                        JButton currButton = userList.get(i);
-                        UserAccount targetUser = results[i];
-                        currButton.setText(targetUser.getUsername());
-                        currButton.setVisible(true);
-                        currButton.setEnabled(true);
-                        currButton.addActionListener(e1 -> {
-                            CurrUserManager currUserManager = CurrUserManager.getCurrUserManager();
-                            String account = currUserManager.getCurrUser().getUsername();
-                            UserLikeBlock profile = new UserLikeBlock(account, targetUser.getUsername());
-                            profile.functionToCall();
-                        });
-                    }
+        jButton.addActionListener(e -> {
+            String selectedFilter = "You selected " + jComboBox.getItemAt(jComboBox.getSelectedIndex());
+            jLabel.setText(selectedFilter);
+            // apply user's selection here
+            applyFilter(jComboBox.getItemAt(jComboBox.getSelectedIndex()));
+            //presenter the result and call the view profile UI when button is clicked
+            for (int i = 0; i <= results.length - 1; i++){
+                if (i <= 4){
+                    JButton currButton = userList.get(i);
+                    UserAccount targetUser = results[i];
+                    currButton.setText(targetUser.getUsername());
+                    currButton.setVisible(true);
+                    currButton.setEnabled(true);
+                    currButton.addActionListener(e1 -> {
+                        CurrUserManager currUserManager = CurrUserManager.getCurrUserManager();
+                        String account = currUserManager.getCurrUser().getUsername();
+                        UserLikeBlock profile = new UserLikeBlock(account, targetUser.getUsername());
+                        profile.functionToCall();
+                    });
                 }
             }
         });
@@ -101,6 +99,14 @@ public class FilterMenu extends JFrame{
     }
 
     public static void main(String[] args) {
+        DatabaseManager manager = DatabaseManager.getDatabaseManager();
+        //sample database for testing
+        String[] sample = {"Jiazi,Test 4,44,She/Her,trt,ON,CA,F,H,Others,44448888",
+                "Jiaziismycat,Lovina,20,She/Her,trt,ON,CA,F,H,Music,12345678",
+                "panda,Peter Panda,33,He/Him,trt,ON,CA,M,B,Exercise,12345678",
+                "test1,Test 2,22,He/Him,null,null,null,M,G,Culinary,22222222"
+        };
+        manager.createDatabase(sample);
         new FilterMenu("Choose the filter");
     }
 
@@ -113,11 +119,12 @@ public class FilterMenu extends JFrame{
             filterController.setFilter(new SexFilterMaleType());
         } if (Objects.equals(choice, options[1])){
             filterController.setFilter(new SexFilterFemaleType());
-        }else {
+        }if (Objects.equals(choice, options[2])){
             filterController.setFilter(new LocationFilterType());
         }
         filterController.performFilter();
     }
 
 }
+
 
