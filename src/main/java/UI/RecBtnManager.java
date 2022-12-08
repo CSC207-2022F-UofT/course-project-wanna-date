@@ -76,7 +76,7 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
 
         // Add buttons to frame, hide and disable buttons, and add action listeners
         for (JButton recBtn : recBtnList) {
-            hideDisable(recBtn, true);
+            hideDisable(recBtn, false);
             recBtn.addActionListener(this);
             recommendFrame.add(recBtn);
         }

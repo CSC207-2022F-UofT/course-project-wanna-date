@@ -42,19 +42,9 @@ class RecommendationTest {
     // https://semaphoreci.com/community/tutorials/stubbing-and-mocking-with-mockito-2-and-junit
 
     @Test
-    public void RecToRemove() {
-        // create
-        RecFakeOutsourcer myOut = mock(RecFakeOutsourcer.class);
-        RecFakeThing myThing = new RecFakeThing(myOut);
-
-        // do magic
-        when(myOut.getKnowledge()).thenReturn("hey there guys");
-        assert Objects.equals(myThing.getX(), "hey there guys");
-    }
-
-    @Test
     public void RecommendationTest7ValidUsers() {
 
+        // TODO: redo this test
         // Create generic classes with mocking
         RecOutputBoundary recPresenter = new FakeRecPresenter();
         DatabaseManager someDatabase = mock(DatabaseManager.class);
