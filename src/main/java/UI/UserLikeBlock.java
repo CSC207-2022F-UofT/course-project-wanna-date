@@ -35,6 +35,7 @@ public class UserLikeBlock implements ActionListener {
 
     JButton like = new JButton("Like♥");
     JButton block = new JButton("Block");
+    JButton home = new JButton("Home");
 
     JLabel likedString = new JLabel();
     JLabel blockedString = new JLabel();
@@ -135,11 +136,18 @@ public class UserLikeBlock implements ActionListener {
         like.setOpaque(true);
 
         //create block button
-        block.setBounds(500,700, 60, 40); //coordinate and size of the label
+        block.setBounds(300,700, 60, 40); //coordinate and size of the label
         block.setFocusable(false);
         block.addActionListener(this);
         block.setBackground(Color.black);
         block.setOpaque(true);
+
+        //create home button
+        home.setBounds(500,700, 60, 40); //coordinate and size of the label
+        home.setFocusable(false);
+        home.addActionListener(this);
+        home.setBackground(Color.blue);
+        home.setOpaque(true);
 
         //create string that will appear after we finish with the like backend work
         likedString.setBounds(600,130, 100, 100); //coordinate and size of the label
@@ -167,7 +175,7 @@ public class UserLikeBlock implements ActionListener {
         profile.add(gender);
         profile.add(sexuality);
         profile.add(interests);
-        profile.repaint();
+
 
         profile.add(block);
         profile.add(like);
@@ -192,6 +200,12 @@ public class UserLikeBlock implements ActionListener {
             String textShow2= controller.blockController(username1, username2);
             blockedString.setText(textShow2+ "!");
             blockedString.setVisible(true);
+        }
+        //if home button get clicked
+        else if(e.getSource()==home){
+            ViewProfilePage viewProfilePage = new ViewProfilePage(username1);
+//            viewProfilePage.buildPage();
+            profile.dispose();
         }
     }
 

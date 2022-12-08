@@ -18,8 +18,7 @@ public class DataAccess {
         DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
         try
         {
-            BufferedReader br = new BufferedReader(new FileReader("/Users/adelinemonica.l/Documents/Uni stuff" +
-                    "/3rd Year/CSC207/course-project-wanna-date/src/main/java/frameworksDrivers/database.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("src/main/java/frameworksDrivers/database.csv"));
             br.readLine();
             String[] data_from_csv = {};
             while ((line = br.readLine()) != null)
