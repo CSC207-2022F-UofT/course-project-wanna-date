@@ -179,6 +179,7 @@ public class UserLikeBlock implements ActionListener {
 
         profile.add(block);
         profile.add(like);
+        profile.add(home);
 
         profile.add(blockedString);
         profile.add(likedString);
