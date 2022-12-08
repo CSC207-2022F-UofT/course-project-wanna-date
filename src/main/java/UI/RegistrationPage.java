@@ -19,7 +19,7 @@ public class RegistrationPage extends JFrame implements ActionListener{
     JLabel  title,
             username_label, name_label, age_label, pronouns_label, country_label, province_label, city_label,
             gender_label, sexuality_label, interest_label, pass_label,
-            username_rule, pass_rule;
+            username_rule, ageRule, pass_rule;
 
     // Text fields
     final JTextField username_textField, name_textField, age_textField, country_textField,
@@ -69,6 +69,11 @@ public class RegistrationPage extends JFrame implements ActionListener{
         age_label.setFocusable(false);
         age_textField = new JTextField(50);
         age_textField.setBounds(300,225,200,40);
+        ageRule = new JLabel();
+        ageRule.setText("Should be a number");
+        ageRule.setBounds(500, 225,200,40);
+        ageRule.setFocusable(false);
+        ageRule.setFont(new Font(ageRule.getFont().getName(),Font.ITALIC,ageRule.getFont().getSize()));
 
         pronouns_label = new JLabel();
         pronouns_label.setText("Pronouns:");
@@ -160,6 +165,7 @@ public class RegistrationPage extends JFrame implements ActionListener{
         frame.add(name_textField);
         frame.add(age_label);
         frame.add(age_textField);
+        frame.add(ageRule);
         frame.add(pronouns_label);
         frame.add(pronouns_comboBox);
         frame.add(country_label);
@@ -267,7 +273,7 @@ public class RegistrationPage extends JFrame implements ActionListener{
                 if (registrationController.callIsValidRegistration(
                         username_value,
                         name_value,
-                        Integer.valueOf(age_value),
+                        Integer.parseInt(age_value),
                         pronouns_value,
                         country_value,
                         province_value,
@@ -276,7 +282,9 @@ public class RegistrationPage extends JFrame implements ActionListener{
                         sexuality_value,
                         interest_value,
                         pass_value)) {
-                    new ViewProfilePage(username_value);
+                    ViewProfilePage viewProfilePage = new ViewProfilePage(username_value);
+                    viewProfilePage.buildPage();
+                    frame.dispose();
                 } else {
                     new RegistrationErrorPage();
                 }

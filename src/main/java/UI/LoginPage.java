@@ -109,7 +109,8 @@ public class LoginPage extends JFrame implements ActionListener {
             loginController.helpSetCurrUsername(username_value);
             loginController.callCreateDatabase();
             if (loginController.callValidLogin(username_value, pass_value)) {
-                new ViewProfilePage(username_value);
+                ViewProfilePage viewProfilePage = new ViewProfilePage(username_value);
+                viewProfilePage.buildPage();
                 frame.dispose();
             } else {
                 new LoginErrorPage();

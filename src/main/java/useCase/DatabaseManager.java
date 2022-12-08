@@ -47,7 +47,7 @@ public class DatabaseManager implements DataExportInterface {
             }
 
             // Storing the UserAccount basic variables and insert it to Database
-            UserAccount curr = new UserAccount(data_line[0], data_line[1], Integer.valueOf(data_line[2]),
+            UserAccount curr = new UserAccount(data_line[0], data_line[1], Integer.parseInt(data_line[2]),
                     data_line[3], data_line[4], data_line[5], data_line[6], data_line[7], data_line[8],
                     data_line[9], data_line[10]);
             database.getData().put(data_line[0], curr);
