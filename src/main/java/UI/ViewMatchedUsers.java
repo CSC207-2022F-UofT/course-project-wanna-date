@@ -20,8 +20,8 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
     JFrame frame = new JFrame();
 
     // Buttons
-    JButton backButton = new JButton("Return ⏎");
-    JButton blockButton = new JButton("Block ✖");
+    JButton backButton = new JButton("Return" );
+    JButton blockButton = new JButton("Block");
     JButton unlikeButton = new JButton("Unlike");
 
     // Labels

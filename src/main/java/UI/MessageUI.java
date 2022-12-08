@@ -28,12 +28,17 @@ public class MessageUI implements ActionListener, ItemListener {
 
     // drop down menu, list of users they have liked (can't talk with all of them)
     public String[] liked;
-    JComboBox mutuallyLiked = new JComboBox(liked);
+    String[] pickUser = {"Select a user."};
+    JComboBox<String> mutuallyLiked = new JComboBox<>(pickUser);
     public String receiver;
     JTextField text = new JTextField();
     public String textMessage = "";
 
-    JLabel text1, text2, text3, text4, text5;
+    JLabel text1 = new JLabel("");
+    JLabel text2 = new JLabel("");
+    JLabel text3 = new JLabel("");
+    JLabel text4 = new JLabel("");
+    JLabel text5 = new JLabel("");
 
     JLabel[] textMessages = {text1, text2, text3, text4, text5};
 
@@ -59,6 +64,10 @@ public class MessageUI implements ActionListener, ItemListener {
         mutuallyLiked.setFont(new Font(null, Font.PLAIN, 25));
         mutuallyLiked.addItemListener(this);
 
+        for (String liked : likedUsers){
+            mutuallyLiked.addItem(liked);
+        }
+
         text.setBounds(100, 460, 600,40);
         text.setFont(new Font(null, Font.PLAIN, 25));
         text.setEnabled(false);
@@ -80,6 +89,8 @@ public class MessageUI implements ActionListener, ItemListener {
         frame.setSize(1000, 600);
         frame.setLayout(null);
         frame.setVisible(true);
+        Color LIGHT_PINK = new Color(255, 200, 175, 250);
+        frame.getContentPane().setBackground(LIGHT_PINK);
 
         frame.add(send);
         frame.add(mutuallyLiked);
@@ -166,4 +177,3 @@ public class MessageUI implements ActionListener, ItemListener {
         }
     }
 }
-

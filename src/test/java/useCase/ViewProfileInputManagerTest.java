@@ -8,6 +8,7 @@ import interfaceAdapters.ViewProfilePresenter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /** Create unit test for ViewProfile useCase. No tests for input boundary and output boundary
@@ -29,7 +30,12 @@ public class ViewProfileInputManagerTest {
         DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
         System.out.println(databaseManager.isUsernameExist("lov123"));
 
-        ViewProfilePage viewProfilePage = new ViewProfilePage("lov123");
+        ViewProfilePage viewProfilePage;
+        try {
+            viewProfilePage = new ViewProfilePage("lov123");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         ViewProfileOutputBoundary viewProfileOutputBoundary = new ViewProfilePresenter(viewProfilePage);
 
         ViewProfileInputManager viewProfileInputManager = new ViewProfileInputManager();
@@ -41,7 +47,7 @@ public class ViewProfileInputManagerTest {
     /** Test cases searchInfo whether it returns the correct information of the newly added user.
      * */
     @Test
-    public void searchInfoCorrect() {
+    public void searchInfoCorrect() throws IOException {
         // Create Database from database.csv
         DataAccess dataAccess = new DataAccess();
         dataAccess.readCSV();

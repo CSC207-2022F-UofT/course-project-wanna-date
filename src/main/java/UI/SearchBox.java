@@ -92,7 +92,7 @@ public class SearchBox extends JFrame {
                         CurrUserManager currUserManager = CurrUserManager.getCurrUserManager();
                         String account = currUserManager.getCurrUser().getUsername();
                         UserLikeBlock profile = new UserLikeBlock(account, targetUser.getUsername());
-                        profile.functionToCall();
+                        getContentPane().remove(panel);
                     });
                 }
             }
@@ -119,7 +119,7 @@ public class SearchBox extends JFrame {
                                 CurrUserManager currUserManager = CurrUserManager.getCurrUserManager();
                                 String account = currUserManager.getCurrUser().getUsername();
                                 UserLikeBlock profile = new UserLikeBlock(account, targetUser.getUsername());
-                                profile.functionToCall();
+                                getContentPane().remove(panel);
                             });
                         }
                     }

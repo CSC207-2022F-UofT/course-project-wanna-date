@@ -1,9 +1,12 @@
 package UI;
 
-import interfaceAdapters.LogoutController;
-import interfaceAdapters.SendMessageController;
-import interfaceAdapters.ViewProfileController;
-import interfaceAdapters.ViewProfileInterface;
+import entities.MessageFactory;
+import entities.MessageFormat;
+import frameworksDrivers.MessageFileUser;
+import interfaceAdapters.*;
+import useCase.ReceiveMessageOB;
+import useCase.SendMessage;
+import useCase.SendMessageIB;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,11 +35,15 @@ public class ViewProfilePage extends JFrame implements ActionListener, ViewProfi
             usernameValue, nameValue, ageValue, pronounsValue, countryValue, provinceValue, cityValue,
             genderValue, sexualityValue, interestValue, passValue;
 
-    SendMessageController sendMessageController;
+    public MessageDSGateway gateway = new MessageFileUser("./messages.csv");
+    public ReceiveMessageOB messagePresenter = new SendMessagePresenter();
+    public MessageFactory messageFactory = new MessageFormat();
+    public SendMessageIB interact = new SendMessage(gateway, messagePresenter, messageFactory);
+    public SendMessageController sendMessageController = new SendMessageController(interact);
 
     /** Constructor function that sets username instance variable
      * */
-    public ViewProfilePage(String username) {
+    public ViewProfilePage(String username) throws IOException {
         this.username = username;
     }
 

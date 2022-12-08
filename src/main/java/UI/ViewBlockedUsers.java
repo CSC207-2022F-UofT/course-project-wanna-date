@@ -19,9 +19,9 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
     JFrame frame = new JFrame();
 
     // Buttons
-    JButton backButton = new JButton("Return ⏎");
-    JButton unblockButton = new JButton("Unblock ↺");
-    JButton likeButton = new JButton("Like ♥");
+    JButton backButton = new JButton("Return");
+    JButton unblockButton = new JButton("Unblock");
+    JButton likeButton = new JButton("Like");
 
     // Labels
     JLabel blockedTitle = new JLabel("BLOCKED USERS");

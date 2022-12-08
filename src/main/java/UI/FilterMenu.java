@@ -90,7 +90,6 @@ public class FilterMenu extends JFrame{
                         CurrUserManager currUserManager = CurrUserManager.getCurrUserManager();
                         String account = currUserManager.getCurrUser().getUsername();
                         UserLikeBlock profile = new UserLikeBlock(account, targetUser.getUsername());
-                        profile.functionToCall();
                     });
                 }
             }

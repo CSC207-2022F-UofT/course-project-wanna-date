@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * UI for the main user history page.
@@ -14,10 +15,10 @@ public class UserHistoryUI implements ActionListener {
     JFrame frame = new JFrame();
 
     // Buttons
-    JButton likedButton = new JButton("✦ Liked Users ✦");
-    JButton blockedButton = new JButton("✖ Blocked Users ✖");
-    JButton matchedButton = new JButton("♥ Matched Users ♥");
-    JButton backButton = new JButton("Back ⏎");
+    JButton likedButton = new JButton("Liked Users");
+    JButton blockedButton = new JButton("Blocked Users");
+    JButton matchedButton = new JButton("Matched Users");
+    JButton backButton = new JButton("Back");
 
     // Labels
     JLabel title = new JLabel("USER HISTORY");
@@ -93,7 +94,12 @@ public class UserHistoryUI implements ActionListener {
         // User clicks Back button
         else if(e.getSource() == backButton){
             // Return to main app, haven't added yet.
-            ViewProfilePage viewProfilePage = new ViewProfilePage(user1);
+            ViewProfilePage viewProfilePage;
+            try {
+                viewProfilePage = new ViewProfilePage(user1);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             viewProfilePage.buildPage();
             frame.dispose();
         }
