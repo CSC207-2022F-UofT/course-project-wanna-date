@@ -1,7 +1,5 @@
 package UI;
 
-import entities.UserAccount;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,11 +22,12 @@ public class UserHistoryUI implements ActionListener {
     // Labels
     JLabel title = new JLabel("USER HISTORY");
 
-    UserAccount user1;
+    // User's username
+    String user1;
 
-    public UserHistoryUI(UserAccount currUser){
+    public UserHistoryUI(String currUsername){
 
-        this.user1 = currUser;
+        this.user1 = currUsername;
 
         // Add frames
         frame.add(likedButton);
@@ -93,41 +92,12 @@ public class UserHistoryUI implements ActionListener {
         }
         // User clicks Back button
         else if(e.getSource() == backButton){
-            // Return to main app
+            // Return to main app, haven't added yet.
             frame.dispose();
         }
     }
 
-    /** CurrUserManager userManager = CurrUserManager.getCurrUserManager();
-     UserAccount account = userManager.getCurrUser();*/
     public static void main(String[] args) {
 
-        UserAccount user1 = new UserAccount("johnd", "John Doe", 20, "him", "USA",
-                "ILL", "CHI", "M", "H","Watching", "123");
-        UserAccount user2 = new UserAccount("JSmith", "Jessica Smith", 18, "her", "CAN",
-                "ON", "TOR", "F", "G","Music", "124");
-        UserAccount user3 = new UserAccount("janed", "Jane Doe", 18, "her", "CAN",
-                "ON", "TOR", "F", "H","Music", "124");
-        UserAccount user4 = new UserAccount("jenndoe", "Jennifer Doe", 18, "her", "CAN",
-                "ON", "OTT", "F", "H","Music", "124");
-        UserAccount user5 = new UserAccount("nicksm", "Nick Smith", 20, "him", "CAN",
-                "ON", "OTT", "F", "H","Watching", "124");
-        UserAccount user6 = new UserAccount("michel9", "Michelle", 18, "her", "CAN",
-                "ON", "OTT", "F", "H","Music", "124");
-        UserAccount user7 = new UserAccount("jane65", "Jane Doee", 20, "her", "CAN",
-                "ON", "OTT", "F", "H","Watching", "124");
-
-        user1.setLikedUsers(user2);
-        user1.setLikedUsers(user4);
-        user1.setBlockedUsers(user3);
-        user1.setBlockedUsers(user5);
-        user1.setLikedUsers(user6);
-        user1.setLikedUsers(user7);
-
-        user1.setLikedByUsers(user2);
-        user1.setLikedByUsers(user4);
-        user1.setLikedByUsers(user5);
-
-        new UserHistoryUI(user1);
     }
 }

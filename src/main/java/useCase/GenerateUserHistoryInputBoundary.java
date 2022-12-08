@@ -1,16 +1,8 @@
 package useCase;
 
-import entities.UserAccount;
+import java.util.ArrayList;
 
 
 public interface GenerateUserHistoryInputBoundary {
-
-    default String getCurrentUserStats(UserAccount user, String stat) {
-        /**
-        CurrUserManager currUserManager = CurrUserManager.getCurrUserManager();
-        UserAccount account = currUserManager.getCurrUser();
-        */
-
-        return stat;
-    }
+     ArrayList<String> getUserStats(String username);
 }

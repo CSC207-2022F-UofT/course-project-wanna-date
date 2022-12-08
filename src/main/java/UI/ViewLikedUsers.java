@@ -1,12 +1,14 @@
 package UI;
 
 import entities.UserAccount;
+import interfaceAdapters.UserHistoryController;
 import useCase.GenerateUserHistory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * UI for the liked users page.
@@ -34,24 +36,30 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
     JLabel likedGenderTitle = new JLabel("Most common Gender of Liked Users: ");
     JLabel likedInterestTitle = new JLabel("Most common Interests: ");
 
-    UserAccount user1;
+    String user1;
 
     int selectedUserIndex;
 
 
-    public ViewLikedUsers(UserAccount currUser){
+    public ViewLikedUsers(String currUsername){
 
-        this.user1 = currUser;
+        UserHistoryController userHistoryController = new UserHistoryController();
+        ArrayList<String> stats = userHistoryController.callGetUserStats(currUsername);
+
+        this.user1 = currUsername;
 
         GenerateUserHistory generateHistory = new GenerateUserHistory();
 
+        // Get the UserAccount entity info from the given username and store it
+        UserAccount user1Acc = generateHistory.getCurrUserAccount(user1);
+
         // Get the total number of likes this user has
-        String totalLikes = Integer.toString(generateHistory.getTotalLiked(user1));
-        String likedAge = Integer.toString(generateHistory.getLikedAgeRange(user1));
-        String likedCity = generateHistory.getLikedCity(user1);
-        String likedCountry = generateHistory.getLikedCountry(user1);
-        String likedGender = generateHistory.getLikedGender(user1);
-        String likedInterest = generateHistory.getLikedInterest(user1);
+        String likedAge = stats.get(0);
+        String likedCity = stats.get(1);
+        String likedCountry = stats.get(2);
+        String likedGender = stats.get(3);
+        String likedInterest = stats.get(4);
+        String totalLikes = stats.get(5);
 
         JLabel totalLikesUsersNumber = new JLabel(totalLikes);
         JLabel likedAgeNumber = new JLabel(likedAge);
@@ -61,7 +69,7 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
         JLabel likedInterestString = new JLabel(likedInterest);
 
         // List of users they have liked
-        String[] likedUsers = generateHistory.likedUsernames(user1);
+        String[] likedUsers = generateHistory.likedUsernames(user1Acc);
         JComboBox<String> likedBox = new JComboBox<>(likedUsers);
 
         // Add frames
@@ -163,8 +171,8 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // User clicks Block Button
-                user1.getBlockedUsers().add(user1.getLikedUsers().get(selectedUserIndex));
-                user1.getLikedUsers().remove(selectedUserIndex);
+                user1Acc.getBlockedUsers().add(user1Acc.getLikedUsers().get(selectedUserIndex));
+                user1Acc.getLikedUsers().remove(selectedUserIndex);
                 new ViewLikedUsers(user1);
                 frame.dispose();
             }
@@ -177,7 +185,7 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // User clicks Unlike Button
-                user1.getLikedUsers().remove(selectedUserIndex);
+                user1Acc.getLikedUsers().remove(selectedUserIndex);
                 new ViewLikedUsers(user1);
                 frame.dispose();
             }
@@ -227,6 +235,6 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
 
 
     public static void main(String[] args) {
-
+        new ViewLikedUsers("lov789");
     }
 }

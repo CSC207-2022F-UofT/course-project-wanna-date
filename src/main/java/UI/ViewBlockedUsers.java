@@ -1,12 +1,14 @@
 package UI;
 
 import entities.UserAccount;
+import interfaceAdapters.UserHistoryController;
 import useCase.GenerateUserHistory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * UI for the blocked users page.
@@ -27,23 +29,28 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
     //Statistics Labels
     JLabel totalBlockedUsersTitle = new JLabel("Total Number of Blocked Users: ");
 
-    UserAccount user1;
+    String user1;
 
     int selectedUserIndex;
 
+    public ViewBlockedUsers(String currUsername){
 
-    public ViewBlockedUsers(UserAccount currUser){
+        UserHistoryController userHistoryController = new UserHistoryController();
+        ArrayList<String> stats = userHistoryController.callGetUserStats(currUsername);
 
-        this.user1 = currUser;
+        this.user1 = currUsername;
 
         GenerateUserHistory generateHistory = new GenerateUserHistory();
 
+        // Get the UserAccount entity info from the given username and store it
+        UserAccount user1Acc = generateHistory.getCurrUserAccount(user1);
+
         // Get the total number of blocks this user has
-        String totalBlocks = Integer.toString(generateHistory.getTotalBlocks(user1));
+        String totalBlocks = stats.get(6);
         JLabel totalBlockedUsersNumber = new JLabel(totalBlocks);
 
         // List of users they have Blocked
-        String[] blockedUsers = generateHistory.blockedUsernames(user1);
+        String[] blockedUsers = generateHistory.blockedUsernames(user1Acc);
         JComboBox<String>  blockedBox = new JComboBox<>(blockedUsers);
 
         // Add frames
@@ -93,7 +100,7 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // User clicks Unblock Button
-                user1.getBlockedUsers().remove(selectedUserIndex);
+                user1Acc.getBlockedUsers().remove(selectedUserIndex);
                 new ViewBlockedUsers(user1);
                 frame.dispose();
             }
@@ -106,8 +113,8 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Use clicks like button
-                user1.getLikedUsers().add(user1.getBlockedUsers().get(selectedUserIndex));
-                user1.getBlockedUsers().remove(selectedUserIndex);
+                user1Acc.getLikedUsers().add(user1Acc.getBlockedUsers().get(selectedUserIndex));
+                user1Acc.getBlockedUsers().remove(selectedUserIndex);
                 new ViewBlockedUsers(user1);
                 frame.dispose();
             }

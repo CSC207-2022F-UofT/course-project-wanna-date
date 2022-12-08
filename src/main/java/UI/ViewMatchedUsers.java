@@ -1,12 +1,15 @@
 package UI;
 
 import entities.UserAccount;
+import interfaceAdapters.UserHistoryController;
 import useCase.GenerateUserHistory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 
 /**
  * UI for the matched users page.
@@ -27,23 +30,29 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
     // Statistics labels
     JLabel totalMatchedUsersTitle = new JLabel("Total Number of Matched Users: ");
 
-    UserAccount user1;
+    String user1;
 
     int selectedUserIndex;
 
 
-    public ViewMatchedUsers(UserAccount currUser){
+    public ViewMatchedUsers(String currUsername){
 
-        this.user1 = currUser;
+        UserHistoryController userHistoryController = new UserHistoryController();
+        ArrayList<String> stats = userHistoryController.callGetUserStats(currUsername);
+
+        this.user1 = currUsername;
 
         GenerateUserHistory generateHistory = new GenerateUserHistory();
 
+        // Get the UserAccount entity info from the given username and store it
+        UserAccount user1Acc = generateHistory.getCurrUserAccount(user1);
+
         // Get the total number of matches this user has
-        String totalMatched = Integer.toString(generateHistory.getTotalMatches(user1));
+        String totalMatched = stats.get(7);
         JLabel totalMatchedUsersNumber = new JLabel(totalMatched);
 
         // List of users they have matched with
-        String[] matchedUsers = generateHistory.matchedUsernames(user1);
+        String[] matchedUsers = generateHistory.matchedUsernames(user1Acc);
         JComboBox<String> matchedBox = new JComboBox<>(matchedUsers);
 
         // Add frames
@@ -93,8 +102,8 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Use clicks block button
-                user1.getBlockedUsers().add(user1.getLikedUsers().get(selectedUserIndex));
-                user1.getLikedUsers().remove(selectedUserIndex);
+                user1Acc.getBlockedUsers().add(user1Acc.getLikedUsers().get(selectedUserIndex));
+                user1Acc.getLikedUsers().remove(selectedUserIndex);
                 new ViewMatchedUsers(user1);
                 frame.dispose();
             }
@@ -107,7 +116,7 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Use clicks unlike button
-                user1.getLikedUsers().remove(selectedUserIndex);
+                user1Acc.getLikedUsers().remove(selectedUserIndex);
                 new ViewMatchedUsers(user1);
                 frame.dispose();
             }
