@@ -1,10 +1,14 @@
 package useCase;
 
+import entities.UserAccount;
+
+import java.util.ArrayList;
+
 /**
  * A class that provides the variables inputted from the user.
  */
 
-public class SendMessageID {
+public class SendMessageID{
     private String receivingUser, sendingUser, text;
 
     public SendMessageID(String receivingUser, String sendingUser, String text) {
