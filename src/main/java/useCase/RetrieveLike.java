@@ -1,24 +1,17 @@
 package useCase;
 import entities.UserAccount;
-import useCase.RetrieveLikeOutputBoundary;
+import interfaceAdapters.PresenterLikeBlock;
 
 import java.util.ArrayList;
 
 public class RetrieveLike {
-    RetrieveLikeOutputBoundary param1;
 
-    public RetrieveLike(RetrieveLikeOutputBoundary OB_Like){
-        this.param1 = OB_Like;
-    }
-
-    public RetrieveLike(){
-
-    }
 
     /** RetrieveLike class that will be connected to the presenter which is responsible to update view when
      * action is given from the user.
      */
     public void connector() {
+        RetrieveLikeOutputBoundary param1 = new PresenterLikeBlock();
         like_view(param1);
     }
 

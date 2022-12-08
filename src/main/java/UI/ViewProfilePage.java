@@ -150,6 +150,8 @@ public class ViewProfilePage extends JFrame implements ActionListener {
         if (ae.getSource() == recommend_button) {
             new RecBtnManager();
         } else if (ae.getSource() == search_button) {
+            new SearchBox("Initiate SearchBox");
+            new FilterMenu("Initiate FilterMenu");
 
         } else if (ae.getSource() == message_button) {
             String name = name_label.getText().substring(11);
