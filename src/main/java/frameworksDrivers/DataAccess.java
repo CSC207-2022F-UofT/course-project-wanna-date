@@ -19,6 +19,7 @@ public class DataAccess {
         try
         {
             BufferedReader br = new BufferedReader(new FileReader("src/main/java/frameworksDrivers/database.csv"));
+
             br.readLine();
             String[] data_from_csv = {};
             while ((line = br.readLine()) != null)

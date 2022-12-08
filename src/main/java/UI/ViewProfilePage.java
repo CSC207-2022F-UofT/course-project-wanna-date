@@ -1,6 +1,7 @@
 package UI;
 
 import interfaceAdapters.LogoutController;
+import interfaceAdapters.SendMessageController;
 import interfaceAdapters.ViewProfileController;
 
 import javax.swing.*;
@@ -16,6 +17,8 @@ public class ViewProfilePage extends JFrame implements ActionListener {
             gender_label, sexuality_label, interest_label, pass_label, title;
 
     JButton recommend_button, search_button, message_button, logout_button;
+
+    SendMessageController sendMessageController;
 
     public ViewProfilePage(String username) {
         ViewProfileController viewProfileController = new ViewProfileController();
@@ -145,14 +148,19 @@ public class ViewProfilePage extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == recommend_button) {
-
+            new RecBtnManager();
         } else if (ae.getSource() == search_button) {
             new SearchBox("Initiate SearchBox");
             new FilterMenu("Initiate FilterMenu");
 
         } else if (ae.getSource() == message_button) {
-//            MessageUI(...);
-
+            String name = name_label.getText().substring(11);
+            String username = username_label.getText().substring(10);
+            try {
+                new MessageUI(name, sendMessageController.getLikedUsers(username));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         } else if (ae.getSource() == logout_button) {
             // Create LogoutController
             LogoutController logoutController = new LogoutController();

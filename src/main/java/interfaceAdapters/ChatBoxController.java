@@ -1,7 +1,6 @@
 package interfaceAdapters;
-import useCase.ChatBoxIB;
-import useCase.ChatBoxOD;
-import useCase.SendMessageID;
+
+import useCase.*;
 
 /**
  * A controller that calls on ChatBoxIB and thus interacts with OpenChatbox

@@ -6,20 +6,13 @@ import interfaceAdapters.MessageDSGateway;
 import interfaceAdapters.SendMessagePresenter;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import useCase.*;
 
 import java.io.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
 public class SendMessageTest {
-    UserAccount sender = new UserAccount("LN", "Linda North", 20, "her", "CAN",
-            "ON", "TOR", "F", "H","Photography", "north123");
-    UserAccount receiver = new UserAccount("SM", "Simon Mint", 21, "him", "CAN",
-            "ON", "TOR", "M", "H","Music", "smint123");
-
     // for comparison
     SendMessageDS message1 = new SendMessageDS("Simon Mint", "Linda North", "Hello",
             LocalDateTime.of(2022, 11, 29, 17, 31, 41));
@@ -41,8 +34,6 @@ public class SendMessageTest {
     MessageDSGateway gateway2 = new MessageFileUser("./messages2.csv");
     ReceiveMessageOB presenter = new SendMessagePresenter();
     MessageFactory messageFactory = new MessageFormat();
-    SendMessageDS input = new SendMessageDS("Simon Mint", "Linda North", "Nothing much",
-            LocalDateTime.now());
     SendMessageID data = new SendMessageID("Simon Mint", "Linda North", "Nothing much");
     SendMessageID data2 = new SendMessageID("Simon Mint", "Linda North", "Good.");
 
@@ -50,7 +41,7 @@ public class SendMessageTest {
     public void addMessageMoreThan4(){
         SendMessage message = new SendMessage(gateway, presenter, messageFactory);
         Map<LocalDateTime, SendMessageDS> pastFive = message.sendMessage(data).getSent();
-        List<LocalDateTime> keys = new ArrayList<LocalDateTime>(pastFive.keySet());
+        List<LocalDateTime> keys = new ArrayList<>(pastFive.keySet());
 
         String[] fiveText = {"", "", "", "", ""};
         for (int i = 0; i < 5; i++){
@@ -58,7 +49,6 @@ public class SendMessageTest {
         }
 
         // expected values
-        Map<LocalDateTime, SendMessageDS> pastFiveTexts = new HashMap<LocalDateTime, SendMessageDS>();
         SendMessageDS[] messages = {message1, message2, message3, message4, message5};
 
         String[] matchingFive = {"", "", "", "", ""};
@@ -73,7 +63,7 @@ public class SendMessageTest {
     public void addMessageLessThan4(){
         SendMessage newMessage = new SendMessage(gateway2, presenter, messageFactory);
         Map<LocalDateTime, SendMessageDS> pastMessages = newMessage.sendMessage(data2).getSent();
-        List<LocalDateTime> keys = new ArrayList<LocalDateTime>(pastMessages.keySet());
+        List<LocalDateTime> keys = new ArrayList<>(pastMessages.keySet());
 
         String[] pastText = {"", "", "", ""};
         for (int i = 0; i < 4; i++){
@@ -81,7 +71,6 @@ public class SendMessageTest {
         }
 
         // expected values
-        Map<LocalDateTime, SendMessageDS> pastFewTexts = new HashMap<LocalDateTime, SendMessageDS>();
         SendMessageDS[] messages = {message1, message2, message3, message6};
 
         String[] matching = {"", "", "", ""};
@@ -99,4 +88,3 @@ public class SendMessageTest {
 
     }
 }
-

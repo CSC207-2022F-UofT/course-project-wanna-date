@@ -1,17 +1,24 @@
 package useCase;
 
 import entities.UserAccount;
+import interfaceAdapters.UserHistoryPresenter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * GenerateUserHistory retrieves different statistics regarding the user's liked and blocked users.
+ * The use case GenerateUserHistory retrieves different statistics regarding the user's liked and blocked users.
  */
 public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
 
-    // Presenter
-    public void viewStats(GenerateUserHistoryOutputBoundary viewUserHistory){
-        viewUserHistory.presenterUserHistory();
+    /**
+     * Function that returns the UserAccount from the user's username using databaseManager
+     * @param username String of the current user's username
+     * @return return a UserAccount from the user's username
+     */
+    public UserAccount getCurrUserAccount(String username) {
+        DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
+        return databaseManager.retrieveUserAccount(username);
     }
 
     /**
@@ -121,13 +128,7 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
             }
         }
         //Return most common Age
-
-        if (commonAge < 0) {
-            return 0;
-        }
-        else {
-            return commonAge;
-        }
+        return Math.max(commonAge, 0);
     }
 
     /**
@@ -307,5 +308,23 @@ public class GenerateUserHistory implements GenerateUserHistoryInputBoundary {
         return matchedUsers(user).size();
     }
 
+    @Override
+    public ArrayList<String> getUserStats(String username){
 
+        UserAccount account = getCurrUserAccount(username);
+
+        ArrayList<String> stats = new ArrayList<>();
+
+        stats.add(Integer.toString(getLikedAgeRange(account))); //0
+        stats.add(getLikedCity(account)); //1
+        stats.add(getLikedCountry(account)); //2
+        stats.add(getLikedGender(account)); //3
+        stats.add(getLikedInterest(account)); //4
+        stats.add(Integer.toString(getTotalLiked(account))); //5
+        stats.add(Integer.toString(getTotalBlocks(account))); //6
+        stats.add(Integer.toString(getTotalMatches(account))); //7
+
+        GenerateUserHistoryOutputBoundary generateUserHistoryOutputBoundary = new UserHistoryPresenter();
+        return generateUserHistoryOutputBoundary.historyConnector(stats);
+    }
 }

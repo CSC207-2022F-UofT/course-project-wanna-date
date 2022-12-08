@@ -1,26 +1,20 @@
 package UI;
+
 import entities.UserAccount;
+import interfaceAdapters.UserHistoryController;
 import useCase.GenerateUserHistory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 
 /**
  * UI for the matched users page.
  */
 public class ViewMatchedUsers extends JFrame implements ActionListener {
-
-    // Get current user // Test user for now
-    UserAccount user1 = new UserAccount("johnd", "John Doe", 20, "her", "USA",
-            "ILL", "CHI", "M", "H","Watching", "123");
-    UserAccount currentUser;
-
-    GenerateUserHistory generateHistory = new GenerateUserHistory();
-
-    // Get the total number of matches this user has
-    String totalMatched = Integer.toString(generateHistory.getTotalMatches(user1));
 
     // New instance of JFrame
     JFrame frame = new JFrame();
@@ -35,14 +29,31 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
 
     // Statistics labels
     JLabel totalMatchedUsersTitle = new JLabel("Total Number of Matched Users: ");
-    JLabel totalMatchedUsersNumber = new JLabel(totalMatched);
 
-    // List of users they have Blocked
-    String[] matchedUsers = generateHistory.matchedUsernames(user1);
-    JComboBox<String> matchedBox = new JComboBox<>(matchedUsers);
+    String user1;
+
+    int selectedUserIndex;
 
 
-    public ViewMatchedUsers(){
+    public ViewMatchedUsers(String currUsername){
+
+        UserHistoryController userHistoryController = new UserHistoryController();
+        ArrayList<String> stats = userHistoryController.callGetUserStats(currUsername);
+
+        this.user1 = currUsername;
+
+        GenerateUserHistory generateHistory = new GenerateUserHistory();
+
+        // Get the UserAccount entity info from the given username and store it
+        UserAccount user1Acc = generateHistory.getCurrUserAccount(user1);
+
+        // Get the total number of matches this user has
+        String totalMatched = stats.get(7);
+        JLabel totalMatchedUsersNumber = new JLabel(totalMatched);
+
+        // List of users they have matched with
+        String[] matchedUsers = generateHistory.matchedUsernames(user1Acc);
+        JComboBox<String> matchedBox = new JComboBox<>(matchedUsers);
 
         // Add frames
         frame.add(matchedTitle);
@@ -58,6 +69,8 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
         frame.setSize(400, 550);
         frame.setLayout(null);
         frame.setVisible(true);
+        Color LIGHT_PINK = new Color(255, 175, 175, 150);
+        frame.getContentPane().setBackground(LIGHT_PINK);
 
         // Set the position and size of the labels
         matchedTitle.setBounds(25,15,500,50);
@@ -73,54 +86,66 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
         backButton.setBounds(15,475,370,35);
         backButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 20));
         backButton.setFocusable(false);
-        backButton.addActionListener(this);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // User clicks back button
+                new UserHistoryUI(user1);
+                frame.dispose();
+            }
+        });
 
         blockButton.setBounds(205,130,190,75);
         blockButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
         blockButton.setFocusable(false);
-        blockButton.addActionListener(this);
+        blockButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Use clicks block button
+                user1Acc.getBlockedUsers().add(user1Acc.getLikedUsers().get(selectedUserIndex));
+                user1Acc.getLikedUsers().remove(selectedUserIndex);
+                new ViewMatchedUsers(user1);
+                frame.dispose();
+            }
+        });
 
         unlikeButton.setBounds(15,130,190,75);
         unlikeButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
         unlikeButton.setFocusable(false);
-        unlikeButton.addActionListener(this);
+        unlikeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Use clicks unlike button
+                user1Acc.getLikedUsers().remove(selectedUserIndex);
+                new ViewMatchedUsers(user1);
+                frame.dispose();
+            }
+        });
 
         // Set the position and size of box
         matchedBox.setBounds(10, 80, 385, 30);
         matchedBox.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
         matchedBox.setVisible(true);
-        matchedBox.addActionListener(this);
+        matchedBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // User clicks Matched users drop down box
+                JComboBox cb = (JComboBox)e.getSource();
+                cb.getSelectedIndex();
+                selectedUserIndex = cb.getSelectedIndex();
+            }
+        });
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        // Get the user's selection from the dropdown box (combobox)
-        Object selection = matchedBox.getSelectedItem();
-
-        // User clicks Back button
-        if(e.getSource() == backButton){
-            new UserHistoryUI();
-            frame.dispose();
-        }
-        // User clicks Unlike Button
-        else if(e.getSource() == unlikeButton){
-            new ViewMatchedUsers();
-            frame.dispose();
-        }
-        // User clicks Block Button
-        else if(e.getSource() == blockButton){
-            new ViewMatchedUsers();
-            frame.dispose();
-        }
     }
 
 
     public static void main(String[] args) {
-        new ViewMatchedUsers();
+
     }
 }
-
-
 
