@@ -12,11 +12,14 @@ public class Recommendation implements RecInputBoundary {
     private RecOutputBoundary outputManager;
     private HashMap<String, ComparingProfile> nameToComp;
     private DatabaseManager databaseRef;
+    private RecDataGetter dataGetter;
 
 
     /**
      * Construct a Recommendation use case object with
      * the given output boundary and data access interface objects.
+     * This is in the case where the developer does not
+     * want to pass their own data getter in.
      *
      * @param outputManager     An output boundary, usually a presenter
      */
@@ -24,6 +27,7 @@ public class Recommendation implements RecInputBoundary {
         this.outputManager = outputManager;
         this.nameToComp = new HashMap<>();
         this.databaseRef = DatabaseManager.getDatabaseManager();
+        this.dataGetter = new RecDataGetFacade();
     }
 
     /**
@@ -235,8 +239,6 @@ public class Recommendation implements RecInputBoundary {
 
             // If the blocked user list does not contain the checked user, then add the
             // checked user to the filtered list
-            // Note that this might have a chance of failing if UserAccount objects
-            // have different memory addresses
             if (!(blockedUsers.contains(checkedUser))) {
                 filteredList.add(checkedUser);
             }
