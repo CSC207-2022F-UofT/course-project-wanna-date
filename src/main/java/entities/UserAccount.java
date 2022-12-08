@@ -60,16 +60,16 @@ public class UserAccount {
     private final String password;
 
     // The list of usernames that this user liked.
-    private ArrayList<UserAccount> likedUsers;
+    private final ArrayList<UserAccount> likedUsers;
 
     // The list of users who liked this user
-    private ArrayList<UserAccount> likedByUsers;
+    private final ArrayList<UserAccount> likedByUsers;
 
     // The list of usernames that this user blocked.
-    private ArrayList<UserAccount> blockedUsers;
+    private final ArrayList<UserAccount> blockedUsers;
 
     // The list of users who blocked this user
-    private ArrayList<UserAccount> blockedByUsers;
+    private final ArrayList<UserAccount> blockedByUsers;
 
     public UserAccount(String username,
                        String full_name,

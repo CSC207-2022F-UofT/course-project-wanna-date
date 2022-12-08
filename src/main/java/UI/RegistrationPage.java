@@ -6,105 +6,143 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/** A UI class for Registration feature.
+ * */
 public class RegistrationPage extends JFrame implements ActionListener{
 
-    JButton register_button2, back_button;
+    // === Class Variables ===
+
+    // Frame
     JFrame frame;
-    JLabel username_label, name_label, age_label, pronouns_label, country_label, province_label, city_label,
-            gender_label, sexuality_label, interest_label, pass_label;
+
+    // Labels
+    JLabel  title,
+            username_label, name_label, age_label, pronouns_label, country_label, province_label, city_label,
+            gender_label, sexuality_label, interest_label, pass_label,
+            username_rule, ageRule, pass_rule;
+
+    // Text fields
     final JTextField username_textField, name_textField, age_textField, country_textField,
             province_textField, city_textField, pass_textField;
+
+    // Drop-down options
     JComboBox<String> pronouns_comboBox, gender_comboBox, sexuality_comboBox, interest_comboBox;
 
+    // Buttons
+    JButton register_button2, back_button;
+
+    /** Constructor function that builds the Registration page.
+     * */
     public RegistrationPage() {
 
         frame = new JFrame();
 
+        title = new JLabel();
+        title.setText("Register new account to APHRODITE");
+        title.setHorizontalAlignment(JLabel.CENTER);
+        title.setBounds(0,50,1000,45);
+        title.setFont(new Font("Lucida Calligraphy", Font.BOLD, 30));
+        title.setFocusable(false);
+
         username_label = new JLabel();
         username_label.setText("Username:");
-        username_label.setBounds(200,100,200,40);
+        username_label.setBounds(200,125,200,40);
         username_label.setFocusable(false);
         username_textField = new JTextField(50);
-        username_textField.setBounds(400,100,200,40);
+        username_textField.setBounds(300,125,200,40);
+        username_rule = new JLabel();
+        username_rule.setText("Should be non-empty username");
+        username_rule.setBounds(500,125,200,40);
+        username_rule.setFocusable(false);
+        username_rule.setFont(new Font(username_rule.getFont().getName(),Font.ITALIC,username_rule.getFont().getSize()));
 
         name_label = new JLabel();
         name_label.setText("Full name:");
-        name_label.setBounds(200,150,200,40);
+        name_label.setBounds(200,175,200,40);
         name_label.setFocusable(false);
         name_textField = new JTextField(50);
-        name_textField.setBounds(400,150,200,40);
+        name_textField.setBounds(300,175,200,40);
 
         age_label = new JLabel();
         age_label.setText("Age:");
-        age_label.setBounds(200,200,200,40);
+        age_label.setBounds(200,225,200,40);
         age_label.setFocusable(false);
         age_textField = new JTextField(50);
-        age_textField.setBounds(400,200,200,40);
+        age_textField.setBounds(300,225,200,40);
+        ageRule = new JLabel();
+        ageRule.setText("Should be a number");
+        ageRule.setBounds(500, 225,200,40);
+        ageRule.setFocusable(false);
+        ageRule.setFont(new Font(ageRule.getFont().getName(),Font.ITALIC,ageRule.getFont().getSize()));
 
         pronouns_label = new JLabel();
         pronouns_label.setText("Pronouns:");
-        pronouns_label.setBounds(200,250,200,40);
+        pronouns_label.setBounds(200,275,200,40);
         pronouns_label.setFocusable(false);
         String[] list_pronouns = {"He/Him", "She/Her", "They/Them"};
         pronouns_comboBox = new JComboBox<>(list_pronouns);
-        pronouns_comboBox.setBounds(400,250,200,40);
+        pronouns_comboBox.setBounds(300,275,200,40);
         pronouns_comboBox.setBackground(Color.WHITE);
 
         country_label = new JLabel();
         country_label.setText("Country:");
-        country_label.setBounds(200,300,200,40);
+        country_label.setBounds(200,325,200,40);
         country_label.setFocusable(false);
         country_textField = new JTextField(50);
-        country_textField.setBounds(400,300,200,40);
+        country_textField.setBounds(300,325,200,40);
 
         province_label = new JLabel();
         province_label.setText("Province:");
-        province_label.setBounds(200,350,200,40);
+        province_label.setBounds(200,375,200,40);
         province_label.setFocusable(false);
         province_textField = new JTextField(50);
-        province_textField.setBounds(400,350,200,40);
+        province_textField.setBounds(300,375,200,40);
 
         city_label = new JLabel();
         city_label.setText("City:");
-        city_label.setBounds(200,400,200,40);
+        city_label.setBounds(200,425,200,40);
         city_label.setFocusable(false);
         city_textField = new JTextField(50);
-        city_textField.setBounds(400,400,200,40);
+        city_textField.setBounds(300,425,200,40);
 
         gender_label = new JLabel();
         gender_label.setText("Gender:");
-        gender_label.setBounds(200,450,200,40);
+        gender_label.setBounds(200,475,200,40);
         gender_label.setFocusable(false);
         String[] list_gender = {"M: Male", "F: Female", "N: Non-binary"};
         gender_comboBox = new JComboBox<>(list_gender);
-        gender_comboBox.setBounds(400,450,200,40);
+        gender_comboBox.setBounds(300,475,200,40);
         gender_comboBox.setBackground(Color.WHITE);
 
         sexuality_label = new JLabel();
         sexuality_label.setText("Sexuality:");
-        sexuality_label.setBounds(200,500,200,40);
+        sexuality_label.setBounds(200,525,200,40);
         sexuality_label.setFocusable(false);
         String[] list_sexuality = {"G: Gay", "L: Lesbian", "H: Heterosexual", "B: Binary"};
         sexuality_comboBox = new JComboBox<>(list_sexuality);
-        sexuality_comboBox.setBounds(400,500,200,40);
+        sexuality_comboBox.setBounds(300,525,200,40);
         sexuality_comboBox.setBackground(Color.WHITE);
 
         interest_label = new JLabel();
         interest_label.setText("Interest:");
-        interest_label.setBounds(200,550,200,40);
+        interest_label.setBounds(200,575,200,40);
         interest_label.setFocusable(false);
         String[] list_interest = {"Culinary", "Sports", "Watching", "Photography", "Travelling",
                 "Fashion", "Music", "Exercise", "Games", "Socializing", "Others"};
         interest_comboBox = new JComboBox<>(list_interest);
-        interest_comboBox.setBounds(400,550,200,40);
+        interest_comboBox.setBounds(300,575,200,40);
         interest_comboBox.setBackground(Color.WHITE);
 
         pass_label = new JLabel();
         pass_label.setText("Password:");
-        pass_label.setBounds(200,600,200,40);
+        pass_label.setBounds(200,625,200,40);
         pass_label.setFocusable(false);
         pass_textField = new JTextField(50);
-        pass_textField.setBounds(400,600,200,40);
+        pass_textField.setBounds(300,625,200,40);
+        pass_rule = new JLabel();
+        pass_rule.setText("Should be at least 8 characters, no white space");
+        pass_rule.setBounds(500,625,300,40);
+        pass_rule.setFont(new Font(pass_rule.getFont().getName(),Font.ITALIC,pass_rule.getFont().getSize()));
 
         // Create buttons
         register_button2 = new JButton("Register new account");
@@ -118,12 +156,16 @@ public class RegistrationPage extends JFrame implements ActionListener{
         back_button.addActionListener(this);
 
         // Add elements to frame
+        frame.add(title);
+
         frame.add(username_label);
         frame.add(username_textField);
+        frame.add(username_rule);
         frame.add(name_label);
         frame.add(name_textField);
         frame.add(age_label);
         frame.add(age_textField);
+        frame.add(ageRule);
         frame.add(pronouns_label);
         frame.add(pronouns_comboBox);
         frame.add(country_label);
@@ -140,6 +182,7 @@ public class RegistrationPage extends JFrame implements ActionListener{
         frame.add(interest_comboBox);
         frame.add(pass_label);
         frame.add(pass_textField);
+        frame.add(pass_rule);
 
         frame.add(register_button2);
         frame.add(back_button);
@@ -150,10 +193,15 @@ public class RegistrationPage extends JFrame implements ActionListener{
         frame.setLayout(null);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
+        Color LIGHT_PINK = new Color(255, 175, 175, 100);
+        frame.getContentPane().setBackground(LIGHT_PINK);
 
         setTitle("REGISTRATION FORM");
     }
 
+    /** Function that implements actionPerformed function from ActionListener interface.
+     * Contains the code for actions to the Register and Back buttons.
+     * */
     @Override
     public void actionPerformed(ActionEvent ae) {
 
@@ -225,7 +273,7 @@ public class RegistrationPage extends JFrame implements ActionListener{
                 if (registrationController.callIsValidRegistration(
                         username_value,
                         name_value,
-                        Integer.valueOf(age_value),
+                        Integer.parseInt(age_value),
                         pronouns_value,
                         country_value,
                         province_value,
@@ -234,7 +282,9 @@ public class RegistrationPage extends JFrame implements ActionListener{
                         sexuality_value,
                         interest_value,
                         pass_value)) {
-                    new ViewProfilePage(username_value);
+                    ViewProfilePage viewProfilePage = new ViewProfilePage(username_value);
+                    viewProfilePage.buildPage();
+                    frame.dispose();
                 } else {
                     new RegistrationErrorPage();
                 }
@@ -249,5 +299,6 @@ public class RegistrationPage extends JFrame implements ActionListener{
             frame.dispose();
         }
     }
+
 }
 
