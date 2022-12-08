@@ -10,7 +10,6 @@ import java.util.*;
 public class Recommendation implements RecInputBoundary {
 
     private RecOutputBoundary outputManager;
-    private RecDataAccessInterface dataManager;
     private HashMap<String, ComparingProfile> nameToComp;
     private DatabaseManager databaseRef;
 
@@ -20,11 +19,9 @@ public class Recommendation implements RecInputBoundary {
      * the given output boundary and data access interface objects.
      *
      * @param outputManager     An output boundary, usually a presenter
-     * @param dataManager       A data access interface object
      */
-    public Recommendation(RecOutputBoundary outputManager, RecDataAccessInterface dataManager){
+    public Recommendation(RecOutputBoundary outputManager){
         this.outputManager = outputManager;
-        this.dataManager = dataManager;
         this.nameToComp = new HashMap<>();
         this.databaseRef = DatabaseManager.getDatabaseManager();
     }

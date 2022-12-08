@@ -24,7 +24,7 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
     // kept inside here in case it's needed for future alterations
     RecOutputBoundary recPresenter = new RecPresenter(this);
     RecDataAccessInterface recDataAccess = new RecDataAccessor();
-    RecInputBoundary recUseCase = new Recommendation(recPresenter, recDataAccess);
+    RecInputBoundary recUseCase = new Recommendation(recPresenter);
     RecController recController = new RecController(recUseCase);
 
     // --- SET UP GUI
