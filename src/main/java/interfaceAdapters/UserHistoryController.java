@@ -1,15 +1,15 @@
 package interfaceAdapters;
 
-import entities.UserAccount;
 import useCase.GenerateUserHistoryInputBoundary;
+import useCase.GenerateUserHistory;
 
-public class UserHistoryController implements GenerateUserHistoryInputBoundary{
+import java.util.ArrayList;
 
-    /**
-    public String getUserHistory(GenerateUserHistoryInputBoundary input, UserAccount user,
-                                 UserHistoryPresenter presenter) {
-        String stats = input.userStats(user);
-        return presenter.presenterUserHistory();
+
+public class UserHistoryController {
+
+    public ArrayList<String> callGetUserStats(String username) {
+        GenerateUserHistoryInputBoundary generateUserHistoryInputBoundary = new GenerateUserHistory();
+        return generateUserHistoryInputBoundary.getUserStats(username);
     }
-     */
 }

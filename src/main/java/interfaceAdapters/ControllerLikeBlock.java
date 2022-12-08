@@ -39,8 +39,9 @@ public class ControllerLikeBlock {
         ViewProfileController view1 = new ViewProfileController();
         UserAccount user1 = view1.callSearchUser(userLiking);
         UserAccount user2 = view1.callSearchUser(userLiked);
-        PresenterLikeBlock presenter = new PresenterLikeBlock(); // calling main method in the use case
+         // calling main method in the use case
         boolean result = LikeIB.like(user1, user2);
+        PresenterLikeBlock presenter = new PresenterLikeBlock();
         if(result){
             return presenter.presenterLike(); //presenterLike function return String which will be used in the UI
         }

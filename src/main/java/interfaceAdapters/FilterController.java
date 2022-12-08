@@ -8,9 +8,9 @@ public class FilterController {
     public FilterType filterType;
     public FilterInputBoundary filter;
 
-
-    public FilterController(){
-        this.filter = new FilterUseCase();
+    // constructor method that allow UI to pass in presenter.
+    public FilterController(SearchFilterPresenter presenter){
+        this.filter = new FilterUseCase(presenter);
     }
 
     // for the different type in UI, set different types of filter
@@ -18,14 +18,9 @@ public class FilterController {
         this.filterType = type;
     }
 
-    public FilterInputBoundary getFilter(){
-        return this.filter;
-    }
 
-
-   // perform filter base on specific filter type with the help of input boundary.
+    // perform filter base on specific filter type with the help of input boundary.
     public void performFilter(){
         this.filter.apply(this.filterType);
     }
-
 }

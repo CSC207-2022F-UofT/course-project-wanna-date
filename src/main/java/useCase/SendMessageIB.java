@@ -1,11 +1,11 @@
-//package useCase;
-//
-//public interface SendMessageIB {
-//    public default boolean mutualUsers(SendMessageID user){
-//        return false;
-//    }
-//
-//    public default void sendMessage(){
-//
-//    }
-//}
+package useCase;
+
+/**
+ * An interface that is implemented by SendMessage.
+ */
+
+public interface SendMessageIB {
+    ReceiveMessageOD sendMessage(SendMessageID sendMessageID);
+
+    String[] getLikedUsers(String username);
+}

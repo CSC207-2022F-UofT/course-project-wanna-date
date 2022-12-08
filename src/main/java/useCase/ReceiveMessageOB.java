@@ -1,7 +1,9 @@
 package useCase;
 
+/**
+ * An interface that is implemented by SendMessagePresenter.
+ */
+
 public interface ReceiveMessageOB {
-    default String sendMessagePresenter(){
-        return null;
-    }
+    ReceiveMessageOD saveMessage(ReceiveMessageOD message);
 }

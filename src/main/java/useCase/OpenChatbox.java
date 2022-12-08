@@ -1,23 +1,23 @@
-//package useCase;
-//
-//public class OpenChatbox implements ChatBoxIB{
-//    RetrieveLike likes;
-//    ChatBoxOB presenter;
-//
-//    @Override
-//    public boolean mutualUsers(SendMessageID user) {
-//         // check if users are mutually liked
-//        if (presenter.chatBoxPresenter(user.messageSender, user.messageReceiver))
-//        {
-//            // open chatbox
-//            return true;
-//
-//        }
-//
-//        else
-//        {
-//            // show message that says, can't chat just yet!
-//            return false;
-//        }
-//    }
-//}
+package useCase;
+
+/**
+ * A class that checks whether the sender is liked by the person receiving the text.
+ */
+
+public class OpenChatbox implements ChatBoxIB {
+    final UserManager likes;
+    final ChatBoxOB chatPresenter;
+
+    public OpenChatbox(UserManager likes, ChatBoxOB chatPresenter){
+        this.likes = likes;
+        this.chatPresenter = chatPresenter;
+    }
+
+    @Override
+    public ChatBoxOD mutualUsers(SendMessageID messageInput){
+        // check if users are mutually liked
+        ChatBoxOD messageOutput = new ChatBoxOD(likes.getLikedByUsernames().contains(messageInput.getSendingUser()));
+        return chatPresenter.prepareChatBox(messageOutput);
+    }
+}
+

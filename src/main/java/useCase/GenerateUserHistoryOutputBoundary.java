@@ -1,7 +1,13 @@
 package useCase;
 
+import java.util.ArrayList;
+
+
 public interface GenerateUserHistoryOutputBoundary {
-    default String presenterUserHistory(){
-        return null;
-    }
+    /**
+     * GenerateUserHistory Output Boundary.
+     */
+    ArrayList<String> getUserInformation(ArrayList<String> info);
+
+    ArrayList<String> historyConnector(ArrayList<String> info);
 }
