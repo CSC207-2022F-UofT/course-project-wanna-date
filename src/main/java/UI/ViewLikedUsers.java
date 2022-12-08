@@ -1,7 +1,6 @@
 package UI;
 
 import entities.UserAccount;
-import interfaceAdapters.UserHistoryPresenter;
 import useCase.GenerateUserHistory;
 
 import javax.swing.*;
@@ -177,3 +176,4 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
         new ViewLikedUsers();
     }
 }
+

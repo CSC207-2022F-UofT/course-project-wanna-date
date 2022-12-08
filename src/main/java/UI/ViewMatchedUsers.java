@@ -1,5 +1,4 @@
 package UI;
-
 import entities.UserAccount;
 import useCase.GenerateUserHistory;
 
@@ -122,5 +121,6 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
         new ViewMatchedUsers();
     }
 }
+
 
 

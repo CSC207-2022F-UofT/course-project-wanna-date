@@ -6,8 +6,8 @@ public interface GenerateUserHistoryInputBoundary {
 
     default void getCurrentUserStats() {
         /**
-        CurrUserManager currUserManager = CurrUserManager.getCurrUserManager();
-        UserAccount account = currUserManager.getCurrUser();
+         CurrUserManager currUserManager = CurrUserManager.getCurrUserManager();
+         UserAccount account = currUserManager.getCurrUser();
          */
 
         UserAccount userTest1 = new UserAccount("johnd", "John Doe", 20, "her", "USA",
@@ -20,8 +20,9 @@ public interface GenerateUserHistoryInputBoundary {
                 "ON", "OTT", "F", "H","Watching", "124");
 
         //user1.setLikedUsers(user2);
-       // user1.setLikedUsers(user3);
+        // user1.setLikedUsers(user3);
     }
 
 
 }
+
