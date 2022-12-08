@@ -151,6 +151,7 @@ public class ViewProfilePage extends JFrame implements ActionListener {
             new FilterMenu("Initiate FilterMenu");
 
         } else if (ae.getSource() == message_button) {
+//            MessageUI(...);
 
         } else if (ae.getSource() == logout_button) {
             // Create LogoutController
