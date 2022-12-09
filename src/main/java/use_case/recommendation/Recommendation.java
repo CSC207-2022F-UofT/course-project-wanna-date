@@ -99,12 +99,6 @@ public class Recommendation implements RecInputBoundary {
         // the compList and finalUsers lists simultaneously
         Collections.sort(compList);
 
-        // Get a list of sorted final users where the users are strings
-        //ArrayList<String> sortedFinalUsers = getSortedFinalUsers(finalUsers, compList);
-
-        // Create recommended profiles in an object
-        //RecommendedProfiles profilesToShow = createRecOutput(currentUser, compList, sortedFinalUsers);
-
         // Create recommended profiles in an object
         RecommendedProfiles profilesToShow = this.recOutputBuilder.constructRecOutput(currentUser,
                 finalUsers, compList);
