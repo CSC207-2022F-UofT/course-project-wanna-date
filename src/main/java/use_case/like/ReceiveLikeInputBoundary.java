@@ -1,5 +1,5 @@
 package use_case.like;
-import entities.UserAccount;
+import entities.account.UserAccount;
 
 public interface ReceiveLikeInputBoundary {
     /** InputBoundary for like.

@@ -1,10 +1,10 @@
 package use_case;
 
-import entities.UserAccount;
-import frameworks_drivers.DataAccess;
-
+import entities.account.UserAccount;
+import frameworks_drivers.account.DataAccess;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import use_case.account.*;
 
 /** Create unit test for Login useCase. No tests for input boundary because it is an interface.
  */

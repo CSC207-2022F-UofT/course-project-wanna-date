@@ -1,7 +1,7 @@
 package use_case.recommendation;
 
-import entities.ComparingProfile;
-import entities.UserAccount;
+import entities.recommendation.ComparingProfile;
+import entities.account.UserAccount;
 
 import java.util.ArrayList;
 import java.util.Objects;

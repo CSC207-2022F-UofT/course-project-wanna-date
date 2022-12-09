@@ -1,13 +1,14 @@
 package UI.filter;
 
-import entities.UserAccount;
-import interface_adapters.FilterController;
-import interface_adapters.SearchFilterPresenter;
-import use_case.CurrUserManager;
-import use_case.DatabaseManager;
-import use_case.LocationFilterType;
-import use_case.SexFilterFemaleType;
-import use_case.SexFilterMaleType;
+import UI.like.UserLikeBlock;
+import entities.account.UserAccount;
+import interface_adapters.filter.FilterController;
+import interface_adapters.filter.SearchFilterPresenter;
+import use_case.account.CurrUserManager;
+import use_case.account.DatabaseManager;
+import use_case.filter.LocationFilterType;
+import use_case.filter.SexFilterFemaleType;
+import use_case.filter.SexFilterMaleType;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -26,6 +27,10 @@ public class FilterMenu extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
+        //Back button
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(20, 50, 90, 20);
+
         // creating drop down menu.
         JComboBox<String> jComboBox = new JComboBox<>(options);
         jComboBox.setBounds(150, 50, 140, 20);
@@ -39,6 +44,7 @@ public class FilterMenu extends JFrame{
         add(jButton);
         add(jComboBox);
         add(jLabel);
+        add(backButton);
 
         // create 5 result buttons and store them in a list.
         ArrayList<JButton> userList = new ArrayList<>();
@@ -72,6 +78,11 @@ public class FilterMenu extends JFrame{
             users.setVisible(false);
             users.setEnabled(false);
         }
+
+        //when user clicks back button
+        backButton.addActionListener(e -> {
+            setVisible(false);
+        });
 
         jButton.addActionListener(e -> {
             String selectedFilter = "You selected " + jComboBox.getItemAt(jComboBox.getSelectedIndex());

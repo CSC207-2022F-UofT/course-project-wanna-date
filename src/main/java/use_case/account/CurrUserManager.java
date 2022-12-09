@@ -1,6 +1,6 @@
 package use_case.account;
 
-import entities.UserAccount;
+import entities.account.UserAccount;
 
 /** A useCase singleton Class that stores the current user's UserAccount object.
  * */

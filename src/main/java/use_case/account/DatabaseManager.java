@@ -1,7 +1,7 @@
 package use_case.account;
 
-import entities.UserAccount;
-import entities.UserDatabase;
+import entities.account.UserAccount;
+import entities.account.UserDatabase;
 
 import java.util.Arrays;
 import java.util.HashMap;

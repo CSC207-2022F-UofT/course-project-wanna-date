@@ -1,6 +1,6 @@
 package use_case.filter;
 
-import entities.UserAccount;
+import entities.account.UserAccount;
 
 public interface FilterType {
 

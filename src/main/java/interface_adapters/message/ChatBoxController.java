@@ -1,6 +1,6 @@
 package interface_adapters.message;
 
-import use_case.*;
+import use_case.message.*;
 
 /**
  * A controller that calls on ChatBoxIB and thus interacts with OpenChatbox

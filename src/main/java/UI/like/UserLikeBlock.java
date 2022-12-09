@@ -1,9 +1,10 @@
 package UI.like;
-import entities.UserAccount;
-import frameworks_drivers.DataAccess;
-import interface_adapters.ControllerLikeBlock;
-import interface_adapters.ViewProfileController;
-import use_case.DatabaseManager;
+import UI.account.ViewProfilePage;
+import entities.account.UserAccount;
+import frameworks_drivers.account.DataAccess;
+import interface_adapters.like.ControllerLikeBlock;
+import interface_adapters.account.ViewProfileController;
+import use_case.account.DatabaseManager;
 
 
 import javax.swing.*;

@@ -1,8 +1,8 @@
 package frameworks_drivers.message;
 
-import interface_adapters.MessageDSGateway;
-import use_case.SendMessageDS;
-import use_case.SendMessageID;
+import interface_adapters.message.MessageDSGateway;
+import use_case.message.SendMessageDS;
+import use_case.message.SendMessageID;
 
 import java.io.*;
 import java.time.LocalDateTime;

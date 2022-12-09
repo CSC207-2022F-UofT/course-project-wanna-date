@@ -1,8 +1,8 @@
 package tutorial;
 
-import entities.UserAccount;
-import use_case.DatabaseManager;
-import use_case.Search;
+import entities.account.UserAccount;
+import use_case.account.DatabaseManager;
+import use_case.filter.Search;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 

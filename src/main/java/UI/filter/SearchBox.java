@@ -1,10 +1,11 @@
 package UI.filter;
 
-import entities.UserAccount;
-import interface_adapters.SearchController;
-import interface_adapters.SearchFilterPresenter;
-import use_case.CurrUserManager;
-import use_case.DatabaseManager;
+import UI.like.UserLikeBlock;
+import entities.account.UserAccount;
+import interface_adapters.filter.SearchController;
+import interface_adapters.filter.SearchFilterPresenter;
+import use_case.account.CurrUserManager;
+import use_case.account.DatabaseManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,6 +22,10 @@ public class SearchBox extends JFrame {
     public UserAccount[] results = {};
     public SearchFilterPresenter presenter = new SearchFilterPresenter(this);
     public SearchController searchController = new SearchController(presenter);
+
+    //Back button
+    JButton backButton = new JButton("Back");
+
 
     public static void main(String[] args) {
         DatabaseManager manager = DatabaseManager.getDatabaseManager();
@@ -66,6 +71,9 @@ public class SearchBox extends JFrame {
         panel.add(user4);
         panel.add(user5);
 
+        panel.add(backButton);
+        backButton.setBounds(20, 50, 90, 20);
+
 
         //set the buttons to invisible and disabled
         for (JButton users : userList){
@@ -73,6 +81,10 @@ public class SearchBox extends JFrame {
             users.setEnabled(false);
         }
 
+        //when user clicks back button
+        backButton.addActionListener(e -> {
+            setVisible(false);
+        });
 
         //perform search when button is clicked
         searchB.addActionListener(e -> {
@@ -92,7 +104,7 @@ public class SearchBox extends JFrame {
                         CurrUserManager currUserManager = CurrUserManager.getCurrUserManager();
                         String account = currUserManager.getCurrUser().getUsername();
                         UserLikeBlock profile = new UserLikeBlock(account, targetUser.getUsername());
-                        getContentPane().remove(panel);
+                        setVisible(false);
                     });
                 }
             }

@@ -1,6 +1,6 @@
 package UI.account;
 
-import interface_adapters.RegistrationController;
+import interface_adapters.account.RegistrationController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,7 +53,7 @@ public class RegistrationPage extends JFrame implements ActionListener{
         username_textField.setBounds(300,125,200,40);
         username_rule = new JLabel();
         username_rule.setText("Should be non-empty username");
-        username_rule.setBounds(500,125,200,40);
+        username_rule.setBounds(500,125,400,40);
         username_rule.setFocusable(false);
         username_rule.setFont(new Font(username_rule.getFont().getName(),Font.ITALIC,username_rule.getFont().getSize()));
 

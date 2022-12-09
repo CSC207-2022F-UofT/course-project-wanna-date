@@ -1,8 +1,8 @@
 package interface_adapters.message;
 
-import use_case.ReceiveMessageOD;
-import use_case.SendMessageIB;
-import use_case.SendMessageID;
+import use_case.message.ReceiveMessageOD;
+import use_case.message.SendMessageIB;
+import use_case.message.SendMessageID;
 
 /**
  * A controller that calls on SendMessageIB to save the given message to the message database.

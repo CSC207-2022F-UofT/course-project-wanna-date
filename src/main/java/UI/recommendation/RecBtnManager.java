@@ -1,9 +1,10 @@
 package UI.recommendation;
 
-import interface_adapters.RecController;
-import interface_adapters.RecPresenter;
-import interface_adapters.RecShowRecBoundary;
-import use_case.*;
+import UI.account.ViewProfilePage;
+import interface_adapters.recommendation.RecController;
+import interface_adapters.recommendation.RecPresenter;
+import interface_adapters.recommendation.RecShowRecBoundary;
+import use_case.recommendation.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

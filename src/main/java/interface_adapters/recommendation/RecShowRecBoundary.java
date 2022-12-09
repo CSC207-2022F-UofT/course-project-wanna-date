@@ -1,6 +1,6 @@
 package interface_adapters.recommendation;
 
-import use_case.RecommendedProfiles;
+import use_case.recommendation.RecommendedProfiles;
 
 public interface RecShowRecBoundary {
 

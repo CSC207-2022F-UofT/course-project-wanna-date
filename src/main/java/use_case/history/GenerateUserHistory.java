@@ -1,7 +1,8 @@
 package use_case.history;
 
-import entities.UserAccount;
-import interface_adapters.UserHistoryPresenter;
+import entities.account.UserAccount;
+import interface_adapters.history.UserHistoryPresenter;
+import use_case.account.DatabaseManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package useCase;
+package use_case.message;
 public class ChatBoxOD {
     boolean isMutual;
 

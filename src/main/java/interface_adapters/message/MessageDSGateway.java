@@ -1,6 +1,6 @@
 package interface_adapters.message;
 
-import use_case.SendMessageDS;
+import use_case.message.SendMessageDS;
 
 import java.time.LocalDateTime;
 import java.util.Map;

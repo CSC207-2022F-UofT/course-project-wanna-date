@@ -1,12 +1,13 @@
 package use_case;
 
-import UI.ViewProfilePage;
-import entities.UserAccount;
-import frameworks_drivers.DataAccess;
+import UI.account.ViewProfilePage;
+import entities.account.UserAccount;
+import frameworks_drivers.account.DataAccess;
 
-import interface_adapters.ViewProfilePresenter;
+import interface_adapters.account.ViewProfilePresenter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import use_case.account.*;
 
 import java.io.IOException;
 import java.util.ArrayList;

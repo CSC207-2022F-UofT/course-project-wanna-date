@@ -1,12 +1,15 @@
 package UI.account;
 
-import entities.MessageFactory;
-import entities.MessageFormat;
-import frameworks_drivers.MessageFileUser;
-import interface_adapters.*;
-import use_case.ReceiveMessageOB;
-import use_case.SendMessage;
-import use_case.SendMessageIB;
+import UI.history.*;
+import UI.message.*;
+import UI.filter.*;
+import UI.recommendation.*;
+import entities.message.MessageFactory;
+import entities.message.MessageFormat;
+import frameworks_drivers.message.MessageFileUser;
+import interface_adapters.account.*;
+import interface_adapters.message.*;
+import use_case.message.*;
 
 import javax.swing.*;
 import java.awt.*;

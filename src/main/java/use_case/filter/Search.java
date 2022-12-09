@@ -1,7 +1,8 @@
 package use_case.filter;
 
-import entities.UserAccount;
-import interface_adapters.testPresenter;
+import entities.account.UserAccount;
+import interface_adapters.filter.testPresenter;
+import use_case.account.DatabaseManager;
 
 import java.util.ArrayList;
 

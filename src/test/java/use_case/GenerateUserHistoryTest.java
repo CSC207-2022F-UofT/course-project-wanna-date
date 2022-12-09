@@ -1,8 +1,9 @@
 package use_case;
 
-import entities.UserAccount;
+import entities.account.UserAccount;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import use_case.history.GenerateUserHistory;
 
 import java.util.ArrayList;
 

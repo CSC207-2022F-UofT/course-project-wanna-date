@@ -1,10 +1,11 @@
 package interface_adapters.like;
 
-import entities.UserAccount;
-import use_case.ReceiveBlock;
-import use_case.ReceiveBlockInputBoundary;
-import use_case.ReceiveLike;
-import use_case.ReceiveLikeInputBoundary;
+import entities.account.UserAccount;
+import interface_adapters.account.ViewProfileController;
+import use_case.like.ReceiveBlock;
+import use_case.like.ReceiveBlockInputBoundary;
+import use_case.like.ReceiveLike;
+import use_case.like.ReceiveLikeInputBoundary;
 
 public class ControllerLikeBlock {
     /** Controller for both like and block. There are 2 functions one for each action. Both function return String

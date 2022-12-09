@@ -1,6 +1,6 @@
 package frameworks_drivers.account;
 
-import use_case.DatabaseManager;
+import use_case.account.DatabaseManager;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,7 +23,7 @@ public class DataAccess {
         DatabaseManager databaseManager = DatabaseManager.getDatabaseManager();
         try
         {
-            BufferedReader br = new BufferedReader(new FileReader("src/main/java/frameworksDrivers/database.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("src/main/java/frameworks_drivers/database.csv"));
             br.readLine();
             String[] data_from_csv = {};
             while ((line = br.readLine()) != null)

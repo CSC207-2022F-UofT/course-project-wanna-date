@@ -2,7 +2,8 @@ package use_case;
 
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import use_case.*;
+import use_case.filter.*;
+import use_case.account.*;
 
 public class FilterTest {
     DatabaseManager manager = DatabaseManager.getDatabaseManager();

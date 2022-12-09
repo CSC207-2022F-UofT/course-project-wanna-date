@@ -1,11 +1,12 @@
-package useCase;
+package use_case;
 
-import entities.*;
-import frameworksDrivers.MessageFileUser;
-import interfaceAdapters.MessageDSGateway;
-import interfaceAdapters.SendMessagePresenter;
+import entities.message.*;
+import frameworks_drivers.message.MessageFileUser;
+import interface_adapters.message.MessageDSGateway;
+import interface_adapters.message.SendMessagePresenter;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import use_case.message.*;
 
 import java.io.*;
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package interface_adapters.history;
 
-import use_case.GenerateUserHistoryOutputBoundary;
+import use_case.history.GenerateUserHistoryOutputBoundary;
 
 import java.util.ArrayList;
 

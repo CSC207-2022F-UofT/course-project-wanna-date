@@ -1,9 +1,10 @@
 package UI.message;
 
-import entities.*;
-import frameworks_drivers.MessageFileUser;
-import interface_adapters.*;
-import use_case.*;
+import UI.account.ViewProfilePage;
+import entities.message.*;
+import frameworks_drivers.message.MessageFileUser;
+import interface_adapters.message.*;
+import use_case.message.*;
 
 import javax.swing.*;
 import java.awt.*;

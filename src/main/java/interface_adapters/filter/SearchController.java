@@ -1,8 +1,8 @@
 package interface_adapters.filter;
 
-import use_case.Search;
-import use_case.SearchFilterOutputBoundary;
-import use_case.SearchInputBoundary;
+import use_case.filter.Search;
+import use_case.filter.SearchFilterOutputBoundary;
+import use_case.filter.SearchInputBoundary;
 
 public class SearchController {
     public String toSearch;

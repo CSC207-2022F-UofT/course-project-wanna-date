@@ -1,8 +1,8 @@
 package interface_adapters.filter;
 
-import use_case.FilterType;
-import use_case.FilterUseCase;
-import use_case.FilterInputBoundary;
+import use_case.filter.FilterType;
+import use_case.filter.FilterUseCase;
+import use_case.filter.FilterInputBoundary;
 
 public class FilterController {
     public FilterType filterType;

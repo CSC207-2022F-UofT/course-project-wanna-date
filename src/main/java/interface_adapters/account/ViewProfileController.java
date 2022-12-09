@@ -1,9 +1,9 @@
 package interface_adapters.account;
 
-import entities.UserAccount;
-import use_case.ViewProfileInputBoundary;
-import use_case.ViewProfileInputManager;
-import use_case.ViewProfileOutputBoundary;
+import entities.account.UserAccount;
+import use_case.account.ViewProfileInputBoundary;
+import use_case.account.ViewProfileInputManager;
+import use_case.account.ViewProfileOutputBoundary;
 
 /** A Controller class that controls the ViewProfile feature.
  * This class is called when the application has to view a user's profile page.

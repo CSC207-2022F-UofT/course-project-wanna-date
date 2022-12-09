@@ -1,6 +1,6 @@
 package UI.account;
 
-import interfaceAdapters.LoginController;
+import interface_adapters.account.LoginController;
 
 import javax.swing.*;
 import java.awt.*;

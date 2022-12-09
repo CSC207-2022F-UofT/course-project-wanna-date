@@ -1,7 +1,7 @@
 package interface_adapters.account;
 
-import frameworks_drivers.DataAccess;
-import use_case.*;
+import frameworks_drivers.account.DataAccess;
+import use_case.account.*;
 
 /** A Controller class that controls the Login feature.
  * This class is called when a user first logs in to the application.

@@ -1,10 +1,11 @@
 package use_case;
 
-import entities.UserAccount;
-import interface_adapters.RecShowRecBoundary;
+import entities.account.UserAccount;
 import interface_adapters.FakeRecPresenter;
-import interface_adapters.FakeRecUI;
+import interface_adapters.recommendation.*;
 import org.junit.jupiter.api.Test;
+import use_case.account.*;
+import use_case.recommendation.*;
 
 import java.util.HashMap;
 import java.util.Objects;

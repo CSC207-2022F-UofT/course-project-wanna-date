@@ -1,6 +1,6 @@
 package interface_adapters.like;
-import use_case.RetrieveLikeOutputBoundary;
-import use_case.RetrieveBlockOutputBoundary;
+import use_case.like.RetrieveLikeOutputBoundary;
+import use_case.like.RetrieveBlockOutputBoundary;
 
 public class PresenterLikeBlock implements RetrieveBlockOutputBoundary, RetrieveLikeOutputBoundary{
     /** Presenter for both Like and Block action

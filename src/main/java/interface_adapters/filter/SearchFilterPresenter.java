@@ -1,9 +1,9 @@
 package interface_adapters.filter;
 
-import entities.UserAccount;
-import UI.FilterMenu;
-import UI.SearchBox;
-import use_case.SearchFilterOutputBoundary;
+import entities.account.UserAccount;
+import UI.filter.FilterMenu;
+import UI.filter.SearchBox;
+import use_case.filter.SearchFilterOutputBoundary;
 
 public class SearchFilterPresenter implements SearchFilterOutputBoundary {
     public SearchBox box = null;

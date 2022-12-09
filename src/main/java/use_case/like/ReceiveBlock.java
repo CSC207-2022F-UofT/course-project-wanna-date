@@ -1,6 +1,6 @@
 package use_case.like;
 
-import entities.UserAccount;
+import entities.account.UserAccount;
 
 public class ReceiveBlock implements ReceiveBlockInputBoundary{
     /** This is the use case class for Block that add user2 that has been blocked to user1's blocked_users entity also

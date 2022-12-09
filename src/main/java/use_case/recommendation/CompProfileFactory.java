@@ -1,6 +1,6 @@
 package use_case.recommendation;
 
-import entities.ComparingProfile;
+import entities.recommendation.ComparingProfile;
 
 public class CompProfileFactory {
 

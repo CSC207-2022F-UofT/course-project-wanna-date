@@ -1,5 +1,7 @@
 package use_case.message;
 
+import use_case.account.UserManager;
+
 /**
  * A class that checks whether the sender is liked by the person receiving the text.
  */

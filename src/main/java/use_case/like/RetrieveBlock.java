@@ -1,5 +1,5 @@
 package use_case.like;
-import interface_adapters.PresenterLikeBlock;
+import interface_adapters.like.PresenterLikeBlock;
 
 public class RetrieveBlock {
     /** Use case that is allowed to call function in presenter.

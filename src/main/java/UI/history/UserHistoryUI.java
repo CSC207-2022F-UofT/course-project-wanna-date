@@ -1,5 +1,7 @@
 package UI.history;
 
+import UI.account.ViewProfilePage;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

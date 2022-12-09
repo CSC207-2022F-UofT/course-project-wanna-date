@@ -1,10 +1,12 @@
 package use_case;
 
 
-import entities.UserAccount;
-import interface_adapters.ChatBoxPresenter;
+import entities.account.UserAccount;
+import interface_adapters.message.ChatBoxPresenter;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import use_case.account.UserManager;
+import use_case.message.*;
 
 public class OpenChatBoxTest {
     UserAccount sender = new UserAccount("AL", "AML", 20, "her", "CAN",

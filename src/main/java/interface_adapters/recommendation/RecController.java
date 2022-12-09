@@ -1,8 +1,8 @@
 package interface_adapters.recommendation;
 
-import UI.UserLikeBlock;
-import use_case.RecInputBoundary;
-import use_case.RecommendedProfiles;
+import UI.like.UserLikeBlock;
+import use_case.recommendation.RecInputBoundary;
+import use_case.recommendation.RecommendedProfiles;
 
 public class RecController {
 

@@ -1,6 +1,6 @@
 package use_case.like;
-import entities.UserAccount;
-import interface_adapters.PresenterLikeBlock;
+import entities.account.UserAccount;
+import interface_adapters.like.PresenterLikeBlock;
 
 import java.util.ArrayList;
 

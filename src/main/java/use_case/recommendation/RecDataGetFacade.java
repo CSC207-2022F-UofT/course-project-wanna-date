@@ -1,6 +1,7 @@
 package use_case.recommendation;
 
-import entities.UserAccount;
+import entities.account.UserAccount;
+import use_case.account.*;
 
 import java.util.HashMap;
 

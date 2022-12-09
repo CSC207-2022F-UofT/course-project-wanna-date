@@ -1,7 +1,7 @@
 package frameworks_drivers.account;
 
-import use_case.DataExportInterface;
-import use_case.DatabaseManager;
+import use_case.account.DataExportInterface;
+import use_case.account.DatabaseManager;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -17,7 +17,7 @@ public class DataExport {
         DataExportInterface dataExportInterface = DatabaseManager.getDatabaseManager();
         Object[][] data_to_csv = dataExportInterface.writeDatabase();
 
-        File csvFile = new File("src/main/java/frameworksDrivers/database.csv");
+        File csvFile = new File("src/main/java/frameworks_drivers/database.csv");
         FileWriter fileWriter = new FileWriter(csvFile);
 
         for (Object[] data: data_to_csv) {

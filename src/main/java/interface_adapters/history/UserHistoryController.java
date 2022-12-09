@@ -1,7 +1,7 @@
 package interface_adapters.history;
 
-import use_case.GenerateUserHistoryInputBoundary;
-import use_case.GenerateUserHistory;
+import use_case.history.GenerateUserHistoryInputBoundary;
+import use_case.history.GenerateUserHistory;
 
 import java.util.ArrayList;
 

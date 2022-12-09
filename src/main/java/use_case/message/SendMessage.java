@@ -1,7 +1,9 @@
 package use_case.message;
 
-import entities.*;
-import interface_adapters.MessageDSGateway;
+import entities.account.UserAccount;
+import entities.message.*;
+import interface_adapters.message.MessageDSGateway;
+import use_case.account.DatabaseManager;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

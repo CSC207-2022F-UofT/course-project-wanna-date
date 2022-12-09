@@ -1,7 +1,7 @@
 package interface_adapters.recommendation;
 
-import use_case.RecOutputBoundary;
-import use_case.RecommendedProfiles;
+import use_case.recommendation.RecOutputBoundary;
+import use_case.recommendation.RecommendedProfiles;
 
 public class RecPresenter implements RecOutputBoundary {
 

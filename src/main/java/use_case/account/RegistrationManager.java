@@ -1,6 +1,6 @@
-package useCase;
+package use_case.account;
 
-import entities.UserAccount;
+import entities.account.UserAccount;
 
 import java.util.ArrayList;
 

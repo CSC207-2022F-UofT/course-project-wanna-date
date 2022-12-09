@@ -1,6 +1,6 @@
 package interface_adapters.message;
 
-import use_case.*;
+import use_case.message.*;
 
 public class ChatBoxPresenter implements ChatBoxOB {
     @Override

@@ -1,6 +1,6 @@
 package interface_adapters.account;
 
-import use_case.ViewProfileOutputBoundary;
+import use_case.account.ViewProfileOutputBoundary;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package use_case.like;
 
-import entities.UserAccount;
+import entities.account.UserAccount;
 
 public interface ReceiveBlockInputBoundary {
     /** This is the input boundary for block action. Below there is a default method without implementation that is also

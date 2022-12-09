@@ -1,7 +1,7 @@
 package interface_adapters.message;
 
-import use_case.ReceiveMessageOB;
-import use_case.ReceiveMessageOD;
+import use_case.message.ReceiveMessageOB;
+import use_case.message.ReceiveMessageOD;
 
 /**
  * The presenter outputs the time that the message was delivered.

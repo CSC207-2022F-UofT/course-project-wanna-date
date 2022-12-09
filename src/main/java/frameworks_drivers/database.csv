@@ -1,6 +1,6 @@
 
-"lov123","Lovina","20","She/Her","null","null","null","F","H","Music","12345678","[deepvoice; panda]","[]","[]","[]"
-"panda","Peter Panda","33","He/Him","null","null","null","M","B","Exercise","12345678","[deepvoice]","[]","[]","[]"
+"lov123","Lovina","20","She/Her","null","null","null","F","H","Music","12345678","[panda]","[panda]","[]","[]"
+"panda","Peter Panda","33","He/Him","null","null","null","M","B","Exercise","12345678","[deepvoice; lov123]","[]","[]","[]"
 "adel","Adeline","20","She/Her","Indonesia","West Jakarta","Jakarta","F","H","Watching","12345678","[]","[]","[]","[]"
 "cat_victorious","Ariana Grande","30","She/Her","U.S.","","New York","F","G","Culinary","lalalala","[]","[]","[]","[]"
 "goat","Lionel Messi","30","He/Him","null","null","null","M","H","Exercise","barcelona","[deepvoice]","[]","[]","[]"

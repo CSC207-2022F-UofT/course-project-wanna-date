@@ -1,7 +1,7 @@
 package use_case.filter;
 
-import entities.UserAccount;
-import interface_adapters.testPresenter;
+import entities.account.UserAccount;
+import interface_adapters.filter.testPresenter;
 
 public class FilterUseCase implements FilterInputBoundary{
     public SearchFilterOutputBoundary presenter;

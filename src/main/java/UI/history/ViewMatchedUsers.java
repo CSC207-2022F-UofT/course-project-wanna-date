@@ -1,8 +1,8 @@
 package UI.history;
 
-import entities.UserAccount;
-import interface_adapters.UserHistoryController;
-import use_case.GenerateUserHistory;
+import entities.account.UserAccount;
+import interface_adapters.history.UserHistoryController;
+import use_case.history.GenerateUserHistory;
 
 import javax.swing.*;
 import java.awt.*;

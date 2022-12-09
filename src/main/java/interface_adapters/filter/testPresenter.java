@@ -1,7 +1,7 @@
 package interface_adapters.filter;
 
-import entities.UserAccount;
-import use_case.SearchFilterOutputBoundary;
+import entities.account.UserAccount;
+import use_case.filter.SearchFilterOutputBoundary;
 
 public class testPresenter implements SearchFilterOutputBoundary {
     @Override

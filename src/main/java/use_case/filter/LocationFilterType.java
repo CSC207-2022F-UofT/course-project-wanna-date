@@ -1,6 +1,7 @@
 package use_case.filter;
 
-import entities.UserAccount;
+import entities.account.UserAccount;
+import use_case.account.*;
 
 import java.util.ArrayList;
 import java.util.Objects;
