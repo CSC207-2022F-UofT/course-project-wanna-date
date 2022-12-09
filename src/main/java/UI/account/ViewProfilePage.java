@@ -219,7 +219,6 @@ public class ViewProfilePage extends JFrame implements ActionListener, ViewProfi
         } else if (ae.getSource() == searchButton) {
             new SearchBox("Initiate SearchBox");
             new FilterMenu("Initiate FilterMenu");
-            frame.dispose();
         } else if (ae.getSource() == messageButton) {
             String name = nameLabel.getText().substring(11);
             String username = usernameLabel.getText().substring(10);
