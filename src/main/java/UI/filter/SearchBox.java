@@ -28,14 +28,14 @@ public class SearchBox extends JFrame {
 
 
     public static void main(String[] args) {
-        DatabaseManager manager = DatabaseManager.getDatabaseManager();
+        //DatabaseManager manager = DatabaseManager.getDatabaseManager();
         //sample database for testing
-        String[] sample = {"Jiazi,Test 4,44,She/Her,trt,ON,CA,F,H,Others,44448888",
-                "Jiaziismycat,Lovina,20,She/Her,trt,ON,CA,F,H,Music,12345678",
-                "panda,Peter Panda,33,He/Him,trt,ON,CA,M,B,Exercise,12345678",
-                "test1,Test 2,22,He/Him,null,null,null,M,G,Culinary,22222222"
-        };
-        manager.createDatabase(sample);
+        //String[] sample = {"Jiazi,Test 4,44,She/Her,trt,ON,CA,F,H,Others,44448888",
+        //        "Jiaziismycat,Lovina,20,She/Her,trt,ON,CA,F,H,Music,12345678",
+        //        "panda,Peter Panda,33,He/Him,trt,ON,CA,M,B,Exercise,12345678",
+        //        "test1,Test 2,22,He/Him,null,null,null,M,G,Culinary,22222222"
+        //};
+        //manager.createDatabase(sample);
         new SearchBox("Search For Username");
     }
 
