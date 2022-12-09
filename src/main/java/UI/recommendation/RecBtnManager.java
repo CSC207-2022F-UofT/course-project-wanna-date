@@ -7,6 +7,7 @@ import interface_adapters.recommendation.RecShowRecBoundary;
 import use_case.recommendation.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -55,9 +56,19 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
 
         // Make settings for frame
         recommendFrame.add(generateBtn);
-        recommendFrame.setSize(400,400);
+        recommendFrame.setSize(600,400);
         recommendFrame.setLayout(null);
         recommendFrame.setVisible(true);
+
+        // Set labels of how the algo works
+        JLabel title = new JLabel();
+        String text = "Click on the button to get random recommendations of users (5 max). If you have less than 5, then there are less people compatible with you due to you blocking them or not having compatible sexualities.";
+        title.setText(text);
+        title.setHorizontalAlignment(JLabel.CENTER);
+        title.setBounds(10, 400, 180, 300);
+        title.setFont(new Font("Lucida Calligraphy", Font.BOLD, 12));
+        title.setFocusable(false);
+        recommendFrame.add(title);
 
         // Make settings for the recommendation button, including the addition of an action listener
         generateBtn.setBounds(0,0,200,30);
@@ -146,6 +157,7 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
             } else if (actSrc == recBtn5) {
                 recController.formLBControl(4);
             }
+            recommendFrame.dispose();
         }
 
     }
@@ -176,11 +188,4 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
         recommendFrame.validate();
         recommendFrame.repaint();
     }
-
-//    /**
-//     * Do general set-up.
-//     */
-//    public static void main(String[] args) {
-//        new RecBtnManager();
-//    }
 }

@@ -2,7 +2,9 @@ package use_case;
 
 import entities.account.UserAccount;
 import interface_adapters.FakeRecPresenter;
+import interface_adapters.FakeRecUI;
 import interface_adapters.recommendation.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import use_case.account.*;
 import use_case.recommendation.*;
@@ -21,85 +23,142 @@ import static org.mockito.Mockito.*;
 class RecommendationTest {
 
     // Create generic classes
+    RecShowRecBoundary fakeRecUI = new FakeRecUI();
     RecOutputBoundary recPresenter = new FakeRecPresenter();
-    DatabaseManager someDatabase = DatabaseManager.getDatabaseManager();
-    CurrUserManager someUserManager = CurrUserManager.getCurrUserManager();
 
     // Create generic users
-    UserAccount user1 = new UserAccount("AL", "AML", 20, "her", "CAN",
-            "ON", "TOR", "F", "H","Watching", "12356435");
-    UserAccount user2 = new UserAccount("JSmith", "Jessica Smith", 20, "her",
-            "CAN", "ON", "TOR", "F", "H","Music", "124564565");
-
-    // TODO: figure out a way to do testing by means of the DatabaseManager.
-    //  After consulting in office hours, I have figured out a way to test the Recommendation use case despite the
-    //  singleton DataManager. I will write unit tests by use of mocking via Mockito and JUnit.
-    //  However, I was unable to finish these tests since currently there are errors in the program which have
-    //  to be fixed.
-    //  TODO: add return values to methods I will test, because it won't matter since I don't use return anyway
-    // Sources:
-    // https://www.vogella.com/tutorials/Mockito/article.html
-    // https://semaphoreci.com/community/tutorials/stubbing-and-mocking-with-mockito-2-and-junit
+    UserAccount user1 = new UserAccount("AL", "AML", 20, "She/Her", "CAN",
+            "ON", "TOR", "F", "B", "Watching", "12356435");
+    UserAccount user1clone = new UserAccount("AL", "AML", 20, "She/Her", "CAN",
+            "ON", "TOR", "F", "B", "Watching", "12356435");
+    UserAccount user2 = new UserAccount("JSmith", "Jessica Smith", 20, "She/Her",
+            "CAN", "ON", "TOR", "F", "B","Music", "124564565");
+    UserAccount user2clone = new UserAccount("JSmith", "Jessica Smith", 20, "She/Her",
+            "CAN", "ON", "TOR", "F", "B","Music", "124564565");
+    UserAccount user3 = new UserAccount("MSmith", "Macy Smith", 20, "She/Her",
+            "CAN", "ON", "TOR", "N", "B","Travelling", "124564565");
+    UserAccount user4 = new UserAccount("SSol", "Shady Sol", 20, "He/Him",
+            "CAN", "ON", "TOR", "M", "B","Music", "124564565");
+    UserAccount user5 = new UserAccount("LoveIsLove", "Layla Lovelace", 20, "She/Her",
+            "CAN", "ON", "TOR", "F", "L","Culinary", "124564565");
+    UserAccount user6 = new UserAccount("AristA", "Arist Bravo", 20, "He/Him",
+            "CAN", "ON", "TOR", "M", "H","Watching", "124564565");
+    UserAccount user6clone = new UserAccount("AristA", "Arist Bravo", 20, "He/Him",
+            "CAN", "ON", "TOR", "M", "H","Watching", "124564565");
+    UserAccount user7 = new UserAccount("THolt", "Tai Holt", 20, "He/Him",
+            "CAN", "ON", "TOR", "M", "H","Travelling", "124564565");
 
     @Test
     public void RecommendationTest7ValidUsers() {
 
-        // TODO: redo this test
-        // Create generic classes with mocking
-        RecOutputBoundary recPresenter = new FakeRecPresenter();
-        DatabaseManager someDatabase = mock(DatabaseManager.class);
-        CurrUserManager someUserManager = mock(CurrUserManager.class);
+        // Simulate the controller being run with typical recommendations for a profile; assume that
+        // there are at least 7 users total; test that we get 5 users randomly
 
-        // what UC calls
-        // DatabaseManager.getDatabaseManager()
-        // this.databaseRef.getDatabase().getData()
-        // CurrUserManager.getCurrUserManager()
-        // singletonUserManager.getCurrUser();
-
-        // Create generic users
-        UserAccount user1 = new UserAccount("AL", "AML", 20, "her", "CAN",
-                "ON", "TOR", "F", "H","Watching", "12356435");
-        UserAccount user2 = new UserAccount("JSmith", "Jessica Smith", 20, "her",
-                "CAN", "ON", "TOR", "F", "H","Music", "124564565");
-
-        // TODO: simulate the controller being run with typical recommendations for a profile; assume that
-        //  there are at least 7 users total
-        //  FakeRecUI and FakeRecPresenter should implement showRecBoundary but should also do nothing
-        // Create a use case object
-        RecInputBoundary recUseCase = new Recommendation(recPresenter);
+        // Create a use case object and needed items for it
         HashMap<String, UserAccount> testData = new HashMap<>();
         testData.put("AL", user1);
         testData.put("JSmith", user2);
+        testData.put("MSmith", user3);
+        testData.put("SSol", user4);
+        testData.put("LoveIsLove", user5);
+        testData.put("AristA", user6);
+        testData.put("THolt", user7);
 
-        when(someUserManager.getCurrUser()).thenReturn(user1);
-        //when(someDatabase.getDatabase()).thenReturn(null);
-        RecommendedProfiles results = recUseCase.makeRecommendations();
-        System.out.println(results);
-        // TODO next steps: delete the files which cause errors + update DataExport file path so that
-        //  I can run tests of my code for the video
-      // block of coverage
-        // verify?
+        RecDataGetter fakeDataGetter = new TestRecDataGetter(user1, testData);
+        RecInputBoundary recUseCase = new Recommendation(recPresenter, fakeDataGetter);
 
+        // Get results
+        RecommendedProfiles actual = recUseCase.makeRecommendations();
+
+        // Assert on results
+        Assertions.assertEquals(user1.getUsername(), actual.getRecProfileUser());
+        Assertions.assertEquals(5, actual.getRecUserAcc().size());
     }
 
     @Test
     public void RecommendationTestLessValidUsers() {
 
-        // TODO: simulate the controller being run with typical recommendations for a profile; assume that
-        //  there are less than 7 users total, meaning that the pool of options will be less
+        // Simulate the controller being run with typical recommendations for a profile; assume that
+        // there are less than 6 users total, meaning that the pool of options will be less and we can
+        // test ordering
+
+        // Create a use case object and needed items for it
+        HashMap<String, UserAccount> testData = new HashMap<>();
+        testData.put("AL", user1);
+        testData.put("JSmith", user2);
+        testData.put("MSmith", user3);
+        testData.put("SSol", user4);
+        testData.put("AristA", user6);
+
+        RecDataGetter fakeDataGetter = new TestRecDataGetter(user6, testData);
+        RecInputBoundary recUseCase = new Recommendation(recPresenter, fakeDataGetter);
+
+        // Get results
+        RecommendedProfiles actual = recUseCase.makeRecommendations();
+
+        // Assert on results
+        Assertions.assertEquals(user6.getUsername(), actual.getRecProfileUser());
+        Assertions.assertEquals(2, actual.getRecUserAcc().size());
+        Assertions.assertEquals("AL", actual.getRecUserAcc().get(0));
+        Assertions.assertEquals("JSmith", actual.getRecUserAcc().get(1));
     }
 
     @Test
     public void RecommendationTestBlockedUsers() {
 
-        // TODO: simulate the controller being run with typical recommendations for a profile; assume that
-        //  at least one different user is blocked such that they would not get recommended
+        // Simulate the controller being run with typical recommendations for a profile; assume that
+        // there are less than 6 users total, meaning that the pool of options will be less and we can
+        // test ordering
+
+        // Create a use case object and needed items for it
+        user4.setBlockedUsers(user6);
+        HashMap<String, UserAccount> testData = new HashMap<>();
+        testData.put("AL", user1);
+        testData.put("JSmith", user2clone);
+        testData.put("MSmith", user3);
+        testData.put("SSol", user4);
+        testData.put("AristA", user6);
+
+        RecDataGetter fakeDataGetter = new TestRecDataGetter(user6, testData);
+        RecInputBoundary recUseCase = new Recommendation(recPresenter, fakeDataGetter);
+
+        // Get results
+        RecommendedProfiles actual = recUseCase.makeRecommendations();
+
+        // Assert on results
+        Assertions.assertEquals(user6.getUsername(), actual.getRecProfileUser());
+        Assertions.assertEquals(2, actual.getRecUserAcc().size());
+        Assertions.assertEquals("AL", actual.getRecUserAcc().get(0));
     }
 
     @Test
     public void RecommendationTestPerfectMatch() {
 
-        // TODO: simulate the controller being run with typical recommendations for a profile; assume that
-        //  at least one different user would have a 100% compatibility with the current user
+        // Simulate the controller being run with typical recommendations for a profile; assume that
+        // at least one different user would have a 100% compatibility with the current user
+        // Simulate the controller being run with typical recommendations for a profile; assume that
+        // there are less than 6 users total, meaning that the pool of options will be less and we can
+        // test ordering
+
+        // Create a use case object and needed items for it
+        user4.setBlockedUsers(user6);
+        user1.setLikedByUsers(user1clone);
+        HashMap<String, UserAccount> testData = new HashMap<>();
+        testData.put("AL", user1clone);
+        testData.put("JSmith", user2clone);
+        testData.put("MSmith", user3);
+        testData.put("SSol", user4);
+        testData.put("AristA", user6clone);
+
+        RecDataGetter fakeDataGetter = new TestRecDataGetter(user6clone, testData);
+        RecInputBoundary recUseCase = new Recommendation(recPresenter, fakeDataGetter);
+
+        // Get results
+        RecommendedProfiles actual = recUseCase.makeRecommendations();
+
+        // Assert on results
+        Assertions.assertEquals(user6clone.getUsername(), actual.getRecProfileUser());
+        Assertions.assertEquals(2, actual.getRecUserAcc().size());
+        Assertions.assertEquals("AL", actual.getRecUserAcc().get(0));
     }
 }
