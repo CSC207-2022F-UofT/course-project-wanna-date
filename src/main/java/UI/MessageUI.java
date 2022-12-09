@@ -16,7 +16,11 @@ public class MessageUI implements ActionListener, ItemListener {
     JFrame frame = new JFrame("Aphrodite");
 
     public String username;
+
+    public String currUsername;
     JButton send = new JButton("Send Message");
+
+    JButton back = new JButton("Back");
     JLabel to = new JLabel("To: ");
     JLabel from;
 
@@ -42,7 +46,8 @@ public class MessageUI implements ActionListener, ItemListener {
 
     JLabel[] textMessages = {text1, text2, text3, text4, text5};
 
-    public MessageUI(String user, String[] likedUsers) throws IOException {
+    public MessageUI(String currUsername, String user, String[] likedUsers) throws IOException {
+        this.currUsername = currUsername;
         username = user;
         liked = likedUsers;
         from = new JLabel("From: " + user);
@@ -84,6 +89,9 @@ public class MessageUI implements ActionListener, ItemListener {
         text4.setBounds(100,300,300,50);
         text5.setBounds(100,350,300,50);
 
+        back.setBounds(50,50,100,30);
+        back.addActionListener(this);
+
         // how to close the frame
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 600);
@@ -104,6 +112,9 @@ public class MessageUI implements ActionListener, ItemListener {
         frame.add(text3);
         frame.add(text4);
         frame.add(text5);
+
+        // back button
+        frame.add(back);
     }
 
     @Override
@@ -113,6 +124,15 @@ public class MessageUI implements ActionListener, ItemListener {
             textMessage = text.getText();
 
             displayMessages(Objects.requireNonNull(mutuallyLiked.getSelectedItem()).toString(), username, textMessage);
+        } else if (e.getSource() == back) {
+            ViewProfilePage viewProfilePage = null;
+            try {
+                viewProfilePage = new ViewProfilePage(currUsername);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            viewProfilePage.buildPage();
+            frame.dispose();
         }
     }
 

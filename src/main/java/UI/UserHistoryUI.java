@@ -39,7 +39,7 @@ public class UserHistoryUI implements ActionListener {
 
         //Set size of window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 550);
+        frame.setSize(410, 550);
         frame.setLayout(null);
         frame.setVisible(true);
         Color LIGHT_PINK = new Color(255, 175, 175, 150);

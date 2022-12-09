@@ -211,7 +211,7 @@ public class ViewProfilePage extends JFrame implements ActionListener, ViewProfi
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == recommendButton) {
-            new RecBtnManager();
+            new RecBtnManager(username);
         } else if (ae.getSource() == searchButton) {
             new SearchBox("Initiate SearchBox");
             new FilterMenu("Initiate FilterMenu");
@@ -219,7 +219,7 @@ public class ViewProfilePage extends JFrame implements ActionListener, ViewProfi
             String name = nameLabel.getText().substring(11);
             String username = usernameLabel.getText().substring(10);
             try {
-                new MessageUI(name, sendMessageController.getLikedUsers(username));
+                new MessageUI(username, name, sendMessageController.getLikedUsers(username));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

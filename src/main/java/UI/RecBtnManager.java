@@ -8,6 +8,7 @@ import useCase.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,10 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
     JButton recBtn4 = new JButton("");
     JButton recBtn5 = new JButton("");
 
+    JButton back = new JButton("Back");
+
+    // currUser username
+    String username;
 
     // Declare an instance attribute which stores the list of recommendation buttons
     ArrayList<JButton> recBtnList;
@@ -44,7 +49,8 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
     /**
      * Construct a RecBtnManager and in doing so, create a new window.
      */
-    public RecBtnManager(){
+    public RecBtnManager(String username){
+        this.username = username;
 
         // Make settings for frame
         recommendFrame.add(generateBtn);
@@ -79,6 +85,9 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
             recommendFrame.add(recBtn);
         }
 
+        back.setBounds(30,300,100,30);
+        back.addActionListener(this);
+        recommendFrame.add(back);
     }
 
     /**
@@ -103,7 +112,16 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
         Object actSrc = pressEvent.getSource();
 
         // If the source of the action is pressing the recommendation button, generate recommendations
-        if (actSrc == generateBtn) {
+        if (actSrc == back) {
+            ViewProfilePage viewProfilePage = null;
+            try {
+                viewProfilePage = new ViewProfilePage(username);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            viewProfilePage.buildPage();
+            recommendFrame.dispose();
+        } else if (actSrc == generateBtn) {
 
             // Hide and disable every button for recommendations
             for (JButton recBtn : this.recBtnList) {
@@ -158,10 +176,10 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
         recommendFrame.repaint();
     }
 
-    /**
-     * Do general set-up.
-     */
-    public static void main(String[] args) {
-        new RecBtnManager();
-    }
+//    /**
+//     * Do general set-up.
+//     */
+//    public static void main(String[] args) {
+//        new RecBtnManager();
+//    }
 }

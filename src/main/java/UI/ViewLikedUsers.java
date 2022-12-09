@@ -94,10 +94,10 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
 
         // Set size of window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 550);
+        frame.setSize(410, 550);
         frame.setLayout(null);
         frame.setVisible(true);
-        Color LIGHT_PINK = new Color(255, 175, 175, 150);
+        Color LIGHT_PINK = new Color(255, 175, 175, 255);
         frame.getContentPane().setBackground(LIGHT_PINK);
 
         // Set the position and size of the labels
@@ -164,7 +164,7 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
             }
         });
 
-        blockButton.setBounds(205,130,190,75);
+        blockButton.setBounds(200,130,185,75);
         blockButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
         blockButton.setFocusable(false);
         blockButton.addActionListener(new ActionListener() {
@@ -178,7 +178,7 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
             }
         });
 
-        unlikeButton.setBounds(15,130,190,75);
+        unlikeButton.setBounds(15,130,185,75);
         unlikeButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
         unlikeButton.setFocusable(false);
         unlikeButton.addActionListener(new ActionListener() {
@@ -191,7 +191,7 @@ public class ViewLikedUsers extends JFrame implements ActionListener {
             }
         });
 
-        statsButton.setBounds(15,250,380,35);
+        statsButton.setBounds(15,250,370,35);
         statsButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 20));
         statsButton.setFocusable(false);
         statsButton.addActionListener(new ActionListener() {
