@@ -1,7 +1,7 @@
 package interface_adapters;
 
-import useCase.RecOutputBoundary;
-import useCase.RecommendedProfiles;
+import use_case.RecOutputBoundary;
+import use_case.RecommendedProfiles;
 
 public class FakeRecPresenter implements RecOutputBoundary {
 
