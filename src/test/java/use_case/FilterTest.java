@@ -8,10 +8,10 @@ import use_case.account.*;
 public class FilterTest {
     DatabaseManager manager = DatabaseManager.getDatabaseManager();
     //sample database for testing
-    String[] sample = {"test4,Test 4,44,She/Her,trt,ON,CA,F,H,Others,44448888",
-            "lov12,Lovina,20,She/Her,trt,ON,CA,F,H,Music,12345678",
-            "panda,Peter Panda,33,He/Him,trt,ON,CA,M,B,Exercise,12345678",
-            "test2,Test 2,22,He/Him,null,null,null,M,G,Culinary,22222222"
+    String[] sample = {"test4,Test 4,44,She/Her,trt,ON,CA,F,H,Others,44448888,[],[],[],[]",
+            "lov12,Lovina,20,She/Her,trt,ON,CA,F,H,Music,12345678,[],[],[],[]",
+            "panda,Peter Panda,33,He/Him,trt,ON,CA,M,B,Exercise,12345678,[],[],[],[]",
+            "test2,Test 2,22,He/Him,null,null,null,M,G,Culinary,22222222,[],[],[],[]"
     };
 
     // test no occurrence of suitable user account in database for all three types of filters
