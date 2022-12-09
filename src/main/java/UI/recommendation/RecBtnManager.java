@@ -146,6 +146,7 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
             } else if (actSrc == recBtn5) {
                 recController.formLBControl(4);
             }
+            recommendFrame.dispose();
         }
 
     }
@@ -176,11 +177,4 @@ public class RecBtnManager implements RecShowRecBoundary, ActionListener {
         recommendFrame.validate();
         recommendFrame.repaint();
     }
-
-//    /**
-//     * Do general set-up.
-//     */
-//    public static void main(String[] args) {
-//        new RecBtnManager();
-//    }
 }
