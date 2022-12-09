@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Assertions;
 public class SearchTest {
     //sample database for testing
     DatabaseManager manager = DatabaseManager.getDatabaseManager();
-    String[] sample = {"test4,Test 4,44,She/Her,null,null,null,F,H,Others,44448888",
-            "lov12,Lovina,20,She/Her,null,null,null,F,H,Music,12345678",
-            "panda,Peter Panda,33,He/Him,null,null,null,M,B,Exercise,12345678",
-            "test2,Test 2,22,He/Him,null,null,null,M,G,Culinary,22222222"
+    String[] sample = {"test4,Test 4,44,She/Her,null,null,null,F,H,Others,44448888,[],[],[],[]",
+            "lov12,Lovina,20,She/Her,null,null,null,F,H,Music,12345678,[],[],[],[]",
+            "panda,Peter Panda,33,He/Him,null,null,null,M,B,Exercise,12345678,[],[],[],[]",
+            "test2,Test 2,22,He/Him,null,null,null,M,G,Culinary,22222222,[],[],[],[]"
             };
 
 
