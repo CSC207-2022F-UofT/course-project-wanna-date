@@ -1,7 +1,7 @@
 package interface_adapters;
 
-import interfaceAdapters.RecShowRecBoundary;
-import useCase.*;
+import interface_adapters.recommendation.RecShowRecBoundary;
+import use_case.recommendation.*;
 
 public class FakeRecUI implements RecShowRecBoundary {
 
