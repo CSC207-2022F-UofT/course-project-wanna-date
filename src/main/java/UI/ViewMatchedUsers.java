@@ -20,8 +20,8 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
     JFrame frame = new JFrame();
 
     // Buttons
-    JButton backButton = new JButton("Return ⏎");
-    JButton blockButton = new JButton("Block ✖");
+    JButton backButton = new JButton("Return" );
+    JButton blockButton = new JButton("Block");
     JButton unlikeButton = new JButton("Unlike");
 
     // Labels
@@ -66,7 +66,7 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
 
         //Set size of window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 550);
+        frame.setSize(410, 550);
         frame.setLayout(null);
         frame.setVisible(true);
         Color LIGHT_PINK = new Color(255, 175, 175, 150);
@@ -95,7 +95,7 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
             }
         });
 
-        blockButton.setBounds(205,130,190,75);
+        blockButton.setBounds(200,130,185,75);
         blockButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
         blockButton.setFocusable(false);
         blockButton.addActionListener(new ActionListener() {
@@ -109,7 +109,7 @@ public class ViewMatchedUsers extends JFrame implements ActionListener {
             }
         });
 
-        unlikeButton.setBounds(15,130,190,75);
+        unlikeButton.setBounds(15,130,185,75);
         unlikeButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
         unlikeButton.setFocusable(false);
         unlikeButton.addActionListener(new ActionListener() {

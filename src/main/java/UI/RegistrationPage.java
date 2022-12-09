@@ -5,6 +5,7 @@ import interfaceAdapters.RegistrationController;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 /** A UI class for Registration feature.
  * */
@@ -292,6 +293,8 @@ public class RegistrationPage extends JFrame implements ActionListener{
             catch (NumberFormatException ex)
             {
                 new RegistrationErrorPage();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
         else if (ae.getSource() == back_button) {

@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 
 public class UserLikeBlock implements ActionListener {
@@ -204,29 +205,14 @@ public class UserLikeBlock implements ActionListener {
         }
         //if home button get clicked
         else if(e.getSource()==home){
-            ViewProfilePage viewProfilePage = new ViewProfilePage(username1);
-//            viewProfilePage.buildPage();
+            ViewProfilePage viewProfilePage = null;
+            try {
+                viewProfilePage = new ViewProfilePage(username1);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            viewProfilePage.buildPage();
             profile.dispose();
         }
-    }
-
-    public void functionToCall(){
-        new UserLikeBlock(username1, username2);
-    }
-
-    public static void main (String[] args) {
-        // for individual testing purposes
-
-        UserAccount user1 = new UserAccount("AL", "AML", 20, "her", "CAN",
-                "ON", "TOR", "F", "H","Watching", "12356435");
-        DataAccess dataAccess = new DataAccess();
-        dataAccess.readCSV();
-        DatabaseManager data = DatabaseManager.getDatabaseManager();
-        data.saveNewUser(user1.getUsername(), user1);
-        UserAccount user2 = new UserAccount("JSmith", "Jessica Smith", 20, "her", "CAN",
-                "ON", "TOR", "F", "H","Music", "124564565");
-        data.saveNewUser(user2.getUsername(), user2);
-        new UserLikeBlock(user1.getUsername(), user2.getUsername());
-
     }
 }

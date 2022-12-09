@@ -5,6 +5,7 @@ import interfaceAdapters.LoginController;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 /** A UI class for Login feature.
  * */
@@ -109,7 +110,12 @@ public class LoginPage extends JFrame implements ActionListener {
             loginController.helpSetCurrUsername(username_value);
             loginController.callCreateDatabase();
             if (loginController.callValidLogin(username_value, pass_value)) {
-                ViewProfilePage viewProfilePage = new ViewProfilePage(username_value);
+                ViewProfilePage viewProfilePage;
+                try {
+                    viewProfilePage = new ViewProfilePage(username_value);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 viewProfilePage.buildPage();
                 frame.dispose();
             } else {

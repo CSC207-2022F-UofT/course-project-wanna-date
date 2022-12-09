@@ -19,9 +19,9 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
     JFrame frame = new JFrame();
 
     // Buttons
-    JButton backButton = new JButton("Return ⏎");
-    JButton unblockButton = new JButton("Unblock ↺");
-    JButton likeButton = new JButton("Like ♥");
+    JButton backButton = new JButton("Return");
+    JButton unblockButton = new JButton("Unblock");
+    JButton likeButton = new JButton("Like");
 
     // Labels
     JLabel blockedTitle = new JLabel("BLOCKED USERS");
@@ -64,7 +64,7 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
 
         //Set size of window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 550);
+        frame.setSize(410, 550);
         frame.setLayout(null);
         frame.setVisible(true);
         Color LIGHT_PINK = new Color(255, 175, 175, 150);
@@ -93,7 +93,7 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
             }
         });
 
-        unblockButton.setBounds(205,130,190,75);
+        unblockButton.setBounds(200,130,185,75);
         unblockButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
         unblockButton.setFocusable(false);
         unblockButton.addActionListener(new ActionListener() {
@@ -106,7 +106,7 @@ public class ViewBlockedUsers extends JFrame implements ActionListener {
             }
         });
 
-        likeButton.setBounds(15,130,190,75);
+        likeButton.setBounds(15,130,185,75);
         likeButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
         likeButton.setFocusable(false);
         likeButton.addActionListener(new ActionListener() {
