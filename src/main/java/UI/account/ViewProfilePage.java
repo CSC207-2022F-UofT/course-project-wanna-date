@@ -215,9 +215,11 @@ public class ViewProfilePage extends JFrame implements ActionListener, ViewProfi
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == recommendButton) {
             new RecBtnManager(username);
+            frame.dispose();
         } else if (ae.getSource() == searchButton) {
             new SearchBox("Initiate SearchBox");
             new FilterMenu("Initiate FilterMenu");
+            frame.dispose();
         } else if (ae.getSource() == messageButton) {
             String name = nameLabel.getText().substring(11);
             String username = usernameLabel.getText().substring(10);
@@ -226,8 +228,10 @@ public class ViewProfilePage extends JFrame implements ActionListener, ViewProfi
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            frame.dispose();
         } else if (ae.getSource() == historyButton) {
             new UserHistoryUI(username);
+            frame.dispose();
         } else if (ae.getSource() == logoutButton) {
             // Create LogoutController
             LogoutController logoutController = new LogoutController();
