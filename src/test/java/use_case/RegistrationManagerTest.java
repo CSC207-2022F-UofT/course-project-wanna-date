@@ -314,7 +314,7 @@ public class RegistrationManagerTest {
 
         RegistrationManager registrationManager = new RegistrationManager();
         boolean testValidRegistration = registrationManager.isValidRegistration(
-                "lov456",
+                "csc207",
                 "Lovina",
                 20,
                 "She/Her",

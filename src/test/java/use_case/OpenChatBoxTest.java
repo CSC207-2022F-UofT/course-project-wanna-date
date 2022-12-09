@@ -3,7 +3,7 @@ package use_case;
 
 import entities.account.UserAccount;
 import interface_adapters.message.ChatBoxPresenter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import use_case.account.UserManager;
 import use_case.message.*;

@@ -1,7 +1,7 @@
 package use_case;
 
 import entities.account.UserAccount;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import use_case.like.*;
 

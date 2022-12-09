@@ -1,9 +1,9 @@
-package tutorial;
+package use_case;
 
 import entities.account.UserAccount;
 import use_case.account.DatabaseManager;
 import use_case.filter.Search;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class SearchTest {
